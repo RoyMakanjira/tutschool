@@ -17,9 +17,8 @@ import {
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import NavBar from "@/components/NavBar"
 
-
-// Sample leadership team data
 const leadershipTeam = [
   {
     name: "Dr. Sarah Johnson",
@@ -38,12 +37,6 @@ const leadershipTeam = [
     role: "Director of Student Success",
     image: "/placeholder.svg?height=300&width=300",
     bio: "Emily leads our student support initiatives, ensuring every student has the resources they need to succeed. Her innovative approach to student services has significantly improved retention and satisfaction rates.",
-  },
-  {
-    name: "David Kim",
-    role: "Chief Technology Officer",
-    image: "/placeholder.svg?height=300&width=300",
-    bio: "David drives our technological innovation, developing platforms that enhance the learning experience. His expertise in educational technology has transformed how our students engage with course materials.",
   },
 ]
 
@@ -131,11 +124,12 @@ const accreditations = [
 export default function AboutPage() {
   return (
     <div className="min-h-screen flex flex-col">
+      <NavBar />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative bg-[#8B0000] text-white overflow-hidden">
           <div className="absolute inset-0 opacity-20">
-            <Image src="/placeholder.svg?height=600&width=1600" alt="Campus background" fill className="object-cover" />
+            <Image src="/assets/painting.jpg?height=600&width=1600" alt="Campus background" fill className="object-cover" />
           </div>
           <div className="container relative px-4 py-16 md:py-24 mx-auto">
             <div className="max-w-3xl">
@@ -187,8 +181,8 @@ export default function AboutPage() {
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-[#8B0000]/10 rounded-full"></div>
                 <div className="relative z-10 rounded-lg overflow-hidden shadow-xl">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000_F_953151115_IQ0hzcX093xEPAZ4NzTmBa2ZUwh1pRsP.jpg-xlWcJi672FVZvtLtwE4OQz9rZyyZmi.jpeg"
-                    alt="Hands reaching together with colorful waves"
+                    src="/assets/landing.jpeg"
+                    alt="Students Learning Chinese"
                     width={600}
                     height={400}
                     className="w-full h-auto"
@@ -586,7 +580,6 @@ export default function AboutPage() {
                     </div>
                     <div>
                       <p className="font-bold text-gray-900">Alex Thompson</p>
-                      <p className="text-sm text-gray-600">Web Development Graduate, 2022</p>
                     </div>
                   </div>
                 </CardContent>
@@ -610,7 +603,6 @@ export default function AboutPage() {
                     </div>
                     <div>
                       <p className="font-bold text-gray-900">Samantha Lee</p>
-                      <p className="text-sm text-gray-600">CTO, InnovateTech Solutions</p>
                     </div>
                   </div>
                 </CardContent>
@@ -633,7 +625,6 @@ export default function AboutPage() {
                     </div>
                     <div>
                       <p className="font-bold text-gray-900">Marcus Johnson</p>
-                      <p className="text-sm text-gray-600">Data Science Graduate, 2023</p>
                     </div>
                   </div>
                 </CardContent>

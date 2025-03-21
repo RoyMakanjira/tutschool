@@ -2,7 +2,9 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import ChatWidget from "./chat-widget"
-import type React from "react" // Import React
+import type React from "react" 
+import Footer from "@/components/footer"
+
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -21,7 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <ChatWidget />
+        <Footer />
       </body>
+    
     </html>
   )
 }

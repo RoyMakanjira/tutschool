@@ -12,8 +12,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+import NavBar from "@/components/NavBar"
 
 // Sample blog post data
 const blogPosts = [
@@ -22,7 +21,7 @@ const blogPosts = [
     title: "10 Effective Study Techniques for Better Learning Outcomes",
     excerpt:
       "Discover research-backed study methods that can help you retain information longer and improve your academic performance.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/assets/verified.png",
     category: "Study Tips",
     author: {
       name: "Dr. Sarah Johnson",
@@ -39,7 +38,7 @@ const blogPosts = [
     title: "The Future of Education: How AI is Transforming Learning",
     excerpt:
       "Explore how artificial intelligence is revolutionizing education and creating new opportunities for personalized learning experiences.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/assets/coursesOne.svg",
     category: "Educational Technology",
     author: {
       name: "Michael Chen",
@@ -49,14 +48,14 @@ const blogPosts = [
     date: "March 10, 2025",
     readTime: "6 min read",
     featured: true,
-    tags: ["AI", "EdTech", "Future of Education"],
+    tags: [ "EdTech", "Future of Education"],
   },
   {
     id: 3,
     title: "From Classroom to Career: Building Your Professional Network",
     excerpt:
       "Learn how to leverage your educational connections to build a strong professional network that will support your career growth.",
-    image: "/placeholder.svg?height=400&width=600",
+      image: "/assets/coursesTwo.svg",
     category: "Career Development",
     author: {
       name: "Emily Rodriguez",
@@ -70,10 +69,10 @@ const blogPosts = [
   },
   {
     id: 4,
-    title: "Student Success Story: From Beginner to Full-Stack Developer in 6 Months",
+    title: "Student Success Story: From Beginner to Pro",
     excerpt:
       "Read about how one of our students transformed their career through dedication and the support of our comprehensive web development program.",
-    image: "/placeholder.svg?height=400&width=600",
+      image: "/assets/coursesThree.svg",
     category: "Success Stories",
     author: {
       name: "David Kim",
@@ -83,14 +82,14 @@ const blogPosts = [
     date: "February 28, 2025",
     readTime: "7 min read",
     featured: false,
-    tags: ["Success Story", "Web Development", "Career Change"],
+    tags: ["Success Story", "Career Change"],
   },
   {
     id: 5,
     title: "The Importance of Soft Skills in Technical Education",
     excerpt:
       "Discover why communication, teamwork, and problem-solving skills are just as important as technical knowledge in today's job market.",
-    image: "/placeholder.svg?height=400&width=600",
+      image: "/assets/coursesFour.svg",
     category: "Skills Development",
     author: {
       name: "Jennifer Lee",
@@ -107,7 +106,7 @@ const blogPosts = [
     title: "How to Balance Work, Life, and Education as an Adult Learner",
     excerpt:
       "Practical strategies for managing your time and responsibilities while pursuing further education as a working professional.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/assets/boy1.svg",
     category: "Adult Learning",
     author: {
       name: "Robert Martinez",
@@ -141,7 +140,7 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <NavBar />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative bg-[#8B0000] text-white overflow-hidden">
@@ -346,49 +345,6 @@ export default function BlogPage() {
                       />
                       <Button className="w-full bg-[#8B0000] hover:bg-[#6B0000] text-white">Subscribe</Button>
                     </form>
-                  </CardContent>
-                </Card>
-
-                {/* Upcoming Events */}
-                <Card className="border-none shadow-md">
-                  <CardHeader>
-                    <CardTitle className="text-xl text-[#8B0000]">Upcoming Events</CardTitle>
-                  </CardHeader>
-                  <CardContent className="pb-6">
-                    <div className="space-y-4">
-                      <div className="flex gap-4">
-                        <div className="flex flex-col items-center justify-center min-w-[60px] h-16 bg-[#8B0000] text-white rounded-md">
-                          <span className="text-sm font-bold">MAR</span>
-                          <span className="text-xl font-bold">25</span>
-                        </div>
-                        <div>
-                          <h4 className="font-medium">Open House: Web Development</h4>
-                          <p className="text-sm text-gray-600">6:00 PM - 8:00 PM</p>
-                        </div>
-                      </div>
-                      <Separator />
-                      <div className="flex gap-4">
-                        <div className="flex flex-col items-center justify-center min-w-[60px] h-16 bg-[#8B0000] text-white rounded-md">
-                          <span className="text-sm font-bold">APR</span>
-                          <span className="text-xl font-bold">10</span>
-                        </div>
-                        <div>
-                          <h4 className="font-medium">Workshop: Data Science Basics</h4>
-                          <p className="text-sm text-gray-600">2:00 PM - 5:00 PM</p>
-                        </div>
-                      </div>
-                      <Separator />
-                      <div className="flex gap-4">
-                        <div className="flex flex-col items-center justify-center min-w-[60px] h-16 bg-[#8B0000] text-white rounded-md">
-                          <span className="text-sm font-bold">APR</span>
-                          <span className="text-xl font-bold">18</span>
-                        </div>
-                        <div>
-                          <h4 className="font-medium">Career Fair: Tech Industry</h4>
-                          <p className="text-sm text-gray-600">10:00 AM - 3:00 PM</p>
-                        </div>
-                      </div>
-                    </div>
                   </CardContent>
                 </Card>
               </div>
@@ -636,7 +592,6 @@ export default function BlogPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   )
 }

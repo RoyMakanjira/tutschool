@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ChevronRight, Calendar, Search, Menu } from "lucide-react"
+import { ChevronRight, Calendar, Search, Menu, Globe2, Users, Trophy, Clock, MessageCircle, GraduationCap, Languages, BookOpen, Palette} from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export default function Home() {
   return (
@@ -38,41 +39,47 @@ export default function Home() {
 
       {/* Main Navigation */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center">
-              <Link href="/" className="font-bold text-2xl text-[#8B0000]">
-                TUT-SCHOOL
-              </Link>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/about" className="text-[#8B0000] font-medium hover:text-[#c00000]">
-                About
-              </Link>
-              <Link href="#" className="text-[#8B0000] font-medium hover:text-[#c00000]">
-                Admissions
-              </Link>
-              <Link href="#" className="text-[#8B0000] font-medium hover:text-[#c00000]">
-                Academic
-              </Link>
-              <Link href="#" className="text-[#8B0000] font-medium hover:text-[#c00000]">
-                Co-Curricular
-              </Link>
-              <Link href="#" className="text-[#8B0000] font-medium hover:text-[#c00000]">
-                Community
-              </Link>
-            </nav>
-            <div className="flex items-center space-x-4">
-              <button className="text-[#8B0000]">
-                <Search size={20} />
-              </button>
-              <button className="md:hidden text-[#8B0000]">
-                <Menu size={24} />
-              </button>
-            </div>
-          </div>
+    <div className="container mx-auto px-4 md:px-8">
+      <div className="flex justify-between items-center py-4">
+        <div className="flex items-center">
+          <Link href="/" className="font-bold text-2xl text-[#8B0000]">
+            TUT-SCHOOL
+          </Link>
         </div>
-      </header>
+        <nav className="hidden md:flex space-x-8">
+          <Link href="/about" className="text-[#8B0000] font-medium hover:text-[#c00000]">
+            About Us
+          </Link>
+          <Link href="#" className="text-[#8B0000] font-medium hover:text-[#c00000]">
+            Admissions
+          </Link>
+          <Link href="#" className="text-[#8B0000] font-medium hover:text-[#c00000]">
+            Academic Programs
+          </Link>
+          <Link href="/schedule" className="text-[#8B0000] font-medium hover:text-[#c00000]">
+            Schedule
+          </Link>
+          <Link href="/testimonials" className="text-[#8B0000] font-medium hover:text-[#c00000]">
+            Testimonials
+          </Link>
+          <Link href="/blog" className="text-[#8B0000] font-medium hover:text-[#c00000]">
+            Blog
+          </Link>
+          <Link href="/contact" className="text-[#8B0000] font-medium hover:text-[#c00000]">
+            Contact
+          </Link>
+        </nav>
+        <div className="flex items-center space-x-4">
+          <button className="text-[#8B0000]">
+            <Search size={20} />
+          </button>
+          <button className="md:hidden text-[#8B0000]">
+            <Menu size={24} />
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
 
       {/* Hero Section */}
       <section className="relative h-[70vh] overflow-hidden">
@@ -115,19 +122,18 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold text-[#8B0000] mb-4">Welcome to TUT-SCHOOL</h2>
             <div className="w-20 h-1 bg-[#8B0000] mx-auto mb-6"></div>
             <p className="text-lg text-gray-700">
-              Our mission is to provide academic excellence in a comfortable environment. We aim to develop
-              communicative and creative skills of our students from the local community in warm and friendly
-              surroundings, providing intercultural competence through language immersion education.
+            Наша миссия – качественное обучение в комфортной среде. 
+            Наша цель – развивать коммуникативные и творческие навыки детей и взрослых в местном комьюнити в теплой и дружеской атмосфере, с погружением в культуру стран изучаемых языков
             </p>
           </div>
         </div>
       </section>
 
-      {/* Featured Sections */}
+      
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Card 1 */}
+          
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
               <div className="relative h-64">
                 <Image src="/assets/lounge.jpg" alt="Students in classroom" fill className="object-cover" />
@@ -144,7 +150,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Card 2 */}
+
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
               <div className="relative h-64">
                 <Image src="/assets/students.jpg" alt="Art class" fill className="object-cover" />
@@ -181,7 +187,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* News & Events Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center mb-10">
@@ -213,16 +218,15 @@ export default function Home() {
               </div>
             </div>
 
-            {/* News Item 2 */}
             <div className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
               <div className="p-6">
                 <div className="flex items-center text-sm text-gray-500 mb-3">
                   <Calendar size={16} className="mr-2" />
                   <span>March 10, 2025</span>
                 </div>
-                <h3 className="text-xl font-bold text-[#8B0000] mb-2">Science Competition Winners</h3>
+                <h3 className="text-xl font-bold text-[#8B0000] mb-2">Chinese Competition Winners</h3>
                 <p className="text-gray-600 mb-4">
-                  Congratulations to our students who received top honors at the Regional Science Competition this
+                  Congratulations to our students who received top honors at the Regional Chinese Competition this
                   weekend.
                 </p>
                 <Link href="#" className="inline-flex items-center text-[#8B0000] font-medium hover:text-[#c00000]">
@@ -231,7 +235,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* News Item 3 */}
             <div className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
               <div className="p-6">
                 <div className="flex items-center text-sm text-gray-500 mb-3">
@@ -252,7 +255,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Call to Action */}
+
       <section className="py-16 bg-[#8B0000] text-white">
         <div className="container mx-auto px-4 md:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Our Language Immersion Community</h2>
@@ -276,160 +279,160 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-[#6B0000] text-white py-12">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">TUT-SCHOOL</h3>
-              <p className="text-gray-300 mb-4">
-                123 School Lane
-                <br />
-                Greenfield, GF1 2AB
-                <br />
-                United Kingdom
-              </p>
-              <p className="text-gray-300">
-                Tel: 01234 567890
-                <br />
-                Email: info@tut-school.edu
+            {/* Features Grid */}
+            <section className="border-t border-gray-800 bg-white py-24">
+        <div className="container">
+          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+            <div className="group space-y-4">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10 text-blue-500 group-hover:bg-blue-500/20">
+                <Globe2 className="h-6 w-6" />
+              </div>
+              <h3 className="text-xl font-semibold text-white">Global Recognition</h3>
+              <p className="text-gray-400">
+                Our certifications are recognized by leading institutions worldwide, opening doors to international
+                opportunities.
               </p>
             </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    Admissions
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    Academic
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    Co-Curricular
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    News & Events
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Information</h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    Term Dates
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    School Policies
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    Careers
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    Safeguarding
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-300 hover:text-white">
-                    Contact Us
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
-              <div className="flex space-x-4 mb-6">
-                <Link href="#" className="text-white hover:text-gray-300">
-                  <span className="sr-only">Facebook</span>
-                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      fillRule="evenodd"
-                      d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </Link>
-                <Link href="#" className="text-white hover:text-gray-300">
-                  <span className="sr-only">Twitter</span>
-                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                  </svg>
-                </Link>
-                <Link href="#" className="text-white hover:text-gray-300">
-                  <span className="sr-only">Instagram</span>
-                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      fillRule="evenodd"
-                      d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </Link>
-                <Link href="#" className="text-white hover:text-gray-300">
-                  <span className="sr-only">YouTube</span>
-                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      fillRule="evenodd"
-                      d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </Link>
+            <div className="group space-y-4">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10 text-green-500 group-hover:bg-green-500/20">
+                <Users className="h-6 w-6" />
               </div>
-              <h4 className="text-lg font-semibold mb-4">Newsletter</h4>
-              <p className="text-gray-300 mb-4">Subscribe to our newsletter for the latest updates.</p>
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="px-4 py-2 w-full rounded-l-md focus:outline-none text-gray-900"
-                />
-                <button className="bg-[#8B0000] px-4 py-2 rounded-r-md hover:bg-[#a00000] transition-colors">
-                  Subscribe
-                </button>
-              </div>
+              <h3 className="text-xl font-semibold text-white">Expert Instructors</h3>
+              <p className="text-gray-400">
+                Learn from experienced native speakers and certified teachers who are passionate about your success.
+              </p>
             </div>
-          </div>
-
-          <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-            <p>© {new Date().getFullYear()} TUT-SCHOOL. All rights reserved.</p>
-            <div className="mt-4 space-x-4">
-              <Link href="#" className="text-gray-400 hover:text-white">
-                Privacy Policy
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-white">
-                Terms of Use
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-white">
-                Cookie Policy
-              </Link>
+            <div className="group space-y-4">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-yellow-500/10 text-yellow-500 group-hover:bg-yellow-500/20">
+                <Trophy className="h-6 w-6" />
+              </div>
+              <h3 className="text-xl font-semibold text-white">Proven Results</h3>
+              <p className="text-gray-400">
+                Our structured curriculum and teaching methods have helped thousands achieve their language goals.
+              </p>
+            </div>
+            <div className="group space-y-4">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-purple-500/10 text-purple-500 group-hover:bg-purple-500/20">
+                <Clock className="h-6 w-6" />
+              </div>
+              <h3 className="text-xl font-semibold text-white">Flexible Schedule</h3>
+              <p className="text-gray-400">
+                Choose from morning, evening, or weekend classes to fit your busy lifestyle.
+              </p>
+            </div>
+            <div className="group space-y-4">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-pink-500/10 text-pink-500 group-hover:bg-pink-500/20">
+                <MessageCircle className="h-6 w-6" />
+              </div>
+              <h3 className="text-xl font-semibold text-white">Interactive Learning</h3>
+              <p className="text-gray-400">
+                Engage in dynamic conversations and cultural exchange with students from around the world.
+              </p>
+            </div>
+            <div className="group space-y-4">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-orange-500/10 text-orange-500 group-hover:bg-orange-500/20">
+                <GraduationCap className="h-6 w-6" />
+              </div>
+              <h3 className="text-xl font-semibold text-white">Career Support</h3>
+              <p className="text-gray-400">
+                Get guidance on resume writing, interview preparation, and professional networking in your target
+                language.
+              </p>
             </div>
           </div>
         </div>
-      </footer>
+      </section>
+
+      {/* Programs Section */}
+      <section className="relative border-t border-gray-800 bg-white py-24">
+        <div className="container">
+          <div className="grid gap-12 lg:grid-cols-2">
+            <div className="relative">
+              <Image
+                src="/assets/students.jpg"
+                alt="Students learning"
+                width={600}
+                height={400}
+                className="rounded-lg object-cover"
+              />
+              <div className="absolute -bottom-6 -right-6 h-48 w-48 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 opacity-20 blur-3xl"></div>
+            </div>
+            <div className="space-y-8">
+              <h2 className="text-4xl font-bold tracking-tight text-white">
+                Comprehensive Language
+                <span className="block text-primary">& Art Programs</span>
+              </h2>
+              <p className="text-lg text-gray-400">
+                Our programs are designed to help you achieve fluency and cultural understanding through immersive
+                learning experiences.
+              </p>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/10 text-blue-500">
+                    <Languages className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white">English Language Program</h3>
+                    <p className="text-gray-400">Master English for academic, business, or personal growth</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-500/10 text-green-500">
+                    <BookOpen className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white">Chinese Language Program</h3>
+                    <p className="text-gray-400">Learn Mandarin Chinese and explore Chinese culture</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-yellow-500/10 text-yellow-500">
+                    <Palette className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white">Art Program</h3>
+                    <p className="text-gray-400">Develop your artistic skills and creative expression</p>
+                  </div>
+                </div>
+              </div>
+              <Button className="h-12 bg-primary px-8 text-lg hover:bg-black-600">Explore Programs</Button>
+            </div>
+          </div>
+        </div>
+        {/* Decorative Elements */}
+        <div className="absolute left-0 top-1/2 -z-10">
+          <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,200 Q200,0 400,200" stroke="#3B82F6" strokeWidth="2" fill="none" opacity="0.2" />
+            <path d="M0,250 Q200,50 400,250" stroke="#22C55E" strokeWidth="2" fill="none" opacity="0.2" />
+          </svg>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="relative border-t border-gray-800 bg-black py-24">
+        <div className="container text-center">
+          <h2 className="mx-auto max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            Ready to start your learning journey?
+          </h2>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-400">
+            Join thousands of successful students who have transformed their lives through our programs.
+          </p>
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button className="h-12 bg-primary px-8 text-lg hover:bg-black-600">Get Started Now</Button>
+            <Button variant="outline" className="h-12 border-gray-700 px-8 text-lg text-white hover:bg-gray-800">
+              Schedule a Tour
+            </Button>
+          </div>
+        </div>
+        {/* Decorative Elements */}
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <svg width="100%" height="100%" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,300 Q600,0 1200,300" stroke="#3B82F6" strokeWidth="2" fill="none" opacity="0.1" />
+            <path d="M0,350 Q600,50 1200,350" stroke="#22C55E" strokeWidth="2" fill="none" opacity="0.1" />
+            <path d="M0,400 Q600,100 1200,400" stroke="#A855F7" strokeWidth="2" fill="none" opacity="0.1" />
+          </svg>
+        </div>
+      </section>
     </div>
   )
 }

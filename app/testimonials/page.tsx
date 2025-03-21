@@ -2,44 +2,14 @@ import { Star } from "lucide-react"
 
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { testimonials } from "@/constants"
+import NavBar from "@/components/NavBar"
 
-const testimonials = [
-  {
-    name: "Sarah Johnson",
-    role: "Web Developer",
-    avatar: "/placeholder.svg?height=40&width=40",
-    content:
-      "The web development course completely transformed my career. I went from knowing nothing about coding to landing a full-time developer position in just 6 months.",
-    rating: 5,
-  },
-  {
-    name: "Michael Chen",
-    role: "Data Analyst",
-    avatar: "/placeholder.svg?height=40&width=40",
-    content:
-      "The data science curriculum is comprehensive and up-to-date. The instructors are knowledgeable and the community support is incredible.",
-    rating: 5,
-  },
-  {
-    name: "Emily Rodriguez",
-    role: "Marketing Manager",
-    avatar: "/placeholder.svg?height=40&width=40",
-    content:
-      "I've taken several digital marketing courses, but TutSchool's masterclass stands out. The practical strategies I learned helped me increase our company's conversion rate by 40%.",
-    rating: 4,
-  },
-  {
-    name: "David Kim",
-    role: "UX Designer",
-    avatar: "/placeholder.svg?height=40&width=40",
-    content:
-      "The UI/UX design course provided me with the skills and confidence to transition into a design role. The project-based approach was exactly what I needed.",
-    rating: 5,
-  },
-]
 
 export default function Testimonials() {
   return (
+    <div className="min-h-screen bg-white">
+      <NavBar />
     <section id="testimonials" className="w-full py-12 md:py-24 bg-white">
       <div className="container px-4 md:px-6 mx-auto">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -85,6 +55,7 @@ export default function Testimonials() {
         </div>
       </div>
     </section>
+  </div>
   )
 }
 

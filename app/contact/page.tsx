@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
+import NavBar from "@/components/NavBar"
 
 
 export default function ContactPage() {
@@ -49,6 +50,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <NavBar />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="w-full py-12 md:py-16 bg-[#8B0000] text-white">
@@ -106,8 +108,8 @@ export default function ContactPage() {
                         </div>
                         <div>
                           <h3 className="font-medium text-lg">Email Us</h3>
-                          <p className="text-gray-600">info@tutschool.com</p>
-                          <p className="text-gray-600">admissions@tutschool.com</p>
+                          <p className="text-gray-600">info@tutschool.ru</p>
+                          <p className="text-gray-600">admissions@tutschool.ru</p>
                         </div>
                       </div>
                     </CardContent>
@@ -121,8 +123,8 @@ export default function ContactPage() {
                         </div>
                         <div>
                           <h3 className="font-medium text-lg">Call Us</h3>
-                          <p className="text-gray-600">Main: +1 (555) 123-4567</p>
-                          <p className="text-gray-600">Support: +1 (555) 987-6543</p>
+                          <p className="text-gray-600">Main: +0 123 456 789</p>
+                          <p className="text-gray-600">Support: +0 123 456 789 </p>
                         </div>
                       </div>
                     </CardContent>

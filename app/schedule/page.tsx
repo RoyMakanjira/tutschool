@@ -11,205 +11,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+import NavBar from "@/components/NavBar"
+import { academicTerms } from "@/constants"
+import { months } from "@/constants"
+import { events } from "@/constants"
+import { importantDates } from "@/constants"
+import { classSchedules } from "@/constants"
 
-// Sample academic terms
-const academicTerms = [
-  { id: "spring2025", name: "Spring 2025" },
-  { id: "summer2025", name: "Summer 2025" },
-  { id: "fall2025", name: "Fall 2025" },
-  { id: "winter2026", name: "Winter 2026" },
-]
-
-// Sample months for navigation
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-]
-
-// Sample events data
-const events = [
-  {
-    id: 1,
-    title: "Spring Semester Begins",
-    date: "March 15, 2025",
-    time: "All Day",
-    location: "All Campuses",
-    category: "Academic Calendar",
-    description: "First day of classes for the Spring 2025 semester.",
-  },
-  {
-    id: 2,
-    title: "Web Development Workshop",
-    date: "March 18, 2025",
-    time: "2:00 PM - 5:00 PM",
-    location: "Tech Lab, Main Campus",
-    category: "Workshop",
-    description: "Hands-on workshop covering the latest web development frameworks and techniques.",
-  },
-  {
-    id: 3,
-    title: "Data Science Guest Lecture",
-    date: "March 20, 2025",
-    time: "3:30 PM - 5:00 PM",
-    location: "Auditorium B",
-    category: "Guest Lecture",
-    description: "Industry expert discusses real-world applications of data science and machine learning.",
-  },
-  {
-    id: 4,
-    title: "Add/Drop Deadline",
-    date: "March 22, 2025",
-    time: "11:59 PM",
-    location: "Online",
-    category: "Academic Calendar",
-    description: "Last day to add or drop courses for the Spring 2025 semester without academic penalty.",
-  },
-  {
-    id: 5,
-    title: "Career Fair: Tech Industry",
-    date: "March 25, 2025",
-    time: "10:00 AM - 3:00 PM",
-    location: "Student Center",
-    category: "Career Event",
-    description: "Connect with employers from leading technology companies. Bring your resume and portfolio.",
-  },
-  {
-    id: 6,
-    title: "Digital Marketing Masterclass",
-    date: "March 27, 2025",
-    time: "1:00 PM - 4:00 PM",
-    location: "Room 302, Business Building",
-    category: "Workshop",
-    description: "Learn advanced digital marketing strategies from industry professionals.",
-  },
-  {
-    id: 7,
-    title: "Spring Break Begins",
-    date: "March 29, 2025",
-    time: "All Day",
-    location: "All Campuses",
-    category: "Academic Calendar",
-    description: "No classes during Spring Break (March 29 - April 6).",
-  },
-]
-
-// Sample class schedule data
-const classSchedules = [
-  {
-    id: 101,
-    courseCode: "WEB101",
-    courseName: "Web Development Fundamentals",
-    instructor: "Dr. Sarah Johnson",
-    schedule: "Mondays & Wednesdays, 9:00 AM - 10:30 AM",
-    location: "Tech Lab 1",
-    startDate: "March 15, 2025",
-    endDate: "June 5, 2025",
-  },
-  {
-    id: 102,
-    courseCode: "DATA201",
-    courseName: "Introduction to Data Science",
-    instructor: "Prof. Michael Chen",
-    schedule: "Tuesdays & Thursdays, 1:00 PM - 2:30 PM",
-    location: "Science Building, Room 305",
-    startDate: "March 15, 2025",
-    endDate: "June 5, 2025",
-  },
-  {
-    id: 103,
-    courseCode: "MKT150",
-    courseName: "Digital Marketing Essentials",
-    instructor: "Emily Rodriguez, MBA",
-    schedule: "Fridays, 10:00 AM - 1:00 PM",
-    location: "Business Building, Room 210",
-    startDate: "March 15, 2025",
-    endDate: "June 5, 2025",
-  },
-  {
-    id: 104,
-    courseCode: "DESIGN120",
-    courseName: "UI/UX Design Principles",
-    instructor: "David Kim, MFA",
-    schedule: "Mondays & Wednesdays, 2:00 PM - 3:30 PM",
-    location: "Design Studio 2",
-    startDate: "March 15, 2025",
-    endDate: "June 5, 2025",
-  },
-  {
-    id: 105,
-    courseCode: "CS250",
-    courseName: "Algorithms and Data Structures",
-    instructor: "Dr. Robert Martinez",
-    schedule: "Tuesdays & Thursdays, 9:00 AM - 10:30 AM",
-    location: "Tech Lab 3",
-    startDate: "March 15, 2025",
-    endDate: "June 5, 2025",
-  },
-]
-
-// Sample important dates
-const importantDates = [
-  {
-    id: 1,
-    title: "Application Deadline - Spring 2025",
-    date: "February 15, 2025",
-    category: "Admissions",
-  },
-  {
-    id: 2,
-    title: "Spring Semester Begins",
-    date: "March 15, 2025",
-    category: "Academic Calendar",
-  },
-  {
-    id: 3,
-    title: "Add/Drop Deadline",
-    date: "March 22, 2025",
-    category: "Academic Calendar",
-  },
-  {
-    id: 4,
-    title: "Spring Break",
-    date: "March 29 - April 6, 2025",
-    category: "Academic Calendar",
-  },
-  {
-    id: 5,
-    title: "Midterm Exams",
-    date: "April 15-19, 2025",
-    category: "Academic Calendar",
-  },
-  {
-    id: 6,
-    title: "Last Day of Classes",
-    date: "June 5, 2025",
-    category: "Academic Calendar",
-  },
-  {
-    id: 7,
-    title: "Final Exams",
-    date: "June 8-12, 2025",
-    category: "Academic Calendar",
-  },
-  {
-    id: 8,
-    title: "Commencement Ceremony",
-    date: "June 20, 2025",
-    category: "Special Events",
-  },
-]
 
 export default function SchedulePage() {
   const [currentMonth, setCurrentMonth] = useState(2) // March (0-indexed)
@@ -250,7 +58,7 @@ export default function SchedulePage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <NavBar />
       <main className="flex-1">
         {/* Hero Banner */}
         <section className="relative bg-[#8B0000] text-white overflow-hidden">
@@ -627,7 +435,7 @@ export default function SchedulePage() {
                 <div className="min-h-[100px] border-r border-t p-1 relative">
                   18
                   <div className="absolute top-6 left-0 right-0 px-1">
-                    <div className="bg-blue-500 text-white text-xs p-1 rounded mb-1 truncate">Web Dev Workshop</div>
+                    <div className="bg-blue-500 text-white text-xs p-1 rounded mb-1 truncate">Art Workshop</div>
                   </div>
                 </div>
 
@@ -762,7 +570,6 @@ export default function SchedulePage() {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   )
 }
