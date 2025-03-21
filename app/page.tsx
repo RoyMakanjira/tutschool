@@ -24,13 +24,22 @@ export default function Page() {
             <a href="#" className="text-sm hover:text-primary">
               Programs
             </a>
-            <a href="#" className="text-sm hover:text-primary">
+            <a href="/" className="text-sm hover:text-primary">
               Resources
             </a>
-            <a href="#" className="text-sm hover:text-primary">
+            <a href="/schedule" className="text-sm hover:text-primary">
+              Schedule
+            </a>
+            <a href="/testimonials" className="text-sm hover:text-primary">
+              Testimonials
+            </a>
+            <a href="/blog" className="text-sm hover:text-primary">
               Blog
             </a>
-            <a href="#" className="text-sm hover:text-primary">
+            <a href="/about" className="text-sm hover:text-primary">
+              About Us
+            </a>
+            <a href="/contact" className="text-sm hover:text-primary">
               About Us
             </a>
           </div>
