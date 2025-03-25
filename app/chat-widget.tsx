@@ -38,14 +38,14 @@ export default function ChatWidget() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 bg-red-500 text-white p-4 rounded-full shadow-lg hover:bg-red-600 transition-colors"
+        className="fixed bottom-6 right-6 bg-red-500 text-white p-6 rounded-full shadow-lg hover:bg-red-600 transition-colors"
       >
         <MessageCircle className="w-6 h-6" />
         <span className="sr-only">Open live chat</span>
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-96 bg-white rounded-lg shadow-xl">
+        <div className="fixed bottom-6 right-6 w-96  bg-white rounded-lg shadow-xl">
           <div className="flex items-center justify-between p-4 border-b">
             <h3 className="font-bold">Live Chat</h3>
             <button onClick={() => setIsOpen(false)}>
