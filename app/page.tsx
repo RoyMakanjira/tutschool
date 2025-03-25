@@ -23,6 +23,7 @@ import {
   Menu,
   X,
 } from "lucide-react"
+import NavBar from "@/components/NavBar"
 
 export default function Home() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
@@ -395,37 +396,7 @@ export default function Home() {
               <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
             </div>
           </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:block">
-            <ul className="flex gap-6">
-              <li>
-                <Link href="#" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.about}
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.catalog}
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.reviews}
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.photo}
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.contacts}
-                </Link>
-              </li>
-            </ul>
-          </nav>
+          <NavBar />
 
           <div className="flex items-center gap-4">
             <div className="hidden items-center rounded-full border border-gray-200 px-3 py-1 md:flex">
