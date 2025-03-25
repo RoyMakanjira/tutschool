@@ -413,63 +413,10 @@ export default function Home() {
             >
               {t.hero.cta}
             </Link>
-            <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+
           </div>
         </div>
       </header>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="border-b bg-white py-4 shadow-sm md:hidden">
-          <div className="container mx-auto px-4">
-            <nav className="space-y-4">
-              <ul className="space-y-2">
-                <li>
-                  <Link href="#" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.about}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.catalog}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.reviews}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.photo}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.contacts}
-                  </Link>
-                </li>
-              </ul>
-              <div className="flex items-center rounded-full border border-gray-200 px-3 py-2">
-                <input
-                  type="text"
-                  placeholder={t.search}
-                  className="w-full border-none bg-transparent text-sm outline-none"
-                />
-                <Search className="h-4 w-4 text-gray-400" />
-              </div>
-              <Link
-                href="#"
-                className="block w-full rounded-full bg-primary py-2 text-center text-sm font-medium text-white hover:bg-primary/90"
-              >
-                {t.hero.cta}
-              </Link>
-            </nav>
-          </div>
-        </div>
-      )}
 
       <main>
         {/* Hero Section */}

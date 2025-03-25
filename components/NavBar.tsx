@@ -8,9 +8,6 @@ const NavBar = () => {
     <div className="container mx-auto px-4 md:px-8">
       <div className="flex justify-between items-center py-4">
         <div className="flex items-center">
-          <Link href="/" className="font-bold text-2xl text-[#8B0000]">
-            TUT-SCHOOL
-          </Link>
         </div>
         <nav className="hidden md:flex space-x-8">
           <Link href="/about" className="text-[#8B0000] font-medium hover:text-[#c00000]">
@@ -36,9 +33,6 @@ const NavBar = () => {
           </h2>
         </nav>
         <div className="flex items-center space-x-4">
-          <button className="text-[#8B0000]">
-            <Search size={20} />
-          </button>
           <button className="md:hidden text-[#8B0000]">
             <Menu size={24} />
           </button>

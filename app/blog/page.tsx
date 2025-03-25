@@ -1,596 +1,866 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import Image from "next/image"
-import { Search, Calendar, Clock, ChevronRight, BookOpen, Users, Lightbulb, Briefcase, Award, Tag } from "lucide-react"
+import Link from "next/link"
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Facebook,
+  Instagram,
+  Twitter,
+  Globe,
+  Star,
+  ChevronRight,
+  Calendar,
+  User,
+  Search,
+  Menu,
+  X,
+  Tag,
+  Clock,
+  ChevronDown,
+  MessageCircle,
+  Share2,
+  Bookmark,
+} from "lucide-react"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import NavBar from "@/components/NavBar"
-
-// Sample blog post data
-const blogPosts = [
-  {
-    id: 1,
-    title: "10 Effective Study Techniques for Better Learning Outcomes",
-    excerpt:
-      "Discover research-backed study methods that can help you retain information longer and improve your academic performance.",
-    image: "/assets/verified.png",
-    category: "Study Tips",
-    author: {
-      name: "Dr. Sarah Johnson",
-      avatar: "/placeholder.svg?height=40&width=40",
-      role: "Learning Specialist",
-    },
-    date: "March 15, 2025",
-    readTime: "8 min read",
-    featured: true,
-    tags: ["Learning", "Study Methods", "Academic Success"],
-  },
-  {
-    id: 2,
-    title: "The Future of Education: How AI is Transforming Learning",
-    excerpt:
-      "Explore how artificial intelligence is revolutionizing education and creating new opportunities for personalized learning experiences.",
-    image: "/assets/coursesOne.svg",
-    category: "Educational Technology",
-    author: {
-      name: "Michael Chen",
-      avatar: "/placeholder.svg?height=40&width=40",
-      role: "Tech Education Director",
-    },
-    date: "March 10, 2025",
-    readTime: "6 min read",
-    featured: true,
-    tags: [ "EdTech", "Future of Education"],
-  },
-  {
-    id: 3,
-    title: "From Classroom to Career: Building Your Professional Network",
-    excerpt:
-      "Learn how to leverage your educational connections to build a strong professional network that will support your career growth.",
-      image: "/assets/coursesTwo.svg",
-    category: "Career Development",
-    author: {
-      name: "Emily Rodriguez",
-      avatar: "/placeholder.svg?height=40&width=40",
-      role: "Career Counselor",
-    },
-    date: "March 5, 2025",
-    readTime: "5 min read",
-    featured: false,
-    tags: ["Networking", "Career Growth", "Professional Development"],
-  },
-  {
-    id: 4,
-    title: "Student Success Story: From Beginner to Pro",
-    excerpt:
-      "Read about how one of our students transformed their career through dedication and the support of our comprehensive web development program.",
-      image: "/assets/coursesThree.svg",
-    category: "Success Stories",
-    author: {
-      name: "David Kim",
-      avatar: "/placeholder.svg?height=40&width=40",
-      role: "Program Director",
-    },
-    date: "February 28, 2025",
-    readTime: "7 min read",
-    featured: false,
-    tags: ["Success Story", "Career Change"],
-  },
-  {
-    id: 5,
-    title: "The Importance of Soft Skills in Technical Education",
-    excerpt:
-      "Discover why communication, teamwork, and problem-solving skills are just as important as technical knowledge in today's job market.",
-      image: "/assets/coursesFour.svg",
-    category: "Skills Development",
-    author: {
-      name: "Jennifer Lee",
-      avatar: "/placeholder.svg?height=40&width=40",
-      role: "Soft Skills Instructor",
-    },
-    date: "February 20, 2025",
-    readTime: "6 min read",
-    featured: false,
-    tags: ["Soft Skills", "Communication", "Professional Growth"],
-  },
-  {
-    id: 6,
-    title: "How to Balance Work, Life, and Education as an Adult Learner",
-    excerpt:
-      "Practical strategies for managing your time and responsibilities while pursuing further education as a working professional.",
-    image: "/assets/boy1.svg",
-    category: "Adult Learning",
-    author: {
-      name: "Robert Martinez",
-      avatar: "/placeholder.svg?height=40&width=40",
-      role: "Student Success Coach",
-    },
-    date: "February 15, 2025",
-    readTime: "9 min read",
-    featured: false,
-    tags: ["Work-Life Balance", "Adult Education", "Time Management"],
-  },
-]
-
-// Categories with icons
-const categories = [
-  { name: "Study Tips", icon: BookOpen, count: 12 },
-  { name: "Educational Technology", icon: Lightbulb, count: 8 },
-  { name: "Career Development", icon: Briefcase, count: 15 },
-  { name: "Success Stories", icon: Award, count: 7 },
-  { name: "Skills Development", icon: Users, count: 10 },
-]
-
-export default function BlogPage() {
+export default function Blog() {
+  const [language, setLanguage] = useState<"ru" | "en">("ru")
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeCategory, setActiveCategory] = useState<string>("all")
   const [searchQuery, setSearchQuery] = useState("")
 
-  const featuredPosts = blogPosts.filter((post) => post.featured)
-  const recentPosts = blogPosts.filter((post) => !post.featured).slice(0, 4)
+  const translations = {
+    ru: {
+      schoolName: "Tut School",
+      schoolSubtitle: "Курсы иностранных языков, Школа искусств",
+      phone: "+7 (983) 600-00-00",
+      email: "info@tut-school.ru",
+      address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
+      rating: "4.8 на Яндексе",
+      search: "Поиск",
+      nav: {
+        home: "ГЛАВНАЯ",
+        about: "О НАС",
+        programs: "ПРОГРАММЫ",
+        admissions: "ПОСТУПЛЕНИЕ",
+        blog: "БЛОГ",
+        contacts: "КОНТАКТЫ",
+      },
+      hero: {
+        title: "НАШ БЛОГ",
+        subtitle: "Полезные статьи, новости и советы по изучению языков и творческому развитию",
+      },
+      breadcrumbs: {
+        home: "Главная",
+        blog: "Блог",
+      },
+      categories: {
+        all: "Все статьи",
+        languages: "Изучение языков",
+        teaching: "Методика преподавания",
+        events: "События школы",
+        arts: "Искусство и творчество",
+        tips: "Советы родителям",
+      },
+      featured: {
+        title: "ИЗБРАННЫЕ СТАТЬИ",
+      },
+      latest: {
+        title: "ПОСЛЕДНИЕ ПУБЛИКАЦИИ",
+        viewAll: "Смотреть все",
+      },
+      searchPlaceholder: "Поиск по блогу...",
+      searchButton: "Искать",
+      readMore: "Читать далее",
+      minutesToRead: "мин. чтения",
+      loadMore: "Загрузить еще",
+      subscribe: {
+        title: "ПОДПИШИТЕСЬ НА НАШУ РАССЫЛКУ",
+        description: "Получайте новые статьи, полезные материалы и новости школы на свою электронную почту",
+        placeholder: "Ваш email",
+        button: "Подписаться",
+        privacy: "Мы уважаем вашу конфиденциальность и никогда не передаем ваши данные третьим лицам",
+      },
+      footer: {
+        quickLinks: "Быстрые ссылки",
+        links: ["О школе", "Наши курсы", "Расписание", "Преподаватели", "Цены", "Блог", "Контакты"],
+        contacts: "Контакты",
+        workingHours: {
+          title: "Режим работы",
+          weekdays: "Понедельник - Пятница: 9:00 - 21:00",
+          saturday: "Суббота: 10:00 - 18:00",
+          sunday: "Воскресенье: выходной",
+        },
+        socialMedia: "Социальные сети",
+        copyright: "© 2024 Tut School. Все права защищены.",
+      },
+      languageToggle: "English",
+    },
+    en: {
+      schoolName: "Tut School",
+      schoolSubtitle: "Foreign Language Courses, School of Arts",
+      phone: "+7 (983) 600-00-00",
+      email: "info@tut-school.ru",
+      address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
+      rating: "4.8 on Yandex",
+      search: "Search",
+      nav: {
+        home: "HOME",
+        about: "ABOUT US",
+        programs: "PROGRAMS",
+        admissions: "ADMISSIONS",
+        blog: "BLOG",
+        contacts: "CONTACTS",
+      },
+      hero: {
+        title: "OUR BLOG",
+        subtitle: "Useful articles, news, and tips on language learning and creative development",
+      },
+      breadcrumbs: {
+        home: "Home",
+        blog: "Blog",
+      },
+      categories: {
+        all: "All Articles",
+        languages: "Language Learning",
+        teaching: "Teaching Methods",
+        events: "School Events",
+        arts: "Arts & Creativity",
+        tips: "Tips for Parents",
+      },
+      featured: {
+        title: "FEATURED ARTICLES",
+      },
+      latest: {
+        title: "LATEST PUBLICATIONS",
+        viewAll: "View all",
+      },
+      searchPlaceholder: "Search the blog...",
+      searchButton: "Search",
+      readMore: "Read more",
+      minutesToRead: "min read",
+      loadMore: "Load more",
+      subscribe: {
+        title: "SUBSCRIBE TO OUR NEWSLETTER",
+        description: "Receive new articles, useful materials, and school news directly to your email",
+        placeholder: "Your email",
+        button: "Subscribe",
+        privacy: "We respect your privacy and never share your data with third parties",
+      },
+      footer: {
+        quickLinks: "Quick Links",
+        links: ["About the school", "Our courses", "Schedule", "Teachers", "Prices", "Blog", "Contacts"],
+        contacts: "Contacts",
+        workingHours: {
+          title: "Working Hours",
+          weekdays: "Monday - Friday: 9:00 AM - 9:00 PM",
+          saturday: "Saturday: 10:00 AM - 6:00 PM",
+          sunday: "Sunday: closed",
+        },
+        socialMedia: "Social Media",
+        copyright: "© 2024 Tut School. All rights reserved.",
+      },
+      languageToggle: "Русский",
+    },
+  }
 
-  // Get all unique tags
-  const allTags = Array.from(new Set(blogPosts.flatMap((post) => post.tags)))
+  const blogPosts = {
+    ru: [
+      {
+        id: 1,
+        title: "Как эффективно изучать иностранный язык: 7 проверенных методов",
+        excerpt:
+          "Изучение иностранного языка может быть сложной задачей, но с правильным подходом процесс становится более эффективным и увлекательным. В этой статье мы рассмотрим семь проверенных методов, которые помогут вам быстрее освоить новый язык.",
+        category: "languages",
+        date: "15 мая 2024",
+        author: "Анна Петрова",
+        readTime: 8,
+        featured: true,
+        image: "/placeholder.svg?height=600&width=1200&text=Language Learning",
+        tags: ["изучение языков", "методика", "советы"],
+        comments: 12,
+      },
+      {
+        id: 2,
+        title: "Летний интенсив по английскому языку для школьников",
+        excerpt:
+          "Приглашаем школьников на летний интенсивный курс английского языка. Программа разработана специально для учеников 5-9 классов и направлена на развитие разговорных навыков, расширение словарного запаса и преодоление языкового барьера.",
+        category: "events",
+        date: "10 мая 2024",
+        author: "Михаил Соколов",
+        readTime: 5,
+        featured: true,
+        image: "/placeholder.svg?height=600&width=1200&text=Summer Intensive",
+        tags: ["курсы", "английский язык", "летний интенсив"],
+        comments: 8,
+      },
+      {
+        id: 3,
+        title: "Китайская каллиграфия: искусство, философия, медитация",
+        excerpt:
+          "Китайская каллиграфия — это не просто искусство красивого письма, но и глубокая философская практика, способствующая концентрации и медитации. В этой статье мы рассказываем об истории каллиграфии, основных стилях и ее влиянии на культуру Китая.",
+        category: "arts",
+        date: "5 мая 2024",
+        author: "Ли Мин",
+        readTime: 10,
+        featured: false,
+        image: "/placeholder.svg?height=600&width=1200&text=Chinese Calligraphy",
+        tags: ["каллиграфия", "китайская культура", "искусство"],
+        comments: 15,
+      },
+      {
+        id: 4,
+        title: "Как помочь ребенку преодолеть языковой барьер",
+        excerpt:
+          "Языковой барьер — распространенная проблема при изучении иностранных языков. В этой статье мы делимся практическими советами для родителей, как помочь ребенку преодолеть страх говорения и развить уверенность в использовании иностранного языка.",
+        category: "tips",
+        date: "1 мая 2024",
+        author: "Елена Иванова",
+        readTime: 7,
+        featured: false,
+        image: "/placeholder.svg?height=600&width=1200&text=Language Barrier",
+        tags: ["советы родителям", "языковой барьер", "детская психология"],
+        comments: 20,
+      },
+      {
+        id: 5,
+        title: "Игровые методики в обучении дошкольников английскому языку",
+        excerpt:
+          "Игра — естественная среда обучения для детей дошкольного возраста. В этой статье мы рассматриваем эффективные игровые методики, которые помогают дошкольникам легко и с удовольствием осваивать английский язык.",
+        category: "teaching",
+        date: "25 апреля 2024",
+        author: "Ольга Смирнова",
+        readTime: 6,
+        featured: false,
+        image: "/placeholder.svg?height=600&width=1200&text=Game Methods",
+        tags: ["дошкольники", "игровые методики", "английский язык"],
+        comments: 9,
+      },
+      {
+        id: 6,
+        title: "Отчет о весеннем концерте театральной студии",
+        excerpt:
+          "В конце апреля состоялся весенний концерт нашей театральной студии на английском языке. Ученики представили постановку по мотивам произведений Шекспира, продемонстрировав не только актерское мастерство, но и отличное владение английским языком.",
+        category: "events",
+        date: "20 апреля 2024",
+        author: "Дмитрий Волков",
+        readTime: 4,
+        featured: false,
+        image: "/placeholder.svg?height=600&width=1200&text=Theater Performance",
+        tags: ["театральная студия", "концерт", "английский язык"],
+        comments: 14,
+      },
+      {
+        id: 7,
+        title: "Как выбрать языковой курс для ребенка: на что обратить внимание",
+        excerpt:
+          "Выбор языкового курса для ребенка — ответственная задача для родителей. В этой статье мы рассказываем, на какие критерии стоит обратить внимание при выборе курса, чтобы обучение было эффективным и приносило удовольствие.",
+        category: "tips",
+        date: "15 апреля 2024",
+        author: "Мария Козлова",
+        readTime: 9,
+        featured: false,
+        image: "/placeholder.svg?height=600&width=1200&text=Choosing a Course",
+        tags: ["выбор курса", "советы родителям", "языковое обучение"],
+        comments: 18,
+      },
+      {
+        id: 8,
+        title: "Мастер-класс по оригами: развиваем мелкую моторику и творческое мышление",
+        excerpt:
+          "Оригами — японское искусство складывания бумаги, которое не только увлекательно, но и полезно для развития детей. В этой статье мы рассказываем о пользе оригами и делимся инструкциями по созданию простых фигурок.",
+        category: "arts",
+        date: "10 апреля 2024",
+        author: "Наталья Петрова",
+        readTime: 7,
+        featured: false,
+        image: "/placeholder.svg?height=600&width=1200&text=Origami Workshop",
+        tags: ["оригами", "мастер-класс", "творчество"],
+        comments: 11,
+      },
+    ],
+    en: [
+      {
+        id: 1,
+        title: "How to Effectively Learn a Foreign Language: 7 Proven Methods",
+        excerpt:
+          "Learning a foreign language can be a challenging task, but with the right approach, the process becomes more effective and engaging. In this article, we'll look at seven proven methods that will help you master a new language faster.",
+        category: "languages",
+        date: "May 15, 2024",
+        author: "Anna Petrova",
+        readTime: 8,
+        featured: true,
+        image: "/placeholder.svg?height=600&width=1200&text=Language Learning",
+        tags: ["language learning", "methodology", "tips"],
+        comments: 12,
+      },
+      {
+        id: 2,
+        title: "Summer Intensive English Course for School Students",
+        excerpt:
+          "We invite school students to a summer intensive English course. The program is specifically designed for students in grades 5-9 and aims to develop conversational skills, expand vocabulary, and overcome the language barrier.",
+        category: "events",
+        date: "May 10, 2024",
+        author: "Mikhail Sokolov",
+        readTime: 5,
+        featured: true,
+        image: "/placeholder.svg?height=600&width=1200&text=Summer Intensive",
+        tags: ["courses", "English language", "summer intensive"],
+        comments: 8,
+      },
+      {
+        id: 3,
+        title: "Chinese Calligraphy: Art, Philosophy, Meditation",
+        excerpt:
+          "Chinese calligraphy is not just the art of beautiful writing, but also a deep philosophical practice that promotes concentration and meditation. In this article, we talk about the history of calligraphy, its main styles, and its influence on Chinese culture.",
+        category: "arts",
+        date: "May 5, 2024",
+        author: "Li Min",
+        readTime: 10,
+        featured: false,
+        image: "/placeholder.svg?height=600&width=1200&text=Chinese Calligraphy",
+        tags: ["calligraphy", "Chinese culture", "art"],
+        comments: 15,
+      },
+      {
+        id: 4,
+        title: "How to Help Your Child Overcome the Language Barrier",
+        excerpt:
+          "The language barrier is a common problem when learning foreign languages. In this article, we share practical advice for parents on how to help their child overcome the fear of speaking and develop confidence in using a foreign language.",
+        category: "tips",
+        date: "May 1, 2024",
+        author: "Elena Ivanova",
+        readTime: 7,
+        featured: false,
+        image: "/placeholder.svg?height=600&width=1200&text=Language Barrier",
+        tags: ["tips for parents", "language barrier", "child psychology"],
+        comments: 20,
+      },
+      {
+        id: 5,
+        title: "Game-Based Methods in Teaching English to Preschoolers",
+        excerpt:
+          "Play is a natural learning environment for preschool children. In this article, we look at effective game-based methods that help preschoolers learn English easily and with pleasure.",
+        category: "teaching",
+        date: "April 25, 2024",
+        author: "Olga Smirnova",
+        readTime: 6,
+        featured: false,
+        image: "/placeholder.svg?height=600&width=1200&text=Game Methods",
+        tags: ["preschoolers", "game methods", "English language"],
+        comments: 9,
+      },
+      {
+        id: 6,
+        title: "Report on the Spring Concert of the Drama Studio",
+        excerpt:
+          "At the end of April, our English-language drama studio held its spring concert. The students presented a performance based on Shakespeare's works, demonstrating not only acting skills but also excellent English language proficiency.",
+        category: "events",
+        date: "April 20, 2024",
+        author: "Dmitry Volkov",
+        readTime: 4,
+        featured: false,
+        image: "/placeholder.svg?height=600&width=1200&text=Theater Performance",
+        tags: ["drama studio", "concert", "English language"],
+        comments: 14,
+      },
+      {
+        id: 7,
+        title: "How to Choose a Language Course for Your Child: What to Look For",
+        excerpt:
+          "Choosing a language course for a child is a responsible task for parents. In this article, we discuss what criteria you should pay attention to when choosing a course to ensure that learning is effective and enjoyable.",
+        category: "tips",
+        date: "April 15, 2024",
+        author: "Maria Kozlova",
+        readTime: 9,
+        featured: false,
+        image: "/placeholder.svg?height=600&width=1200&text=Choosing a Course",
+        tags: ["course selection", "tips for parents", "language learning"],
+        comments: 18,
+      },
+      {
+        id: 8,
+        title: "Origami Workshop: Developing Fine Motor Skills and Creative Thinking",
+        excerpt:
+          "Origami is the Japanese art of paper folding, which is not only fascinating but also beneficial for children's development. In this article, we discuss the benefits of origami and share instructions for creating simple figures.",
+        category: "arts",
+        date: "April 10, 2024",
+        author: "Natalia Petrova",
+        readTime: 7,
+        featured: false,
+        image: "/placeholder.svg?height=600&width=1200&text=Origami Workshop",
+        tags: ["origami", "workshop", "creativity"],
+        comments: 11,
+      },
+    ],
+  }
+
+  const t = translations[language]
+  const posts = blogPosts[language]
+
+  const toggleLanguage = () => {
+    setLanguage(language === "ru" ? "en" : "ru")
+  }
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
+  const featuredPosts = posts.filter((post) => post.featured)
+
+  const filteredPosts = posts.filter((post) => {
+    const matchesCategory = activeCategory === "all" || post.category === activeCategory
+    const matchesSearch =
+      searchQuery === "" ||
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
+    return matchesCategory && matchesSearch && !post.featured
+  })
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <NavBar />
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative bg-[#8B0000] text-white overflow-hidden">
-          <div className="absolute inset-0 opacity-20">
-            <Image src="/placeholder.svg?height=600&width=1600" alt="Blog background" fill className="object-cover" />
+    <div className="flex min-h-screen flex-col">
+      {/* Top Bar */}
+      <div className="bg-primary/90 py-2 text-white">
+        <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Phone className="h-4 w-4" />
+              <span className="text-sm">{t.phone}</span>
+            </div>
+            <div className="hidden items-center gap-2 md:flex">
+              <Mail className="h-4 w-4" />
+              <span className="text-sm">{t.email}</span>
+            </div>
           </div>
-          <div className="container relative px-4 py-16 md:py-24 mx-auto">
-            <div className="max-w-3xl">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">TutSchool Blog</h1>
-              <p className="text-xl md:text-2xl text-white/80 mb-8">
-                Insights, tips, and stories from our educational community
-              </p>
-              <div className="relative max-w-xl">
-                <Input
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1">
+              <div className="flex text-yellow-300">
+                <Star className="h-4 w-4 fill-current" />
+                <Star className="h-4 w-4 fill-current" />
+                <Star className="h-4 w-4 fill-current" />
+                <Star className="h-4 w-4 fill-current" />
+                <Star className="h-4 w-4 fill-current stroke-yellow-300" />
+              </div>
+              <span className="text-sm">{t.rating}</span>
+            </div>
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1 rounded-md border border-white/30 px-2 py-1 text-sm hover:bg-white/10"
+            >
+              <Globe className="h-4 w-4" />
+              {t.languageToggle}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Header */}
+      <header className="border-b bg-white py-4 shadow-sm">
+        <div className="container mx-auto flex items-center justify-between px-4">
+          <div className="flex items-center gap-3">
+            <div className="relative h-14 w-14">
+              <Image
+                src="/placeholder.svg?height=56&width=56"
+                alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
+              <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
+            </div>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:block">
+            <ul className="flex gap-6">
+              <li>
+                <Link href="/" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.home}
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.about}
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.programs}
+                </Link>
+              </li>
+              <li>
+                <Link href="/admissions" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.admissions}
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="text-sm font-medium text-primary hover:text-primary/80">
+                  {t.nav.blog}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.contacts}
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <div className="hidden items-center rounded-full border border-gray-200 px-3 py-1 md:flex">
+              <input
+                type="text"
+                placeholder={t.search}
+                className="w-32 border-none bg-transparent text-sm outline-none"
+              />
+              <Search className="h-4 w-4 text-gray-400" />
+            </div>
+            <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="border-b bg-white py-4 shadow-sm md:hidden">
+          <div className="container mx-auto px-4">
+            <nav className="space-y-4">
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.home}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.about}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/programs" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.programs}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admissions" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.admissions}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
+                    {t.nav.blog}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.contacts}
+                  </Link>
+                </li>
+              </ul>
+              <div className="flex items-center rounded-full border border-gray-200 px-3 py-2">
+                <input
                   type="text"
-                  placeholder="Search articles..."
-                  className="pl-10 pr-4 py-3 bg-white/10 backdrop-blur-sm border-white/20 text-white placeholder:text-white/60 focus:border-white focus:ring-white"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={t.search}
+                  className="w-full border-none bg-transparent text-sm outline-none"
                 />
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/60" />
+                <Search className="h-4 w-4 text-gray-400" />
+              </div>
+            </nav>
+          </div>
+        </div>
+      )}
+
+      <main>
+        {/* Hero Section */}
+        <section className="relative">
+          <div className="relative h-[300px] w-full">
+            <Image
+              src="/placeholder.svg?height=300&width=1600"
+              alt={language === "ru" ? "Блог Tut School" : "Tut School Blog"}
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
+            <div className="absolute inset-0 flex flex-col items-start justify-center px-4 text-white md:px-12 lg:px-20">
+              <div className="max-w-2xl">
+                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl">{t.hero.title}</h2>
+                <p className="text-lg md:text-xl">{t.hero.subtitle}</p>
               </div>
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
         </section>
 
-        {/* Featured Posts */}
-        <section className="py-12 bg-white">
-          <div className="container px-4 mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-[#8B0000]">Featured Articles</h2>
-              <Link href="#" className="text-[#8B0000] hover:text-[#6B0000] font-medium flex items-center mt-2 md:mt-0">
-                View all articles <ChevronRight className="h-4 w-4 ml-1" />
+        {/* Breadcrumbs */}
+        <div className="border-b bg-gray-50">
+          <div className="container mx-auto px-4 py-3">
+            <div className="flex items-center gap-2 text-sm text-gray-500">
+              <Link href="/" className="hover:text-primary hover:underline">
+                {t.breadcrumbs.home}
               </Link>
+              <ChevronRight className="h-4 w-4" />
+              <span className="text-gray-700">{t.breadcrumbs.blog}</span>
             </div>
+          </div>
+        </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {featuredPosts.map((post) => (
-                <Card key={post.id} className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="aspect-[16/9] relative">
-                    <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
-                    <div className="absolute top-4 left-4">
-                      <Badge className="bg-[#8B0000] hover:bg-[#6B0000] text-white">{post.category}</Badge>
-                    </div>
+        {/* Blog Content */}
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid gap-12 lg:grid-cols-3">
+            {/* Main Content */}
+            <div className="lg:col-span-2">
+              {/* Featured Posts */}
+              {featuredPosts.length > 0 && (
+                <section className="mb-12">
+                  <h2 className="mb-6 text-2xl font-bold text-primary">{t.featured.title}</h2>
+                  <div className="grid gap-8 md:grid-cols-2">
+                    {featuredPosts.map((post) => (
+                      <div
+                        key={post.id}
+                        className="group overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md transition-all hover:shadow-lg"
+                      >
+                        <div className="relative h-48">
+                          <Image
+                            src={post.image || "/placeholder.svg"}
+                            alt={post.title}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+                        </div>
+                        <div className="p-6">
+                          <div className="mb-2 flex items-center gap-2">
+                            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                              {t.categories[post.category as keyof typeof t.categories]}
+                            </span>
+                            <div className="flex items-center gap-1 text-xs text-gray-500">
+                              <Clock className="h-3 w-3" />
+                              <span>
+                                {post.readTime} {t.minutesToRead}
+                              </span>
+                            </div>
+                          </div>
+                          <h3 className="mb-3 text-xl font-bold">{post.title}</h3>
+                          <p className="mb-4 text-gray-600 line-clamp-3">{post.excerpt}</p>
+                          <div className="mb-4 flex items-center gap-2">
+                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+                              <User className="h-4 w-4" />
+                            </div>
+                            <span className="text-sm font-medium">{post.author}</span>
+                            <span className="text-gray-400">•</span>
+                            <div className="flex items-center gap-1 text-sm text-gray-500">
+                              <Calendar className="h-4 w-4" />
+                              <span>{post.date}</span>
+                            </div>
+                          </div>
+                          <Link
+                            href={`/blog/${post.id}`}
+                            className="inline-flex items-center gap-1 text-primary hover:underline"
+                          >
+                            {t.readMore}
+                            <ChevronRight className="h-4 w-4" />
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-2xl hover:text-[#8B0000] transition-colors">
-                      <Link href={`/blog/${post.id}`}>{post.title}</Link>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pb-2">
-                    <CardDescription className="text-base text-gray-600">{post.excerpt}</CardDescription>
-                  </CardContent>
-                  <CardFooter className="flex flex-col items-start space-y-4">
-                    <div className="flex items-center space-x-4">
-                      <Avatar>
-                        <AvatarImage src={post.author.avatar} alt={post.author.name} />
-                        <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="text-sm font-medium">{post.author.name}</p>
-                        <p className="text-xs text-gray-500">{post.author.role}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center text-sm text-gray-500 w-full">
-                      <div className="flex items-center">
-                        <Calendar className="h-4 w-4 mr-1" />
-                        {post.date}
-                      </div>
-                      <div className="mx-3">•</div>
-                      <div className="flex items-center">
-                        <Clock className="h-4 w-4 mr-1" />
-                        {post.readTime}
-                      </div>
-                    </div>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
+                </section>
+              )}
 
-        {/* Main Content */}
-        <section className="py-12 bg-gray-50">
-          <div className="container px-4 mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Main Blog Posts */}
-              <div className="lg:col-span-2">
-                <h2 className="text-2xl md:text-3xl font-bold text-[#8B0000] mb-8">Recent Articles</h2>
-
-                <div className="space-y-8">
-                  {recentPosts.map((post) => (
-                    <Card
-                      key={post.id}
-                      className="overflow-hidden border-none shadow-md hover:shadow-lg transition-shadow"
+              {/* Category Filters */}
+              <div className="mb-8 flex flex-wrap gap-3">
+                <button
+                  onClick={() => setActiveCategory("all")}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                    activeCategory === "all" ? "bg-primary text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  {t.categories.all}
+                </button>
+                {Object.keys(t.categories)
+                  .filter((key) => key !== "all")
+                  .map((category) => (
+                    <button
+                      key={category}
+                      onClick={() => setActiveCategory(category)}
+                      className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                        activeCategory === category
+                          ? "bg-primary text-white"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      }`}
                     >
-                      <div className="grid md:grid-cols-3 gap-6">
-                        <div className="aspect-[4/3] relative">
-                          <Image
-                            src={post.image || "/placeholder.svg"}
-                            alt={post.title}
-                            fill
-                            className="object-cover rounded-l-lg"
-                          />
-                        </div>
-                        <div className="md:col-span-2 p-6">
-                          <div className="mb-2">
-                            <Badge className="bg-[#8B0000] hover:bg-[#6B0000] text-white">{post.category}</Badge>
-                          </div>
-                          <h3 className="text-xl font-bold mb-2 hover:text-[#8B0000] transition-colors">
-                            <Link href={`/blog/${post.id}`}>{post.title}</Link>
-                          </h3>
-                          <p className="text-gray-600 mb-4 line-clamp-2">{post.excerpt}</p>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-3">
-                              <Avatar className="h-8 w-8">
-                                <AvatarImage src={post.author.avatar} alt={post.author.name} />
-                                <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
-                              </Avatar>
-                              <span className="text-sm font-medium">{post.author.name}</span>
-                            </div>
-                            <div className="flex items-center text-xs text-gray-500">
-                              <Calendar className="h-3 w-3 mr-1" />
-                              {post.date}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
+                      {t.categories[category as keyof typeof t.categories]}
+                    </button>
                   ))}
-                </div>
+              </div>
 
-                <div className="mt-8 flex justify-center">
-                  <Button className="bg-[#8B0000] hover:bg-[#6B0000] text-white">Load More Articles</Button>
+              {/* Search Bar */}
+              <div className="mb-8">
+                <div className="flex overflow-hidden rounded-lg border border-gray-200">
+                  <input
+                    type="text"
+                    placeholder={t.searchPlaceholder}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full border-none px-4 py-3 outline-none"
+                  />
+                  <button className="bg-primary px-4 text-white hover:bg-primary/90">{t.searchButton}</button>
                 </div>
               </div>
 
-              {/* Sidebar */}
+              {/* Blog Posts */}
               <div className="space-y-8">
-                {/* Categories */}
-                <Card className="border-none shadow-md">
-                  <CardHeader>
-                    <CardTitle className="text-xl text-[#8B0000]">Categories</CardTitle>
-                  </CardHeader>
-                  <CardContent className="pb-6">
-                    <div className="space-y-2">
-                      {categories.map((category, index) => (
-                        <Link
-                          key={index}
-                          href="#"
-                          className="flex items-center justify-between p-2 rounded-md hover:bg-gray-100 transition-colors"
-                        >
-                          <div className="flex items-center">
-                            <div className="p-2 rounded-full bg-[#8B0000]/10 mr-3">
-                              <category.icon className="h-4 w-4 text-[#8B0000]" />
-                            </div>
-                            <span>{category.name}</span>
-                          </div>
-                          <Badge variant="outline" className="ml-2">
-                            {category.count}
-                          </Badge>
-                        </Link>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Popular Tags */}
-                <Card className="border-none shadow-md">
-                  <CardHeader>
-                    <CardTitle className="text-xl text-[#8B0000]">Popular Tags</CardTitle>
-                  </CardHeader>
-                  <CardContent className="pb-6">
-                    <div className="flex flex-wrap gap-2">
-                      {allTags.map((tag, index) => (
-                        <Link key={index} href="#">
-                          <Badge variant="secondary" className="bg-gray-100 hover:bg-gray-200 text-gray-800">
-                            <Tag className="h-3 w-3 mr-1" />
-                            {tag}
-                          </Badge>
-                        </Link>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Newsletter Signup */}
-                <Card className="border-none shadow-md bg-[#8B0000]/5">
-                  <CardHeader>
-                    <CardTitle className="text-xl text-[#8B0000]">Subscribe to Our Newsletter</CardTitle>
-                    <CardDescription>
-                      Get the latest articles and educational resources delivered to your inbox.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <form className="space-y-4">
-                      <Input
-                        type="email"
-                        placeholder="Your email address"
-                        className="border-gray-300 focus:border-[#8B0000] focus:ring-[#8B0000]"
-                      />
-                      <Button className="w-full bg-[#8B0000] hover:bg-[#6B0000] text-white">Subscribe</Button>
-                    </form>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Topics Section */}
-        <section className="py-12 bg-white">
-          <div className="container px-4 mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#8B0000] mb-8 text-center">Explore Topics</h2>
-
-            <Tabs defaultValue="all" className="w-full">
-              <div className="flex justify-center mb-8">
-                <TabsList className="bg-gray-100">
-                  <TabsTrigger value="all" className="data-[state=active]:bg-[#8B0000] data-[state=active]:text-white">
-                    All Topics
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="learning"
-                    className="data-[state=active]:bg-[#8B0000] data-[state=active]:text-white"
+                {filteredPosts.map((post) => (
+                  <article
+                    key={post.id}
+                    className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md"
                   >
-                    Learning
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="career"
-                    className="data-[state=active]:bg-[#8B0000] data-[state=active]:text-white"
-                  >
-                    Career
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="technology"
-                    className="data-[state=active]:bg-[#8B0000] data-[state=active]:text-white"
-                  >
-                    Technology
-                  </TabsTrigger>
-                </TabsList>
-              </div>
-
-              <TabsContent value="all" className="mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {blogPosts.slice(0, 6).map((post) => (
-                    <Card
-                      key={post.id}
-                      className="overflow-hidden border-none shadow-md hover:shadow-lg transition-shadow"
-                    >
-                      <div className="aspect-video relative">
+                    <div className="grid md:grid-cols-3">
+                      <div className="relative h-48 md:h-auto">
                         <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
-                        <div className="absolute top-4 left-4">
-                          <Badge className="bg-[#8B0000] hover:bg-[#6B0000] text-white">{post.category}</Badge>
+                      </div>
+                      <div className="p-6 md:col-span-2">
+                        <div className="mb-2 flex items-center gap-2">
+                          <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                            {t.categories[post.category as keyof typeof t.categories]}
+                          </span>
+                          <div className="flex items-center gap-1 text-xs text-gray-500">
+                            <Clock className="h-3 w-3" />
+                            <span>
+                              {post.readTime} {t.minutesToRead}
+                            </span>
+                          </div>
+                        </div>
+                        <h3 className="mb-3 text-xl font-bold">{post.title}</h3>
+                        <p className="mb-4 text-gray-600">{post.excerpt}</p>
+                        <div className="mb-4 flex items-center gap-2">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+                            <User className="h-4 w-4" />
+                          </div>
+                          <span className="text-sm font-medium">{post.author}</span>
+                          <span className="text-gray-400">•</span>
+                          <div className="flex items-center gap-1 text-sm text-gray-500">
+                            <Calendar className="h-4 w-4" />
+                            <span>{post.date}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <Link
+                            href={`/blog/${post.id}`}
+                            className="inline-flex items-center gap-1 text-primary hover:underline"
+                          >
+                            {t.readMore}
+                            <ChevronRight className="h-4 w-4" />
+                          </Link>
+                          <div className="flex items-center gap-3 text-gray-500">
+                            <div className="flex items-center gap-1">
+                              <MessageCircle className="h-4 w-4" />
+                              <span className="text-sm">{post.comments}</span>
+                            </div>
+                            <button className="rounded-full p-1 hover:bg-gray-100">
+                              <Share2 className="h-4 w-4" />
+                            </button>
+                            <button className="rounded-full p-1 hover:bg-gray-100">
+                              <Bookmark className="h-4 w-4" />
+                            </button>
+                          </div>
                         </div>
                       </div>
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg hover:text-[#8B0000] transition-colors line-clamp-2">
-                          <Link href={`/blog/${post.id}`}>{post.title}</Link>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="pb-2">
-                        <CardDescription className="text-sm text-gray-600 line-clamp-2">{post.excerpt}</CardDescription>
-                      </CardContent>
-                      <CardFooter className="flex items-center justify-between text-xs text-gray-500">
-                        <div className="flex items-center">
-                          <Calendar className="h-3 w-3 mr-1" />
-                          {post.date}
-                        </div>
-                        <div className="flex items-center">
-                          <Clock className="h-3 w-3 mr-1" />
-                          {post.readTime}
-                        </div>
-                      </CardFooter>
-                    </Card>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              {/* Load More Button */}
+              {filteredPosts.length > 0 && (
+                <div className="mt-8 text-center">
+                  <button className="inline-flex items-center gap-2 rounded-full border border-primary bg-white px-6 py-2 font-medium text-primary transition-colors hover:bg-primary/5">
+                    {t.loadMore}
+                    <ChevronDown className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
+
+              {/* No Results */}
+              {filteredPosts.length === 0 && (
+                <div className="rounded-lg border border-gray-200 bg-white p-8 text-center">
+                  <p className="text-lg text-gray-600">
+                    {language === "ru" ? "По вашему запросу ничего не найдено." : "No results found for your query."}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Sidebar */}
+            <div>
+              {/* Newsletter Subscription */}
+              <div className="mb-8 rounded-lg bg-primary p-6 text-white">
+                <h3 className="mb-4 text-xl font-bold">{t.subscribe.title}</h3>
+                <p className="mb-4 text-sm">{t.subscribe.description}</p>
+                <div className="mb-4">
+                  <input
+                    type="email"
+                    placeholder={t.subscribe.placeholder}
+                    className="w-full rounded-md border-0 bg-white/10 p-3 text-white placeholder:text-white/70 focus:ring-2 focus:ring-white/50"
+                  />
+                </div>
+                <button className="w-full rounded-md bg-white py-2 font-medium text-primary hover:bg-white/90">
+                  {t.subscribe.button}
+                </button>
+                <p className="mt-3 text-xs text-white/70">{t.subscribe.privacy}</p>
+              </div>
+
+              {/* Popular Tags */}
+              <div className="mb-8 rounded-lg border border-gray-200 bg-white p-6">
+                <h3 className="mb-4 text-lg font-bold">{language === "ru" ? "Популярные теги" : "Popular Tags"}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {Array.from(new Set(posts.flatMap((post) => post.tags)))
+                    .slice(0, 10)
+                    .map((tag, index) => (
+                      <button
+                        key={index}
+                        className="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700 hover:bg-gray-200"
+                      >
+                        <span className="flex items-center gap-1">
+                          <Tag className="h-3 w-3" />
+                          {tag}
+                        </span>
+                      </button>
+                    ))}
+                </div>
+              </div>
+
+              {/* Recent Posts */}
+              <div className="rounded-lg border border-gray-200 bg-white p-6">
+                <h3 className="mb-4 text-lg font-bold">{language === "ru" ? "Недавние публикации" : "Recent Posts"}</h3>
+                <div className="space-y-4">
+                  {posts.slice(0, 5).map((post) => (
+                    <div key={post.id} className="flex gap-3">
+                      <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md">
+                        <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium line-clamp-2">
+                          <Link href={`/blog/${post.id}`} className="hover:text-primary">
+                            {post.title}
+                          </Link>
+                        </h4>
+                        <p className="text-xs text-gray-500">{post.date}</p>
+                      </div>
+                    </div>
                   ))}
                 </div>
-              </TabsContent>
-
-              <TabsContent value="learning" className="mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {blogPosts
-                    .filter(
-                      (post) =>
-                        post.category === "Study Tips" ||
-                        post.tags.includes("Learning") ||
-                        post.tags.includes("Academic Success"),
-                    )
-                    .map((post) => (
-                      <Card
-                        key={post.id}
-                        className="overflow-hidden border-none shadow-md hover:shadow-lg transition-shadow"
-                      >
-                        <div className="aspect-video relative">
-                          <Image
-                            src={post.image || "/placeholder.svg"}
-                            alt={post.title}
-                            fill
-                            className="object-cover"
-                          />
-                          <div className="absolute top-4 left-4">
-                            <Badge className="bg-[#8B0000] hover:bg-[#6B0000] text-white">{post.category}</Badge>
-                          </div>
-                        </div>
-                        <CardHeader className="pb-2">
-                          <CardTitle className="text-lg hover:text-[#8B0000] transition-colors line-clamp-2">
-                            <Link href={`/blog/${post.id}`}>{post.title}</Link>
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent className="pb-2">
-                          <CardDescription className="text-sm text-gray-600 line-clamp-2">
-                            {post.excerpt}
-                          </CardDescription>
-                        </CardContent>
-                        <CardFooter className="flex items-center justify-between text-xs text-gray-500">
-                          <div className="flex items-center">
-                            <Calendar className="h-3 w-3 mr-1" />
-                            {post.date}
-                          </div>
-                          <div className="flex items-center">
-                            <Clock className="h-3 w-3 mr-1" />
-                            {post.readTime}
-                          </div>
-                        </CardFooter>
-                      </Card>
-                    ))}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="career" className="mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {blogPosts
-                    .filter(
-                      (post) =>
-                        post.category === "Career Development" ||
-                        post.tags.includes("Career Growth") ||
-                        post.tags.includes("Professional Development"),
-                    )
-                    .map((post) => (
-                      <Card
-                        key={post.id}
-                        className="overflow-hidden border-none shadow-md hover:shadow-lg transition-shadow"
-                      >
-                        <div className="aspect-video relative">
-                          <Image
-                            src={post.image || "/placeholder.svg"}
-                            alt={post.title}
-                            fill
-                            className="object-cover"
-                          />
-                          <div className="absolute top-4 left-4">
-                            <Badge className="bg-[#8B0000] hover:bg-[#6B0000] text-white">{post.category}</Badge>
-                          </div>
-                        </div>
-                        <CardHeader className="pb-2">
-                          <CardTitle className="text-lg hover:text-[#8B0000] transition-colors line-clamp-2">
-                            <Link href={`/blog/${post.id}`}>{post.title}</Link>
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent className="pb-2">
-                          <CardDescription className="text-sm text-gray-600 line-clamp-2">
-                            {post.excerpt}
-                          </CardDescription>
-                        </CardContent>
-                        <CardFooter className="flex items-center justify-between text-xs text-gray-500">
-                          <div className="flex items-center">
-                            <Calendar className="h-3 w-3 mr-1" />
-                            {post.date}
-                          </div>
-                          <div className="flex items-center">
-                            <Clock className="h-3 w-3 mr-1" />
-                            {post.readTime}
-                          </div>
-                        </CardFooter>
-                      </Card>
-                    ))}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="technology" className="mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {blogPosts
-                    .filter(
-                      (post) =>
-                        post.category === "Educational Technology" ||
-                        post.tags.includes("EdTech") ||
-                        post.tags.includes("AI") ||
-                        post.tags.includes("Web Development"),
-                    )
-                    .map((post) => (
-                      <Card
-                        key={post.id}
-                        className="overflow-hidden border-none shadow-md hover:shadow-lg transition-shadow"
-                      >
-                        <div className="aspect-video relative">
-                          <Image
-                            src={post.image || "/placeholder.svg"}
-                            alt={post.title}
-                            fill
-                            className="object-cover"
-                          />
-                          <div className="absolute top-4 left-4">
-                            <Badge className="bg-[#8B0000] hover:bg-[#6B0000] text-white">{post.category}</Badge>
-                          </div>
-                        </div>
-                        <CardHeader className="pb-2">
-                          <CardTitle className="text-lg hover:text-[#8B0000] transition-colors line-clamp-2">
-                            <Link href={`/blog/${post.id}`}>{post.title}</Link>
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent className="pb-2">
-                          <CardDescription className="text-sm text-gray-600 line-clamp-2">
-                            {post.excerpt}
-                          </CardDescription>
-                        </CardContent>
-                        <CardFooter className="flex items-center justify-between text-xs text-gray-500">
-                          <div className="flex items-center">
-                            <Calendar className="h-3 w-3 mr-1" />
-                            {post.date}
-                          </div>
-                          <div className="flex items-center">
-                            <Clock className="h-3 w-3 mr-1" />
-                            {post.readTime}
-                          </div>
-                        </CardFooter>
-                      </Card>
-                    ))}
-                </div>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-12 bg-[#8B0000] text-white">
-          <div className="container px-4 mx-auto">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-4">Ready to Start Your Learning Journey?</h2>
-              <p className="text-white/80 text-lg mb-8">
-                Explore our courses and join thousands of students who have transformed their careers with TutSchool.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Button className="bg-white text-[#8B0000] hover:bg-gray-100">Explore Courses</Button>
-                <Button variant="outline" className="border-white text-white hover:bg-white/10">
-                  Learn More
-                </Button>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </main>
     </div>
   )
