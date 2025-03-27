@@ -776,7 +776,7 @@ export default function Home() {
                 >
                   <div className="relative h-48 overflow-hidden">
                     <Image
-                      src={`/placeholder.svg?height=200&width=400&text=News ${index + 1}`}
+                      src={`/assets/courses/courses-1.svg?height=200&width=400&text=News ${index + 1}`}
                       alt={item.title}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
