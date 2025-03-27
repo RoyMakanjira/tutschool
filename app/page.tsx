@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -22,12 +22,66 @@ import {
   Search,
   Menu,
   X,
+  ChevronLeft,
 } from "lucide-react"
-import NavBar from "@/components/NavBar"
 
 export default function Home() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null)
+  const [hoveredCourse, setHoveredCourse] = useState<number | null>(null)
+  const [sliderDirection, setSliderDirection] = useState<"next" | "prev" | null>(null)
+
+  const heroImages = [
+    "/assets/boy1.svg?height=600&width=1600&text=Students in classroom",
+    "/assets/students.jpg?height=600&width=1600&text=Language Learning",
+    "/assets/happy-student.jpg?height=600&width=1600&text=Arts and Creativity",
+    "/assets/lounge.jpg?height=600&width=1600&text=School Events",
+  ]
+
+  useEffect(() => {
+    if (isAutoPlaying) {
+      autoPlayRef.current = setInterval(() => {
+        setSliderDirection("next")
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length)
+      }, 5000)
+    }
+
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current)
+      }
+    }
+  }, [isAutoPlaying, heroImages.length])
+
+  const goToNextSlide = () => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current)
+      setIsAutoPlaying(false)
+    }
+    setSliderDirection("next")
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length)
+  }
+
+  const goToPrevSlide = () => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current)
+      setIsAutoPlaying(false)
+    }
+    setSliderDirection("prev")
+    setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? heroImages.length - 1 : prevIndex - 1))
+  }
+
+  const goToSlide = (index: number) => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current)
+      setIsAutoPlaying(false)
+    }
+    setSliderDirection(index > currentImageIndex ? "next" : "prev")
+    setCurrentImageIndex(index)
+  }
 
   const translations = {
     ru: {
@@ -39,13 +93,13 @@ export default function Home() {
       rating: "4.8 на Яндексе",
       search: "Поиск",
       nav: {
+        home: "ГЛАВНАЯ",
         about: "О НАС",
         programs: "ПРОГРАММЫ",
+        schedule: "РАСПИСАНИЕ",
         admissions: "ПОСТУПЛЕНИЕ",
         blog: "БЛОГ",
         contacts: "КОНТАКТЫ",
-        schedule: "ПОСТУПЛЕНИЕ",
-        testimonials: "ПОСТУПЛЕНИЕ",
       },
       hero: {
         title: "ШКОЛА ИНОСТРАННЫХ ЯЗЫКОВ И ИСКУССТВ",
@@ -175,7 +229,7 @@ export default function Home() {
           title: "Режим работы",
           weekdays: "Понедельник - Пятница: 9:00 - 21:00",
           saturday: "Суббота: 10:00 - 18:00",
-          sunday: "Воскресенье, выходной",
+          sunday: "Воскресенье: выходной",
         },
         socialMedia: "Социальные сети",
         copyright: "© 2024 Tut School. Все права защищены.",
@@ -191,13 +245,13 @@ export default function Home() {
       rating: "4.8 on Yandex",
       search: "Search",
       nav: {
+        home: "HOME",
         about: "ABOUT US",
         programs: "PROGRAMS",
+        schedule: "SCHEDULE",
         admissions: "ADMISSIONS",
         blog: "BLOG",
         contacts: "CONTACTS",
-        schedule: "SCHEDULE",
-        testimonials: "TESTIMONIALS",
       },
       hero: {
         title: "SCHOOL OF FOREIGN LANGUAGES AND ARTS",
@@ -405,6 +459,11 @@ export default function Home() {
           <nav className="hidden md:block">
             <ul className="flex gap-6">
               <li>
+                <Link href="/" className="text-sm font-medium text-primary hover:text-primary/80">
+                  {t.nav.home}
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.about}
                 </Link>
@@ -412,6 +471,11 @@ export default function Home() {
               <li>
                 <Link href="/programs" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.programs}
+                </Link>
+              </li>
+              <li>
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
                 </Link>
               </li>
               <li>
@@ -425,17 +489,7 @@ export default function Home() {
                 </Link>
               </li>
               <li>
-                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.schedule}
-                </Link>
-              </li>
-              <li>
-                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.testimonials}
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sm font-medium text-primary hover:text-primary/80">
+                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.contacts}
                 </Link>
               </li>
@@ -451,6 +505,12 @@ export default function Home() {
               />
               <Search className="h-4 w-4 text-gray-400" />
             </div>
+            <Link
+              href="#"
+              className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 md:block"
+            >
+              {t.hero.cta}
+            </Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -465,6 +525,11 @@ export default function Home() {
             <nav className="space-y-4">
               <ul className="space-y-2">
                 <li>
+                  <Link href="/" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
+                    {t.nav.home}
+                  </Link>
+                </li>
+                <li>
                   <Link href="/about" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.about}
                   </Link>
@@ -472,6 +537,11 @@ export default function Home() {
                 <li>
                   <Link href="/programs" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.programs}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.schedule}
                   </Link>
                 </li>
                 <li>
@@ -485,17 +555,7 @@ export default function Home() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.schedule}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.testimonials}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
+                  <Link href="/contact" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.contacts}
                   </Link>
                 </li>
@@ -508,6 +568,12 @@ export default function Home() {
                 />
                 <Search className="h-4 w-4 text-gray-400" />
               </div>
+              <Link
+                href="#"
+                className="block w-full rounded-full bg-primary py-2 text-center text-sm font-medium text-white hover:bg-primary/90"
+              >
+                {t.hero.cta}
+              </Link>
             </nav>
           </div>
         </div>
@@ -516,27 +582,74 @@ export default function Home() {
       <main>
         {/* Hero Section */}
         <section className="relative">
-          <div className="relative h-[600px] w-full">
-            <Image
-              src="/assets/landing.jpeg"
-              alt={language === "ru" ? "Студенты в классе" : "Students in classroom"}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
-            <div className="absolute inset-0 flex flex-col items-start justify-center px-4 text-white md:px-12 lg:px-20">
+          <div className="relative h-[600px] w-full overflow-hidden">
+            {heroImages.map((src, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 transition-all duration-1000 ${
+                  index === currentImageIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                } ${
+                  sliderDirection === "next" && index === currentImageIndex
+                    ? "animate-slide-in-right"
+                    : sliderDirection === "prev" && index === currentImageIndex
+                      ? "animate-slide-in-left"
+                      : ""
+                }`}
+              >
+                <Image
+                  src={src || "/placeholder.svg"}
+                  alt={language === "ru" ? `Слайд ${index + 1}` : `Slide ${index + 1}`}
+                  fill
+                  className="object-cover transform transition-transform duration-10000 hover:scale-105"
+                  priority={index === 0}
+                />
+              </div>
+            ))}
+            <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/70 to-transparent"></div>
+            <div className="absolute inset-0 z-30 flex flex-col items-start justify-center px-4 text-white md:px-12 lg:px-20">
               <div className="max-w-2xl">
-                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">{t.hero.title}</h2>
-                <p className="mb-8 text-lg md:text-xl">{t.hero.subtitle}</p>
+                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl animate-fade-in-up">
+                  {t.hero.title}
+                </h2>
+                <p className="mb-8 text-lg md:text-xl animate-fade-in-up animation-delay-300">{t.hero.subtitle}</p>
                 <Link
                   href="#"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white transition-all hover:bg-primary/90 hover:gap-3"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white transition-all hover:bg-primary/90 hover:gap-3 animate-fade-in-up animation-delay-600"
                 >
                   {t.hero.cta}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
+            </div>
+
+            {/* Carousel Navigation Arrows */}
+            <button
+              onClick={goToPrevSlide}
+              className="absolute left-4 top-1/2 z-30 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white transition-all hover:bg-black/50"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+            <button
+              onClick={goToNextSlide}
+              className="absolute right-4 top-1/2 z-30 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white transition-all hover:bg-black/50"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+
+            {/* Carousel Navigation Dots */}
+            <div className="absolute bottom-6 left-0 right-0 z-30 flex justify-center gap-2">
+              {heroImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`h-2 w-2 rounded-full transition-all ${
+                    index === currentImageIndex ? "bg-white w-6" : "bg-white/50"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -545,7 +658,7 @@ export default function Home() {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="grid gap-8 md:grid-cols-2 md:gap-12">
-              <div>
+              <div className="transform transition-all duration-700 hover:translate-y-[-10px]">
                 <h2 className="mb-6 text-3xl font-bold text-primary">{t.welcome.title}</h2>
                 <p className="mb-6 text-lg text-gray-700">{t.welcome.description}</p>
                 <ul className="mb-8 space-y-3">
@@ -556,17 +669,17 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <Link href="#" className="inline-flex items-center text-primary hover:underline">
+                <Link href="/about" className="inline-flex items-center text-primary hover:underline group">
                   {t.welcome.cta}
-                  <ChevronRight className="ml-1 h-4 w-4" />
+                  <ChevronRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </div>
-              <div className="relative h-[400px] overflow-hidden rounded-lg shadow-lg">
+              <div className="relative h-[400px] overflow-hidden rounded-lg shadow-lg transform transition-all duration-700 hover:shadow-2xl hover:scale-[1.02]">
                 <Image
-                  src="/assets/happy-student.jpg"
+                  src="/placeholder.svg?height=400&width=600"
                   alt="Tut School classroom"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-2000 hover:scale-110"
                 />
               </div>
             </div>
@@ -580,7 +693,12 @@ export default function Home() {
             <div className="mx-auto mb-12 h-1 w-20 bg-primary"></div>
             <div className="grid gap-8 md:grid-cols-3">
               {t.advantages.items.map((item, index) => (
-                <div key={index} className="rounded-lg bg-white p-8 shadow-md transition-all hover:shadow-lg">
+                <div
+                  key={index}
+                  className="rounded-lg bg-white p-8 shadow-md transition-all hover:shadow-lg hover:translate-y-[-5px]"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
+                >
                   <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <span className="text-2xl font-bold">{index + 1}</span>
                   </div>
@@ -601,23 +719,37 @@ export default function Home() {
               {t.courses.items.map((course, index) => (
                 <div
                   key={index}
-                  className="group overflow-hidden rounded-lg border border-gray-200 bg-white transition-all hover:shadow-lg"
+                  className="group overflow-hidden rounded-lg border border-gray-200 bg-white transition-all hover:shadow-lg hover:translate-y-[-10px]"
+                  onMouseEnter={() => setHoveredCourse(index)}
+                  onMouseLeave={() => setHoveredCourse(null)}
                 >
                   <div className="relative h-48">
                     <Image
-                      src={`/assets/student.jpg?height=200&width=300&text=${index + 1}`}
+                      src={`/placeholder.svg?height=200&width=300&text=${index + 1}`}
                       alt={course.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className={`object-cover transition-all duration-700 ${
+                        hoveredCourse === index ? "scale-110" : "scale-100"
+                      }`}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-500 ${
+                        hoveredCourse === index ? "opacity-100" : "opacity-0"
+                      }`}
+                    ></div>
                   </div>
                   <div className="p-6">
-                    <h3 className="mb-3 text-xl font-bold">{course.title}</h3>
+                    <h3 className="mb-3 text-xl font-bold transition-colors duration-300 group-hover:text-primary">
+                      {course.title}
+                    </h3>
                     <p className="mb-4 text-sm text-gray-600">{course.description}</p>
-                    <Link href="#" className="inline-flex items-center text-primary hover:underline">
+                    <Link href="#" className="inline-flex items-center text-primary hover:underline group">
                       {course.cta}
-                      <ChevronRight className="ml-1 h-4 w-4" />
+                      <ChevronRight
+                        className={`ml-1 h-4 w-4 transition-transform duration-300 ${
+                          hoveredCourse === index ? "translate-x-1" : ""
+                        }`}
+                      />
                     </Link>
                   </div>
                 </div>
@@ -631,35 +763,38 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="mb-8 flex items-center justify-between">
               <h2 className="text-3xl font-bold text-primary">{t.news.title}</h2>
-              <Link href="#" className="flex items-center text-sm font-medium text-primary hover:underline">
+              <Link href="#" className="flex items-center text-sm font-medium text-primary hover:underline group">
                 {t.news.viewAll}
-                <ChevronRight className="ml-1 h-4 w-4" />
+                <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
             <div className="grid gap-6 md:grid-cols-3">
               {t.news.items.map((item, index) => (
                 <div
                   key={index}
-                  className="overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg"
+                  className="group overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg hover:translate-y-[-5px]"
                 >
-                  <div className="relative h-48">
+                  <div className="relative h-48 overflow-hidden">
                     <Image
-                      src={`/assets/coursesOne.svg?height=200&width=400&text=News ${index + 1}`}
+                      src={`/placeholder.svg?height=200&width=400&text=News ${index + 1}`}
                       alt={item.title}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
                   </div>
                   <div className="p-6">
                     <div className="mb-2 flex items-center gap-2 text-sm text-gray-500">
                       <Calendar className="h-4 w-4" />
                       <span>{item.date}</span>
                     </div>
-                    <h3 className="mb-3 text-xl font-bold">{item.title}</h3>
+                    <h3 className="mb-3 text-xl font-bold transition-colors duration-300 group-hover:text-primary">
+                      {item.title}
+                    </h3>
                     <p className="mb-4 text-sm text-gray-600">{item.description}</p>
-                    <Link href="#" className="inline-flex items-center text-primary hover:underline">
+                    <Link href="#" className="inline-flex items-center text-primary hover:underline group">
                       {item.cta}
-                      <ChevronRight className="ml-1 h-4 w-4" />
+                      <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </div>
                 </div>
@@ -675,7 +810,10 @@ export default function Home() {
             <div className="mx-auto mb-12 h-1 w-20 bg-primary"></div>
             <div className="grid gap-6 md:grid-cols-3">
               {t.testimonials.items.map((item, index) => (
-                <div key={index} className="rounded-lg bg-white p-6 shadow-md">
+                <div
+                  key={index}
+                  className="rounded-lg bg-white p-6 shadow-md transition-all hover:shadow-xl hover:translate-y-[-5px]"
+                >
                   <div className="mb-4 text-yellow-400">
                     <Star className="inline-block h-5 w-5 fill-current" />
                     <Star className="inline-block h-5 w-5 fill-current" />
@@ -703,38 +841,38 @@ export default function Home() {
             <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-4">
               <Link
                 href={`tel:${t.phone.replace(/\s+/g, "")}`}
-                className="flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-white transition-all hover:bg-primary/90"
+                className="flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-white transition-all hover:bg-primary/90 hover:translate-y-[-3px] hover:shadow-md"
               >
                 <Phone className="h-5 w-5" />
                 {t.contact.phone}
               </Link>
               <Link
                 href="#"
-                className="flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-white transition-all hover:bg-blue-600"
+                className="flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-white transition-all hover:bg-blue-600 hover:translate-y-[-3px] hover:shadow-md"
               >
                 <Navigation className="h-5 w-5" />
                 {t.contact.directions}
               </Link>
               <Link
                 href="#"
-                className="flex items-center gap-2 rounded-md bg-gray-700 px-4 py-2 text-white transition-all hover:bg-gray-800"
+                className="flex items-center gap-2 rounded-md bg-gray-700 px-4 py-2 text-white transition-all hover:bg-gray-800 hover:translate-y-[-3px] hover:shadow-md"
               >
                 <MessageSquare className="h-5 w-5" />
                 {t.contact.write}
               </Link>
               <Link
                 href="#"
-                className="flex items-center gap-2 rounded-md bg-blue-400 px-4 py-2 text-white transition-all hover:bg-blue-500"
+                className="flex items-center gap-2 rounded-md bg-blue-400 px-4 py-2 text-white transition-all hover:bg-blue-500 hover:translate-y-[-3px] hover:shadow-md"
               >
                 <Send className="h-5 w-5" />
                 {t.contact.telegram}
               </Link>
               <Link
                 href="#"
-                className="flex items-center gap-2 rounded-md bg-green-500 px-4 py-2 text-white transition-all hover:bg-green-600"
+                className="flex items-center gap-2 rounded-md bg-green-500 px-4 py-2 text-white transition-all hover:bg-green-600 hover:translate-y-[-3px] hover:shadow-md"
               >
                 <MessageSquare className="h-5 w-5" />
-                {t.contact.whatsapp}\
+                {t.contact.whatsapp}
               </Link>
             </div>
             <div className="mt-8 text-center">
@@ -749,11 +887,11 @@ export default function Home() {
         {/* CTA Section */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <div className="overflow-hidden rounded-xl bg-primary shadow-xl">
+            <div className="overflow-hidden rounded-xl bg-primary shadow-xl transition-transform hover:scale-[1.01]">
               <div className="relative">
                 <div className="absolute inset-0">
                   <Image
-                    src="/assets/painting.jpg?height=400&width=1200"
+                    src="/placeholder.svg?height=400&width=1200"
                     alt="Background"
                     fill
                     className="object-cover opacity-20"
@@ -764,7 +902,7 @@ export default function Home() {
                   <p className="mx-auto mb-8 max-w-2xl text-lg">{t.trial.description}</p>
                   <Link
                     href="#"
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary transition-all hover:bg-gray-100 hover:gap-3"
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary transition-all hover:bg-gray-100 hover:gap-3 hover:shadow-lg"
                   >
                     {t.trial.cta}
                     <ArrowRight className="h-4 w-4" />
@@ -775,6 +913,91 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 py-12 text-white">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
+            <div>
+              <div className="flex items-center gap-3">
+                <div className="relative h-12 w-12 rounded-full bg-white p-2">
+                  <Image
+                    src="/placeholder.svg?height=48&width=48"
+                    alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">{t.schoolName}</h3>
+                  <p className="text-sm text-gray-400">{t.schoolSubtitle}</p>
+                </div>
+              </div>
+              <p className="mt-4 text-gray-400">{t.about.description.substring(0, 120)}...</p>
+            </div>
+            <div>
+              <h3 className="mb-4 text-lg font-bold">{t.footer.quickLinks}</h3>
+              <ul className="space-y-2">
+                {t.footer.links.map((link, index) => (
+                  <li key={index}>
+                    <Link href="#" className="text-gray-400 hover:text-white">
+                      {link}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="mb-4 text-lg font-bold">{t.footer.contacts}</h3>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <Phone className="h-4 w-4 text-gray-400" />
+                  <span>{t.phone}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Mail className="h-4 w-4 text-gray-400" />
+                  <span>{t.email}</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <MapPin className="h-4 w-4 flex-shrink-0 text-gray-400" />
+                  <span className="text-sm">{t.address}</span>
+                </div>
+              </div>
+              <h3 className="mb-2 mt-6 text-lg font-bold">{t.footer.workingHours.title}</h3>
+              <div className="space-y-1 text-sm text-gray-400">
+                <p>{t.footer.workingHours.weekdays}</p>
+                <p>{t.footer.workingHours.saturday}</p>
+                <p>{t.footer.workingHours.sunday}</p>
+              </div>
+            </div>
+            <div>
+              <h3 className="mb-4 text-lg font-bold">{t.footer.socialMedia}</h3>
+              <div className="flex gap-3">
+                <Link href="#" className="rounded-full bg-gray-700 p-2 hover:bg-primary transition-colors">
+                  <Facebook className="h-5 w-5" />
+                </Link>
+                <Link href="#" className="rounded-full bg-gray-700 p-2 hover:bg-primary transition-colors">
+                  <Instagram className="h-5 w-5" />
+                </Link>
+                <Link href="#" className="rounded-full bg-gray-700 p-2 hover:bg-primary transition-colors">
+                  <Twitter className="h-5 w-5" />
+                </Link>
+              </div>
+              <div className="mt-6">
+                <Link
+                  href="#"
+                  className="inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
+                >
+                  {t.hero.cta}
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+            <p>{t.footer.copyright}</p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
