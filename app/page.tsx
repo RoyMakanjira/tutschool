@@ -597,7 +597,7 @@ export default function Home() {
                 }`}
               >
                 <Image
-                  src={src || "/placeholder.svg"}
+                  src={src || "/assets/happy-student.jpg"}
                   alt={language === "ru" ? `Слайд ${index + 1}` : `Slide ${index + 1}`}
                   fill
                   className="object-cover transform transition-transform duration-10000 hover:scale-105"
@@ -676,7 +676,7 @@ export default function Home() {
               </div>
               <div className="relative h-[400px] overflow-hidden rounded-lg shadow-lg transform transition-all duration-700 hover:shadow-2xl hover:scale-[1.02]">
                 <Image
-                  src="/placeholder.svg?height=400&width=600"
+                  src="/assets/students.jpg?height=400&width=600"
                   alt="Tut School classroom"
                   fill
                   className="object-cover transition-transform duration-2000 hover:scale-110"
@@ -725,7 +725,7 @@ export default function Home() {
                 >
                   <div className="relative h-48">
                     <Image
-                      src={`/placeholder.svg?height=200&width=300&text=${index + 1}`}
+                      src={`/assets/coursesOne.svg?height=200&width=300&text=${index + 1}`}
                       alt={course.title}
                       fill
                       className={`object-cover transition-all duration-700 ${
@@ -913,91 +913,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 py-12 text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
-            <div>
-              <div className="flex items-center gap-3">
-                <div className="relative h-12 w-12 rounded-full bg-white p-2">
-                  <Image
-                    src="/placeholder.svg?height=48&width=48"
-                    alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold">{t.schoolName}</h3>
-                  <p className="text-sm text-gray-400">{t.schoolSubtitle}</p>
-                </div>
-              </div>
-              <p className="mt-4 text-gray-400">{t.about.description.substring(0, 120)}...</p>
-            </div>
-            <div>
-              <h3 className="mb-4 text-lg font-bold">{t.footer.quickLinks}</h3>
-              <ul className="space-y-2">
-                {t.footer.links.map((link, index) => (
-                  <li key={index}>
-                    <Link href="#" className="text-gray-400 hover:text-white">
-                      {link}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-4 text-lg font-bold">{t.footer.contacts}</h3>
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-gray-400" />
-                  <span>{t.phone}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-gray-400" />
-                  <span>{t.email}</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <MapPin className="h-4 w-4 flex-shrink-0 text-gray-400" />
-                  <span className="text-sm">{t.address}</span>
-                </div>
-              </div>
-              <h3 className="mb-2 mt-6 text-lg font-bold">{t.footer.workingHours.title}</h3>
-              <div className="space-y-1 text-sm text-gray-400">
-                <p>{t.footer.workingHours.weekdays}</p>
-                <p>{t.footer.workingHours.saturday}</p>
-                <p>{t.footer.workingHours.sunday}</p>
-              </div>
-            </div>
-            <div>
-              <h3 className="mb-4 text-lg font-bold">{t.footer.socialMedia}</h3>
-              <div className="flex gap-3">
-                <Link href="#" className="rounded-full bg-gray-700 p-2 hover:bg-primary transition-colors">
-                  <Facebook className="h-5 w-5" />
-                </Link>
-                <Link href="#" className="rounded-full bg-gray-700 p-2 hover:bg-primary transition-colors">
-                  <Instagram className="h-5 w-5" />
-                </Link>
-                <Link href="#" className="rounded-full bg-gray-700 p-2 hover:bg-primary transition-colors">
-                  <Twitter className="h-5 w-5" />
-                </Link>
-              </div>
-              <div className="mt-6">
-                <Link
-                  href="#"
-                  className="inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
-                >
-                  {t.hero.cta}
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-            <p>{t.footer.copyright}</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
