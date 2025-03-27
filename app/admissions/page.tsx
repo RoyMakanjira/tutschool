@@ -41,9 +41,12 @@ export default function Admissions() {
       nav: {
         home: "ГЛАВНАЯ",
         about: "О НАС",
-        catalog: "КАТАЛОГ",
+        programs: "ПРОГРАММЫ",
         admissions: "ПОСТУПЛЕНИЕ",
+        blog: "БЛОГ",
         contacts: "КОНТАКТЫ",
+        schedule: "ПОСТУПЛЕНИЕ",
+        testimonials: "ПОСТУПЛЕНИЕ",
       },
       hero: {
         title: "ПОСТУПЛЕНИЕ",
@@ -310,9 +313,12 @@ export default function Admissions() {
       nav: {
         home: "HOME",
         about: "ABOUT US",
-        catalog: "CATALOG",
+        programs: "PROGRAMS",
         admissions: "ADMISSIONS",
+        blog: "BLOG",
         contacts: "CONTACTS",
+        schedule: "SCHEDULE",
+        testimonials: "TESTIMONIALS",
       },
       hero: {
         title: "ADMISSIONS",
@@ -642,22 +648,37 @@ export default function Admissions() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.about}
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.catalog}
+                <Link href="/programs" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.programs}
                 </Link>
               </li>
               <li>
-                <Link href="/admissions" className="text-sm font-medium text-primary hover:text-primary/80">
+                <Link href="/admissions" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.admissions}
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/blog" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.blog}
+                </Link>
+              </li>
+              <li>
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.testimonials}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-primary hover:text-primary/80">
                   {t.nav.contacts}
                 </Link>
               </li>
@@ -673,12 +694,6 @@ export default function Admissions() {
               />
               <Search className="h-4 w-4 text-gray-400" />
             </div>
-            <Link
-              href="#apply"
-              className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 md:block"
-            >
-              {t.hero.cta}
-            </Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -698,25 +713,37 @@ export default function Admissions() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/about" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.about}
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.catalog}
+                  <Link href="/programs" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.programs}
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/admissions"
-                    className="block py-2 text-sm font-medium text-primary hover:text-primary/80"
-                  >
+                  <Link href="/admissions" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.admissions}
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/blog" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.blog}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.schedule}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.testimonials}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
                     {t.nav.contacts}
                   </Link>
                 </li>
@@ -729,12 +756,6 @@ export default function Admissions() {
                 />
                 <Search className="h-4 w-4 text-gray-400" />
               </div>
-              <Link
-                href="#apply"
-                className="block w-full rounded-full bg-primary py-2 text-center text-sm font-medium text-white hover:bg-primary/90"
-              >
-                {t.hero.cta}
-              </Link>
             </nav>
           </div>
         </div>

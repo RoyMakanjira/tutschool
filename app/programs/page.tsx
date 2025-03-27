@@ -48,7 +48,10 @@ export default function Programs() {
         about: "О НАС",
         programs: "ПРОГРАММЫ",
         admissions: "ПОСТУПЛЕНИЕ",
+        blog: "БЛОГ",
         contacts: "КОНТАКТЫ",
+        schedule: "ПОСТУПЛЕНИЕ",
+        testimonials: "ПОСТУПЛЕНИЕ",
       },
       hero: {
         title: "АКАДЕМИЧЕСКИЕ ПРОГРАММЫ",
@@ -387,7 +390,10 @@ export default function Programs() {
         about: "ABOUT US",
         programs: "PROGRAMS",
         admissions: "ADMISSIONS",
+        blog: "BLOG",
         contacts: "CONTACTS",
+        schedule: "SCHEDULE",
+        testimonials: "TESTIMONIALS",
       },
       hero: {
         title: "ACADEMIC PROGRAMS",
@@ -771,7 +777,6 @@ export default function Programs() {
           </div>
         </div>
       </div>
-
       {/* Header */}
       <header className="border-b bg-white py-4 shadow-sm">
         <div className="container mx-auto flex items-center justify-between px-4">
@@ -799,12 +804,12 @@ export default function Programs() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.about}
                 </Link>
               </li>
               <li>
-                <Link href="/programs" className="text-sm font-medium text-primary hover:text-primary/80">
+                <Link href="/programs" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.programs}
                 </Link>
               </li>
@@ -814,7 +819,22 @@ export default function Programs() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/blog" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.blog}
+                </Link>
+              </li>
+              <li>
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.testimonials}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-primary hover:text-primary/80">
                   {t.nav.contacts}
                 </Link>
               </li>
@@ -830,12 +850,6 @@ export default function Programs() {
               />
               <Search className="h-4 w-4 text-gray-400" />
             </div>
-            <Link
-              href="#enroll"
-              className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 md:block"
-            >
-              {t.hero.cta}
-            </Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -855,12 +869,12 @@ export default function Programs() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/about" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.about}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/programs" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
+                  <Link href="/programs" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.programs}
                   </Link>
                 </li>
@@ -870,7 +884,22 @@ export default function Programs() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/blog" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.blog}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.schedule}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.testimonials}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
                     {t.nav.contacts}
                   </Link>
                 </li>
@@ -883,17 +912,10 @@ export default function Programs() {
                 />
                 <Search className="h-4 w-4 text-gray-400" />
               </div>
-              <Link
-                href="#enroll"
-                className="block w-full rounded-full bg-primary py-2 text-center text-sm font-medium text-white hover:bg-primary/90"
-              >
-                {t.hero.cta}
-              </Link>
             </nav>
           </div>
         </div>
       )}
-
       <main>
         {/* Hero Section */}
         <section className="relative">

@@ -1,133 +1,619 @@
 "use client"
-import Image from "next/image"
-import {
-  ChevronRight,
-  Award,
-  Users,
-  BookOpen,
-  Globe,
-  Calendar,
-  GraduationCap,
-  Building,
-  ArrowRight,
-  CheckCircle,
-  Star,
-} from "lucide-react"
 
+import { useState } from "react"
+import Image from "next/image"
+import Link from "next/link"
+import {
+  Phone,
+  Mail,
+
+  Globe,
+  Star,
+  ChevronRight,
+  Calendar,
+  ArrowRight,
+  Search,
+  Menu,
+  Users,Award, BookOpen, CheckCircle, Building, GraduationCap,
+  X,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import NavBar from "@/components/NavBar"
 
 const leadershipTeam = [
-  {
-    name: "Dr. Sarah Johnson",
-    role: "President & Founder",
-    image: "/placeholder.svg?height=300&width=300",
-    bio: "Dr. Johnson founded TutSchool in 2010 with a vision to make quality education accessible to all. With over 20 years of experience in education and technology, she has led the school to become a leader in innovative learning approaches.",
-  },
-  {
-    name: "Michael Chen",
-    role: "Chief Academic Officer",
-    image: "/placeholder.svg?height=300&width=300",
-    bio: "Michael oversees all academic programs and curriculum development. His background in both education and industry ensures our programs remain cutting-edge and aligned with market demands.",
-  },
-  {
-    name: "Emily Rodriguez",
-    role: "Director of Student Success",
-    image: "/placeholder.svg?height=300&width=300",
-    bio: "Emily leads our student support initiatives, ensuring every student has the resources they need to succeed. Her innovative approach to student services has significantly improved retention and satisfaction rates.",
-  },
-]
+    {
+      name: "Dr. Sarah Johnson",
+      role: "President & Founder",
+      image: "/placeholder.svg?height=300&width=300",
+      bio: "Dr. Johnson founded TutSchool in 2010 with a vision to make quality education accessible to all. With over 20 years of experience in education and technology, she has led the school to become a leader in innovative learning approaches.",
+    },
+    {
+      name: "Michael Chen",
+      role: "Chief Academic Officer",
+      image: "/placeholder.svg?height=300&width=300",
+      bio: "Michael oversees all academic programs and curriculum development. His background in both education and industry ensures our programs remain cutting-edge and aligned with market demands.",
+    },
+    {
+      name: "Emily Rodriguez",
+      role: "Director of Student Success",
+      image: "/placeholder.svg?height=300&width=300",
+      bio: "Emily leads our student support initiatives, ensuring every student has the resources they need to succeed. Her innovative approach to student services has significantly improved retention and satisfaction rates.",
+    },
+  ]
+  
+  // Sample milestones data
+  const milestones = [
+    {
+      year: "2010",
+      title: "Foundation",
+      description:
+        "TutSchool was founded with a mission to provide accessible, quality education in technology and business fields.",
+    },
+    {
+      year: "2013",
+      title: "First Graduating Class",
+      description: "Our first cohort of students graduated with a remarkable 95% job placement rate within six months.",
+    },
+    {
+      year: "2015",
+      title: "Online Learning Platform",
+      description: "Launched our proprietary online learning platform, expanding our reach to students worldwide.",
+    },
+    {
+      year: "2018",
+      title: "Industry Partnerships",
+      description:
+        "Established key partnerships with leading technology companies to provide internship and employment opportunities.",
+    },
+    {
+      year: "2020",
+      title: "Curriculum Expansion",
+      description:
+        "Expanded our curriculum to include data science, artificial intelligence, and digital marketing programs.",
+    },
+    {
+      year: "2023",
+      title: "Global Recognition",
+      description: "Recognized as one of the top educational institutions for technology and business education.",
+    },
+  ]
+  
+  // Sample stats data
+  const stats = [
+    { value: "10,000+", label: "Students Enrolled" },
+    { value: "95%", label: "Job Placement Rate" },
+    { value: "50+", label: "Industry Partners" },
+    { value: "25+", label: "Countries Represented" },
+  ]
+  
+  // Sample values data
+  const values = [
+    {
+      icon: Users,
+      title: "Student-Centered",
+      description:
+        "We put students at the center of everything we do, designing programs and services that meet their unique needs and aspirations.",
+    },
+    {
+      icon: Award,
+      title: "Excellence",
+      description:
+        "We strive for excellence in teaching, learning, and innovation, setting high standards for ourselves and our students.",
+    },
+    {
+      icon: Globe,
+      title: "Inclusivity",
+      description:
+        "We foster an inclusive environment where diverse perspectives are valued and everyone has the opportunity to succeed.",
+    },
+    {
+      icon: BookOpen,
+      title: "Lifelong Learning",
+      description:
+        "We believe in the power of continuous learning and growth, both for our students and our institution.",
+    },
+  ]
+  
+  // Sample accreditations data
+  const accreditations = [
+    "Higher Education Accreditation Commission",
+    "International Association of Technology Educators",
+    "National Business Education Council",
+    "Global Online Learning Standards Organization",
+  ]
 
-// Sample milestones data
-const milestones = [
-  {
-    year: "2010",
-    title: "Foundation",
-    description:
-      "TutSchool was founded with a mission to provide accessible, quality education in technology and business fields.",
-  },
-  {
-    year: "2013",
-    title: "First Graduating Class",
-    description: "Our first cohort of students graduated with a remarkable 95% job placement rate within six months.",
-  },
-  {
-    year: "2015",
-    title: "Online Learning Platform",
-    description: "Launched our proprietary online learning platform, expanding our reach to students worldwide.",
-  },
-  {
-    year: "2018",
-    title: "Industry Partnerships",
-    description:
-      "Established key partnerships with leading technology companies to provide internship and employment opportunities.",
-  },
-  {
-    year: "2020",
-    title: "Curriculum Expansion",
-    description:
-      "Expanded our curriculum to include data science, artificial intelligence, and digital marketing programs.",
-  },
-  {
-    year: "2023",
-    title: "Global Recognition",
-    description: "Recognized as one of the top educational institutions for technology and business education.",
-  },
-]
+export default function Home() {
+  const [language, setLanguage] = useState<"ru" | "en">("ru")
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-// Sample stats data
-const stats = [
-  { value: "10,000+", label: "Students Enrolled" },
-  { value: "95%", label: "Job Placement Rate" },
-  { value: "50+", label: "Industry Partners" },
-  { value: "25+", label: "Countries Represented" },
-]
+  const translations = {
+    ru: {
+      schoolName: "Tut School",
+      schoolSubtitle: "Курсы иностранных языков, Школа искусств",
+      phone: "+7 (983) 600-00-00",
+      email: "info@tut-school.ru",
+      address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
+      rating: "4.8 на Яндексе",
+      search: "Поиск",
+      nav: {
+        about: "О НАС",
+        programs: "ПРОГРАММЫ",
+        admissions: "ПОСТУПЛЕНИЕ",
+        blog: "БЛОГ",
+        contacts: "КОНТАКТЫ",
+        schedule: "ПОСТУПЛЕНИЕ",
+        testimonials: "ПОСТУПЛЕНИЕ",
+      },
+      hero: {
+        title: "ШКОЛА ИНОСТРАННЫХ ЯЗЫКОВ И ИСКУССТВ",
+        subtitle: "Мы помогаем детям и взрослым освоить английский и китайский языки в дружеской атмосфере",
+        cta: "Записаться на пробный урок",
+      },
+      about: {
+        title: "О НАС",
+        description:
+          "Мы языковая студия, английский и китайский языки для детей и взрослых. Нашим клиентам нравится качество преподавания и дружеская атмосфера. У нас вы не только найдете компанию для изучения языков, но и обретете новых друзей.",
+        cta: "Подробнее",
+      },
+      welcome: {
+        title: "ДОБРО ПОЖАЛОВАТЬ В TUT SCHOOL",
+        description:
+          "Наша школа предлагает уникальную возможность изучать языки и искусство в одном месте. Мы создаем вдохновляющую среду, где каждый студент может раскрыть свой потенциал.",
+        points: [
+          "Индивидуальный подход к каждому ученику",
+          "Современные методики преподавания",
+          "Комфортные классы и дружелюбная атмосфера",
+          "Регулярные культурные мероприятия",
+        ],
+        cta: "Узнать больше о нашей школе",
+      },
+      advantages: {
+        title: "НАШИ ПРЕИМУЩЕСТВА",
+        items: [
+          {
+            title: "Опытные преподаватели",
+            description: "Наши учителя имеют международные сертификаты и многолетний опыт преподавания",
+          },
+          {
+            title: "Английский и китайский",
+            description: "Предлагаем курсы по двум востребованным языкам для детей и взрослых",
+          },
+          {
+            title: "Школа искусств",
+            description: "Помимо языковых курсов у нас есть творческие занятия и мастер-классы",
+          },
+        ],
+      },
+      courses: {
+        title: "НАШИ КУРСЫ",
+        subtitle: "Выберите программу, которая подходит именно вам",
+        items: [
+          {
+            title: "Английский для детей",
+            description: "Возраст: 5-10 лет. Игровой формат обучения с акцентом на разговорную речь.",
+            cta: "Подробнее",
+          },
+          {
+            title: "Китайский для детей",
+            description: "Возраст: 5-10 лет. Знакомство с иероглифами и основами китайской культуры.",
+            cta: "Подробнее",
+          },
+          {
+            title: "Английский для взрослых",
+            description: "Общий и деловой английский для всех уровней от начинающего до продвинутого.",
+            cta: "Подробнее",
+          },
+          {
+            title: "Китайская каллиграфия",
+            description: "Творческие занятия по китайской каллиграфии для детей и взрослых.",
+            cta: "Подробнее",
+          },
+        ],
+      },
+      news: {
+        title: "НОВОСТИ И СОБЫТИЯ",
+        viewAll: "Смотреть все",
+        items: [
+          {
+            date: "15 мая 2024",
+            title: "Летний интенсив по английскому",
+            description: "Запускаем интенсивный курс английского языка для школьников на летних каникулах.",
+            cta: "Читать далее",
+          },
+          {
+            date: "10 мая 2024",
+            title: "Мастер-класс по китайской каллиграфии",
+            description: "Приглашаем на творческий мастер-класс по традиционной китайской каллиграфии.",
+            cta: "Читать далее",
+          },
+          {
+            date: "5 мая 2024",
+            title: "Новые группы для дошкольников",
+            description: "Открываем набор в новые группы английского языка для детей 4-6 лет.",
+            cta: "Читать далее",
+          },
+        ],
+      },
+      testimonials: {
+        title: "ОТЗЫВЫ НАШИХ УЧЕНИКОВ",
+        items: [
+          {
+            name: "Анна К.",
+            text: "Мой ребенок с удовольствием ходит на занятия английским. За полгода виден значительный прогресс, особенно в разговорной речи.",
+          },
+          {
+            name: "Дмитрий С.",
+            text: "Отличная школа с профессиональными преподавателями. Занимаюсь китайским уже год, и результаты превзошли мои ожидания.",
+          },
+          {
+            name: "Елена В.",
+            text: "Очень нравится дружелюбная атмосфера и индивидуальный подход. Преподаватели всегда готовы помочь и ответить на все вопросы.",
+          },
+        ],
+      },
+      contact: {
+        title: "СВЯЗАТЬСЯ С НАМИ",
+        phone: "Позвонить",
+        directions: "Как доехать",
+        write: "Написать",
+        telegram: "Telegram",
+        whatsapp: "WhatsApp",
+      },
+      trial: {
+        title: "ЗАПИШИТЕСЬ НА БЕСПЛАТНЫЙ ПРОБНЫЙ УРОК",
+        description: "Оставьте заявку, и мы свяжемся с вами для записи на бесплатное пробное занятие",
+        cta: "Записаться",
+      },
+      footer: {
+        quickLinks: "Быстрые ссылки",
+        links: ["О школе", "Наши курсы", "Расписание", "Преподаватели", "Цены", "Блог", "Контакты"],
+        contacts: "Контакты",
+        workingHours: {
+          title: "Режим работы",
+          weekdays: "Понедельник - Пятница: 9:00 - 21:00",
+          saturday: "Суббота: 10:00 - 18:00",
+          sunday: "Воскресенье, выходной",
+        },
+        socialMedia: "Социальные сети",
+        copyright: "© 2024 Tut School. Все права защищены.",
+      },
+      languageToggle: "English",
+    },
+    en: {
+      schoolName: "Tut School",
+      schoolSubtitle: "Foreign Language Courses, School of Arts",
+      phone: "+7 (983) 600-00-00",
+      email: "info@tut-school.ru",
+      address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
+      rating: "4.8 on Yandex",
+      search: "Search",
+      nav: {
+        about: "ABOUT US",
+        programs: "PROGRAMS",
+        admissions: "ADMISSIONS",
+        blog: "BLOG",
+        contacts: "CONTACTS",
+        schedule: "SCHEDULE",
+        testimonials: "TESTIMONIALS",
+      },
+      hero: {
+        title: "SCHOOL OF FOREIGN LANGUAGES AND ARTS",
+        subtitle: "We help children and adults learn English and Chinese in a friendly atmosphere",
+        cta: "Book a trial lesson",
+      },
+      about: {
+        title: "ABOUT US",
+        description:
+          "We are a language studio offering English and Chinese languages for children and adults. Our clients appreciate the quality of teaching and friendly atmosphere. With us, you will not only find a company to learn languages but also make new friends.",
+        cta: "Learn More",
+      },
+      welcome: {
+        title: "WELCOME TO TUT SCHOOL",
+        description:
+          "Our school offers a unique opportunity to study languages and art in one place. We create an inspiring environment where every student can reach their potential.",
+        points: [
+          "Individual approach to each student",
+          "Modern teaching methods",
+          "Comfortable classrooms and friendly atmosphere",
+          "Regular cultural events",
+        ],
+        cta: "Learn more about our school",
+      },
+      advantages: {
+        title: "OUR ADVANTAGES",
+        items: [
+          {
+            title: "Experienced Teachers",
+            description: "Our teachers have international certificates and many years of teaching experience",
+          },
+          {
+            title: "English and Chinese",
+            description: "We offer courses in two in-demand languages for children and adults",
+          },
+          {
+            title: "School of Arts",
+            description: "In addition to language courses, we have creative classes and master classes",
+          },
+        ],
+      },
+      courses: {
+        title: "OUR COURSES",
+        subtitle: "Choose the program that suits you best",
+        items: [
+          {
+            title: "English for Children",
+            description: "Ages: 5-10 years. Game-based learning format with an emphasis on speaking skills.",
+            cta: "Learn More",
+          },
+          {
+            title: "Chinese for Children",
+            description: "Ages: 5-10 years. Introduction to characters and basics of Chinese culture.",
+            cta: "Learn More",
+          },
+          {
+            title: "English for Adults",
+            description: "General and business English for all levels from beginner to advanced.",
+            cta: "Learn More",
+          },
+          {
+            title: "Chinese Calligraphy",
+            description: "Creative classes in Chinese calligraphy for children and adults.",
+            cta: "Learn More",
+          },
+        ],
+      },
+      news: {
+        title: "NEWS AND EVENTS",
+        viewAll: "View all",
+        items: [
+          {
+            date: "May 15, 2024",
+            title: "Summer English Intensive Course",
+            description: "We are launching an intensive English course for school students during summer holidays.",
+            cta: "Read more",
+          },
+          {
+            date: "May 10, 2024",
+            title: "Chinese Calligraphy Workshop",
+            description: "Join us for a creative workshop on traditional Chinese calligraphy.",
+            cta: "Read more",
+          },
+          {
+            date: "May 5, 2024",
+            title: "New Groups for Preschoolers",
+            description: "We are opening enrollment for new English language groups for children aged 4-6.",
+            cta: "Read more",
+          },
+        ],
+      },
+      testimonials: {
+        title: "TESTIMONIALS FROM OUR STUDENTS",
+        items: [
+          {
+            name: "Anna K.",
+            text: "My child enjoys attending English classes. There has been significant progress over six months, especially in speaking skills.",
+          },
+          {
+            name: "Dmitry S.",
+            text: "Excellent school with professional teachers. I've been studying Chinese for a year, and the results have exceeded my expectations.",
+          },
+          {
+            name: "Elena V.",
+            text: "I really like the friendly atmosphere and individual approach. The teachers are always ready to help and answer all questions.",
+          },
+        ],
+      },
+      contact: {
+        title: "CONTACT US",
+        phone: "Call",
+        directions: "Directions",
+        write: "Write",
+        telegram: "Telegram",
+        whatsapp: "WhatsApp",
+      },
+      trial: {
+        title: "SIGN UP FOR A FREE TRIAL LESSON",
+        description: "Leave a request and we will contact you to schedule a free trial lesson",
+        cta: "Sign up",
+      },
+      footer: {
+        quickLinks: "Quick Links",
+        links: ["About the school", "Our courses", "Schedule", "Teachers", "Prices", "Blog", "Contacts"],
+        contacts: "Contacts",
+        workingHours: {
+          title: "Working Hours",
+          weekdays: "Monday - Friday: 9:00 AM - 9:00 PM",
+          saturday: "Saturday: 10:00 AM - 6:00 PM",
+          sunday: "Sunday: closed",
+        },
+        socialMedia: "Social Media",
+        copyright: "© 2024 Tut School. All rights reserved.",
+      },
+      languageToggle: "Русский",
+    },
+  }
 
-// Sample values data
-const values = [
-  {
-    icon: Users,
-    title: "Student-Centered",
-    description:
-      "We put students at the center of everything we do, designing programs and services that meet their unique needs and aspirations.",
-  },
-  {
-    icon: Award,
-    title: "Excellence",
-    description:
-      "We strive for excellence in teaching, learning, and innovation, setting high standards for ourselves and our students.",
-  },
-  {
-    icon: Globe,
-    title: "Inclusivity",
-    description:
-      "We foster an inclusive environment where diverse perspectives are valued and everyone has the opportunity to succeed.",
-  },
-  {
-    icon: BookOpen,
-    title: "Lifelong Learning",
-    description:
-      "We believe in the power of continuous learning and growth, both for our students and our institution.",
-  },
-]
+  const t = translations[language]
 
-// Sample accreditations data
-const accreditations = [
-  "Higher Education Accreditation Commission",
-  "International Association of Technology Educators",
-  "National Business Education Council",
-  "Global Online Learning Standards Organization",
-]
+  const toggleLanguage = () => {
+    setLanguage(language === "ru" ? "en" : "ru")
+  }
 
-export default function AboutPage() {
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <NavBar />
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative bg-[#8B0000] text-white overflow-hidden">
+    <div className="flex min-h-screen flex-col">
+      {/* Top Bar */}
+      <div className="bg-primary/90 py-2 text-white">
+        <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Phone className="h-4 w-4" />
+              <span className="text-sm">{t.phone}</span>
+            </div>
+            <div className="hidden items-center gap-2 md:flex">
+              <Mail className="h-4 w-4" />
+              <span className="text-sm">{t.email}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1">
+              <div className="flex text-yellow-300">
+                <Star className="h-4 w-4 fill-current" />
+                <Star className="h-4 w-4 fill-current" />
+                <Star className="h-4 w-4 fill-current" />
+                <Star className="h-4 w-4 fill-current" />
+                <Star className="h-4 w-4 fill-current stroke-yellow-300" />
+              </div>
+              <span className="text-sm">{t.rating}</span>
+            </div>
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1 rounded-md border border-white/30 px-2 py-1 text-sm hover:bg-white/10"
+            >
+              <Globe className="h-4 w-4" />
+              {t.languageToggle}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Header */}
+      <header className="border-b bg-white py-4 shadow-sm">
+        <div className="container mx-auto flex items-center justify-between px-4">
+          <div className="flex items-center gap-3">
+            <div className="relative h-14 w-14">
+              <Image
+                src="/placeholder.svg?height=56&width=56"
+                alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
+              <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
+            </div>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:block">
+            <ul className="flex gap-6">
+              <li>
+                <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.about}
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.programs}
+                </Link>
+              </li>
+              <li>
+                <Link href="/admissions" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.admissions}
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.blog}
+                </Link>
+              </li>
+              <li>
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.testimonials}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-primary hover:text-primary/80">
+                  {t.nav.contacts}
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <div className="hidden items-center rounded-full border border-gray-200 px-3 py-1 md:flex">
+              <input
+                type="text"
+                placeholder={t.search}
+                className="w-32 border-none bg-transparent text-sm outline-none"
+              />
+              <Search className="h-4 w-4 text-gray-400" />
+            </div>
+            <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="border-b bg-white py-4 shadow-sm md:hidden">
+          <div className="container mx-auto px-4">
+            <nav className="space-y-4">
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/about" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.about}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/programs" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.programs}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admissions" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.admissions}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.blog}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.schedule}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.testimonials}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
+                    {t.nav.contacts}
+                  </Link>
+                </li>
+              </ul>
+              <div className="flex items-center rounded-full border border-gray-200 px-3 py-2">
+                <input
+                  type="text"
+                  placeholder={t.search}
+                  className="w-full border-none bg-transparent text-sm outline-none"
+                />
+                <Search className="h-4 w-4 text-gray-400" />
+              </div>
+            </nav>
+          </div>
+        </div>
+      )}
+
+      <main>
+                {/* Hero Section */}
+                <section className="relative bg-[#8B0000] text-white overflow-hidden">
           <div className="absolute inset-0 opacity-20">
             <Image src="/assets/painting.jpg?height=600&width=1600" alt="Campus background" fill className="object-cover" />
           </div>

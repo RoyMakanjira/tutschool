@@ -23,6 +23,7 @@ import {
   HelpCircle,
   ChevronDown,
 } from "lucide-react"
+import { testimonials } from "@/constants"
 
 export default function Contact() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
@@ -52,7 +53,8 @@ export default function Contact() {
         admissions: "ПОСТУПЛЕНИЕ",
         blog: "БЛОГ",
         contacts: "КОНТАКТЫ",
-        schedule: "ПОСТУПЛЕНИЕ"
+        schedule: "ПОСТУПЛЕНИЕ",
+        testimonials: "ПОСТУПЛЕНИЕ",
       },
       hero: {
         title: "СВЯЖИТЕСЬ С НАМИ",
@@ -156,6 +158,8 @@ export default function Contact() {
         admissions: "ADMISSIONS",
         blog: "BLOG",
         contacts: "CONTACTS",
+        schedule: "SCHEDULE",
+        testimonials: "TESTIMONIALS",
       },
       hero: {
         title: "CONTACT US",
@@ -345,7 +349,7 @@ export default function Contact() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.about}
                 </Link>
               </li>
@@ -362,6 +366,16 @@ export default function Contact() {
               <li>
                 <Link href="/blog" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.blog}
+                </Link>
+              </li>
+              <li>
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.testimonials}
                 </Link>
               </li>
               <li>
@@ -400,7 +414,7 @@ export default function Contact() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/about" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.about}
                   </Link>
                 </li>
@@ -417,6 +431,16 @@ export default function Contact() {
                 <li>
                   <Link href="/blog" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.blog}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.schedule}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.testimonials}
                   </Link>
                 </li>
                 <li>

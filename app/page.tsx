@@ -40,10 +40,12 @@ export default function Home() {
       search: "Поиск",
       nav: {
         about: "О НАС",
-        catalog: "КАТАЛОГ",
-        reviews: "ОТЗЫВЫ",
-        photo: "ФОТО",
+        programs: "ПРОГРАММЫ",
+        admissions: "ПОСТУПЛЕНИЕ",
+        blog: "БЛОГ",
         contacts: "КОНТАКТЫ",
+        schedule: "ПОСТУПЛЕНИЕ",
+        testimonials: "ПОСТУПЛЕНИЕ",
       },
       hero: {
         title: "ШКОЛА ИНОСТРАННЫХ ЯЗЫКОВ И ИСКУССТВ",
@@ -190,10 +192,12 @@ export default function Home() {
       search: "Search",
       nav: {
         about: "ABOUT US",
-        catalog: "CATALOG",
-        reviews: "REVIEWS",
-        photo: "PHOTOS",
+        programs: "PROGRAMS",
+        admissions: "ADMISSIONS",
+        blog: "BLOG",
         contacts: "CONTACTS",
+        schedule: "SCHEDULE",
+        testimonials: "TESTIMONIALS",
       },
       hero: {
         title: "SCHOOL OF FOREIGN LANGUAGES AND ARTS",
@@ -385,7 +389,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <div className="relative h-14 w-14">
               <Image
-                src="/"
+                src="/placeholder.svg?height=56&width=56"
                 alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                 fill
                 className="object-contain"
@@ -396,7 +400,47 @@ export default function Home() {
               <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
             </div>
           </div>
-          <NavBar />
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:block">
+            <ul className="flex gap-6">
+              <li>
+                <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.about}
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.programs}
+                </Link>
+              </li>
+              <li>
+                <Link href="/admissions" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.admissions}
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.blog}
+                </Link>
+              </li>
+              <li>
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.testimonials}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-primary hover:text-primary/80">
+                  {t.nav.contacts}
+                </Link>
+              </li>
+            </ul>
+          </nav>
 
           <div className="flex items-center gap-4">
             <div className="hidden items-center rounded-full border border-gray-200 px-3 py-1 md:flex">
@@ -407,16 +451,67 @@ export default function Home() {
               />
               <Search className="h-4 w-4 text-gray-400" />
             </div>
-            <Link
-              href="#"
-              className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 md:block"
-            >
-              {t.hero.cta}
-            </Link>
-
+            <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
         </div>
       </header>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="border-b bg-white py-4 shadow-sm md:hidden">
+          <div className="container mx-auto px-4">
+            <nav className="space-y-4">
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/about" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.about}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/programs" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.programs}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admissions" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.admissions}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.blog}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.schedule}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.testimonials}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
+                    {t.nav.contacts}
+                  </Link>
+                </li>
+              </ul>
+              <div className="flex items-center rounded-full border border-gray-200 px-3 py-2">
+                <input
+                  type="text"
+                  placeholder={t.search}
+                  className="w-full border-none bg-transparent text-sm outline-none"
+                />
+                <Search className="h-4 w-4 text-gray-400" />
+              </div>
+            </nav>
+          </div>
+        </div>
+      )}
 
       <main>
         {/* Hero Section */}

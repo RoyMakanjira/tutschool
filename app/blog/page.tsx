@@ -48,6 +48,8 @@ export default function Blog() {
         admissions: "ПОСТУПЛЕНИЕ",
         blog: "БЛОГ",
         contacts: "КОНТАКТЫ",
+        schedule: "ПОСТУПЛЕНИЕ",
+        testimonials: "ПОСТУПЛЕНИЕ",
       },
       hero: {
         title: "НАШ БЛОГ",
@@ -114,6 +116,8 @@ export default function Blog() {
         admissions: "ADMISSIONS",
         blog: "BLOG",
         contacts: "CONTACTS",
+        schedule: "SCHEDULE",
+        testimonials: "TESTIMONIALS",
       },
       hero: {
         title: "OUR BLOG",
@@ -456,7 +460,6 @@ export default function Blog() {
           </div>
         </div>
       </div>
-
       {/* Header */}
       <header className="border-b bg-white py-4 shadow-sm">
         <div className="container mx-auto flex items-center justify-between px-4">
@@ -484,7 +487,7 @@ export default function Blog() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.about}
                 </Link>
               </li>
@@ -499,12 +502,22 @@ export default function Blog() {
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-sm font-medium text-primary hover:text-primary/80">
+                <Link href="/blog" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.blog}
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.testimonials}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-primary hover:text-primary/80">
                   {t.nav.contacts}
                 </Link>
               </li>
@@ -539,7 +552,7 @@ export default function Blog() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/about" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.about}
                   </Link>
                 </li>
@@ -554,12 +567,22 @@ export default function Blog() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/blog" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
+                  <Link href="/blog" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.blog}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.schedule}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.testimonials}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
                     {t.nav.contacts}
                   </Link>
                 </li>
