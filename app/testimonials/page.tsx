@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -24,31 +24,10 @@ import {
   Share2,
 } from "lucide-react"
 
-export default function Testimonials() {
+export default function TestimonialsSimple() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeCategory, setActiveCategory] = useState<"all" | "children" | "adults" | "companies">("all")
-  const [scrollY, setScrollY] = useState(0)
-  const [isLoaded, setIsLoaded] = useState(false)
-
-  useEffect(() => {
-    // Set loaded state after a small delay to trigger initial animations
-    const timer = setTimeout(() => {
-      setIsLoaded(true)
-    }, 100)
-
-    // Handle scroll events for scroll-triggered animations
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
 
   const translations = {
     ru: {
@@ -451,19 +430,6 @@ export default function Testimonials() {
     setMobileMenuOpen(!mobileMenuOpen)
   }
 
-  // Function to check if element should be animated based on scroll position
-  const shouldAnimate = (elementId: string): boolean => {
-    const element = document.getElementById(elementId)
-    if (!element) return false
-
-    const rect = element.getBoundingClientRect()
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight
-
-    // Element is considered in view when its top is below 20% of the window height
-    // and its bottom is above 80% of the window height
-    return rect.top < windowHeight * 0.8 && rect.bottom > windowHeight * 0.2
-  }
-
   // Filter testimonials based on active category
   const filteredTestimonials = t.testimonials.items.filter(
     (item) => activeCategory === "all" || item.category === activeCategory,
@@ -472,9 +438,7 @@ export default function Testimonials() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Top Bar */}
-      <div
-        className={`bg-primary/90 py-2 text-white transition-all duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}
-      >
+      <div className="bg-primary/90 py-2 text-white">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
@@ -499,7 +463,7 @@ export default function Testimonials() {
             </div>
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1 rounded-md border border-white/30 px-2 py-1 text-sm hover:bg-white/10 transition-colors duration-300"
+              className="flex items-center gap-1 rounded-md border border-white/30 px-2 py-1 text-sm hover:bg-white/10"
             >
               <Globe className="h-4 w-4" />
               {t.languageToggle}
@@ -509,14 +473,12 @@ export default function Testimonials() {
       </div>
 
       {/* Header */}
-      <header
-        className={`border-b bg-white py-4 shadow-sm sticky top-0 z-50 transition-all duration-500 ${isLoaded ? "translate-y-0" : "-translate-y-full"}`}
-      >
+      <header className="border-b bg-white py-4 shadow-sm sticky top-0 z-50">
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-14 w-14 animate-pulse-slow">
+            <div className="relative h-14 w-14">
               <Image
-                src="/logo.png"
+                src="/placeholder.svg?height=56&width=56"
                 alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                 fill
                 className="object-contain"
@@ -547,8 +509,18 @@ export default function Testimonials() {
                 </Link>
               </li>
               <li>
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
+                </Link>
+              </li>
+              <li>
                 <Link href="/admissions" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.admissions}
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials-simple" className="text-sm font-medium text-primary">
+                  {t.nav.testimonials}
                 </Link>
               </li>
               <li>
@@ -557,17 +529,7 @@ export default function Testimonials() {
                 </Link>
               </li>
               <li>
-                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.schedule}
-                </Link>
-              </li>
-              <li>
-                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.testimonials}
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sm font-medium text-primary hover:text-primary/80">
+                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.contacts}
                 </Link>
               </li>
@@ -612,8 +574,18 @@ export default function Testimonials() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.schedule}
+                  </Link>
+                </li>
+                <li>
                   <Link href="/admissions" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.admissions}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/testimonials-simple" className="block py-2 text-sm font-medium text-primary">
+                    {t.nav.testimonials}
                   </Link>
                 </li>
                 <li>
@@ -622,17 +594,7 @@ export default function Testimonials() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.schedule}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.testimonials}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
+                  <Link href="/contact" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.contacts}
                   </Link>
                 </li>
@@ -651,21 +613,46 @@ export default function Testimonials() {
       )}
 
       <main>
-        
+        {/* Hero Section */}
+        <section className="relative">
+          <div className="relative h-[300px] w-full">
+            <Image
+              src="/placeholder.svg?height=300&width=1600&text=Testimonials"
+              alt={language === "ru" ? "Отзывы Tut School" : "Tut School Testimonials"}
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
+            <div className="absolute inset-0 flex flex-col items-start justify-center px-4 text-white md:px-12 lg:px-20">
+              <div className="max-w-2xl">
+                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl">{t.hero.title}</h2>
+                <p className="text-lg md:text-xl">{t.hero.subtitle}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Breadcrumbs */}
+        <div className="border-b bg-gray-50">
+          <div className="container mx-auto px-4 py-3">
+            <div className="flex items-center gap-2 text-sm text-gray-500">
+              <Link href="/" className="hover:text-primary hover:underline">
+                {t.breadcrumbs.home}
+              </Link>
+              <ChevronRight className="h-4 w-4" />
+              <span className="text-gray-700">{t.breadcrumbs.testimonials}</span>
+            </div>
+          </div>
+        </div>
 
         {/* Stats Section */}
-        <section className="py-12 bg-gray-50" id="stats-section">
+        <section className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {t.stats.items.map((stat, index) => (
-                <div
-                  key={index}
-                  className={`rounded-lg bg-white p-6 text-center shadow-md transition-all duration-1000 hover:shadow-lg ${
-                    shouldAnimate("stats-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                  style={{ transitionDelay: `${index * 200}ms` }}
-                >
-                  <div className="mb-2 text-4xl font-bold text-primary animate-pulse-slow">{stat.number}</div>
+                <div key={index} className="rounded-lg bg-white p-6 text-center shadow-md hover:shadow-lg">
+                  <div className="mb-2 text-4xl font-bold text-primary">{stat.number}</div>
                   <div className="text-sm text-gray-600">{stat.label}</div>
                 </div>
               ))}
@@ -674,37 +661,17 @@ export default function Testimonials() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-12" id="testimonials-section">
+        <section className="py-12">
           <div className="container mx-auto px-4">
-            <h2
-              className={`mb-2 text-center text-3xl font-bold text-primary transition-all duration-1000 ${
-                shouldAnimate("testimonials-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
-              {t.testimonials.title}
-            </h2>
-            <div
-              className={`mx-auto mb-8 h-1 w-20 bg-primary transition-all duration-1000 delay-300 ${
-                shouldAnimate("testimonials-section") ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
-              }`}
-            ></div>
-            <p
-              className={`mx-auto mb-12 max-w-3xl text-center text-lg text-gray-700 transition-all duration-1000 delay-500 ${
-                shouldAnimate("testimonials-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
-              {t.testimonials.description}
-            </p>
+            <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.testimonials.title}</h2>
+            <div className="mx-auto mb-8 h-1 w-20 bg-primary"></div>
+            <p className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-700">{t.testimonials.description}</p>
 
             {/* Category Filters */}
-            <div
-              className={`mb-8 flex flex-wrap justify-center gap-3 transition-all duration-1000 delay-700 ${
-                shouldAnimate("testimonials-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
+            <div className="mb-8 flex flex-wrap justify-center gap-3">
               <button
                 onClick={() => setActiveCategory("all")}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-full px-4 py-2 text-sm font-medium ${
                   activeCategory === "all" ? "bg-primary text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -712,7 +679,7 @@ export default function Testimonials() {
               </button>
               <button
                 onClick={() => setActiveCategory("children")}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-full px-4 py-2 text-sm font-medium ${
                   activeCategory === "children"
                     ? "bg-primary text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -722,7 +689,7 @@ export default function Testimonials() {
               </button>
               <button
                 onClick={() => setActiveCategory("adults")}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-full px-4 py-2 text-sm font-medium ${
                   activeCategory === "adults" ? "bg-primary text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -730,7 +697,7 @@ export default function Testimonials() {
               </button>
               <button
                 onClick={() => setActiveCategory("companies")}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-full px-4 py-2 text-sm font-medium ${
                   activeCategory === "companies"
                     ? "bg-primary text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -743,13 +710,7 @@ export default function Testimonials() {
             {/* Testimonials Grid */}
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {filteredTestimonials.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className={`rounded-lg bg-white p-6 shadow-md transition-all duration-1000 hover:shadow-xl hover:translate-y-[-5px] ${
-                    shouldAnimate("testimonials-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                  style={{ transitionDelay: `${(index % 6) * 200 + 900}ms` }}
-                >
+                <div key={index} className="rounded-lg bg-white p-6 shadow-md hover:shadow-xl">
                   <div className="mb-4 flex justify-between">
                     <div className="flex items-center gap-3">
                       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -774,11 +735,11 @@ export default function Testimonials() {
                   <div className="flex items-center justify-between text-xs text-gray-500">
                     <span>{testimonial.date}</span>
                     <div className="flex gap-2">
-                      <button className="flex items-center gap-1 hover:text-primary transition-colors">
+                      <button className="flex items-center gap-1 hover:text-primary">
                         <ThumbsUp className="h-3 w-3" />
                         <span>Полезно</span>
                       </button>
-                      <button className="flex items-center gap-1 hover:text-primary transition-colors">
+                      <button className="flex items-center gap-1 hover:text-primary">
                         <Share2 className="h-3 w-3" />
                         <span>Поделиться</span>
                       </button>
@@ -791,17 +752,13 @@ export default function Testimonials() {
         </section>
 
         {/* Leave Review Section */}
-        <section className="bg-gray-50 py-16" id="leave-review-section">
+        <section className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
-            <div
-              className={`mx-auto max-w-3xl rounded-lg bg-white p-8 shadow-lg transition-all duration-1000 ${
-                shouldAnimate("leave-review-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
+            <div className="mx-auto max-w-3xl rounded-lg bg-white p-8 shadow-lg">
               <h2 className="mb-4 text-center text-2xl font-bold text-primary">{t.leaveReview.title}</h2>
               <p className="mb-6 text-center text-gray-600">{t.leaveReview.description}</p>
               <div className="flex justify-center">
-                <button className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white transition-all hover:bg-primary/90 hover:gap-3 hover:shadow-lg">
+                <button className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white hover:bg-primary/90">
                   <MessageSquare className="h-5 w-5" />
                   {t.leaveReview.button}
                 </button>
@@ -811,46 +768,26 @@ export default function Testimonials() {
         </section>
 
         {/* Video Testimonials Section */}
-        <section className="py-16" id="video-section">
+        <section className="py-16">
           <div className="container mx-auto px-4">
-            <h2
-              className={`mb-2 text-center text-3xl font-bold text-primary transition-all duration-1000 ${
-                shouldAnimate("video-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
-              {t.videoTestimonials.title}
-            </h2>
-            <div
-              className={`mx-auto mb-8 h-1 w-20 bg-primary transition-all duration-1000 delay-300 ${
-                shouldAnimate("video-section") ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
-              }`}
-            ></div>
-            <p
-              className={`mx-auto mb-12 max-w-3xl text-center text-lg text-gray-700 transition-all duration-1000 delay-500 ${
-                shouldAnimate("video-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
+            <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.videoTestimonials.title}</h2>
+            <div className="mx-auto mb-8 h-1 w-20 bg-primary"></div>
+            <p className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-700">
               {t.videoTestimonials.description}
             </p>
 
             <div className="grid gap-6 md:grid-cols-3">
               {t.videoTestimonials.videos.map((video, index) => (
-                <div
-                  key={index}
-                  className={`group overflow-hidden rounded-lg shadow-md transition-all duration-1000 hover:shadow-lg ${
-                    shouldAnimate("video-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                  style={{ transitionDelay: `${index * 200 + 700}ms` }}
-                >
+                <div key={index} className="group overflow-hidden rounded-lg shadow-md hover:shadow-lg">
                   <div className="relative">
                     <div className="relative h-48 w-full">
                       <Image
                         src={video.thumbnail || "/placeholder.svg"}
                         alt={video.title}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="object-cover"
                       />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 transition-opacity group-hover:opacity-100">
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 hover:opacity-100">
                         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/80 text-white">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -880,13 +817,9 @@ export default function Testimonials() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16" id="cta-section">
+        <section className="py-16">
           <div className="container mx-auto px-4">
-            <div
-              className={`overflow-hidden rounded-xl bg-primary shadow-xl transition-all duration-1000 hover:scale-[1.01] ${
-                shouldAnimate("cta-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
+            <div className="overflow-hidden rounded-xl bg-primary shadow-xl">
               <div className="relative">
                 <div className="absolute inset-0">
                   <Image
@@ -897,16 +830,14 @@ export default function Testimonials() {
                   />
                 </div>
                 <div className="relative px-8 py-16 text-center text-white md:px-12 lg:px-16">
-                  <h2 className="mb-4 text-3xl font-bold md:text-4xl animate-fade-in">{t.cta.title}</h2>
-                  <p className="mx-auto mb-8 max-w-2xl text-lg animate-fade-in animation-delay-300">
-                    {t.cta.description}
-                  </p>
+                  <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t.cta.title}</h2>
+                  <p className="mx-auto mb-8 max-w-2xl text-lg">{t.cta.description}</p>
                   <Link
                     href="#"
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary transition-all duration-300 hover:bg-gray-100 hover:gap-3 hover:shadow-lg animate-fade-in animation-delay-600"
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary hover:bg-gray-100"
                   >
                     {t.cta.button}
-                    <ArrowRight className="h-4 w-4 animate-bounce-horizontal" />
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </div>
@@ -914,6 +845,87 @@ export default function Testimonials() {
           </div>
         </section>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 py-12 text-white">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
+            <div>
+              <div className="flex items-center gap-3">
+                <div className="relative h-12 w-12 rounded-full bg-white p-2">
+                  <Image
+                    src="/placeholder.svg?height=48&width=48"
+                    alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">{t.schoolName}</h3>
+                  <p className="text-sm text-gray-400">{t.schoolSubtitle}</p>
+                </div>
+              </div>
+              <p className="mt-4 text-gray-400">
+                {language === "ru"
+                  ? "Школа иностранных языков и искусств для детей и взрослых. Мы помогаем нашим студентам достигать своих целей в изучении языков и творческом развитии."
+                  : "School of foreign languages and arts for children and adults. We help our students achieve their goals in language learning and creative development."}
+              </p>
+            </div>
+            <div>
+              <h3 className="mb-4 text-lg font-bold">{t.footer.quickLinks}</h3>
+              <ul className="space-y-2">
+                {t.footer.links.map((link, index) => (
+                  <li key={index}>
+                    <Link href="#" className="text-gray-400 hover:text-white">
+                      {link}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="mb-4 text-lg font-bold">{t.footer.contacts}</h3>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <Phone className="h-4 w-4 text-gray-400" />
+                  <span>{t.phone}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Mail className="h-4 w-4 text-gray-400" />
+                  <span>{t.email}</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <MapPin className="h-4 w-4 flex-shrink-0 text-gray-400" />
+                  <span className="text-sm">{t.address}</span>
+                </div>
+              </div>
+              <h3 className="mb-2 mt-6 text-lg font-bold">{t.footer.workingHours.title}</h3>
+              <div className="space-y-1 text-sm text-gray-400">
+                <p>{t.footer.workingHours.weekdays}</p>
+                <p>{t.footer.workingHours.saturday}</p>
+                <p>{t.footer.workingHours.sunday}</p>
+              </div>
+            </div>
+            <div>
+              <h3 className="mb-4 text-lg font-bold">{t.footer.socialMedia}</h3>
+              <div className="flex gap-3">
+                <Link href="#" className="rounded-full bg-gray-700 p-2 hover:bg-primary">
+                  <Facebook className="h-5 w-5" />
+                </Link>
+                <Link href="#" className="rounded-full bg-gray-700 p-2 hover:bg-primary">
+                  <Instagram className="h-5 w-5" />
+                </Link>
+                <Link href="#" className="rounded-full bg-gray-700 p-2 hover:bg-primary">
+                  <Twitter className="h-5 w-5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+            <p>{t.footer.copyright}</p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
