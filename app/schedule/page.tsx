@@ -1,574 +1,1441 @@
 "use client"
 
-import { useState } from "react"
-import Link from "next/link"
+import { useState, useEffect } from "react"
 import Image from "next/image"
-import { ChevronLeft, ChevronRight, Calendar, Clock, MapPin, Users, Filter, Download, Search } from "lucide-react"
+import Link from "next/link"
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Facebook,
+  Instagram,
+  Twitter,
+  Globe,
+  Star,
+  ChevronRight,
+  Search,
+  Menu,
+  X,
+  Clock,
+  Filter,
+  CheckCircle,
+} from "lucide-react"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import NavBar from "@/components/NavBar"
-import { academicTerms } from "@/constants"
-import { months } from "@/constants"
-import { events } from "@/constants"
-import { importantDates } from "@/constants"
-import { classSchedules } from "@/constants"
+export default function Schedule() {
+  const [language, setLanguage] = useState<"ru" | "en">("ru")
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeDay, setActiveDay] = useState<number>(1) // Monday = 1, Sunday = 7
+  const [activeFilter, setActiveFilter] = useState<string>("all")
+  const [scrollY, setScrollY] = useState(0)
+  const [isLoaded, setIsLoaded] = useState(false)
 
+  useEffect(() => {
+    // Set loaded state after a small delay to trigger initial animations
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+    }, 100)
 
-export default function SchedulePage() {
-  const [currentMonth, setCurrentMonth] = useState(2) // March (0-indexed)
-  const [currentYear, setCurrentYear] = useState(2025)
-  const [selectedTerm, setSelectedTerm] = useState("spring2025")
-  const [searchQuery, setSearchQuery] = useState("")
-  const [categoryFilter, setCategoryFilter] = useState("all")
+    // Handle scroll events for scroll-triggered animations
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
 
-  const handlePreviousMonth = () => {
-    if (currentMonth === 0) {
-      setCurrentMonth(11)
-      setCurrentYear(currentYear - 1)
-    } else {
-      setCurrentMonth(currentMonth - 1)
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+  const translations = {
+    ru: {
+      schoolName: "Tut School",
+      schoolSubtitle: "Курсы иностранных языков, Школа искусств",
+      phone: "+7 (983) 600-00-00",
+      email: "info@tut-school.ru",
+      address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
+      rating: "4.8 на Яндексе",
+      search: "Поиск",
+      nav: {
+        home: "ГЛАВНАЯ",
+        about: "О НАС",
+        programs: "ПРОГРАММЫ",
+        schedule: "РАСПИСАНИЕ",
+        admissions: "ПОСТУПЛЕНИЕ",
+        testimonials: "ОТЗЫВЫ",
+        blog: "БЛОГ",
+        contacts: "КОНТАКТЫ",
+      },
+      hero: {
+        title: "РАСПИСАНИЕ ЗАНЯТИЙ",
+        subtitle: "Ознакомьтесь с расписанием наших курсов и выберите удобное для вас время",
+      },
+      breadcrumbs: {
+        home: "Главная",
+        schedule: "Расписание",
+      },
+      days: {
+        monday: "Понедельник",
+        tuesday: "Вторник",
+        wednesday: "Среда",
+        thursday: "Четверг",
+        friday: "Пятница",
+        saturday: "Суббота",
+        sunday: "Воскресенье",
+      },
+      filters: {
+        all: "Все курсы",
+        english: "Английский язык",
+        chinese: "Китайский язык",
+        arts: "Искусство",
+        children: "Для детей",
+        adults: "Для взрослых",
+      },
+      schedule: {
+        title: "РАСПИСАНИЕ ЗАНЯТИЙ",
+        noClasses: "В этот день занятия не проводятся",
+        classInfo: {
+          level: "Уровень",
+          age: "Возраст",
+          teacher: "Преподаватель",
+          room: "Кабинет",
+          duration: "Продолжительность",
+          spots: "Свободных мест",
+        },
+        enrollButton: "Записаться",
+        fullClass: "Группа укомплектована",
+      },
+      legend: {
+        title: "ОБОЗНАЧЕНИЯ",
+        items: [
+          {
+            color: "bg-blue-100 border-blue-300",
+            label: "Английский язык",
+          },
+          {
+            color: "bg-red-100 border-red-300",
+            label: "Китайский язык",
+          },
+          {
+            color: "bg-purple-100 border-purple-300",
+            label: "Искусство и творчество",
+          },
+          {
+            color: "bg-green-100 border-green-300",
+            label: "Для детей",
+          },
+          {
+            color: "bg-amber-100 border-amber-300",
+            label: "Для взрослых",
+          },
+        ],
+      },
+      info: {
+        title: "ИНФОРМАЦИЯ О РАСПИСАНИИ",
+        items: [
+          "Расписание действительно с 1 сентября 2024 года",
+          "Возможны изменения в расписании, следите за обновлениями",
+          "Продолжительность занятий зависит от возраста и уровня группы",
+          "Для записи на курс необходимо пройти предварительное тестирование",
+          "При отсутствии свободных мест вы можете записаться в лист ожидания",
+        ],
+      },
+      contact: {
+        title: "ОСТАЛИСЬ ВОПРОСЫ?",
+        description: "Если у вас остались вопросы по расписанию или вы хотите записаться на курс, свяжитесь с нами",
+        phone: "Позвонить",
+        email: "Написать",
+      },
+      footer: {
+        quickLinks: "Быстрые ссылки",
+        links: ["О школе", "Наши курсы", "Расписание", "Преподаватели", "Цены", "Блог", "Контакты"],
+        contacts: "Контакты",
+        workingHours: {
+          title: "Режим работы",
+          weekdays: "Понедельник - Пятница: 9:00 - 21:00",
+          saturday: "Суббота: 10:00 - 18:00",
+          sunday: "Воскресенье: выходной",
+        },
+        socialMedia: "Социальные сети",
+        copyright: "© 2024 Tut School. Все права защищены.",
+      },
+      languageToggle: "English",
+    },
+    en: {
+      schoolName: "Tut School",
+      schoolSubtitle: "Foreign Language Courses, School of Arts",
+      phone: "+7 (983) 600-00-00",
+      email: "info@tut-school.ru",
+      address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
+      rating: "4.8 on Yandex",
+      search: "Search",
+      nav: {
+        home: "HOME",
+        about: "ABOUT US",
+        programs: "PROGRAMS",
+        schedule: "SCHEDULE",
+        admissions: "ADMISSIONS",
+        testimonials: "TESTIMONIALS",
+        blog: "BLOG",
+        contacts: "CONTACTS",
+      },
+      hero: {
+        title: "CLASS SCHEDULE",
+        subtitle: "Check our course schedule and choose a time that works for you",
+      },
+      breadcrumbs: {
+        home: "Home",
+        schedule: "Schedule",
+      },
+      days: {
+        monday: "Monday",
+        tuesday: "Tuesday",
+        wednesday: "Wednesday",
+        thursday: "Thursday",
+        friday: "Friday",
+        saturday: "Saturday",
+        sunday: "Sunday",
+      },
+      filters: {
+        all: "All Courses",
+        english: "English Language",
+        chinese: "Chinese Language",
+        arts: "Arts",
+        children: "For Children",
+        adults: "For Adults",
+      },
+      schedule: {
+        title: "CLASS SCHEDULE",
+        noClasses: "No classes on this day",
+        classInfo: {
+          level: "Level",
+          age: "Age",
+          teacher: "Teacher",
+          room: "Room",
+          duration: "Duration",
+          spots: "Available spots",
+        },
+        enrollButton: "Enroll",
+        fullClass: "Class is full",
+      },
+      legend: {
+        title: "LEGEND",
+        items: [
+          {
+            color: "bg-blue-100 border-blue-300",
+            label: "English Language",
+          },
+          {
+            color: "bg-red-100 border-red-300",
+            label: "Chinese Language",
+          },
+          {
+            color: "bg-purple-100 border-purple-300",
+            label: "Arts & Creativity",
+          },
+          {
+            color: "bg-green-100 border-green-300",
+            label: "For Children",
+          },
+          {
+            color: "bg-amber-100 border-amber-300",
+            label: "For Adults",
+          },
+        ],
+      },
+      info: {
+        title: "SCHEDULE INFORMATION",
+        items: [
+          "Schedule is valid from September 1, 2024",
+          "Schedule may change, please check for updates",
+          "Class duration depends on age and group level",
+          "Preliminary assessment is required to enroll in a course",
+          "If there are no available spots, you can join the waiting list",
+        ],
+      },
+      contact: {
+        title: "HAVE QUESTIONS?",
+        description: "If you have questions about the schedule or want to enroll in a course, contact us",
+        phone: "Call",
+        email: "Email",
+      },
+      footer: {
+        quickLinks: "Quick Links",
+        links: ["About the school", "Our courses", "Schedule", "Teachers", "Prices", "Blog", "Contacts"],
+        contacts: "Contacts",
+        workingHours: {
+          title: "Working Hours",
+          weekdays: "Monday - Friday: 9:00 AM - 9:00 PM",
+          saturday: "Saturday: 10:00 AM - 6:00 PM",
+          sunday: "Sunday: closed",
+        },
+        socialMedia: "Social Media",
+        copyright: "© 2024 Tut School. All rights reserved.",
+      },
+      languageToggle: "Русский",
+    },
+  }
+
+  // Schedule data
+  const scheduleData = {
+    ru: [
+      // Monday
+      [
+        {
+          id: 1,
+          time: "10:00 - 11:00",
+          title: "Английский для дошкольников",
+          type: "english",
+          audience: "children",
+          level: "Начальный",
+          age: "4-6 лет",
+          teacher: "Анна Петрова",
+          room: "101",
+          duration: "60 минут",
+          spots: 2,
+        },
+        {
+          id: 2,
+          time: "12:00 - 13:30",
+          title: "Китайский для школьников",
+          type: "chinese",
+          audience: "children",
+          level: "Начальный",
+          age: "7-10 лет",
+          teacher: "Михаил Ли",
+          room: "102",
+          duration: "90 минут",
+          spots: 0,
+        },
+        {
+          id: 3,
+          time: "16:00 - 17:30",
+          title: "Английский для подростков",
+          type: "english",
+          audience: "children",
+          level: "Средний",
+          age: "11-14 лет",
+          teacher: "Елена Соколова",
+          room: "103",
+          duration: "90 минут",
+          spots: 3,
+        },
+        {
+          id: 4,
+          time: "18:00 - 19:30",
+          title: "Деловой английский",
+          type: "english",
+          audience: "adults",
+          level: "Продвинутый",
+          age: "16+ лет",
+          teacher: "Дмитрий Волков",
+          room: "104",
+          duration: "90 минут",
+          spots: 5,
+        },
+        {
+          id: 5,
+          time: "19:45 - 21:15",
+          title: "Китайская каллиграфия",
+          type: "arts",
+          audience: "adults",
+          level: "Начальный",
+          age: "16+ лет",
+          teacher: "Михаил Ли",
+          room: "105",
+          duration: "90 минут",
+          spots: 4,
+        },
+      ],
+      // Tuesday
+      [
+        {
+          id: 6,
+          time: "10:00 - 11:00",
+          title: "Китайский для дошкольников",
+          type: "chinese",
+          audience: "children",
+          level: "Начальный",
+          age: "5-6 лет",
+          teacher: "Михаил Ли",
+          room: "102",
+          duration: "60 минут",
+          spots: 3,
+        },
+        {
+          id: 7,
+          time: "15:00 - 16:30",
+          title: "Английский для школьников",
+          type: "english",
+          audience: "children",
+          level: "Начальный",
+          age: "7-10 лет",
+          teacher: "Анна Петрова",
+          room: "101",
+          duration: "90 минут",
+          spots: 1,
+        },
+        {
+          id: 8,
+          time: "17:00 - 18:30",
+          title: "Китайский для подростков",
+          type: "chinese",
+          audience: "children",
+          level: "Начальный",
+          age: "11-14 лет",
+          teacher: "Михаил Ли",
+          room: "102",
+          duration: "90 минут",
+          spots: 4,
+        },
+        {
+          id: 9,
+          time: "19:00 - 20:30",
+          title: "Английский для взрослых",
+          type: "english",
+          audience: "adults",
+          level: "Средний",
+          age: "16+ лет",
+          teacher: "Елена Соколова",
+          room: "103",
+          duration: "90 минут",
+          spots: 2,
+        },
+      ],
+      // Wednesday
+      [
+        {
+          id: 10,
+          time: "10:00 - 11:00",
+          title: "Английский для дошкольников",
+          type: "english",
+          audience: "children",
+          level: "Начальный",
+          age: "4-6 лет",
+          teacher: "Анна Петрова",
+          room: "101",
+          duration: "60 минут",
+          spots: 2,
+        },
+        {
+          id: 11,
+          time: "12:00 - 13:30",
+          title: "Китайский для школьников",
+          type: "chinese",
+          audience: "children",
+          level: "Начальный",
+          age: "7-10 лет",
+          teacher: "Михаил Ли",
+          room: "102",
+          duration: "90 минут",
+          spots: 0,
+        },
+        {
+          id: 12,
+          time: "16:00 - 17:30",
+          title: "Английский для подростков",
+          type: "english",
+          audience: "children",
+          level: "Средний",
+          age: "11-14 лет",
+          teacher: "Елена Соколова",
+          room: "103",
+          duration: "90 минут",
+          spots: 3,
+        },
+        {
+          id: 13,
+          time: "18:00 - 19:30",
+          title: "Оригами",
+          type: "arts",
+          audience: "children",
+          level: "Начальный",
+          age: "6-12 лет",
+          teacher: "Наталья Петрова",
+          room: "105",
+          duration: "90 минут",
+          spots: 6,
+        },
+        {
+          id: 14,
+          time: "19:45 - 21:15",
+          title: "Китайский для взрослых",
+          type: "chinese",
+          audience: "adults",
+          level: "Начальный",
+          age: "16+ лет",
+          teacher: "Михаил Ли",
+          room: "102",
+          duration: "90 минут",
+          spots: 5,
+        },
+      ],
+      // Thursday
+      [
+        {
+          id: 15,
+          time: "10:00 - 11:00",
+          title: "Китайский для дошкольников",
+          type: "chinese",
+          audience: "children",
+          level: "Начальный",
+          age: "5-6 лет",
+          teacher: "Михаил Ли",
+          room: "102",
+          duration: "60 минут",
+          spots: 3,
+        },
+        {
+          id: 16,
+          time: "15:00 - 16:30",
+          title: "Английский для школьников",
+          type: "english",
+          audience: "children",
+          level: "Начальный",
+          age: "7-10 лет",
+          teacher: "Анна Петрова",
+          room: "101",
+          duration: "90 минут",
+          spots: 1,
+        },
+        {
+          id: 17,
+          time: "17:00 - 18:30",
+          title: "Китайский для подростков",
+          type: "chinese",
+          audience: "children",
+          level: "Начальный",
+          age: "11-14 лет",
+          teacher: "Михаил Ли",
+          room: "102",
+          duration: "90 минут",
+          spots: 4,
+        },
+        {
+          id: 18,
+          time: "19:00 - 20:30",
+          title: "Театральная студия на английском",
+          type: "arts",
+          audience: "children",
+          level: "Средний",
+          age: "8-15 лет",
+          teacher: "Дмитрий Волков",
+          room: "104",
+          duration: "90 минут",
+          spots: 2,
+        },
+      ],
+      // Friday
+      [
+        {
+          id: 19,
+          time: "10:00 - 11:00",
+          title: "Английский для дошкольников",
+          type: "english",
+          audience: "children",
+          level: "Начальный",
+          age: "4-6 лет",
+          teacher: "Анна Петрова",
+          room: "101",
+          duration: "60 минут",
+          spots: 2,
+        },
+        {
+          id: 20,
+          time: "12:00 - 13:30",
+          title: "Китайский для школьников",
+          type: "chinese",
+          audience: "children",
+          level: "Начальный",
+          age: "7-10 лет",
+          teacher: "Михаил Ли",
+          room: "102",
+          duration: "90 минут",
+          spots: 0,
+        },
+        {
+          id: 21,
+          time: "16:00 - 17:30",
+          title: "Английский для подростков",
+          type: "english",
+          audience: "children",
+          level: "Средний",
+          age: "11-14 лет",
+          teacher: "Елена Соколова",
+          room: "103",
+          duration: "90 минут",
+          spots: 3,
+        },
+        {
+          id: 22,
+          time: "18:00 - 19:30",
+          title: "Деловой английский",
+          type: "english",
+          audience: "adults",
+          level: "Продвинутый",
+          age: "16+ лет",
+          teacher: "Дмитрий Волков",
+          room: "104",
+          duration: "90 минут",
+          spots: 5,
+        },
+        {
+          id: 23,
+          time: "19:45 - 21:15",
+          title: "Китайская каллиграфия",
+          type: "arts",
+          audience: "adults",
+          level: "Начальный",
+          age: "16+ лет",
+          teacher: "Михаил Ли",
+          room: "105",
+          duration: "90 минут",
+          spots: 4,
+        },
+      ],
+      // Saturday
+      [
+        {
+          id: 24,
+          time: "10:00 - 11:30",
+          title: "Английский для школьников",
+          type: "english",
+          audience: "children",
+          level: "Начальный",
+          age: "7-10 лет",
+          teacher: "Анна Петрова",
+          room: "101",
+          duration: "90 минут",
+          spots: 3,
+        },
+        {
+          id: 25,
+          time: "12:00 - 13:30",
+          title: "Китайский для школьников",
+          type: "chinese",
+          audience: "children",
+          level: "Начальный",
+          age: "7-10 лет",
+          teacher: "Михаил Ли",
+          room: "102",
+          duration: "90 минут",
+          spots: 2,
+        },
+        {
+          id: 26,
+          time: "14:00 - 15:30",
+          title: "Музыкальные занятия на английском",
+          type: "arts",
+          audience: "children",
+          level: "Начальный",
+          age: "4-8 лет",
+          teacher: "Елена Соколова",
+          room: "103",
+          duration: "90 минут",
+          spots: 4,
+        },
+        {
+          id: 27,
+          time: "16:00 - 17:30",
+          title: "Английский для взрослых",
+          type: "english",
+          audience: "adults",
+          level: "Начальный",
+          age: "16+ лет",
+          teacher: "Дмитрий Волков",
+          room: "104",
+          duration: "90 минут",
+          spots: 6,
+        },
+      ],
+      // Sunday
+      [],
+    ],
+    en: [
+      // Monday
+      [
+        {
+          id: 1,
+          time: "10:00 - 11:00",
+          title: "English for Preschoolers",
+          type: "english",
+          audience: "children",
+          level: "Beginner",
+          age: "4-6 years",
+          teacher: "Anna Petrova",
+          room: "101",
+          duration: "60 minutes",
+          spots: 2,
+        },
+        {
+          id: 2,
+          time: "12:00 - 13:30",
+          title: "Chinese for School Children",
+          type: "chinese",
+          audience: "children",
+          level: "Beginner",
+          age: "7-10 years",
+          teacher: "Michael Li",
+          room: "102",
+          duration: "90 minutes",
+          spots: 0,
+        },
+        {
+          id: 3,
+          time: "16:00 - 17:30",
+          title: "English for Teenagers",
+          type: "english",
+          audience: "children",
+          level: "Intermediate",
+          age: "11-14 years",
+          teacher: "Elena Sokolova",
+          room: "103",
+          duration: "90 minutes",
+          spots: 3,
+        },
+        {
+          id: 4,
+          time: "18:00 - 19:30",
+          title: "Business English",
+          type: "english",
+          audience: "adults",
+          level: "Advanced",
+          age: "16+ years",
+          teacher: "Dmitry Volkov",
+          room: "104",
+          duration: "90 minutes",
+          spots: 5,
+        },
+        {
+          id: 5,
+          time: "19:45 - 21:15",
+          title: "Chinese Calligraphy",
+          type: "arts",
+          audience: "adults",
+          level: "Beginner",
+          age: "16+ years",
+          teacher: "Michael Li",
+          room: "105",
+          duration: "90 minutes",
+          spots: 4,
+        },
+      ],
+      // Tuesday
+      [
+        {
+          id: 6,
+          time: "10:00 - 11:00",
+          title: "Chinese for Preschoolers",
+          type: "chinese",
+          audience: "children",
+          level: "Beginner",
+          age: "5-6 years",
+          teacher: "Michael Li",
+          room: "102",
+          duration: "60 minutes",
+          spots: 3,
+        },
+        {
+          id: 7,
+          time: "15:00 - 16:30",
+          title: "English for School Children",
+          type: "english",
+          audience: "children",
+          level: "Beginner",
+          age: "7-10 years",
+          teacher: "Anna Petrova",
+          room: "101",
+          duration: "90 minutes",
+          spots: 1,
+        },
+        {
+          id: 8,
+          time: "17:00 - 18:30",
+          title: "Chinese for Teenagers",
+          type: "chinese",
+          audience: "children",
+          level: "Beginner",
+          age: "11-14 years",
+          teacher: "Michael Li",
+          room: "102",
+          duration: "90 minutes",
+          spots: 4,
+        },
+        {
+          id: 9,
+          time: "19:00 - 20:30",
+          title: "English for Adults",
+          type: "english",
+          audience: "adults",
+          level: "Intermediate",
+          age: "16+ years",
+          teacher: "Elena Sokolova",
+          room: "103",
+          duration: "90 minutes",
+          spots: 2,
+        },
+      ],
+      // Wednesday
+      [
+        {
+          id: 10,
+          time: "10:00 - 11:00",
+          title: "English for Preschoolers",
+          type: "english",
+          audience: "children",
+          level: "Beginner",
+          age: "4-6 years",
+          teacher: "Anna Petrova",
+          room: "101",
+          duration: "60 minutes",
+          spots: 2,
+        },
+        {
+          id: 11,
+          time: "12:00 - 13:30",
+          title: "Chinese for School Children",
+          type: "chinese",
+          audience: "children",
+          level: "Beginner",
+          age: "7-10 years",
+          teacher: "Michael Li",
+          room: "102",
+          duration: "90 minutes",
+          spots: 0,
+        },
+        {
+          id: 12,
+          time: "16:00 - 17:30",
+          title: "English for Teenagers",
+          type: "english",
+          audience: "children",
+          level: "Intermediate",
+          age: "11-14 years",
+          teacher: "Elena Sokolova",
+          room: "103",
+          duration: "90 minutes",
+          spots: 3,
+        },
+        {
+          id: 13,
+          time: "18:00 - 19:30",
+          title: "Origami Art",
+          type: "arts",
+          audience: "children",
+          level: "Beginner",
+          age: "6-12 years",
+          teacher: "Natalia Petrova",
+          room: "105",
+          duration: "90 minutes",
+          spots: 6,
+        },
+        {
+          id: 14,
+          time: "19:45 - 21:15",
+          title: "Chinese for Adults",
+          type: "chinese",
+          audience: "adults",
+          level: "Beginner",
+          age: "16+ years",
+          teacher: "Michael Li",
+          room: "102",
+          duration: "90 minutes",
+          spots: 5,
+        },
+      ],
+      // Thursday
+      [
+        {
+          id: 15,
+          time: "10:00 - 11:00",
+          title: "Chinese for Preschoolers",
+          type: "chinese",
+          audience: "children",
+          level: "Beginner",
+          age: "5-6 years",
+          teacher: "Michael Li",
+          room: "102",
+          duration: "60 minutes",
+          spots: 3,
+        },
+        {
+          id: 16,
+          time: "15:00 - 16:30",
+          title: "English for School Children",
+          type: "english",
+          audience: "children",
+          level: "Beginner",
+          age: "7-10 years",
+          teacher: "Anna Petrova",
+          room: "101",
+          duration: "90 minutes",
+          spots: 1,
+        },
+        {
+          id: 17,
+          time: "17:00 - 18:30",
+          title: "Chinese for Teenagers",
+          type: "chinese",
+          audience: "children",
+          level: "Beginner",
+          age: "11-14 years",
+          teacher: "Michael Li",
+          room: "102",
+          duration: "90 minutes",
+          spots: 4,
+        },
+        {
+          id: 18,
+          time: "19:00 - 20:30",
+          title: "English Drama Studio",
+          type: "arts",
+          audience: "children",
+          level: "Intermediate",
+          age: "8-15 years",
+          teacher: "Dmitry Volkov",
+          room: "104",
+          duration: "90 minutes",
+          spots: 2,
+        },
+      ],
+      // Friday
+      [
+        {
+          id: 19,
+          time: "10:00 - 11:00",
+          title: "English for Preschoolers",
+          type: "english",
+          audience: "children",
+          level: "Beginner",
+          age: "4-6 years",
+          teacher: "Anna Petrova",
+          room: "101",
+          duration: "60 minutes",
+          spots: 2,
+        },
+        {
+          id: 20,
+          time: "12:00 - 13:30",
+          title: "Chinese for School Children",
+          type: "chinese",
+          audience: "children",
+          level: "Beginner",
+          age: "7-10 years",
+          teacher: "Michael Li",
+          room: "102",
+          duration: "90 minutes",
+          spots: 0,
+        },
+        {
+          id: 21,
+          time: "16:00 - 17:30",
+          title: "English for Teenagers",
+          type: "english",
+          audience: "children",
+          level: "Intermediate",
+          age: "11-14 years",
+          teacher: "Elena Sokolova",
+          room: "103",
+          duration: "90 minutes",
+          spots: 3,
+        },
+        {
+          id: 22,
+          time: "18:00 - 19:30",
+          title: "Business English",
+          type: "english",
+          audience: "adults",
+          level: "Advanced",
+          age: "16+ years",
+          teacher: "Dmitry Volkov",
+          room: "104",
+          duration: "90 minutes",
+          spots: 5,
+        },
+        {
+          id: 23,
+          time: "19:45 - 21:15",
+          title: "Chinese Calligraphy",
+          type: "arts",
+          audience: "adults",
+          level: "Beginner",
+          age: "16+ years",
+          teacher: "Michael Li",
+          room: "105",
+          duration: "90 minutes",
+          spots: 4,
+        },
+      ],
+      // Saturday
+      [
+        {
+          id: 24,
+          time: "10:00 - 11:30",
+          title: "English for School Children",
+          type: "english",
+          audience: "children",
+          level: "Beginner",
+          age: "7-10 years",
+          teacher: "Anna Petrova",
+          room: "101",
+          duration: "90 minutes",
+          spots: 3,
+        },
+        {
+          id: 25,
+          time: "12:00 - 13:30",
+          title: "Chinese for School Children",
+          type: "chinese",
+          audience: "children",
+          level: "Beginner",
+          age: "7-10 years",
+          teacher: "Michael Li",
+          room: "102",
+          duration: "90 minutes",
+          spots: 2,
+        },
+        {
+          id: 26,
+          time: "14:00 - 15:30",
+          title: "Music Classes in English",
+          type: "arts",
+          audience: "children",
+          level: "Beginner",
+          age: "4-8 years",
+          teacher: "Elena Sokolova",
+          room: "103",
+          duration: "90 minutes",
+          spots: 4,
+        },
+        {
+          id: 27,
+          time: "16:00 - 17:30",
+          title: "English for Adults",
+          type: "english",
+          audience: "adults",
+          level: "Beginner",
+          age: "16+ years",
+          teacher: "Dmitry Volkov",
+          room: "104",
+          duration: "90 minutes",
+          spots: 6,
+        },
+      ],
+      // Sunday
+      [],
+    ],
+  }
+
+  const t = translations[language]
+  const schedule = scheduleData[language][activeDay - 1]
+
+  const toggleLanguage = () => {
+    setLanguage(language === "ru" ? "en" : "ru")
+  }
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
+  const getClassCardStyle = (type: string) => {
+    switch (type) {
+      case "english":
+        return "bg-blue-100 border-blue-300"
+      case "chinese":
+        return "bg-red-100 border-red-300"
+      case "arts":
+        return "bg-purple-100 border-purple-300"
+      default:
+        return "bg-gray-100 border-gray-300"
     }
   }
 
-  const handleNextMonth = () => {
-    if (currentMonth === 11) {
-      setCurrentMonth(0)
-      setCurrentYear(currentYear + 1)
-    } else {
-      setCurrentMonth(currentMonth + 1)
+  const getAudienceStyle = (audience: string) => {
+    switch (audience) {
+      case "children":
+        return "bg-green-100 text-green-800"
+      case "adults":
+        return "bg-amber-100 text-amber-800"
+      default:
+        return "bg-gray-100 text-gray-800"
     }
   }
 
-  // Filter events based on search query and category
-  const filteredEvents = events.filter((event) => {
-    const matchesSearch =
-      event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      event.description.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesCategory = categoryFilter === "all" || event.category === categoryFilter
-    return matchesSearch && matchesCategory
+  const filteredSchedule = schedule.filter((item) => {
+    if (activeFilter === "all") return true
+    if (activeFilter === "english" && item.type === "english") return true
+    if (activeFilter === "chinese" && item.type === "chinese") return true
+    if (activeFilter === "arts" && item.type === "arts") return true
+    if (activeFilter === "children" && item.audience === "children") return true
+    if (activeFilter === "adults" && item.audience === "adults") return true
+    return false
   })
 
-  // Get unique categories for filter
-  const categories = ["all", ...new Set(events.map((event) => event.category))]
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <NavBar />
-      <main className="flex-1">
-        {/* Hero Banner */}
-        <section className="relative bg-[#8B0000] text-white overflow-hidden">
-          <div className="absolute inset-0 opacity-20">
-            <Image
-              src="/placeholder.svg?height=400&width=1600"
-              alt="Calendar background"
-              fill
-              className="object-cover"
-            />
+    <div className="flex min-h-screen flex-col">
+      {/* Top Bar */}
+      <div
+        className={`bg-primary/90 py-2 text-white transition-all duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+      >
+        <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Phone className="h-4 w-4" />
+              <span className="text-sm">{t.phone}</span>
+            </div>
+            <div className="hidden items-center gap-2 md:flex">
+              <Mail className="h-4 w-4" />
+              <span className="text-sm">{t.email}</span>
+            </div>
           </div>
-          <div className="container relative px-4 py-12 md:py-16 mx-auto">
-            <div className="max-w-3xl">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">Academic Calendar & Schedule</h1>
-              <p className="text-xl text-white/80 mb-6">
-                View important dates, class schedules, and upcoming events for the academic year.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Select value={selectedTerm} onValueChange={setSelectedTerm}>
-                  <SelectTrigger className="w-[180px] bg-white/10 border-white/20 text-white">
-                    <SelectValue placeholder="Select Term" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {academicTerms.map((term) => (
-                      <SelectItem key={term.id} value={term.id}>
-                        {term.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <Button className="bg-white text-[#8B0000] hover:bg-gray-100">
-                  <Download className="mr-2 h-4 w-4" /> Download Calendar
-                </Button>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1">
+              <div className="flex text-yellow-300">
+                <Star className="h-4 w-4 fill-current" />
+                <Star className="h-4 w-4 fill-current" />
+                <Star className="h-4 w-4 fill-current" />
+                <Star className="h-4 w-4 fill-current" />
+                <Star className="h-4 w-4 fill-current stroke-yellow-300" />
               </div>
+              <span className="text-sm">{t.rating}</span>
+            </div>
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1 rounded-md border border-white/30 px-2 py-1 text-sm hover:bg-white/10 transition-colors duration-300"
+            >
+              <Globe className="h-4 w-4" />
+              {t.languageToggle}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Header */}
+      <header
+        className={`border-b bg-white py-4 shadow-sm sticky top-0 z-50 transition-all duration-500 ${isLoaded ? "translate-y-0" : "-translate-y-full"}`}
+      >
+        <div className="container mx-auto flex items-center justify-between px-4">
+          <div className="flex items-center gap-3">
+            <div className="relative h-14 w-14 animate-pulse-slow">
+              <Image
+                src="/logo.png"
+                alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
+              <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
-        </section>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:block">
+            <ul className="flex gap-6">
+              <li>
+                <Link href="/" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.home}
+                </Link>
+              </li>
+              <li>
+                <Link href="/about-us" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.about}
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.programs}
+                </Link>
+              </li>
+              <li>
+                <Link href="/admissions" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.admissions}
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.blog}
+                </Link>
+              </li>
+              <li>
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.testimonials}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-primary hover:text-primary/80">
+                  {t.nav.contacts}
+                </Link>
+              </li>
+            </ul>
+          </nav>
 
-        {/* Calendar Navigation */}
-        <section className="py-8 bg-white border-b">
-          <div className="container px-4 mx-auto">
-            <div className="flex items-center justify-between">
-              <Button variant="outline" size="sm" onClick={handlePreviousMonth}>
-                <ChevronLeft className="h-4 w-4 mr-2" /> Previous
-              </Button>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#8B0000]">
-                {months[currentMonth]} {currentYear}
-              </h2>
-              <Button variant="outline" size="sm" onClick={handleNextMonth}>
-                Next <ChevronRight className="h-4 w-4 ml-2" />
-              </Button>
+          <div className="flex items-center gap-4">
+            <div className="hidden items-center rounded-full border border-gray-200 px-3 py-1 md:flex">
+              <input
+                type="text"
+                placeholder={t.search}
+                className="w-32 border-none bg-transparent text-sm outline-none"
+              />
+              <Search className="h-4 w-4 text-gray-400" />
+            </div>
+            <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="border-b bg-white py-4 shadow-sm md:hidden">
+          <div className="container mx-auto px-4">
+            <nav className="space-y-4">
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.home}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about-us" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.about}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/programs" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.programs}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admissions" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.admissions}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.blog}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.schedule}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.testimonials}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
+                    {t.nav.contacts}
+                  </Link>
+                </li>
+              </ul>
+              <div className="flex items-center rounded-full border border-gray-200 px-3 py-2">
+                <input
+                  type="text"
+                  placeholder={t.search}
+                  className="w-full border-none bg-transparent text-sm outline-none"
+                />
+                <Search className="h-4 w-4 text-gray-400" />
+              </div>
+            </nav>
+          </div>
+        </div>
+      )}
+
+      <main>
+
+        {/* Schedule Content */}
+        <div className="container mx-auto px-4 py-12">
+          <h2 className="mb-8 text-center text-3xl font-bold text-primary">{t.schedule.title}</h2>
+
+          {/* Days Navigation */}
+          <div className="mb-8 overflow-x-auto">
+            <div className="flex min-w-max border-b">
+              {Object.entries(t.days).map(([key, value], index) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveDay(index + 1)}
+                  className={`px-6 py-3 text-sm font-medium transition-colors ${
+                    activeDay === index + 1
+                      ? "border-b-2 border-primary text-primary"
+                      : "text-gray-600 hover:text-primary"
+                  }`}
+                >
+                  {value}
+                </button>
+              ))}
             </div>
           </div>
-        </section>
 
-        {/* Main Content */}
-        <section className="py-8 bg-gray-50">
-          <div className="container px-4 mx-auto">
-            <Tabs defaultValue="events" className="w-full">
-              <TabsList className="grid w-full max-w-md grid-cols-3 mx-auto mb-8">
-                <TabsTrigger value="events" className="data-[state=active]:bg-[#8B0000] data-[state=active]:text-white">
-                  Events
-                </TabsTrigger>
-                <TabsTrigger
-                  value="classes"
-                  className="data-[state=active]:bg-[#8B0000] data-[state=active]:text-white"
+          {/* Filters */}
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <Filter className="h-5 w-5 text-primary" />
+              <span className="font-medium">{language === "ru" ? "Фильтры" : "Filters"}</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {Object.entries(t.filters).map(([key, value]) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveFilter(key)}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                    activeFilter === key ? "bg-primary text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
                 >
-                  Class Schedule
-                </TabsTrigger>
-                <TabsTrigger
-                  value="important"
-                  className="data-[state=active]:bg-[#8B0000] data-[state=active]:text-white"
-                >
-                  Important Dates
-                </TabsTrigger>
-              </TabsList>
+                  {value}
+                </button>
+              ))}
+            </div>
+          </div>
 
-              {/* Events Tab */}
-              <TabsContent value="events" className="mt-0">
-                <div className="flex flex-col md:flex-row gap-6 mb-8">
-                  <div className="w-full md:w-2/3">
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-                      <Input
-                        type="text"
-                        placeholder="Search events..."
-                        className="pl-10 border-gray-300"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="w-full md:w-1/3">
-                    <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-                      <SelectTrigger className="w-full border-gray-300">
-                        <Filter className="h-4 w-4 mr-2" />
-                        <SelectValue placeholder="Filter by category" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {categories.map((category, index) => (
-                          <SelectItem key={index} value={category}>
-                            {category === "all" ? "All Categories" : category}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="space-y-6">
-                  {filteredEvents.length > 0 ? (
-                    filteredEvents.map((event) => (
-                      <Card
-                        key={event.id}
-                        className="overflow-hidden border-none shadow-md hover:shadow-lg transition-shadow"
-                      >
-                        <CardContent className="p-0">
-                          <div className="grid md:grid-cols-4 gap-0">
-                            <div className="bg-[#8B0000] text-white p-6 flex flex-col justify-center items-center text-center">
-                              <div className="text-sm uppercase font-semibold">{event.date.split(", ")[0]}</div>
-                              <div className="text-3xl font-bold my-1">{event.date.split(" ")[1].replace(",", "")}</div>
-                              <div className="text-sm">{event.date.split(", ")[1].split(" ")[1]}</div>
-                              <Badge className="mt-3 bg-white text-[#8B0000]">{event.category}</Badge>
-                            </div>
-                            <div className="md:col-span-3 p-6">
-                              <h3 className="text-xl font-bold mb-2">{event.title}</h3>
-                              <p className="text-gray-600 mb-4">{event.description}</p>
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="flex items-center text-gray-600">
-                                  <Clock className="h-4 w-4 mr-2 text-[#8B0000]" />
-                                  {event.time}
-                                </div>
-                                <div className="flex items-center text-gray-600">
-                                  <MapPin className="h-4 w-4 mr-2 text-[#8B0000]" />
-                                  {event.location}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))
-                  ) : (
-                    <div className="text-center py-12">
-                      <Calendar className="h-12 w-12 mx-auto text-gray-300 mb-4" />
-                      <h3 className="text-xl font-medium text-gray-600 mb-2">No events found</h3>
-                      <p className="text-gray-500">Try adjusting your search or filter criteria</p>
-                    </div>
-                  )}
-                </div>
-              </TabsContent>
-
-              {/* Class Schedule Tab */}
-              <TabsContent value="classes" className="mt-0">
-                <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-                  <h3 className="text-xl font-bold text-[#8B0000] mb-4">Spring 2025 Class Schedule</h3>
-                  <p className="text-gray-600 mb-6">
-                    Classes for the Spring 2025 semester run from March 15 to June 5, 2025. Please check with your
-                    instructor for any schedule changes or special sessions.
-                  </p>
-
-                  <div className="overflow-x-auto">
-                    <table className="w-full border-collapse">
-                      <thead>
-                        <tr className="bg-gray-50">
-                          <th className="border px-4 py-2 text-left">Course</th>
-                          <th className="border px-4 py-2 text-left">Instructor</th>
-                          <th className="border px-4 py-2 text-left">Schedule</th>
-                          <th className="border px-4 py-2 text-left">Location</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {classSchedules.map((course) => (
-                          <tr key={course.id} className="hover:bg-gray-50">
-                            <td className="border px-4 py-3">
-                              <div className="font-medium">{course.courseCode}</div>
-                              <div className="text-sm text-gray-600">{course.courseName}</div>
-                            </td>
-                            <td className="border px-4 py-3">{course.instructor}</td>
-                            <td className="border px-4 py-3">{course.schedule}</td>
-                            <td className="border px-4 py-3">{course.location}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card className="border-none shadow-md">
-                    <CardHeader className="bg-[#8B0000]/5">
-                      <CardTitle className="text-[#8B0000]">Class Policies</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-6">
-                      <ul className="space-y-3">
-                        <li className="flex items-start">
-                          <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-[#8B0000]"></div>
-                          <span>
-                            <strong>Attendance:</strong> Students are expected to attend all scheduled classes. More
-                            than three unexcused absences may affect your final grade.
+          {/* Schedule */}
+          <div className="mb-12">
+            {filteredSchedule.length > 0 ? (
+              <div className="grid gap-6">
+                {filteredSchedule.map((item) => (
+                  <div
+                    key={item.id}
+                    className={`rounded-lg border p-6 shadow-sm transition-all hover:shadow-md ${getClassCardStyle(
+                      item.type,
+                    )}`}
+                  >
+                    <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div>
+                        <div className="mb-2 flex items-center gap-2">
+                          <Clock className="h-5 w-5 text-gray-600" />
+                          <span className="font-medium">{item.time}</span>
+                          <span
+                            className={`ml-2 rounded-full px-3 py-1 text-xs font-medium ${getAudienceStyle(item.audience)}`}
+                          >
+                            {item.audience === "children"
+                              ? language === "ru"
+                                ? "Для детей"
+                                : "For Children"
+                              : language === "ru"
+                                ? "Для взрослых"
+                                : "For Adults"}
                           </span>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-[#8B0000]"></div>
-                          <span>
-                            <strong>Late Arrivals:</strong> Students arriving more than 15 minutes late may be marked
-                            absent.
-                          </span>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-[#8B0000]"></div>
-                          <span>
-                            <strong>Make-up Work:</strong> Arrangements for make-up work must be made directly with your
-                            instructor.
-                          </span>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-[#8B0000]"></div>
-                          <span>
-                            <strong>Office Hours:</strong> Instructors maintain regular office hours for student
-                            consultations.
-                          </span>
-                        </li>
-                      </ul>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="border-none shadow-md">
-                    <CardHeader className="bg-[#8B0000]/5">
-                      <CardTitle className="text-[#8B0000]">Resources</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-6">
-                      <div className="space-y-4">
-                        <div className="flex items-start">
-                          <Users className="h-5 w-5 mr-3 text-[#8B0000]" />
-                          <div>
-                            <h4 className="font-medium">Academic Advising</h4>
-                            <p className="text-sm text-gray-600">
-                              Schedule an appointment with your academic advisor for course planning and registration
-                              assistance.
-                            </p>
-                            <Link href="#" className="text-sm text-[#8B0000] hover:underline">
-                              Book Appointment
-                            </Link>
-                          </div>
                         </div>
-                        <div className="flex items-start">
-                          <Calendar className="h-5 w-5 mr-3 text-[#8B0000]" />
-                          <div>
-                            <h4 className="font-medium">Study Room Reservations</h4>
-                            <p className="text-sm text-gray-600">
-                              Reserve study rooms and collaboration spaces for group projects or individual study.
-                            </p>
-                            <Link href="#" className="text-sm text-[#8B0000] hover:underline">
-                              Make Reservation
-                            </Link>
+                        <h3 className="mb-3 text-xl font-bold">{item.title}</h3>
+                        <div className="grid gap-2 text-sm md:grid-cols-2">
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">{t.schedule.classInfo.level}:</span>
+                            <span>{item.level}</span>
                           </div>
-                        </div>
-                        <div className="flex items-start">
-                          <MapPin className="h-5 w-5 mr-3 text-[#8B0000]" />
-                          <div>
-                            <h4 className="font-medium">Campus Map</h4>
-                            <p className="text-sm text-gray-600">
-                              Find your way around campus with our interactive map.
-                            </p>
-                            <Link href="#" className="text-sm text-[#8B0000] hover:underline">
-                              View Map
-                            </Link>
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">{t.schedule.classInfo.age}:</span>
+                            <span>{item.age}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">{t.schedule.classInfo.teacher}:</span>
+                            <span>{item.teacher}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">{t.schedule.classInfo.room}:</span>
+                            <span>{item.room}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">{t.schedule.classInfo.duration}:</span>
+                            <span>{item.duration}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">{t.schedule.classInfo.spots}:</span>
+                            <span>{item.spots}</span>
                           </div>
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </TabsContent>
-
-              {/* Important Dates Tab */}
-              <TabsContent value="important" className="mt-0">
-                <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-                  <h3 className="text-xl font-bold text-[#8B0000] mb-4">Important Academic Dates</h3>
-                  <p className="text-gray-600 mb-6">
-                    Mark these key dates on your calendar for the Spring 2025 semester. All deadlines are effective at
-                    11:59 PM Eastern Time on the date listed unless otherwise specified.
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  {importantDates.map((date) => (
-                    <Card key={date.id} className="overflow-hidden border-none shadow-md">
-                      <CardContent className="p-0">
-                        <div className="flex flex-col md:flex-row">
-                          <div className="bg-[#8B0000] text-white p-6 md:w-1/4 flex flex-col justify-center items-center text-center">
-                            <div className="text-lg font-bold">{date.date}</div>
-                            <Badge className="mt-2 bg-white text-[#8B0000]">{date.category}</Badge>
+                      <div className="flex flex-col items-center">
+                        {item.spots > 0 ? (
+                          <button className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors">
+                            {t.schedule.enrollButton}
+                          </button>
+                        ) : (
+                          <div className="rounded-full bg-gray-200 px-4 py-2 text-sm font-medium text-gray-600">
+                            {t.schedule.fullClass}
                           </div>
-                          <div className="p-6 md:w-3/4 flex items-center">
-                            <h3 className="text-xl font-bold">{date.title}</h3>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-
-                <div className="mt-8 flex justify-center">
-                  <Button className="bg-[#8B0000] hover:bg-[#6B0000] text-white">
-                    <Download className="mr-2 h-4 w-4" /> Download Full Academic Calendar
-                  </Button>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </section>
-
-        {/* Calendar View Section */}
-        <section className="py-12 bg-white">
-          <div className="container px-4 mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-[#8B0000]">Monthly Calendar View</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto mt-2">
-                View all events and important dates in a monthly calendar format.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              {/* Calendar Header */}
-              <div className="bg-[#8B0000] text-white p-4">
-                <div className="grid grid-cols-7 text-center">
-                  <div className="font-medium">Sun</div>
-                  <div className="font-medium">Mon</div>
-                  <div className="font-medium">Tue</div>
-                  <div className="font-medium">Wed</div>
-                  <div className="font-medium">Thu</div>
-                  <div className="font-medium">Fri</div>
-                  <div className="font-medium">Sat</div>
-                </div>
-              </div>
-
-              {/* Calendar Grid - This would be dynamically generated in a real app */}
-              <div className="grid grid-cols-7 border-b border-l">
-                {/* Week 1 */}
-                <div className="min-h-[100px] border-r border-t p-1 text-gray-400">26</div>
-                <div className="min-h-[100px] border-r border-t p-1 text-gray-400">27</div>
-                <div className="min-h-[100px] border-r border-t p-1 text-gray-400">28</div>
-                <div className="min-h-[100px] border-r border-t p-1">1</div>
-                <div className="min-h-[100px] border-r border-t p-1">2</div>
-                <div className="min-h-[100px] border-r border-t p-1">3</div>
-                <div className="min-h-[100px] border-r border-t p-1">4</div>
-
-                {/* Week 2 */}
-                <div className="min-h-[100px] border-r border-t p-1">5</div>
-                <div className="min-h-[100px] border-r border-t p-1">6</div>
-                <div className="min-h-[100px] border-r border-t p-1">7</div>
-                <div className="min-h-[100px] border-r border-t p-1">8</div>
-                <div className="min-h-[100px] border-r border-t p-1">9</div>
-                <div className="min-h-[100px] border-r border-t p-1">10</div>
-                <div className="min-h-[100px] border-r border-t p-1">11</div>
-
-                {/* Week 3 */}
-                <div className="min-h-[100px] border-r border-t p-1">12</div>
-                <div className="min-h-[100px] border-r border-t p-1">13</div>
-                <div className="min-h-[100px] border-r border-t p-1">14</div>
-                <div className="min-h-[100px] border-r border-t p-1 relative">
-                  15
-                  <div className="absolute top-6 left-0 right-0 px-1">
-                    <div className="bg-[#8B0000] text-white text-xs p-1 rounded mb-1 truncate">
-                      Spring Semester Begins
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="min-h-[100px] border-r border-t p-1">16</div>
-                <div className="min-h-[100px] border-r border-t p-1">17</div>
-                <div className="min-h-[100px] border-r border-t p-1 relative">
-                  18
-                  <div className="absolute top-6 left-0 right-0 px-1">
-                    <div className="bg-blue-500 text-white text-xs p-1 rounded mb-1 truncate">Art Workshop</div>
-                  </div>
-                </div>
-
-                {/* Week 4 */}
-                <div className="min-h-[100px] border-r border-t p-1">19</div>
-                <div className="min-h-[100px] border-r border-t p-1 relative">
-                  20
-                  <div className="absolute top-6 left-0 right-0 px-1">
-                    <div className="bg-green-500 text-white text-xs p-1 rounded mb-1 truncate">Guest Lecture</div>
-                  </div>
-                </div>
-                <div className="min-h-[100px] border-r border-t p-1">21</div>
-                <div className="min-h-[100px] border-r border-t p-1 relative">
-                  22
-                  <div className="absolute top-6 left-0 right-0 px-1">
-                    <div className="bg-orange-500 text-white text-xs p-1 rounded mb-1 truncate">Add/Drop Deadline</div>
-                  </div>
-                </div>
-                <div className="min-h-[100px] border-r border-t p-1">23</div>
-                <div className="min-h-[100px] border-r border-t p-1">24</div>
-                <div className="min-h-[100px] border-r border-t p-1 relative">
-                  25
-                  <div className="absolute top-6 left-0 right-0 px-1">
-                    <div className="bg-purple-500 text-white text-xs p-1 rounded mb-1 truncate">Career Fair</div>
-                  </div>
-                </div>
-
-                {/* Week 5 */}
-                <div className="min-h-[100px] border-r border-t p-1">26</div>
-                <div className="min-h-[100px] border-r border-t p-1 relative">
-                  27
-                  <div className="absolute top-6 left-0 right-0 px-1">
-                    <div className="bg-blue-500 text-white text-xs p-1 rounded mb-1 truncate">
-                      Marketing Masterclass
-                    </div>
-                  </div>
-                </div>
-                <div className="min-h-[100px] border-r border-t p-1">28</div>
-                <div className="min-h-[100px] border-r border-t p-1 relative">
-                  29
-                  <div className="absolute top-6 left-0 right-0 px-1">
-                    <div className="bg-[#8B0000] text-white text-xs p-1 rounded mb-1 truncate">Spring Break Begins</div>
-                  </div>
-                </div>
-                <div className="min-h-[100px] border-r border-t p-1">30</div>
-                <div className="min-h-[100px] border-r border-t p-1">31</div>
-                <div className="min-h-[100px] border-r border-t p-1 text-gray-400">1</div>
+                ))}
               </div>
-            </div>
+            ) : (
+              <div className="rounded-lg border border-gray-200 bg-white p-8 text-center">
+                <p className="text-lg text-gray-600">{t.schedule.noClasses}</p>
+              </div>
+            )}
+          </div>
 
-            <div className="mt-8 flex justify-center">
-              <Button variant="outline" className="mr-4">
-                <ChevronLeft className="mr-2 h-4 w-4" /> Previous Month
-              </Button>
-              <Button variant="outline">
-                Next Month <ChevronRight className="ml-2 h-4 w-4" />
-              </Button>
+          {/* Legend */}
+          <div className="mb-12 rounded-lg border border-gray-200 bg-white p-6">
+            <h3 className="mb-4 text-xl font-bold text-primary">{t.legend.title}</h3>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {t.legend.items.map((item, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <div className={`h-6 w-6 rounded border ${item.color}`}></div>
+                  <span>{item.label}</span>
+                </div>
+              ))}
             </div>
           </div>
-        </section>
 
-        {/* FAQ Section */}
-        <section className="py-12 bg-gray-50">
-          <div className="container px-4 mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-[#8B0000]">Frequently Asked Questions</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto mt-2">
-                Find answers to common questions about our academic calendar and schedules.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              <Card className="border-none shadow-md">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-lg text-[#8B0000] mb-2">How do I register for classes?</h3>
-                  <p className="text-gray-700">
-                    Registration is available through the student portal. Log in with your student ID and password, then
-                    navigate to "Course Registration" to view available classes and register.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-none shadow-md">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-lg text-[#8B0000] mb-2">What is the attendance policy?</h3>
-                  <p className="text-gray-700">
-                    Students are expected to attend all scheduled classes. More than three unexcused absences may affect
-                    your final grade. Please refer to your course syllabus for specific policies.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-none shadow-md">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-lg text-[#8B0000] mb-2">How do I request an incomplete grade?</h3>
-                  <p className="text-gray-700">
-                    To request an incomplete grade, you must contact your instructor before the end of the semester and
-                    have completed at least 70% of the coursework with a passing grade.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-none shadow-md">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-lg text-[#8B0000] mb-2">When are final grades posted?</h3>
-                  <p className="text-gray-700">
-                    Final grades are typically posted within one week after the end of final exams. You can view your
-                    grades in the student portal under "Academic Records."
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
+          {/* Schedule Info */}
+          <div className="mb-12 rounded-lg border border-gray-200 bg-white p-6">
+            <h3 className="mb-4 text-xl font-bold text-primary">{t.info.title}</h3>
+            <ul className="space-y-2">
+              {t.info.items.map((item, index) => (
+                <li key={index} className="flex items-start gap-2">
+                  <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </section>
 
-        {/* CTA Section */}
-        <section className="py-12 bg-[#8B0000] text-white">
-          <div className="container px-4 mx-auto">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-4">Need Help Planning Your Schedule?</h2>
-              <p className="text-white/80 text-lg mb-8">
-                Our academic advisors are here to help you plan your course schedule and ensure you're on track to meet
-                your educational goals.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Button className="bg-white text-[#8B0000] hover:bg-gray-100">Schedule Advising Appointment</Button>
-                <Button variant="outline" className="border-white text-white hover:bg-white/10">
-                  Contact Student Services
-                </Button>
+          {/* Contact Section */}
+          <div className="rounded-lg bg-primary p-8 text-white">
+            <div className="grid gap-8 md:grid-cols-2">
+              <div>
+                <h3 className="mb-4 text-2xl font-bold">{t.contact.title}</h3>
+                <p className="mb-6">{t.contact.description}</p>
+                <div className="flex flex-wrap gap-4">
+                  <Link
+                    href={`tel:${t.phone.replace(/\s+/g, "")}`}
+                    className="flex items-center gap-2 rounded-md bg-white px-4 py-2 font-medium text-primary hover:bg-gray-100 transition-colors"
+                  >
+                    <Phone className="h-5 w-5" />
+                    {t.contact.phone}
+                  </Link>
+                  <Link
+                    href={`mailto:${t.email}`}
+                    className="flex items-center gap-2 rounded-md bg-white px-4 py-2 font-medium text-primary hover:bg-gray-100 transition-colors"
+                  >
+                    <Mail className="h-5 w-5" />
+                    {t.contact.email}
+                  </Link>
+                </div>
+              </div>
+              <div className="relative h-[200px] overflow-hidden rounded-lg md:h-auto">
+                <Image
+                  src="/placeholder.svg?height=300&width=400"
+                  alt="Tut School classroom"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </main>
     </div>
   )

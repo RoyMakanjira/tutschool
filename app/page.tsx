@@ -34,6 +34,28 @@ export default function Home() {
   const [hoveredCourse, setHoveredCourse] = useState<number | null>(null)
   const [sliderDirection, setSliderDirection] = useState<"next" | "prev" | null>(null)
 
+  const [scrollY, setScrollY] = useState(0)
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    // Set loaded state after a small delay to trigger initial animations
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+    }, 100)
+
+    // Handle scroll events for scroll-triggered animations
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
   const heroImages = [
     "/assets/boy1.svg?height=600&width=1600&text=Students in classroom",
     "/assets/students.jpg?height=600&width=1600&text=Language Learning",
@@ -98,6 +120,7 @@ export default function Home() {
         programs: "ПРОГРАММЫ",
         schedule: "РАСПИСАНИЕ",
         admissions: "ПОСТУПЛЕНИЕ",
+        testimonials: "ОТЗЫВЫ",
         blog: "БЛОГ",
         contacts: "КОНТАКТЫ",
       },
@@ -153,11 +176,6 @@ export default function Home() {
           {
             title: "Китайский для детей",
             description: "Возраст: 5-10 лет. Знакомство с иероглифами и основами китайской культуры.",
-            cta: "Подробнее",
-          },
-          {
-            title: "Английский для взрослых",
-            description: "Общий и деловой английский для всех уровней от начинающего до продвинутого.",
             cta: "Подробнее",
           },
           {
@@ -250,6 +268,7 @@ export default function Home() {
         programs: "PROGRAMS",
         schedule: "SCHEDULE",
         admissions: "ADMISSIONS",
+        testimonials: "TESTIMONIALS",
         blog: "BLOG",
         contacts: "CONTACTS",
       },
@@ -298,23 +317,19 @@ export default function Home() {
         subtitle: "Choose the program that suits you best",
         items: [
           {
-            title: "English for Children",
-            description: "Ages: 5-10 years. Game-based learning format with an emphasis on speaking skills.",
+            title: "English ",
+            description: " Game-based learning format with an emphasis on speaking skills.",
             cta: "Learn More",
           },
           {
-            title: "Chinese for Children",
-            description: "Ages: 5-10 years. Introduction to characters and basics of Chinese culture.",
+            title: "Chinese ",
+            description: " Introduction to characters and basics of Chinese culture.",
             cta: "Learn More",
           },
+         
           {
-            title: "English for Adults",
-            description: "General and business English for all levels from beginner to advanced.",
-            cta: "Learn More",
-          },
-          {
-            title: "Chinese Calligraphy",
-            description: "Creative classes in Chinese calligraphy for children and adults.",
+            title: "Arts",
+            description: "Creative classes for children and adults.",
             cta: "Learn More",
           },
         ],
@@ -403,7 +418,9 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Top Bar */}
-      <div className="bg-primary/90 py-2 text-white">
+      <div
+        className={`bg-primary/90 py-2 text-white transition-all duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+      >
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
@@ -428,7 +445,7 @@ export default function Home() {
             </div>
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1 rounded-md border border-white/30 px-2 py-1 text-sm hover:bg-white/10"
+              className="flex items-center gap-1 rounded-md border border-white/30 px-2 py-1 text-sm hover:bg-white/10 transition-colors duration-300"
             >
               <Globe className="h-4 w-4" />
               {t.languageToggle}
@@ -438,12 +455,14 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header className="border-b bg-white py-4 shadow-sm">
+      <header
+        className={`border-b bg-white py-4 shadow-sm sticky top-0 z-50 transition-all duration-500 ${isLoaded ? "translate-y-0" : "-translate-y-full"}`}
+      >
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-14 w-14">
+            <div className="relative h-14 w-14 animate-pulse-slow">
               <Image
-                src="/placeholder.svg?height=56&width=56"
+                src="/logo.png"
                 alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                 fill
                 className="object-contain"
@@ -454,28 +473,22 @@ export default function Home() {
               <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
             </div>
           </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:block">
+                   {/* Desktop Navigation */}
+                   <nav className="hidden md:block">
             <ul className="flex gap-6">
               <li>
-                <Link href="/" className="text-sm font-medium text-primary hover:text-primary/80">
+                <Link href="/" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.home}
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/about-us" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.about}
                 </Link>
               </li>
               <li>
                 <Link href="/programs" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.programs}
-                </Link>
-              </li>
-              <li>
-                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.schedule}
                 </Link>
               </li>
               <li>
@@ -489,7 +502,17 @@ export default function Home() {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.testimonials}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-primary hover:text-primary/80">
                   {t.nav.contacts}
                 </Link>
               </li>
@@ -505,12 +528,6 @@ export default function Home() {
               />
               <Search className="h-4 w-4 text-gray-400" />
             </div>
-            <Link
-              href="#"
-              className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 md:block"
-            >
-              {t.hero.cta}
-            </Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -525,23 +542,18 @@ export default function Home() {
             <nav className="space-y-4">
               <ul className="space-y-2">
                 <li>
-                  <Link href="/" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
+                  <Link href="/" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.home}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/about-us" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.about}
                   </Link>
                 </li>
                 <li>
                   <Link href="/programs" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.programs}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.schedule}
                   </Link>
                 </li>
                 <li>
@@ -555,7 +567,17 @@ export default function Home() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.schedule}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.testimonials}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
                     {t.nav.contacts}
                   </Link>
                 </li>
@@ -568,12 +590,6 @@ export default function Home() {
                 />
                 <Search className="h-4 w-4 text-gray-400" />
               </div>
-              <Link
-                href="#"
-                className="block w-full rounded-full bg-primary py-2 text-center text-sm font-medium text-white hover:bg-primary/90"
-              >
-                {t.hero.cta}
-              </Link>
             </nav>
           </div>
         </div>
@@ -715,7 +731,7 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.courses.title}</h2>
             <p className="mb-12 text-center text-lg text-gray-600">{t.courses.subtitle}</p>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {t.courses.items.map((course, index) => (
                 <div
                   key={index}
@@ -725,7 +741,7 @@ export default function Home() {
                 >
                   <div className="relative h-48">
                     <Image
-                      src={`/assets/coursesOne.svg?height=200&width=300&text=${index + 1}`}
+                      src={`/assets/coursesTwo.svg?height=200&width=300&text=${index + 1}`}
                       alt={course.title}
                       fill
                       className={`object-cover transition-all duration-700 ${
@@ -743,7 +759,7 @@ export default function Home() {
                       {course.title}
                     </h3>
                     <p className="mb-4 text-sm text-gray-600">{course.description}</p>
-                    <Link href="#" className="inline-flex items-center text-primary hover:underline group">
+                    <Link href="/programs" className="inline-flex items-center text-primary hover:underline group">
                       {course.cta}
                       <ChevronRight
                         className={`ml-1 h-4 w-4 transition-transform duration-300 ${

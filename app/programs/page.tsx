@@ -783,7 +783,7 @@ export default function Programs() {
           <div className="flex items-center gap-3">
             <div className="relative h-14 w-14">
               <Image
-                src="/placeholder.svg?height=56&width=56"
+                src="/logo.png"
                 alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                 fill
                 className="object-contain"
@@ -795,8 +795,8 @@ export default function Programs() {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:block">
+            {/* Desktop Navigation */}
+            <nav className="hidden md:block">
             <ul className="flex gap-6">
               <li>
                 <Link href="/" className="text-sm font-medium text-gray-700 hover:text-primary">
@@ -804,7 +804,7 @@ export default function Programs() {
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/about-us" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.about}
                 </Link>
               </li>
@@ -869,7 +869,7 @@ export default function Programs() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/about-us" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.about}
                   </Link>
                 </li>
@@ -917,46 +917,6 @@ export default function Programs() {
         </div>
       )}
       <main>
-        {/* Hero Section */}
-        <section className="relative">
-          <div className="relative h-[400px] w-full">
-            <Image
-              src="/placeholder.svg?height=400&width=1600"
-              alt={language === "ru" ? "Академические программы Tut School" : "Academic Programs at Tut School"}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
-            <div className="absolute inset-0 flex flex-col items-start justify-center px-4 text-white md:px-12 lg:px-20">
-              <div className="max-w-2xl">
-                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl">{t.hero.title}</h2>
-                <p className="mb-8 text-lg md:text-xl">{t.hero.subtitle}</p>
-                <Link
-                  href="#enroll"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white transition-all hover:bg-primary/90 hover:gap-3"
-                >
-                  {t.hero.cta}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Breadcrumbs */}
-        <div className="border-b bg-gray-50">
-          <div className="container mx-auto px-4 py-3">
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <Link href="/" className="hover:text-primary hover:underline">
-                {t.breadcrumbs.home}
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-gray-700">{t.breadcrumbs.programs}</span>
-            </div>
-          </div>
-        </div>
-
         {/* Introduction Section */}
         <section className="py-12">
           <div className="container mx-auto px-4">

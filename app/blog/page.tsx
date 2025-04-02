@@ -466,7 +466,7 @@ export default function Blog() {
           <div className="flex items-center gap-3">
             <div className="relative h-14 w-14">
               <Image
-                src="/placeholder.svg?height=56&width=56"
+                src="/logo.png"
                 alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                 fill
                 className="object-contain"
@@ -487,7 +487,7 @@ export default function Blog() {
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/about-us" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.about}
                 </Link>
               </li>
@@ -552,7 +552,7 @@ export default function Blog() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/about-us" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.about}
                   </Link>
                 </li>
@@ -601,39 +601,6 @@ export default function Blog() {
       )}
 
       <main>
-        {/* Hero Section */}
-        <section className="relative">
-          <div className="relative h-[300px] w-full">
-            <Image
-              src="/placeholder.svg?height=300&width=1600"
-              alt={language === "ru" ? "Блог Tut School" : "Tut School Blog"}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
-            <div className="absolute inset-0 flex flex-col items-start justify-center px-4 text-white md:px-12 lg:px-20">
-              <div className="max-w-2xl">
-                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl">{t.hero.title}</h2>
-                <p className="text-lg md:text-xl">{t.hero.subtitle}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Breadcrumbs */}
-        <div className="border-b bg-gray-50">
-          <div className="container mx-auto px-4 py-3">
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <Link href="/" className="hover:text-primary hover:underline">
-                {t.breadcrumbs.home}
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-gray-700">{t.breadcrumbs.blog}</span>
-            </div>
-          </div>
-        </div>
-
         {/* Blog Content */}
         <div className="container mx-auto px-4 py-12">
           <div className="grid gap-12 lg:grid-cols-3">
