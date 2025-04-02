@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -17,38 +17,17 @@ import {
   Search,
   Menu,
   X,
+  ArrowRight,
   Award,
   BookOpen,
   Users,
+  School,
   CheckCircle,
-  ArrowRight,
 } from "lucide-react"
 
 export default function AboutUs() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [activeTab, setActiveTab] = useState<"mission" | "team" | "facilities" | "achievements">("mission")
-  const [scrollY, setScrollY] = useState(0)
-  const [isLoaded, setIsLoaded] = useState(false)
-
-  useEffect(() => {
-    // Set loaded state after a small delay to trigger initial animations
-    const timer = setTimeout(() => {
-      setIsLoaded(true)
-    }, 100)
-
-    // Handle scroll events for scroll-triggered animations
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
 
   const translations = {
     ru: {
@@ -71,262 +50,220 @@ export default function AboutUs() {
       },
       hero: {
         title: "О НАШЕЙ ШКОЛЕ",
-        subtitle: "Узнайте больше о нашей миссии, команде и достижениях",
+        subtitle: "Узнайте больше о нашей истории, миссии и ценностях",
       },
       breadcrumbs: {
         home: "Главная",
         about: "О нас",
       },
-      tabs: {
-        mission: "Миссия и ценности",
-        team: "Наша команда",
-        facilities: "Наши классы",
-        achievements: "Достижения",
-      },
       welcome: {
         title: "ДОБРО ПОЖАЛОВАТЬ В TUT SCHOOL",
         description:
-          "Tut School — это современная школа иностранных языков и искусств, где каждый студент может раскрыть свой потенциал в дружественной и вдохновляющей атмосфере. Мы предлагаем широкий спектр курсов для детей и взрослых, разработанных с учетом индивидуальных потребностей и целей каждого ученика.",
+          "Tut School — это современная школа иностранных языков и искусств, где каждый студент получает индивидуальный подход и возможность раскрыть свой потенциал. Мы сочетаем традиционные методики обучения с инновационными подходами, чтобы сделать процесс обучения максимально эффективным и увлекательным.",
+        image: "/placeholder.svg?height=400&width=600&text=School Building",
+      },
+      history: {
+        title: "НАША ИСТОРИЯ",
+        description:
+          "Школа Tut School была основана в 2010 году группой энтузиастов, объединенных общей идеей — создать образовательное пространство, где изучение языков и искусств будет доступно каждому. За 14 лет работы мы выросли из небольшого учебного центра в полноценную школу с широким спектром программ для детей и взрослых.",
+        milestones: [
+          {
+            year: "2010",
+            title: "Основание школы",
+            description: "Открытие первого учебного центра с курсами английского и китайского языков",
+          },
+          {
+            year: "2013",
+            title: "Расширение программ",
+            description: "Добавление курсов для детей и подростков, открытие театральной студии на английском языке",
+          },
+          {
+            year: "2016",
+            title: "Новый кампус",
+            description: "Переезд в новое просторное здание с современным оборудованием и учебными материалами",
+          },
+          {
+            year: "2019",
+            title: "Международная аккредитация",
+            description:
+              "Получение международной аккредитации и статуса официального центра подготовки к международным экзаменам",
+          },
+          {
+            year: "2022",
+            title: "Онлайн-обучение",
+            description: "Запуск полноценной платформы для онлайн-обучения и гибридных форматов занятий",
+          },
+        ],
       },
       mission: {
         title: "НАША МИССИЯ И ЦЕННОСТИ",
-        description:
-          "Наша миссия — создать вдохновляющую образовательную среду, где каждый студент может раскрыть свой потенциал в изучении языков и искусства. Мы стремимся не только обучать языкам, но и знакомить наших студентов с культурой и традициями разных стран.",
+        mission:
+          "Наша миссия — помогать людям преодолевать языковые барьеры и раскрывать творческий потенциал через качественное образование и индивидуальный подход к каждому студенту.",
         values: [
+          {
+            title: "Качество",
+            description:
+              "Мы стремимся к высочайшему качеству образования, постоянно совершенствуя методики и учебные материалы",
+            icon: "Award",
+          },
           {
             title: "Индивидуальный подход",
             description:
-              "Мы учитываем особенности каждого студента и адаптируем методику обучения под его потребности и стиль обучения.",
+              "Мы учитываем особенности, интересы и цели каждого студента при построении образовательного процесса",
+            icon: "User",
           },
           {
-            title: "Качество преподавания",
+            title: "Инновации",
             description:
-              "Наши преподаватели — опытные профессионалы с международными сертификатами и богатым опытом работы.",
+              "Мы внедряем современные технологии и методики, чтобы сделать обучение эффективным и увлекательным",
+            icon: "BookOpen",
           },
           {
-            title: "Современные методики",
+            title: "Сообщество",
             description:
-              "Мы используем современные методики преподавания, которые делают процесс обучения эффективным и увлекательным.",
-          },
-          {
-            title: "Дружественная атмосфера",
-            description:
-              "Мы создаем комфортную и дружественную атмосферу, где каждый студент чувствует себя уверенно и может свободно выражать свои мысли.",
+              "Мы создаем дружественную среду, где студенты могут общаться, обмениваться опытом и поддерживать друг друга",
+            icon: "Users",
           },
         ],
-        history: {
-          title: "ИСТОРИЯ ШКОЛЫ",
-          paragraphs: [
-            "Tut School была основана в 2015 году группой энтузиастов, объединенных общей идеей — создать современную школу иностранных языков, где обучение будет не только эффективным, но и увлекательным.",
-            "Начав с небольшого помещения и нескольких групп английского языка, мы постепенно расширяли спектр предлагаемых курсов и улучшали инфраструктуру. В 2018 году мы добавили курсы китайского языка, а в 2020 году открыли направление творческих занятий.",
-            "Сегодня Tut School — это современный образовательный центр с просторными классами, профессиональными преподавателями и разнообразными программами для всех возрастов. Мы гордимся тем, что многие наши студенты успешно сдают международные экзамены и продолжают обучение за рубежом.",
-          ],
-        },
       },
       team: {
         title: "НАША КОМАНДА",
         description:
-          "Наши преподаватели — опытные профессионалы с международными сертификатами и богатым опытом работы. Они не только обладают глубокими знаниями в своей области, но и умеют вдохновлять студентов, создавая увлекательную и продуктивную атмосферу на занятиях.",
+          "В Tut School работают опытные преподаватели с международными сертификатами и богатым опытом работы. Многие из них являются носителями языка или имеют опыт длительного проживания в странах изучаемого языка.",
         members: [
           {
             name: "Анна Петрова",
-            position: "Директор школы, преподаватель английского языка",
-            credentials: "CELTA, DELTA, 10 лет опыта",
-            description:
-              "Анна основала Tut School в 2015 году и с тех пор руководит ее развитием. Она имеет богатый опыт преподавания английского языка и разработки учебных программ. Анна специализируется на работе с детьми младшего и среднего школьного возраста.",
+            role: "Директор школы",
+            bio: "Основатель и идейный вдохновитель Tut School. Имеет 20-летний опыт преподавания английского языка и степень магистра в области образования.",
+            image: "/placeholder.svg?height=300&width=300&text=Anna",
           },
           {
-            name: "Михаил Ли",
-            position: "Преподаватель китайского языка и каллиграфии",
-            credentials: "Магистр лингвистики, носитель языка",
-            description:
-              "Михаил — носитель китайского языка с глубоким пониманием китайской культуры и традиций. Он мастерски сочетает обучение языку с элементами культурного контекста, что помогает студентам лучше понять и усвоить материал.",
+            name: "Джон Смит",
+            role: "Преподаватель английского языка",
+            bio: "Носитель языка из Великобритании с сертификатами CELTA и DELTA. Специализируется на подготовке к международным экзаменам.",
+            image: "/placeholder.svg?height=300&width=300&text=John",
           },
           {
-            name: "Елена Соколова",
-            position: "Преподаватель английского языка",
-            credentials: "CELTA, BEC Higher, 8 лет опыта",
-            description:
-              "Елена имеет богатый опыт работы с разными возрастными группами и уровнями подготовки. Она специализируется на подготовке к международным экзаменам и деловом английском. Ее уроки всегда наполнены интерактивными заданиями и практическими упражнениями.",
+            name: "Ли Вэй",
+            role: "Преподаватель китайского языка",
+            bio: "Носитель языка из Пекина с 10-летним опытом преподавания китайского как иностранного. Автор учебных пособий по китайскому языку.",
+            image: "/placeholder.svg?height=300&width=300&text=Li Wei",
           },
           {
-            name: "Дмитрий Волков",
-            position: "Преподаватель английского языка, руководитель театральной студии",
-            credentials: "TEFL, актерское образование",
-            description:
-              "Дмитрий успешно сочетает свой опыт в театральном искусстве с преподаванием английского языка. Он руководит театральной студией на английском языке, где студенты не только улучшают свои языковые навыки, но и развивают уверенность в себе и творческие способности.",
-          },
-          {
-            name: "Наталья Петрова",
-            position: "Преподаватель творческих занятий",
-            credentials: "Художественное образование, 6 лет опыта",
-            description:
-              "Наталья ведет курсы оригами и других творческих занятий. Она умеет находить индивидуальный подход к каждому ученику и раскрывать его творческий потенциал. Ее занятия всегда проходят в атмосфере творчества и вдохновения.",
-          },
-          {
-            name: "Ольга Смирнова",
-            position: "Методист, преподаватель английского языка",
-            credentials: "CELTA, TKT, 7 лет опыта",
-            description:
-              "Ольга отвечает за разработку и адаптацию учебных программ. Она следит за новыми тенденциями в методике преподавания и внедряет инновационные подходы в образовательный процесс. Ольга также ведет занятия по английскому языку для дошкольников.",
+            name: "Мария Иванова",
+            role: "Руководитель детских программ",
+            bio: "Педагог с 15-летним стажем работы с детьми. Разработчик авторских методик обучения иностранным языкам для детей разного возраста.",
+            image: "/placeholder.svg?height=300&width=300&text=Maria",
           },
         ],
       },
       facilities: {
-        title: "НАШИ КЛАССЫ И ОБОРУДОВАНИЕ",
+        title: "НАШИ ПОМЕЩЕНИЯ И ОБОРУДОВАНИЕ",
         description:
-          "Мы создали комфортную и современную образовательную среду, где каждый студент может полностью погрузиться в процесс обучения. Наши классы оборудованы всем необходимым для эффективного изучения языков и творческого развития.",
-        features: [
+          "Tut School располагается в современном здании с просторными и комфортными учебными классами. Все помещения оборудованы по последнему слову техники для обеспечения эффективного образовательного процесса.",
+        items: [
           {
             title: "Современные классы",
-            description: "Просторные и светлые классы с удобной мебелью и современным оборудованием.",
+            description: "10 просторных классов с интерактивными досками и комфортной мебелью",
+            icon: "School",
           },
           {
-            title: "Интерактивные доски",
-            description:
-              "Все классы оснащены интерактивными досками, которые делают процесс обучения более наглядным и увлекательным.",
+            title: "Мультимедийная лаборатория",
+            description: "Специально оборудованное помещение для аудирования и отработки произношения",
+            icon: "Headphones",
           },
           {
-            title: "Аудио и видео оборудование",
-            description:
-              "Качественное аудио и видео оборудование для прослушивания и просмотра аутентичных материалов.",
+            title: "Театральная студия",
+            description: "Пространство для творческих занятий и языковой практики через искусство",
+            icon: "Theater",
           },
           {
             title: "Библиотека",
-            description:
-              "Богатая библиотека с учебниками, художественной литературой и периодическими изданиями на изучаемых языках.",
+            description: "Богатая коллекция учебных материалов, книг и мультимедийных ресурсов",
+            icon: "BookOpen",
           },
           {
             title: "Зона отдыха",
-            description: "Комфортная зона отдыха, где студенты могут пообщаться, выпить чай или кофе между занятиями.",
-          },
-          {
-            title: "Творческая мастерская",
-            description:
-              "Специально оборудованное помещение для творческих занятий с необходимыми материалами и инструментами.",
+            description: "Комфортное пространство для общения и отдыха между занятиями",
+            icon: "Coffee",
           },
         ],
-        gallery: {
-          title: "ГАЛЕРЕЯ",
-          images: [
-            {
-              src: "/placeholder.svg?height=300&width=400&text=Classroom 1",
-              alt: "Класс английского языка",
-            },
-            {
-              src: "/placeholder.svg?height=300&width=400&text=Classroom 2",
-              alt: "Класс китайского языка",
-            },
-            {
-              src: "/placeholder.svg?height=300&width=400&text=Art Studio",
-              alt: "Творческая мастерская",
-            },
-            {
-              src: "/placeholder.svg?height=300&width=400&text=Library",
-              alt: "Библиотека",
-            },
-            {
-              src: "/assets/lounge.jpg?height=300&width=400&text=Lounge",
-              alt: "Зона отдыха",
-            },
-            {
-              src: "/assets/gallery/reception.webp?height=300&width=400&text=Reception",
-              alt: "Ресепшн",
-            },
-          ],
-        },
       },
-      achievements: {
-        title: "НАШИ ДОСТИЖЕНИЯ",
+      methodology: {
+        title: "НАША МЕТОДОЛОГИЯ",
         description:
-          "За годы работы наша школа достигла значительных успехов в области языкового образования и творческого развития. Мы гордимся достижениями наших студентов и преподавателей.",
-        stats: [
+          "В Tut School мы используем коммуникативный подход к обучению языкам, который фокусируется на развитии практических навыков общения. Наши методики сочетают лучшие традиционные практики с инновационными технологиями.",
+        features: [
           {
-            number: "2000+",
-            label: "Выпускников",
+            title: "Коммуникативный подход",
+            description: "Фокус на развитии разговорных навыков и практическом применении языка",
           },
           {
-            number: "15",
-            label: "Опытных преподавателей",
+            title: "Погружение в языковую среду",
+            description: "Создание аутентичной языковой среды на занятиях для максимальной эффективности",
           },
           {
-            number: "10+",
-            label: "Программ обучения",
+            title: "Индивидуальные траектории",
+            description:
+              "Разработка персонализированных программ обучения с учетом целей и особенностей каждого студента",
           },
           {
-            number: "98%",
-            label: "Довольных студентов",
+            title: "Регулярная обратная связь",
+            description: "Постоянный мониторинг прогресса и корректировка учебного плана",
+          },
+          {
+            title: "Интеграция технологий",
+            description: "Использование современных технологий и онлайн-ресурсов для повышения эффективности обучения",
           },
         ],
+      },
+      accreditations: {
+        title: "АККРЕДИТАЦИИ И СЕРТИФИКАТЫ",
+        description:
+          "Tut School имеет все необходимые лицензии и аккредитации, подтверждающие высокое качество нашего образования. Мы являемся официальным центром подготовки к международным экзаменам и сотрудничаем с ведущими образовательными организациями.",
         items: [
           {
-            title: "Международные сертификаты",
-            description:
-              "90% наших студентов успешно сдают международные экзамены по английскому языку (Cambridge YLE, KET, PET, FCE).",
+            title: "Лицензия на образовательную деятельность",
+            issuer: "Министерство образования РФ",
           },
           {
-            title: "Олимпиады и конкурсы",
-            description:
-              "Ежегодно наши ученики становятся призерами городских и региональных олимпиад по иностранным языкам.",
+            title: "Аккредитованный центр Cambridge Assessment English",
+            issuer: "Cambridge University",
           },
           {
-            title: "Театральные постановки",
-            description:
-              "Театральная студия регулярно выступает на городских мероприятиях с постановками на английском языке.",
+            title: "Официальный центр подготовки к HSK",
+            issuer: "Hanban/Confucius Institute Headquarters",
           },
           {
-            title: "Выставки работ",
-            description:
-              "Работы студентов курса китайской каллиграфии были представлены на выставке в культурном центре.",
-          },
-          {
-            title: "Поступление в зарубежные вузы",
-            description:
-              "Многие выпускники продолжают обучение в зарубежных вузах благодаря языковой подготовке в нашей школе.",
-          },
-          {
-            title: "Партнерство с международными организациями",
-            description:
-              "Мы сотрудничаем с международными образовательными организациями и являемся официальным центром подготовки к экзаменам Cambridge.",
+            title: "Сертификат качества образовательных услуг",
+            issuer: "Международная ассоциация языковых школ",
           },
         ],
-        certificates: {
-          title: "СЕРТИФИКАТЫ И АККРЕДИТАЦИИ",
-          items: [
-            "Официальный центр подготовки к экзаменам Cambridge",
-            "Сертификат качества образовательных услуг",
-            "Членство в Ассоциации преподавателей иностранных языков",
-            "Аккредитация Министерства образования",
-          ],
-        },
       },
-      partners: {
-        title: "НАШИ ПАРТНЕРЫ",
-        description:
-          "Мы сотрудничаем с ведущими образовательными организациями и издательствами, что позволяет нам предлагать нашим студентам качественные учебные материалы и дополнительные возможности для развития.",
-        logos: [
+      stats: {
+        title: "TUT SCHOOL В ЦИФРАХ",
+        items: [
           {
-            src: "/placeholder.svg?height=100&width=200&text=Partner 1",
-            alt: "Логотип партнера 1",
+            number: "14",
+            label: "Лет опыта",
           },
           {
-            src: "/placeholder.svg?height=100&width=200&text=Partner 2",
-            alt: "Логотип партнера 2",
+            number: "30+",
+            label: "Профессиональных преподавателей",
           },
           {
-            src: "/placeholder.svg?height=100&width=200&text=Partner 3",
-            alt: "Логотип партнера 3",
+            number: "1500+",
+            label: "Студентов ежегодно",
           },
           {
-            src: "/placeholder.svg?height=100&width=200&text=Partner 4",
-            alt: "Логотип партнера 4",
+            number: "15+",
+            label: "Языковых программ",
           },
         ],
       },
       cta: {
-        title: "ПРИСОЕДИНЯЙТЕСЬ К НАМ",
-        description:
-          "Станьте частью нашего дружного сообщества и начните свой путь к новым знаниям и навыкам. Мы поможем вам достичь ваших целей в изучении языков и творческом развитии.",
+        title: "СТАНЬТЕ ЧАСТЬЮ НАШЕГО СООБЩЕСТВА",
+        description: "Запишитесь на пробное занятие и убедитесь в качестве нашего обучения",
         button: "Записаться на пробный урок",
       },
       footer: {
@@ -364,257 +301,219 @@ export default function AboutUs() {
       },
       hero: {
         title: "ABOUT OUR SCHOOL",
-        subtitle: "Learn more about our mission, team, and achievements",
+        subtitle: "Learn more about our history, mission, and values",
       },
       breadcrumbs: {
         home: "Home",
         about: "About Us",
       },
-      tabs: {
-        mission: "Mission & Values",
-        team: "Our Team",
-        facilities: "Our Facilities",
-        achievements: "Achievements",
-      },
       welcome: {
         title: "WELCOME TO TUT SCHOOL",
         description:
-          "Tut School is a modern school of foreign languages and arts where every student can reach their potential in a friendly and inspiring atmosphere. We offer a wide range of courses for children and adults, designed to meet the individual needs and goals of each student.",
+          "Tut School is a modern school of foreign languages and arts where each student receives an individual approach and the opportunity to unlock their potential. We combine traditional teaching methods with innovative approaches to make the learning process as effective and engaging as possible.",
+        image: "/placeholder.svg?height=400&width=600&text=School Building",
+      },
+      history: {
+        title: "OUR HISTORY",
+        description:
+          "Tut School was founded in 2010 by a group of enthusiasts united by a common idea — to create an educational space where the study of languages and arts would be accessible to everyone. Over 14 years of operation, we have grown from a small learning center into a full-fledged school with a wide range of programs for children and adults.",
+        milestones: [
+          {
+            year: "2010",
+            title: "School Foundation",
+            description: "Opening of the first learning center with English and Chinese language courses",
+          },
+          {
+            year: "2013",
+            title: "Program Expansion",
+            description: "Addition of courses for children and teenagers, opening of an English-language drama studio",
+          },
+          {
+            year: "2016",
+            title: "New Campus",
+            description: "Moving to a new spacious building with modern equipment and educational materials",
+          },
+          {
+            year: "2019",
+            title: "International Accreditation",
+            description:
+              "Receiving international accreditation and status as an official center for preparation for international exams",
+          },
+          {
+            year: "2022",
+            title: "Online Learning",
+            description: "Launch of a full-fledged platform for online learning and hybrid class formats",
+          },
+        ],
       },
       mission: {
-        title: "OUR MISSION & VALUES",
-        description:
-          "Our mission is to create an inspiring educational environment where every student can reach their potential in learning languages and arts. We strive not only to teach languages but also to introduce our students to the culture and traditions of different countries.",
+        title: "OUR MISSION AND VALUES",
+        mission:
+          "Our mission is to help people overcome language barriers and unlock their creative potential through quality education and an individual approach to each student.",
         values: [
+          {
+            title: "Quality",
+            description:
+              "We strive for the highest quality of education, constantly improving our methods and educational materials",
+            icon: "Award",
+          },
           {
             title: "Individual Approach",
             description:
-              "We take into account the characteristics of each student and adapt our teaching methodology to their needs and learning style.",
+              "We take into account the characteristics, interests, and goals of each student when building the educational process",
+            icon: "User",
           },
           {
-            title: "Quality Teaching",
+            title: "Innovation",
+            description: "We implement modern technologies and methodologies to make learning effective and engaging",
+            icon: "BookOpen",
+          },
+          {
+            title: "Community",
             description:
-              "Our teachers are experienced professionals with international certificates and extensive work experience.",
-          },
-          {
-            title: "Modern Methods",
-            description: "We use modern teaching methods that make the learning process effective and engaging.",
-          },
-          {
-            title: "Friendly Atmosphere",
-            description:
-              "We create a comfortable and friendly atmosphere where every student feels confident and can freely express their thoughts.",
+              "We create a friendly environment where students can communicate, exchange experiences, and support each other",
+            icon: "Users",
           },
         ],
-        history: {
-          title: "SCHOOL HISTORY",
-          paragraphs: [
-            "Tut School was founded in 2015 by a group of enthusiasts united by a common idea — to create a modern language school where learning would be not only effective but also engaging.",
-            "Starting with a small space and a few English language groups, we gradually expanded our range of courses and improved our infrastructure. In 2018, we added Chinese language courses, and in 2020, we opened a creative arts department.",
-            "Today, Tut School is a modern educational center with spacious classrooms, professional teachers, and diverse programs for all ages. We are proud that many of our students successfully pass international exams and continue their education abroad.",
-          ],
-        },
       },
       team: {
         title: "OUR TEAM",
         description:
-          "Our teachers are experienced professionals with international certificates and extensive work experience. They not only possess deep knowledge in their field but also know how to inspire students, creating an engaging and productive atmosphere in the classroom.",
+          "Tut School employs experienced teachers with international certificates and extensive work experience. Many of them are native speakers or have experience of long-term residence in the countries of the studied language.",
         members: [
           {
             name: "Anna Petrova",
-            position: "School Director, English Language Teacher",
-            credentials: "CELTA, DELTA, 10 years of experience",
-            description:
-              "Anna founded Tut School in 2015 and has been leading its development ever since. She has extensive experience in teaching English and developing educational programs. Anna specializes in working with primary and middle school children.",
+            role: "School Director",
+            bio: "Founder and visionary of Tut School. Has 20 years of experience teaching English and a Master's degree in Education.",
+            image: "/placeholder.svg?height=300&width=300&text=Anna",
           },
           {
-            name: "Michael Li",
-            position: "Chinese Language and Calligraphy Teacher",
-            credentials: "Master's in Linguistics, Native Speaker",
-            description:
-              "Michael is a native Chinese speaker with a deep understanding of Chinese culture and traditions. He masterfully combines language teaching with elements of cultural context, helping students better understand and absorb the material.",
+            name: "John Smith",
+            role: "English Teacher",
+            bio: "Native speaker from the UK with CELTA and DELTA certificates. Specializes in preparation for international exams.",
+            image: "/placeholder.svg?height=300&width=300&text=John",
           },
           {
-            name: "Elena Sokolova",
-            position: "English Language Teacher",
-            credentials: "CELTA, BEC Higher, 8 years of experience",
-            description:
-              "Elena has extensive experience working with different age groups and proficiency levels. She specializes in preparation for international exams and business English. Her lessons are always filled with interactive tasks and practical exercises.",
+            name: "Li Wei",
+            role: "Chinese Teacher",
+            bio: "Native speaker from Beijing with 10 years of experience teaching Chinese as a foreign language. Author of textbooks on the Chinese language.",
+            image: "/placeholder.svg?height=300&width=300&text=Li Wei",
           },
           {
-            name: "Dmitry Volkov",
-            position: "English Language Teacher, Drama Studio Director",
-            credentials: "TEFL, Acting Education",
-            description:
-              "Dmitry successfully combines his experience in theatrical arts with teaching English. He directs the English-language drama studio, where students not only improve their language skills but also develop confidence and creative abilities.",
-          },
-          {
-            name: "Natalia Petrova",
-            position: "Creative Arts Teacher",
-            credentials: "Art Education, 6 years of experience",
-            description:
-              "Natalia teaches origami and other creative classes. She knows how to find an individual approach to each student and unlock their creative potential. Her classes always take place in an atmosphere of creativity and inspiration.",
-          },
-          {
-            name: "Olga Smirnova",
-            position: "Methodologist, English Language Teacher",
-            credentials: "CELTA, TKT, 7 years of experience",
-            description:
-              "Olga is responsible for developing and adapting educational programs. She keeps track of new trends in teaching methodology and implements innovative approaches in the educational process. Olga also teaches English to preschoolers.",
+            name: "Maria Ivanova",
+            role: "Head of Children's Programs",
+            bio: "Educator with 15 years of experience working with children. Developer of original methods for teaching foreign languages to children of different ages.",
+            image: "/placeholder.svg?height=300&width=300&text=Maria",
           },
         ],
       },
       facilities: {
         title: "OUR FACILITIES AND EQUIPMENT",
         description:
-          "We have created a comfortable and modern educational environment where every student can fully immerse themselves in the learning process. Our classrooms are equipped with everything necessary for effective language learning and creative development.",
-        features: [
+          "Tut School is located in a modern building with spacious and comfortable classrooms. All premises are equipped with state-of-the-art technology to ensure an effective educational process.",
+        items: [
           {
             title: "Modern Classrooms",
-            description: "Spacious and bright classrooms with comfortable furniture and modern equipment.",
+            description: "10 spacious classrooms with interactive whiteboards and comfortable furniture",
+            icon: "School",
           },
           {
-            title: "Interactive Whiteboards",
-            description:
-              "All classrooms are equipped with interactive whiteboards that make the learning process more visual and engaging.",
+            title: "Multimedia Laboratory",
+            description: "Specially equipped room for listening and pronunciation practice",
+            icon: "Headphones",
           },
           {
-            title: "Audio and Video Equipment",
-            description: "Quality audio and video equipment for listening to and viewing authentic materials.",
+            title: "Drama Studio",
+            description: "Space for creative activities and language practice through art",
+            icon: "Theater",
           },
           {
             title: "Library",
-            description: "A rich library with textbooks, fiction, and periodicals in the languages being studied.",
+            description: "Rich collection of educational materials, books, and multimedia resources",
+            icon: "BookOpen",
           },
           {
-            title: "Lounge Area",
-            description:
-              "A comfortable lounge area where students can socialize and have tea or coffee between classes.",
-          },
-          {
-            title: "Creative Workshop",
-            description: "A specially equipped space for creative activities with necessary materials and tools.",
+            title: "Relaxation Area",
+            description: "Comfortable space for communication and relaxation between classes",
+            icon: "Coffee",
           },
         ],
-        gallery: {
-          title: "GALLERY",
-          images: [
-            {
-              src: "/placeholder.svg?height=300&width=400&text=Classroom 1",
-              alt: "English Language Classroom",
-            },
-            {
-              src: "/placeholder.svg?height=300&width=400&text=Classroom 2",
-              alt: "Chinese Language Classroom",
-            },
-            {
-              src: "/placeholder.svg?height=300&width=400&text=Art Studio",
-              alt: "Creative Workshop",
-            },
-            {
-              src: "/placeholder.svg?height=300&width=400&text=Library",
-              alt: "Library",
-            },
-            {
-              src: "/placeholder.svg?height=300&width=400&text=Lounge",
-              alt: "Lounge Area",
-            },
-            {
-              src: "/placeholder.svg?height=300&width=400&text=Reception",
-              alt: "Reception",
-            },
-          ],
-        },
       },
-      achievements: {
-        title: "OUR ACHIEVEMENTS",
+      methodology: {
+        title: "OUR METHODOLOGY",
         description:
-          "Over the years, our school has achieved significant success in language education and creative development. We are proud of the achievements of our students and teachers.",
-        stats: [
+          "At Tut School, we use a communicative approach to language learning that focuses on developing practical communication skills. Our methods combine the best traditional practices with innovative technologies.",
+        features: [
           {
-            number: "2000+",
-            label: "Graduates",
+            title: "Communicative Approach",
+            description: "Focus on developing conversational skills and practical application of the language",
           },
           {
-            number: "15",
-            label: "Experienced Teachers",
+            title: "Language Immersion",
+            description: "Creating an authentic language environment in classes for maximum effectiveness",
           },
           {
-            number: "10+",
-            label: "Educational Programs",
+            title: "Individual Trajectories",
+            description:
+              "Development of personalized learning programs taking into account the goals and characteristics of each student",
           },
           {
-            number: "98%",
-            label: "Satisfied Students",
+            title: "Regular Feedback",
+            description: "Constant monitoring of progress and adjustment of the curriculum",
+          },
+          {
+            title: "Technology Integration",
+            description: "Use of modern technologies and online resources to increase learning efficiency",
           },
         ],
+      },
+      accreditations: {
+        title: "ACCREDITATIONS AND CERTIFICATES",
+        description:
+          "Tut School has all the necessary licenses and accreditations confirming the high quality of our education. We are an official center for preparation for international exams and cooperate with leading educational organizations.",
         items: [
           {
-            title: "International Certificates",
-            description:
-              "90% of our students successfully pass international English exams (Cambridge YLE, KET, PET, FCE).",
+            title: "License for Educational Activities",
+            issuer: "Ministry of Education of the Russian Federation",
           },
           {
-            title: "Olympiads and Competitions",
-            description: "Every year our students become winners of city and regional foreign language olympiads.",
+            title: "Accredited Cambridge Assessment English Center",
+            issuer: "Cambridge University",
           },
           {
-            title: "Theatrical Performances",
-            description: "The drama studio regularly performs at city events with plays in English.",
+            title: "Official HSK Preparation Center",
+            issuer: "Hanban/Confucius Institute Headquarters",
           },
           {
-            title: "Art Exhibitions",
-            description:
-              "Works by students of the Chinese calligraphy course were presented at an exhibition in the cultural center.",
-          },
-          {
-            title: "Admission to Foreign Universities",
-            description:
-              "Many graduates continue their education at foreign universities thanks to language training at our school.",
-          },
-          {
-            title: "Partnership with International Organizations",
-            description:
-              "We cooperate with international educational organizations and are an official Cambridge exam preparation center.",
+            title: "Certificate of Quality of Educational Services",
+            issuer: "International Association of Language Schools",
           },
         ],
-        certificates: {
-          title: "CERTIFICATES AND ACCREDITATIONS",
-          items: [
-            "Official Cambridge Exam Preparation Center",
-            "Educational Services Quality Certificate",
-            "Membership in the Association of Foreign Language Teachers",
-            "Ministry of Education Accreditation",
-          ],
-        },
       },
-      partners: {
-        title: "OUR PARTNERS",
-        description:
-          "We cooperate with leading educational organizations and publishers, which allows us to offer our students quality educational materials and additional opportunities for development.",
-        logos: [
+      stats: {
+        title: "TUT SCHOOL IN NUMBERS",
+        items: [
           {
-            src: "/placeholder.svg?height=100&width=200&text=Partner 1",
-            alt: "Partner 1 Logo",
+            number: "14",
+            label: "Years of Experience",
           },
           {
-            src: "/placeholder.svg?height=100&width=200&text=Partner 2",
-            alt: "Partner 2 Logo",
+            number: "30+",
+            label: "Professional Teachers",
           },
           {
-            src: "/placeholder.svg?height=100&width=200&text=Partner 3",
-            alt: "Partner 3 Logo",
+            number: "1500+",
+            label: "Students Annually",
           },
           {
-            src: "/placeholder.svg?height=100&width=200&text=Partner 4",
-            alt: "Partner 4 Logo",
+            number: "15+",
+            label: "Language Programs",
           },
         ],
       },
       cta: {
-        title: "JOIN US",
-        description:
-          "Become part of our friendly community and start your journey to new knowledge and skills. We will help you achieve your goals in language learning and creative development.",
+        title: "BECOME PART OF OUR COMMUNITY",
+        description: "Sign up for a trial lesson and see the quality of our teaching for yourself",
         button: "Book a Trial Lesson",
       },
       footer: {
@@ -644,25 +543,10 @@ export default function AboutUs() {
     setMobileMenuOpen(!mobileMenuOpen)
   }
 
-  // Function to check if element should be animated based on scroll position
-  const shouldAnimate = (elementId: string): boolean => {
-    const element = document.getElementById(elementId)
-    if (!element) return false
-
-    const rect = element.getBoundingClientRect()
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight
-
-    // Element is considered in view when its top is below 20% of the window height
-    // and its bottom is above 80% of the window height
-    return rect.top < windowHeight * 0.8 && rect.bottom > windowHeight * 0.2
-  }
-
   return (
     <div className="flex min-h-screen flex-col">
       {/* Top Bar */}
-      <div
-        className={`bg-primary/90 py-2 text-white transition-all duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}
-      >
+      <div className="bg-primary/90 py-2 text-white">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
@@ -687,7 +571,7 @@ export default function AboutUs() {
             </div>
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1 rounded-md border border-white/30 px-2 py-1 text-sm hover:bg-white/10 transition-colors duration-300"
+              className="flex items-center gap-1 rounded-md border border-white/30 px-2 py-1 text-sm hover:bg-white/10"
             >
               <Globe className="h-4 w-4" />
               {t.languageToggle}
@@ -697,14 +581,12 @@ export default function AboutUs() {
       </div>
 
       {/* Header */}
-      <header
-        className={`border-b bg-white py-4 shadow-sm sticky top-0 z-50 transition-all duration-500 ${isLoaded ? "translate-y-0" : "-translate-y-full"}`}
-      >
+      <header className="border-b bg-white py-4 shadow-sm sticky top-0 z-50">
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-14 w-14 animate-pulse-slow">
+            <div className="relative h-14 w-14">
               <Image
-                src="/logo.png"
+                src="/placeholder.svg?height=56&width=56"
                 alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                 fill
                 className="object-contain"
@@ -715,6 +597,7 @@ export default function AboutUs() {
               <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
             </div>
           </div>
+
           {/* Desktop Navigation */}
           <nav className="hidden md:block">
             <ul className="flex gap-6">
@@ -724,7 +607,7 @@ export default function AboutUs() {
                 </Link>
               </li>
               <li>
-                <Link href="/about-us" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/about-us" className="text-sm font-medium text-primary">
                   {t.nav.about}
                 </Link>
               </li>
@@ -734,8 +617,18 @@ export default function AboutUs() {
                 </Link>
               </li>
               <li>
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
+                </Link>
+              </li>
+              <li>
                 <Link href="/admissions" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.admissions}
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials-simple" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.testimonials}
                 </Link>
               </li>
               <li>
@@ -744,17 +637,7 @@ export default function AboutUs() {
                 </Link>
               </li>
               <li>
-                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.schedule}
-                </Link>
-              </li>
-              <li>
-                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.testimonials}
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sm font-medium text-primary hover:text-primary/80">
+                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.contacts}
                 </Link>
               </li>
@@ -789,7 +672,7 @@ export default function AboutUs() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about-us" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/about-us" className="block py-2 text-sm font-medium text-primary">
                     {t.nav.about}
                   </Link>
                 </li>
@@ -799,8 +682,21 @@ export default function AboutUs() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.schedule}
+                  </Link>
+                </li>
+                <li>
                   <Link href="/admissions" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.admissions}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/testimonials-simple"
+                    className="block py-2 text-sm font-medium text-gray-700 hover:text-primary"
+                  >
+                    {t.nav.testimonials}
                   </Link>
                 </li>
                 <li>
@@ -809,17 +705,7 @@ export default function AboutUs() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.schedule}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.testimonials}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
+                  <Link href="/contact" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.contacts}
                   </Link>
                 </li>
@@ -838,339 +724,239 @@ export default function AboutUs() {
       )}
 
       <main>
-        {/* Welcome Section */}
-        <section className="py-12" id="welcome-section">
-          <div className="container mx-auto px-4">
-            <div
-              className={`mx-auto max-w-3xl text-center transition-all duration-1000 ${
-                shouldAnimate("welcome-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
-              <h2 className="mb-6 text-3xl font-bold text-primary">{t.welcome.title}</h2>
-              <p className="text-lg text-gray-700">{t.welcome.description}</p>
+        {/* Hero Section */}
+        <section className="relative">
+          <div className="relative h-[300px] w-full">
+            <Image
+              src="/placeholder.svg?height=300&width=1600&text=About Us"
+              alt={language === "ru" ? "О нас Tut School" : "About Tut School"}
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
+            <div className="absolute inset-0 flex flex-col items-start justify-center px-4 text-white md:px-12 lg:px-20">
+              <div className="max-w-2xl">
+                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl">{t.hero.title}</h2>
+                <p className="text-lg md:text-xl">{t.hero.subtitle}</p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Tabs Navigation */}
-        <section className="border-b border-t bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-wrap justify-center">
-              <button
-                onClick={() => setActiveTab("mission")}
-                className={`px-6 py-4 text-sm font-medium transition-colors ${
-                  activeTab === "mission"
-                    ? "border-b-2 border-primary text-primary"
-                    : "text-gray-600 hover:text-primary"
-                }`}
-              >
-                {t.tabs.mission}
-              </button>
-              <button
-                onClick={() => setActiveTab("team")}
-                className={`px-6 py-4 text-sm font-medium transition-colors ${
-                  activeTab === "team" ? "border-b-2 border-primary text-primary" : "text-gray-600 hover:text-primary"
-                }`}
-              >
-                {t.tabs.team}
-              </button>
-              <button
-                onClick={() => setActiveTab("facilities")}
-                className={`px-6 py-4 text-sm font-medium transition-colors ${
-                  activeTab === "facilities"
-                    ? "border-b-2 border-primary text-primary"
-                    : "text-gray-600 hover:text-primary"
-                }`}
-              >
-                {t.tabs.facilities}
-              </button>
-              <button
-                onClick={() => setActiveTab("achievements")}
-                className={`px-6 py-4 text-sm font-medium transition-colors ${
-                  activeTab === "achievements"
-                    ? "border-b-2 border-primary text-primary"
-                    : "text-gray-600 hover:text-primary"
-                }`}
-              >
-                {t.tabs.achievements}
-              </button>
+        {/* Breadcrumbs */}
+        <div className="border-b bg-gray-50">
+          <div className="container mx-auto px-4 py-3">
+            <div className="flex items-center gap-2 text-sm text-gray-500">
+              <Link href="/" className="hover:text-primary hover:underline">
+                {t.breadcrumbs.home}
+              </Link>
+              <ChevronRight className="h-4 w-4" />
+              <span className="text-gray-700">{t.breadcrumbs.about}</span>
             </div>
           </div>
-        </section>
-
-        {/* Tab Content */}
-        <div className="py-12">
-          {/* Mission & Values Tab */}
-          {activeTab === "mission" && (
-            <div className="container mx-auto px-4" id="mission-tab">
-              <div className="mx-auto max-w-4xl">
-                <h2
-                  className={`mb-6 text-center text-3xl font-bold text-primary transition-all duration-1000 ${
-                    shouldAnimate("mission-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                >
-                  {t.mission.title}
-                </h2>
-                <p
-                  className={`mb-12 text-center text-lg text-gray-700 transition-all duration-1000 delay-300 ${
-                    shouldAnimate("mission-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                >
-                  {t.mission.description}
-                </p>
-
-                {/* Values */}
-                <div className="mb-16 grid gap-6 md:grid-cols-2">
-                  {t.mission.values.map((value, index) => (
-                    <div
-                      key={index}
-                      className={`rounded-lg bg-white p-6 shadow-md transition-all duration-1000 hover:shadow-lg hover:translate-y-[-5px] ${
-                        shouldAnimate("mission-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                      }`}
-                      style={{ transitionDelay: `${index * 200 + 500}ms` }}
-                    >
-                      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary animate-float">
-                        {index === 0 && <User className="h-6 w-6" />}
-                        {index === 1 && <Award className="h-6 w-6" />}
-                        {index === 2 && <BookOpen className="h-6 w-6" />}
-                        {index === 3 && <Users className="h-6 w-6" />}
-                      </div>
-                      <h3 className="mb-3 text-xl font-bold">{value.title}</h3>
-                      <p className="text-gray-600">{value.description}</p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* History */}
-                <div
-                  className={`rounded-lg bg-gray-50 p-8 transition-all duration-1000 delay-700 ${
-                    shouldAnimate("mission-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                >
-                  <h3 className="mb-6 text-center text-2xl font-bold text-primary">{t.mission.history.title}</h3>
-                  <div className="space-y-4">
-                    {t.mission.history.paragraphs.map((paragraph, index) => (
-                      <p key={index} className="text-gray-700">
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Team Tab */}
-          {activeTab === "team" && (
-            <div className="container mx-auto px-4" id="team-tab">
-              <div className="mx-auto max-w-4xl">
-                <h2
-                  className={`mb-6 text-center text-3xl font-bold text-primary transition-all duration-1000 ${
-                    shouldAnimate("team-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                >
-                  {t.team.title}
-                </h2>
-                <p
-                  className={`mb-12 text-center text-lg text-gray-700 transition-all duration-1000 delay-300 ${
-                    shouldAnimate("team-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                >
-                  {t.team.description}
-                </p>
-
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  {t.team.members.map((member, index) => (
-                    <div
-                      key={index}
-                      className={`rounded-lg bg-white p-6 shadow-md transition-all duration-1000 hover:shadow-lg hover:translate-y-[-5px] ${
-                        shouldAnimate("team-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                      }`}
-                      style={{ transitionDelay: `${index * 200 + 500}ms` }}
-                    >
-                      <div className="mb-4 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-primary/10 mx-auto animate-pulse-slow">
-                        <User className="h-12 w-12 text-primary" />
-                      </div>
-                      <h3 className="mb-1 text-center text-xl font-bold">{member.name}</h3>
-                      <p className="mb-2 text-center text-sm text-primary">{member.position}</p>
-                      <p className="mb-4 text-center text-xs text-gray-500">{member.credentials}</p>
-                      <p className="text-gray-600">{member.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Facilities Tab */}
-          {activeTab === "facilities" && (
-            <div className="container mx-auto px-4" id="facilities-tab">
-              <div className="mx-auto max-w-4xl">
-                <h2
-                  className={`mb-6 text-center text-3xl font-bold text-primary transition-all duration-1000 ${
-                    shouldAnimate("facilities-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                >
-                  {t.facilities.title}
-                </h2>
-                <p
-                  className={`mb-12 text-center text-lg text-gray-700 transition-all duration-1000 delay-300 ${
-                    shouldAnimate("facilities-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                >
-                  {t.facilities.description}
-                </p>
-
-                {/* Features */}
-                <div className="mb-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {t.facilities.features.map((feature, index) => (
-                    <div
-                      key={index}
-                      className={`rounded-lg bg-white p-6 shadow-md transition-all duration-1000 hover:shadow-lg hover:translate-y-[-5px] ${
-                        shouldAnimate("facilities-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                      }`}
-                      style={{ transitionDelay: `${index * 200 + 500}ms` }}
-                    >
-                      <h3 className="mb-3 text-xl font-bold">{feature.title}</h3>
-                      <p className="text-gray-600">{feature.description}</p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Gallery */}
-                <div
-                  className={`transition-all duration-1000 delay-700 ${
-                    shouldAnimate("facilities-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                >
-                  <h3 className="mb-6 text-center text-2xl font-bold text-primary">{t.facilities.gallery.title}</h3>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {t.facilities.gallery.images.map((image, index) => (
-                      <div key={index} className="overflow-hidden rounded-lg shadow-md group">
-                        <div className="relative h-48">
-                          <Image
-                            src={image.src || "/placeholder.svg"}
-                            alt={image.alt}
-                            fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-110"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Achievements Tab */}
-          {activeTab === "achievements" && (
-            <div className="container mx-auto px-4" id="achievements-tab">
-              <div className="mx-auto max-w-4xl">
-                <h2
-                  className={`mb-6 text-center text-3xl font-bold text-primary transition-all duration-1000 ${
-                    shouldAnimate("achievements-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                >
-                  {t.achievements.title}
-                </h2>
-                <p
-                  className={`mb-12 text-center text-lg text-gray-700 transition-all duration-1000 delay-300 ${
-                    shouldAnimate("achievements-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                >
-                  {t.achievements.description}
-                </p>
-
-                {/* Stats */}
-                <div className="mb-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                  {t.achievements.stats.map((stat, index) => (
-                    <div
-                      key={index}
-                      className={`rounded-lg bg-primary p-6 text-center text-white shadow-md transition-all duration-1000 hover:shadow-lg ${
-                        shouldAnimate("achievements-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                      }`}
-                      style={{ transitionDelay: `${index * 200 + 500}ms` }}
-                    >
-                      <div className="mb-2 text-4xl font-bold animate-pulse-slow">{stat.number}</div>
-                      <div className="text-sm">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Achievements List */}
-                <div className="mb-16 grid gap-6 md:grid-cols-2">
-                  {t.achievements.items.map((item, index) => (
-                    <div
-                      key={index}
-                      className={`rounded-lg bg-white p-6 shadow-md transition-all duration-1000 hover:shadow-lg hover:translate-y-[-5px] ${
-                        shouldAnimate("achievements-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                      }`}
-                      style={{ transitionDelay: `${index * 200 + 900}ms` }}
-                    >
-                      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary animate-float">
-                        <Award className="h-6 w-6" />
-                      </div>
-                      <h3 className="mb-3 text-xl font-bold">{item.title}</h3>
-                      <p className="text-gray-600">{item.description}</p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Certificates */}
-                <div
-                  className={`rounded-lg bg-gray-50 p-8 transition-all duration-1000 delay-1200 ${
-                    shouldAnimate("achievements-tab") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                  }`}
-                >
-                  <h3 className="mb-6 text-center text-2xl font-bold text-primary">
-                    {t.achievements.certificates.title}
-                  </h3>
-                  <div className="grid gap-4 md:grid-cols-2">
-                    {t.achievements.certificates.items.map((item, index) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
 
-        {/* Partners Section */}
-        <section className="bg-gray-50 py-16" id="partners-section">
+        {/* Welcome Section */}
+        <section className="py-16">
           <div className="container mx-auto px-4">
-            <h2
-              className={`mb-2 text-center text-3xl font-bold text-primary transition-all duration-1000 ${
-                shouldAnimate("partners-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
-              {t.partners.title}
-            </h2>
-            <div
-              className={`mx-auto mb-8 h-1 w-20 bg-primary transition-all duration-1000 delay-300 ${
-                shouldAnimate("partners-section") ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
-              }`}
-            ></div>
-            <p
-              className={`mx-auto mb-12 max-w-3xl text-center text-lg text-gray-700 transition-all duration-1000 delay-500 ${
-                shouldAnimate("partners-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
-              {t.partners.description}
-            </p>
-            <div
-              className={`flex flex-wrap justify-center gap-8 transition-all duration-1000 delay-700 ${
-                shouldAnimate("partners-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
-              {t.partners.logos.map((logo, index) => (
-                <div key={index} className="relative h-24 w-48 transition-transform duration-300 hover:scale-105">
-                  <Image src={logo.src || "/placeholder.svg"} alt={logo.alt} fill className="object-contain" />
+            <div className="grid gap-8 md:grid-cols-2 items-center">
+              <div>
+                <h2 className="mb-2 text-3xl font-bold text-primary">{t.welcome.title}</h2>
+                <div className="mb-6 h-1 w-20 bg-primary"></div>
+                <p className="mb-6 text-lg text-gray-700">{t.welcome.description}</p>
+                <div className="flex flex-wrap gap-4">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span className="text-gray-700">
+                      {language === "ru" ? "Профессиональные преподаватели" : "Professional teachers"}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span className="text-gray-700">
+                      {language === "ru" ? "Современные методики" : "Modern methodologies"}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span className="text-gray-700">
+                      {language === "ru" ? "Индивидуальный подход" : "Individual approach"}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span className="text-gray-700">
+                      {language === "ru" ? "Комфортная атмосфера" : "Comfortable atmosphere"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src={t.welcome.image || "/placeholder.svg"}
+                  alt={language === "ru" ? "Здание школы Tut School" : "Tut School Building"}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* History Section */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.history.title}</h2>
+            <div className="mx-auto mb-8 h-1 w-20 bg-primary"></div>
+            <p className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-700">{t.history.description}</p>
+
+            <div className="space-y-8">
+              {t.history.milestones.map((milestone, index) => (
+                <div key={index} className="rounded-lg bg-white p-6 shadow-md">
+                  <div className="flex flex-wrap items-center gap-4">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white text-xl font-bold">
+                      {milestone.year}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="mb-2 text-xl font-bold text-gray-800">{milestone.title}</h3>
+                      <p className="text-gray-600">{milestone.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Mission and Values Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.mission.title}</h2>
+            <div className="mx-auto mb-8 h-1 w-20 bg-primary"></div>
+            <div className="mx-auto mb-12 max-w-3xl rounded-lg bg-primary/5 p-6 text-center">
+              <p className="text-xl font-medium text-gray-800">{t.mission.mission}</p>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {t.mission.values.map((value, index) => (
+                <div key={index} className="rounded-lg bg-white p-6 shadow-md hover:shadow-lg">
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    {value.icon === "Award" && <Award className="h-8 w-8" />}
+                    {value.icon === "User" && <User className="h-8 w-8" />}
+                    {value.icon === "BookOpen" && <BookOpen className="h-8 w-8" />}
+                    {value.icon === "Users" && <Users className="h-8 w-8" />}
+                  </div>
+                  <h3 className="mb-2 text-xl font-bold text-gray-800">{value.title}</h3>
+                  <p className="text-gray-600">{value.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Team Section */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.team.title}</h2>
+            <div className="mx-auto mb-8 h-1 w-20 bg-primary"></div>
+            <p className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-700">{t.team.description}</p>
+
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+              {t.team.members.map((member, index) => (
+                <div key={index} className="rounded-lg bg-white overflow-hidden shadow-md hover:shadow-lg">
+                  <div className="relative h-64 w-full">
+                    <Image src={member.image || "/placeholder.svg"} alt={member.name} fill className="object-cover" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="mb-1 text-xl font-bold text-gray-800">{member.name}</h3>
+                    <p className="mb-4 text-sm font-medium text-primary">{member.role}</p>
+                    <p className="text-gray-600">{member.bio}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Facilities Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.facilities.title}</h2>
+            <div className="mx-auto mb-8 h-1 w-20 bg-primary"></div>
+            <p className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-700">{t.facilities.description}</p>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {t.facilities.items.map((facility, index) => (
+                <div key={index} className="rounded-lg bg-white p-6 shadow-md hover:shadow-lg">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    {facility.icon === "School" && <School className="h-6 w-6" />}
+                    {facility.icon === "Headphones" && <div className="h-6 w-6">🎧</div>}
+                    {facility.icon === "Theater" && <div className="h-6 w-6">🎭</div>}
+                    {facility.icon === "BookOpen" && <BookOpen className="h-6 w-6" />}
+                    {facility.icon === "Coffee" && <div className="h-6 w-6">☕</div>}
+                  </div>
+                  <h3 className="mb-2 text-lg font-bold text-gray-800">{facility.title}</h3>
+                  <p className="text-gray-600">{facility.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Methodology Section */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.methodology.title}</h2>
+            <div className="mx-auto mb-8 h-1 w-20 bg-primary"></div>
+            <p className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-700">{t.methodology.description}</p>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {t.methodology.features.map((feature, index) => (
+                <div key={index} className="rounded-lg bg-white p-6 shadow-md hover:shadow-lg">
+                  <div className="mb-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white text-lg font-bold">
+                    {index + 1}
+                  </div>
+                  <h3 className="mb-2 text-lg font-bold text-gray-800">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Accreditations Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.accreditations.title}</h2>
+            <div className="mx-auto mb-8 h-1 w-20 bg-primary"></div>
+            <p className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-700">{t.accreditations.description}</p>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              {t.accreditations.items.map((item, index) => (
+                <div key={index} className="rounded-lg bg-white p-6 shadow-md hover:shadow-lg">
+                  <div className="mb-4 flex items-center gap-4">
+                    <Award className="h-10 w-10 text-primary" />
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-800">{item.title}</h3>
+                      <p className="text-sm text-gray-500">{item.issuer}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Stats Section */}
+        <section className="py-12 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="mb-12 text-center text-3xl font-bold text-primary">{t.stats.title}</h2>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {t.stats.items.map((stat, index) => (
+                <div key={index} className="rounded-lg bg-white p-6 text-center shadow-md hover:shadow-lg">
+                  <div className="mb-2 text-4xl font-bold text-primary">{stat.number}</div>
+                  <div className="text-sm text-gray-600">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -1178,13 +964,9 @@ export default function AboutUs() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16" id="cta-section">
+        <section className="py-16">
           <div className="container mx-auto px-4">
-            <div
-              className={`overflow-hidden rounded-xl bg-primary shadow-xl transition-all duration-1000 hover:scale-[1.01] ${
-                shouldAnimate("cta-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
+            <div className="overflow-hidden rounded-xl bg-primary shadow-xl">
               <div className="relative">
                 <div className="absolute inset-0">
                   <Image
@@ -1195,16 +977,14 @@ export default function AboutUs() {
                   />
                 </div>
                 <div className="relative px-8 py-16 text-center text-white md:px-12 lg:px-16">
-                  <h2 className="mb-4 text-3xl font-bold md:text-4xl animate-fade-in">{t.cta.title}</h2>
-                  <p className="mx-auto mb-8 max-w-2xl text-lg animate-fade-in animation-delay-300">
-                    {t.cta.description}
-                  </p>
+                  <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t.cta.title}</h2>
+                  <p className="mx-auto mb-8 max-w-2xl text-lg">{t.cta.description}</p>
                   <Link
                     href="#"
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary transition-all duration-300 hover:bg-gray-100 hover:gap-3 hover:shadow-lg animate-fade-in animation-delay-600"
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary hover:bg-gray-100"
                   >
                     {t.cta.button}
-                    <ArrowRight className="h-4 w-4 animate-bounce-horizontal" />
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </div>
