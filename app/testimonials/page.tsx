@@ -459,7 +459,9 @@ export default function TestimonialsSimple() {
                 <Star className="h-4 w-4 fill-current" />
                 <Star className="h-4 w-4 fill-current stroke-yellow-300" />
               </div>
+              <a href="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=routes&rtext=~55.894611%2C37.374147&rtt=auto&ruri=~&z=17">
               <span className="text-sm">{t.rating}</span>
+              </a>
             </div>
             <button
               onClick={toggleLanguage}
@@ -477,12 +479,14 @@ export default function TestimonialsSimple() {
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
             <div className="relative h-14 w-14">
+              <Link href="/">
               <Image
-                src="/placeholder.svg?height=56&width=56"
+                src="/logo.png?height=56&width=56"
                 alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                 fill
                 className="object-contain"
               />
+              </Link>
             </div>
             <div>
               <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
@@ -491,7 +495,8 @@ export default function TestimonialsSimple() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:block">
+                 {/* Desktop Navigation */}
+                 <nav className="hidden md:block">
             <ul className="flex gap-6">
               <li>
                 <Link href="/" className="text-sm font-medium text-gray-700 hover:text-primary">
@@ -509,18 +514,8 @@ export default function TestimonialsSimple() {
                 </Link>
               </li>
               <li>
-                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.schedule}
-                </Link>
-              </li>
-              <li>
                 <Link href="/admissions" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.admissions}
-                </Link>
-              </li>
-              <li>
-                <Link href="/testimonials-simple" className="text-sm font-medium text-primary">
-                  {t.nav.testimonials}
                 </Link>
               </li>
               <li>
@@ -529,7 +524,17 @@ export default function TestimonialsSimple() {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.testimonials}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-primary hover:text-primary/80">
                   {t.nav.contacts}
                 </Link>
               </li>
@@ -574,18 +579,8 @@ export default function TestimonialsSimple() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.schedule}
-                  </Link>
-                </li>
-                <li>
                   <Link href="/admissions" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.admissions}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/testimonials-simple" className="block py-2 text-sm font-medium text-primary">
-                    {t.nav.testimonials}
                   </Link>
                 </li>
                 <li>
@@ -594,7 +589,17 @@ export default function TestimonialsSimple() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.schedule}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.testimonials}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
                     {t.nav.contacts}
                   </Link>
                 </li>
@@ -613,39 +618,6 @@ export default function TestimonialsSimple() {
       )}
 
       <main>
-        {/* Hero Section */}
-        <section className="relative">
-          <div className="relative h-[300px] w-full">
-            <Image
-              src="/placeholder.svg?height=300&width=1600&text=Testimonials"
-              alt={language === "ru" ? "Отзывы Tut School" : "Tut School Testimonials"}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
-            <div className="absolute inset-0 flex flex-col items-start justify-center px-4 text-white md:px-12 lg:px-20">
-              <div className="max-w-2xl">
-                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl">{t.hero.title}</h2>
-                <p className="text-lg md:text-xl">{t.hero.subtitle}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Breadcrumbs */}
-        <div className="border-b bg-gray-50">
-          <div className="container mx-auto px-4 py-3">
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <Link href="/" className="hover:text-primary hover:underline">
-                {t.breadcrumbs.home}
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-gray-700">{t.breadcrumbs.testimonials}</span>
-            </div>
-          </div>
-        </div>
-
         {/* Stats Section */}
         <section className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
@@ -845,87 +817,6 @@ export default function TestimonialsSimple() {
           </div>
         </section>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 py-12 text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
-            <div>
-              <div className="flex items-center gap-3">
-                <div className="relative h-12 w-12 rounded-full bg-white p-2">
-                  <Image
-                    src="/placeholder.svg?height=48&width=48"
-                    alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold">{t.schoolName}</h3>
-                  <p className="text-sm text-gray-400">{t.schoolSubtitle}</p>
-                </div>
-              </div>
-              <p className="mt-4 text-gray-400">
-                {language === "ru"
-                  ? "Школа иностранных языков и искусств для детей и взрослых. Мы помогаем нашим студентам достигать своих целей в изучении языков и творческом развитии."
-                  : "School of foreign languages and arts for children and adults. We help our students achieve their goals in language learning and creative development."}
-              </p>
-            </div>
-            <div>
-              <h3 className="mb-4 text-lg font-bold">{t.footer.quickLinks}</h3>
-              <ul className="space-y-2">
-                {t.footer.links.map((link, index) => (
-                  <li key={index}>
-                    <Link href="#" className="text-gray-400 hover:text-white">
-                      {link}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-4 text-lg font-bold">{t.footer.contacts}</h3>
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-gray-400" />
-                  <span>{t.phone}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-gray-400" />
-                  <span>{t.email}</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <MapPin className="h-4 w-4 flex-shrink-0 text-gray-400" />
-                  <span className="text-sm">{t.address}</span>
-                </div>
-              </div>
-              <h3 className="mb-2 mt-6 text-lg font-bold">{t.footer.workingHours.title}</h3>
-              <div className="space-y-1 text-sm text-gray-400">
-                <p>{t.footer.workingHours.weekdays}</p>
-                <p>{t.footer.workingHours.saturday}</p>
-                <p>{t.footer.workingHours.sunday}</p>
-              </div>
-            </div>
-            <div>
-              <h3 className="mb-4 text-lg font-bold">{t.footer.socialMedia}</h3>
-              <div className="flex gap-3">
-                <Link href="#" className="rounded-full bg-gray-700 p-2 hover:bg-primary">
-                  <Facebook className="h-5 w-5" />
-                </Link>
-                <Link href="#" className="rounded-full bg-gray-700 p-2 hover:bg-primary">
-                  <Instagram className="h-5 w-5" />
-                </Link>
-                <Link href="#" className="rounded-full bg-gray-700 p-2 hover:bg-primary">
-                  <Twitter className="h-5 w-5" />
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-            <p>{t.footer.copyright}</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }

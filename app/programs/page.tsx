@@ -765,7 +765,9 @@ export default function Programs() {
                 <Star className="h-4 w-4 fill-current" />
                 <Star className="h-4 w-4 fill-current stroke-yellow-300" />
               </div>
+              <a href="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=routes&rtext=~55.894611%2C37.374147&rtt=auto&ruri=~&z=17">
               <span className="text-sm">{t.rating}</span>
+              </a>
             </div>
             <button
               onClick={toggleLanguage}
@@ -782,12 +784,14 @@ export default function Programs() {
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
             <div className="relative h-14 w-14">
+              <Link href="/">
               <Image
-                src="/logo.png"
+                src="/logo.png?height=56&width=56"
                 alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                 fill
                 className="object-contain"
               />
+              </Link>
             </div>
             <div>
               <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>

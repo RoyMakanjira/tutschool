@@ -441,7 +441,9 @@ export default function Home() {
                 <Star className="h-4 w-4 fill-current" />
                 <Star className="h-4 w-4 fill-current stroke-yellow-300" />
               </div>
+              <a href="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=routes&rtext=~55.894611%2C37.374147&rtt=auto&ruri=~&z=17">
               <span className="text-sm">{t.rating}</span>
+              </a>
             </div>
             <button
               onClick={toggleLanguage}
@@ -461,12 +463,14 @@ export default function Home() {
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
             <div className="relative h-14 w-14 animate-pulse-slow">
+              <Link href="/" >
               <Image
                 src="/logo.png"
                 alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                 fill
                 className="object-contain"
               />
+              </Link>
             </div>
             <div>
               <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
@@ -863,7 +867,7 @@ export default function Home() {
                 {t.contact.phone}
               </Link>
               <Link
-                href="#"
+                href="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=routes&rtext=~55.894611%2C37.374147&rtt=auto&ruri=~&z=17"
                 className="flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-white transition-all hover:bg-blue-600 hover:translate-y-[-3px] hover:shadow-md"
               >
                 <Navigation className="h-5 w-5" />
@@ -877,14 +881,14 @@ export default function Home() {
                 {t.contact.write}
               </Link>
               <Link
-                href="#"
+                href="https://t.me/TUTschoolNovogorsk"
                 className="flex items-center gap-2 rounded-md bg-blue-400 px-4 py-2 text-white transition-all hover:bg-blue-500 hover:translate-y-[-3px] hover:shadow-md"
               >
                 <Send className="h-5 w-5" />
                 {t.contact.telegram}
               </Link>
               <Link
-                href="#"
+                href="https://api.whatsapp.com/send/?phone=%2B79167349246&text&type=phone_number&app_absent=0"
                 className="flex items-center gap-2 rounded-md bg-green-500 px-4 py-2 text-white transition-all hover:bg-green-600 hover:translate-y-[-3px] hover:shadow-md"
               >
                 <MessageSquare className="h-5 w-5" />

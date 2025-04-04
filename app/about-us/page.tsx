@@ -60,7 +60,7 @@ export default function AboutUs() {
         title: "ДОБРО ПОЖАЛОВАТЬ В TUT SCHOOL",
         description:
           "Tut School — это современная школа иностранных языков и искусств, где каждый студент получает индивидуальный подход и возможность раскрыть свой потенциал. Мы сочетаем традиционные методики обучения с инновационными подходами, чтобы сделать процесс обучения максимально эффективным и увлекательным.",
-        image: "/placeholder.svg?height=400&width=600&text=School Building",
+        image: "/assets/gallery/reception.webp?height=400&width=600&text=School Building",
       },
       history: {
         title: "НАША ИСТОРИЯ",
@@ -567,7 +567,9 @@ export default function AboutUs() {
                 <Star className="h-4 w-4 fill-current" />
                 <Star className="h-4 w-4 fill-current stroke-yellow-300" />
               </div>
+              <a href="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=routes&rtext=~55.894611%2C37.374147&rtt=auto&ruri=~&z=17">
               <span className="text-sm">{t.rating}</span>
+              </a>
             </div>
             <button
               onClick={toggleLanguage}
@@ -585,12 +587,14 @@ export default function AboutUs() {
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
             <div className="relative h-14 w-14">
+              <Link href="/">
               <Image
-                src="/placeholder.svg?height=56&width=56"
+                src="/logo.png?height=56&width=56"
                 alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                 fill
                 className="object-contain"
               />
+              </Link> 
             </div>
             <div>
               <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
@@ -599,7 +603,8 @@ export default function AboutUs() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:block">
+               {/* Desktop Navigation */}
+               <nav className="hidden md:block">
             <ul className="flex gap-6">
               <li>
                 <Link href="/" className="text-sm font-medium text-gray-700 hover:text-primary">
@@ -607,7 +612,7 @@ export default function AboutUs() {
                 </Link>
               </li>
               <li>
-                <Link href="/about-us" className="text-sm font-medium text-primary">
+                <Link href="/about-us" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.about}
                 </Link>
               </li>
@@ -617,18 +622,8 @@ export default function AboutUs() {
                 </Link>
               </li>
               <li>
-                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.schedule}
-                </Link>
-              </li>
-              <li>
                 <Link href="/admissions" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.admissions}
-                </Link>
-              </li>
-              <li>
-                <Link href="/testimonials-simple" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.testimonials}
                 </Link>
               </li>
               <li>
@@ -637,7 +632,17 @@ export default function AboutUs() {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.testimonials}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-primary hover:text-primary/80">
                   {t.nav.contacts}
                 </Link>
               </li>
@@ -672,7 +677,7 @@ export default function AboutUs() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about-us" className="block py-2 text-sm font-medium text-primary">
+                  <Link href="/about-us" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.about}
                   </Link>
                 </li>
@@ -682,21 +687,8 @@ export default function AboutUs() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.schedule}
-                  </Link>
-                </li>
-                <li>
                   <Link href="/admissions" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                     {t.nav.admissions}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/testimonials-simple"
-                    className="block py-2 text-sm font-medium text-gray-700 hover:text-primary"
-                  >
-                    {t.nav.testimonials}
                   </Link>
                 </li>
                 <li>
@@ -705,7 +697,17 @@ export default function AboutUs() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.schedule}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                    {t.nav.testimonials}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
                     {t.nav.contacts}
                   </Link>
                 </li>
@@ -724,38 +726,6 @@ export default function AboutUs() {
       )}
 
       <main>
-        {/* Hero Section */}
-        <section className="relative">
-          <div className="relative h-[300px] w-full">
-            <Image
-              src="/placeholder.svg?height=300&width=1600&text=About Us"
-              alt={language === "ru" ? "О нас Tut School" : "About Tut School"}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
-            <div className="absolute inset-0 flex flex-col items-start justify-center px-4 text-white md:px-12 lg:px-20">
-              <div className="max-w-2xl">
-                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl">{t.hero.title}</h2>
-                <p className="text-lg md:text-xl">{t.hero.subtitle}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Breadcrumbs */}
-        <div className="border-b bg-gray-50">
-          <div className="container mx-auto px-4 py-3">
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <Link href="/" className="hover:text-primary hover:underline">
-                {t.breadcrumbs.home}
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-gray-700">{t.breadcrumbs.about}</span>
-            </div>
-          </div>
-        </div>
 
         {/* Welcome Section */}
         <section className="py-16">
@@ -866,7 +836,7 @@ export default function AboutUs() {
               {t.team.members.map((member, index) => (
                 <div key={index} className="rounded-lg bg-white overflow-hidden shadow-md hover:shadow-lg">
                   <div className="relative h-64 w-full">
-                    <Image src={member.image || "/placeholder.svg"} alt={member.name} fill className="object-cover" />
+                    <User className="h-100 w-100 justify-center"/>
                   </div>
                   <div className="p-6">
                     <h3 className="mb-1 text-xl font-bold text-gray-800">{member.name}</h3>

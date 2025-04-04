@@ -9,12 +9,8 @@ import {
   MapPin,
   Phone,
   Mail,
-  Facebook,
-  Instagram,
-  Twitter,
   Globe,
   Star,
-  ChevronRight,
   ArrowRight,
   Search,
   Menu,
@@ -309,7 +305,9 @@ export default function Contact() {
                 <Star className="h-4 w-4 fill-current" />
                 <Star className="h-4 w-4 fill-current stroke-yellow-300" />
               </div>
+              <a href="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=routes&rtext=~55.894611%2C37.374147&rtt=auto&ruri=~&z=17">
               <span className="text-sm">{t.rating}</span>
+              </a>
             </div>
             <button
               onClick={toggleLanguage}
@@ -327,12 +325,14 @@ export default function Contact() {
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
             <div className="relative h-14 w-14">
+              <Link href="/">
               <Image
-                src="/logo.png"
+                src="/logo.png?height=56&width=56"
                 alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                 fill
                 className="object-contain"
               />
+              </Link>
             </div>
             <div>
               <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
@@ -478,13 +478,29 @@ export default function Contact() {
                     <p>{t.address}</p>
                   </div>
                   <div className="mt-4 aspect-video w-full overflow-hidden rounded-lg">
-                    <Image
-                      src="/placeholder.svg?height=300&width=500&text=Map"
-                      alt="Map"
-                      width={500}
-                      height={300}
-                      className="h-full w-full object-cover"
-                    />
+                    <iframe
+                      src="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NTg5NDYxMRJc0KDQvtGB0YHQuNGPLCDQnNC-0YHQutC-0LLRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwg0KXQuNC80LrQuCwg0JfQsNGA0LXRh9C90LDRjyDRg9C70LjRhtCwLCA10YIyIgoNcSVeQhXKIUtC&z=17"
+                      width="100%"
+                      height="100%"
+                      frameBorder="0"
+                      style={{ border: 0 }}
+                      allowFullScreen={true}
+                      aria-hidden="false"
+                      tabIndex={0}
+                      title="Tut School Location"
+                      className="rounded-lg"
+                    ></iframe>
+                  </div>
+                  <div className="mt-2 text-center">
+                    <a
+                      href="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=routes&rtext=~55.894611%2C37.374147&rtt=auto&ruri=~&z=17"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-primary hover:underline flex items-center justify-center gap-1"
+                    >
+                      <Globe className="h-4 w-4" />
+                      {language === "ru" ? "Открыть карту в Яндекс" : "Open in Yandex Maps"}
+                    </a>
                   </div>
                 </div>
 
@@ -673,14 +689,6 @@ export default function Contact() {
                     {t.visit.cta}
                     <ArrowRight className="h-4 w-4" />
                   </Link>
-                </div>
-                <div className="relative h-[200px] overflow-hidden rounded-lg md:h-auto">
-                  <Image
-                    src="/placeholder.svg?height=300&width=400"
-                    alt="Tut School classroom"
-                    fill
-                    className="object-cover"
-                  />
                 </div>
               </div>
             </div>
