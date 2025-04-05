@@ -48,8 +48,8 @@ export default function Blog() {
         admissions: "ПОСТУПЛЕНИЕ",
         blog: "БЛОГ",
         contacts: "КОНТАКТЫ",
-        schedule: "ПОСТУПЛЕНИЕ",
-        testimonials: "ПОСТУПЛЕНИЕ",
+        schedule: "РАСПИСАНИЕ",
+        testimonials: "ОТЗЫВЫ",
       },
       hero: {
         title: "НАШ БЛОГ",

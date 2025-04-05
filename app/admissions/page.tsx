@@ -45,8 +45,8 @@ export default function Admissions() {
         admissions: "ПОСТУПЛЕНИЕ",
         blog: "БЛОГ",
         contacts: "КОНТАКТЫ",
-        schedule: "ПОСТУПЛЕНИЕ",
-        testimonials: "ПОСТУПЛЕНИЕ",
+        schedule: "РАСПИСАНИЕ",
+        testimonials: "ОТЗЫВЫ",
       },
       hero: {
         title: "ПОСТУПЛЕНИЕ",

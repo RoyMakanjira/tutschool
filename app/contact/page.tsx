@@ -49,8 +49,8 @@ export default function Contact() {
         admissions: "ПОСТУПЛЕНИЕ",
         blog: "БЛОГ",
         contacts: "КОНТАКТЫ",
-        schedule: "ПОСТУПЛЕНИЕ",
-        testimonials: "ПОСТУПЛЕНИЕ",
+        schedule: "РАСПИСАНИЕ",
+        testimonials: "ОТЗЫВЫ",
       },
       hero: {
         title: "СВЯЖИТЕСЬ С НАМИ",
