@@ -20,6 +20,7 @@ import {
   ChevronDown,
 } from "lucide-react"
 import { testimonials } from "@/constants"
+import YandexMap from "@/components/YandexMap"
 
 export default function Contact() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
@@ -478,18 +479,7 @@ export default function Contact() {
                     <p>{t.address}</p>
                   </div>
                   <div className="mt-4 aspect-video w-full overflow-hidden rounded-lg">
-                    <iframe
-                      src="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NTg5NDYxMRJc0KDQvtGB0YHQuNGPLCDQnNC-0YHQutC-0LLRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwg0KXQuNC80LrQuCwg0JfQsNGA0LXRh9C90LDRjyDRg9C70LjRhtCwLCA10YIyIgoNcSVeQhXKIUtC&z=17"
-                      width="100%"
-                      height="100%"
-                      frameBorder="0"
-                      style={{ border: 0 }}
-                      allowFullScreen={true}
-                      aria-hidden="false"
-                      tabIndex={0}
-                      title="Tut School Location"
-                      className="rounded-lg"
-                    ></iframe>
+                  <YandexMap />
                   </div>
                   <div className="mt-2 text-center">
                     <a
@@ -683,7 +673,7 @@ export default function Contact() {
                   <h2 className="mb-4 text-2xl font-bold">{t.visit.title}</h2>
                   <p className="mb-6">{t.visit.description}</p>
                   <Link
-                    href="#"
+                    href="/"
                     className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-medium text-primary transition-all hover:bg-gray-100 hover:gap-3"
                   >
                     {t.visit.cta}

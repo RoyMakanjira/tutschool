@@ -950,7 +950,7 @@ export default function AboutUs() {
                   <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t.cta.title}</h2>
                   <p className="mx-auto mb-8 max-w-2xl text-lg">{t.cta.description}</p>
                   <Link
-                    href="#"
+                    href="/bookings"
                     className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary hover:bg-gray-100"
                   >
                     {t.cta.button}

@@ -633,7 +633,7 @@ export default function Home() {
                 </h2>
                 <p className="mb-8 text-lg md:text-xl animate-fade-in-up animation-delay-300">{t.hero.subtitle}</p>
                 <Link
-                  href="#"
+                  href="/bookings"
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white transition-all hover:bg-primary/90 hover:gap-3 animate-fade-in-up animation-delay-600"
                 >
                   {t.hero.cta}
@@ -921,7 +921,7 @@ export default function Home() {
                   <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t.trial.title}</h2>
                   <p className="mx-auto mb-8 max-w-2xl text-lg">{t.trial.description}</p>
                   <Link
-                    href="#"
+                    href="/bookings"
                     className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary transition-all hover:bg-gray-100 hover:gap-3 hover:shadow-lg"
                   >
                     {t.trial.cta}

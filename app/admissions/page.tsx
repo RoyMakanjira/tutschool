@@ -994,7 +994,7 @@ export default function Admissions() {
                   <h2 className="mb-4 text-2xl font-bold text-primary">{t.visit.title}</h2>
                   <p className="mb-6 text-gray-700">{t.visit.description}</p>
                   <Link
-                    href="#"
+                    href="/contact"
                     className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white transition-all hover:bg-primary/90 hover:gap-3"
                   >
                     {t.visit.cta}
