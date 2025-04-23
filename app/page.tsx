@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { Card, CardHeader, CardTitle, CardContent,  } from "@/components/ui/card"
 import {
   MapPin,
   Phone,
@@ -150,7 +151,7 @@ export default function Home() {
           { title: "Каллиграфия", href: "/courses/calligraphy" },
         ],
         schedule: "РАСПИСАНИЕ",
-        prices: "ЦЕНЫ",
+        news: "Новости",
         blog: "БЛОГ",
         contacts: "КОНТАКТЫ",
       },
@@ -315,7 +316,7 @@ export default function Home() {
           { title: "Calligraphy", href: "/courses/calligraphy" },
         ],
         schedule: "SCHEDULE",
-        prices: "PRICES",
+        news: "NEWS",
         blog: "BLOG",
         contacts: "CONTACTS",
       },
@@ -477,6 +478,15 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Top Bar */}
+       {/* Promotional Banner */}
+       <div className="bg-primary/90 py-3 text-center text-white">
+        <div className="container mx-auto px-4">
+          <p className="flex items-center justify-center gap-2">
+            <Headphones className="h-5 w-5" />
+            <span>{t.promo}</span>
+          </p>
+        </div>
+      </div>
       <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
           <div className="flex flex-wrap items-center gap-4">
@@ -498,17 +508,15 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <a href="#" className="text-gray-600 hover:text-primary">
-              <Facebook className="h-4 w-4" />
+            
+            <a href="#" className="text-red-600 hover:text-primary">
+              <Image src="/assets/icons/vk.svg" alt="vk" width={20} height={20} />
             </a>
-            <a href="#" className="text-gray-600 hover:text-primary">
-              <Instagram className="h-4 w-4" />
+            <a href="#" className="text-red-600 hover:text-primary">
+            <Image src="/assets/icons/whatsapp.svg" alt="whatsapp" width={20} height={20} />
             </a>
-            <a href="#" className="text-gray-600 hover:text-primary">
-              <Telegram className="h-4 w-4" />
-            </a>
-            <a href="#" className="text-gray-600 hover:text-primary">
-              <Youtube className="h-4 w-4" />
+            <a href="#" className="text-red-600 hover:text-primary">
+            <Image src="/assets/icons/telegram-plane.svg" alt="telegram" width={20} height={20} />
             </a>
             <button
               onClick={toggleLanguage}
@@ -596,8 +604,8 @@ export default function Home() {
                 </Link>
               </li>
               <li>
-                <Link href="/prices" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.prices}
+                <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.news}
                 </Link>
               </li>
               <li>
@@ -615,7 +623,7 @@ export default function Home() {
 
           <div className="flex items-center gap-4">
             <Link
-              href="/booking"
+              href="/bookings"
               className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 md:block"
             >
               {t.hero.cta}
@@ -627,15 +635,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Promotional Banner */}
-      <div className="bg-primary/90 py-3 text-center text-white">
-        <div className="container mx-auto px-4">
-          <p className="flex items-center justify-center gap-2">
-            <Headphones className="h-5 w-5" />
-            <span>{t.promo}</span>
-          </p>
-        </div>
-      </div>
+     
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
@@ -695,8 +695,8 @@ export default function Home() {
               <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                 {t.nav.schedule}
               </Link>
-              <Link href="/prices" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                {t.nav.prices}
+              <Link href="/news" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                {t.nav.news}
               </Link>
               <Link href="/blog" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                 {t.nav.blog}
@@ -822,6 +822,14 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Values Section */}
+
+        <section className="py-16 px-4 md:px-6 bg-white">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-playfair font-bold text-center mb-12">Our Values</h2>
+      </div>
+    </section>
 
         {/* Advantages Section */}
         <section className="bg-gray-50 py-16">
@@ -1013,7 +1021,7 @@ export default function Home() {
                   <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t.trial.title}</h2>
                   <p className="mx-auto mb-8 max-w-2xl text-lg">{t.trial.description}</p>
                   <Link
-                    href="/booking"
+                    href="/bookings"
                     className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary transition-all hover:bg-gray-100 hover:gap-3"
                   >
                     {t.trial.cta}
