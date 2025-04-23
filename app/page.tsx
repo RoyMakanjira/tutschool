@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Card, CardHeader, CardTitle, CardContent,  } from "@/components/ui/card"
+import ValuesSectionCard from "@/components/ValuesSectionCard"
 import {
   MapPin,
   Phone,
@@ -27,6 +27,7 @@ import {
   ChevronLeft, Youtube,
   Headphones,
 } from "lucide-react"
+import PromotionalBanner from "@/components/PromotionalBanner"
 
 export default function Home() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
@@ -479,14 +480,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       {/* Top Bar */}
        {/* Promotional Banner */}
-       <div className="bg-primary/90 py-3 text-center text-white">
-        <div className="container mx-auto px-4">
-          <p className="flex items-center justify-center gap-2">
-            <Headphones className="h-5 w-5" />
-            <span>{t.promo}</span>
-          </p>
-        </div>
-      </div>
+       <PromotionalBanner />
       <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
           <div className="flex flex-wrap items-center gap-4">
@@ -825,11 +819,8 @@ export default function Home() {
 
         {/* Values Section */}
 
-        <section className="py-16 px-4 md:px-6 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-playfair font-bold text-center mb-12">Our Values</h2>
-      </div>
-    </section>
+        <ValuesSectionCard language={language} />
+  
 
         {/* Advantages Section */}
         <section className="bg-gray-50 py-16">
