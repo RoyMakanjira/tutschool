@@ -64,7 +64,7 @@ export default function Home() {
   }, [])
 
   const heroImages = [
-    "/assets/slider/Slider-Image-1.jpg?height=600&width=1600&text=Students in classroom",
+    "/assets/slider/Slider-image-1.jpg?height=600&width=1600&text=Students in classroom",
     "/assets/slider/Slider-Image-2.jpg?height=600&width=1600&text=Language Learning",
     "/assets/slider/Slider-image-3.jpg?height=600&width=1600&text=Arts and Creativity",
     "/assets/slider/Slider-image-4.jpg?heitht=600&width=1600&text=School Events",
