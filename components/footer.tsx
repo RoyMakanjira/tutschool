@@ -136,6 +136,9 @@ export default function TestimonialsSimple() {
            <div className="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
              <p>{t.footer.copyright}</p>
            </div>
+           <div className="mt-4 pt-4 text-center text-sm text-gray-400">
+             <a href="https://floatycodepins.com">Designed by Noir Sfera</a>
+           </div>
          </div>
        </footer>
       

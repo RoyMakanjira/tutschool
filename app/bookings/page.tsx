@@ -3,7 +3,8 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Calendar, Clock, Users, MessageSquare, Phone, Mail, User, Check, AlertCircle, Loader2 } from "lucide-react"
-import { createBooking, type BookingResponse } from "@/configs/booking-actions"
+import { BookingResponse } from "../api/bookings/route"
+
 
 export default function BookingPage() {
   const router = useRouter()
@@ -20,25 +21,6 @@ export default function BookingPage() {
     "Консультация",
   ]
 
-  async function handleSubmit(formData: FormData) {
-    setIsSubmitting(true)
-    try {
-      const result = await createBooking(formData)
-      setResponse(result)
-      if (result.success) {
-        // Reset form on success
-        const form = document.getElementById("booking-form") as HTMLFormElement
-        form.reset()
-      }
-    } catch (error) {
-      setResponse({
-        success: false,
-        message: "Произошла непредвиденная ошибка. Пожалуйста, попробуйте снова.",
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
@@ -133,7 +115,7 @@ export default function BookingPage() {
                   </div>
                 )}
 
-                <form id="booking-form" action={handleSubmit}>
+                <form id="booking-form">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Name */}
                     <div className="col-span-2 md:col-span-1">
