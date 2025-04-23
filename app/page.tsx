@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -9,7 +9,6 @@ import {
   Mail,
   Facebook,
   Instagram,
-  Twitter,
   Globe,
   Star,
   MessageSquare,
@@ -19,20 +18,26 @@ import {
   Calendar,
   User,
   ArrowRight,
-  Search,
   Menu,
   X,
-  ChevronLeft,
+  ChevronDown,
+  Clock,
+  TextIcon as Telegram,
+  ChevronLeft, Youtube,
+  Headphones,
 } from "lucide-react"
 
 export default function Home() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null)
   const [hoveredCourse, setHoveredCourse] = useState<number | null>(null)
   const [sliderDirection, setSliderDirection] = useState<"next" | "prev" | null>(null)
+
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   const [scrollY, setScrollY] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -57,10 +62,10 @@ export default function Home() {
   }, [])
 
   const heroImages = [
-    "/assets/boy1.svg?height=600&width=1600&text=Students in classroom",
-    "/assets/students.jpg?height=600&width=1600&text=Language Learning",
-    "/assets/happy-student.jpg?height=600&width=1600&text=Arts and Creativity",
-    "/assets/lounge.jpg?height=600&width=1600&text=School Events",
+    "/assets/slider/Slider-Image-1.jpg?height=600&width=1600&text=Students in classroom",
+    "/assets/slider/Slider-Image-2.jpg?height=600&width=1600&text=Language Learning",
+    "/assets/slider/Slider-image-3.jpg?height=600&width=1600&text=Arts and Creativity",
+    "/assets/slider/Slider-image-4.jpg?heitht=600&width=1600&text=School Events",
   ]
 
   useEffect(() => {
@@ -105,6 +110,19 @@ export default function Home() {
     setCurrentImageIndex(index)
   }
 
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
+
   const translations = {
     ru: {
       schoolName: "Tut School",
@@ -114,13 +132,25 @@ export default function Home() {
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
       rating: "4.8 на Яндексе",
       search: "Поиск",
+      workingHours: "Пн-Пт: 9:00-21:00, Сб: 10:00-18:00",
+      promo: "Запишитесь на пробный урок до 30 мая и получите скидку 20% на первый месяц обучения!",
       nav: {
-        home: "ГЛАВНАЯ",
         about: "О НАС",
-        programs: "ПРОГРАММЫ",
+        aboutDropdown: [
+          { title: "О школе", href: "/about" },
+          { title: "Наша команда", href: "/team" },
+          { title: "Отзывы", href: "/testimonials" },
+          { title: "Галерея", href: "/gallery" },
+        ],
+        courses: "КУРСЫ",
+        coursesDropdown: [
+          { title: "Английский для детей", href: "/courses/english-kids" },
+          { title: "Английский для взрослых", href: "/courses/english-adults" },
+          { title: "Китайский язык", href: "/courses/chinese" },
+          { title: "Каллиграфия", href: "/courses/calligraphy" },
+        ],
         schedule: "РАСПИСАНИЕ",
-        admissions: "ПОСТУПЛЕНИЕ",
-        testimonials: "ОТЗЫВЫ",
+        prices: "ЦЕНЫ",
         blog: "БЛОГ",
         contacts: "КОНТАКТЫ",
       },
@@ -176,6 +206,11 @@ export default function Home() {
           {
             title: "Китайский для детей",
             description: "Возраст: 5-10 лет. Знакомство с иероглифами и основами китайской культуры.",
+            cta: "Подробнее",
+          },
+          {
+            title: "Английский для взрослых",
+            description: "Общий и деловой английский для всех уровней от начинающего до продвинутого.",
             cta: "Подробнее",
           },
           {
@@ -247,7 +282,7 @@ export default function Home() {
           title: "Режим работы",
           weekdays: "Понедельник - Пятница: 9:00 - 21:00",
           saturday: "Суббота: 10:00 - 18:00",
-          sunday: "Воскресенье: выходной",
+          sunday: "Воскресенье, выходной",
         },
         socialMedia: "Социальные сети",
         copyright: "© 2024 Tut School. Все права защищены.",
@@ -262,13 +297,25 @@ export default function Home() {
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
       rating: "4.8 on Yandex",
       search: "Search",
+      workingHours: "Mon-Fri: 9:00-21:00, Sat: 10:00-18:00",
+      promo: "Sign up for a trial lesson before May 30 and get a 20% discount on your first month of study!",
       nav: {
-        home: "HOME",
         about: "ABOUT US",
-        programs: "PROGRAMS",
+        aboutDropdown: [
+          { title: "About the school", href: "/about" },
+          { title: "Our team", href: "/team" },
+          { title: "Testimonials", href: "/testimonials" },
+          { title: "Gallery", href: "/gallery" },
+        ],
+        courses: "COURSES",
+        coursesDropdown: [
+          { title: "English for children", href: "/courses/english-kids" },
+          { title: "English for adults", href: "/courses/english-adults" },
+          { title: "Chinese language", href: "/courses/chinese" },
+          { title: "Calligraphy", href: "/courses/calligraphy" },
+        ],
         schedule: "SCHEDULE",
-        admissions: "ADMISSIONS",
-        testimonials: "TESTIMONIALS",
+        prices: "PRICES",
         blog: "BLOG",
         contacts: "CONTACTS",
       },
@@ -317,19 +364,23 @@ export default function Home() {
         subtitle: "Choose the program that suits you best",
         items: [
           {
-            title: "English ",
-            description: " Game-based learning format with an emphasis on speaking skills.",
+            title: "English for Children",
+            description: "Ages: 5-10 years. Game-based learning format with an emphasis on speaking skills.",
             cta: "Learn More",
           },
           {
-            title: "Chinese ",
-            description: " Introduction to characters and basics of Chinese culture.",
+            title: "Chinese for Children",
+            description: "Ages: 5-10 years. Introduction to characters and basics of Chinese culture.",
             cta: "Learn More",
           },
-         
           {
-            title: "Arts",
-            description: "Creative classes for children and adults.",
+            title: "English for Adults",
+            description: "General and business English for all levels from beginner to advanced.",
+            cta: "Learn More",
+          },
+          {
+            title: "Chinese Calligraphy",
+            description: "Creative classes in Chinese calligraphy for children and adults.",
             cta: "Learn More",
           },
         ],
@@ -415,41 +466,55 @@ export default function Home() {
     setMobileMenuOpen(!mobileMenuOpen)
   }
 
+  const toggleDropdown = (dropdown: string) => {
+    if (activeDropdown === dropdown) {
+      setActiveDropdown(null)
+    } else {
+      setActiveDropdown(dropdown)
+    }
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       {/* Top Bar */}
-      <div
-        className={`bg-primary/90 py-2 text-white transition-all duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}
-      >
+      <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-2">
-              <Phone className="h-4 w-4" />
-              <span className="text-sm">{t.phone}</span>
+              <Clock className="h-4 w-4 text-primary" />
+              <span className="text-gray-600">{t.workingHours}</span>
             </div>
-            <div className="hidden items-center gap-2 md:flex">
-              <Mail className="h-4 w-4" />
-              <span className="text-sm">{t.email}</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1">
-              <div className="flex text-yellow-300">
-                <Star className="h-4 w-4 fill-current" />
-                <Star className="h-4 w-4 fill-current" />
-                <Star className="h-4 w-4 fill-current" />
-                <Star className="h-4 w-4 fill-current" />
-                <Star className="h-4 w-4 fill-current stroke-yellow-300" />
-              </div>
-              <a href="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=routes&rtext=~55.894611%2C37.374147&rtt=auto&ruri=~&z=17">
-              <span className="text-sm">{t.rating}</span>
+            <div className="flex items-center gap-2">
+              <Phone className="h-4 w-4 text-primary" />
+              <a href={`tel:${t.phone.replace(/\s+/g, "")}`} className="text-gray-600 hover:text-primary">
+                {t.phone}
               </a>
             </div>
+            <div className="hidden items-center gap-2 md:flex">
+              <Mail className="h-4 w-4 text-primary" />
+              <a href={`mailto:${t.email}`} className="text-gray-600 hover:text-primary">
+                {t.email}
+              </a>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <a href="#" className="text-gray-600 hover:text-primary">
+              <Facebook className="h-4 w-4" />
+            </a>
+            <a href="#" className="text-gray-600 hover:text-primary">
+              <Instagram className="h-4 w-4" />
+            </a>
+            <a href="#" className="text-gray-600 hover:text-primary">
+              <Telegram className="h-4 w-4" />
+            </a>
+            <a href="#" className="text-gray-600 hover:text-primary">
+              <Youtube className="h-4 w-4" />
+            </a>
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1 rounded-md border border-white/30 px-2 py-1 text-sm hover:bg-white/10 transition-colors duration-300"
+              className="ml-2 flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 text-xs hover:bg-gray-200"
             >
-              <Globe className="h-4 w-4" />
+              <Globe className="h-3 w-3" />
               {t.languageToggle}
             </button>
           </div>
@@ -457,47 +522,82 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header
-        className={`border-b bg-white py-4 shadow-sm sticky top-0 z-50 transition-all duration-500 ${isLoaded ? "translate-y-0" : "-translate-y-full"}`}
-      >
+      <header className="border-b bg-white py-4 shadow-sm">
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-14 w-14 animate-pulse-slow">
-              <Link href="/" >
+            <div className="relative h-14 w-14">
               <Image
-                src="/logo.png"
+                src="/logo.png?height=56&width=56"
                 alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                 fill
                 className="object-contain"
               />
-              </Link>
             </div>
             <div>
               <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
               <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
             </div>
           </div>
-                   {/* Desktop Navigation */}
-                   <nav className="hidden md:block">
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:block" ref={dropdownRef}>
             <ul className="flex gap-6">
-              <li>
-                <Link href="/" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.home}
-                </Link>
-              </li>
-              <li>
-                <Link href="/about-us" className="text-sm font-medium text-gray-700 hover:text-primary">
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("about")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "about" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
                   {t.nav.about}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "about" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.aboutDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("courses")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "courses" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.courses}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "courses" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "courses" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.coursesDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li>
+                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.schedule}
                 </Link>
               </li>
               <li>
-                <Link href="/programs" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.programs}
-                </Link>
-              </li>
-              <li>
-                <Link href="/admissions" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.admissions}
+                <Link href="/prices" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.prices}
                 </Link>
               </li>
               <li>
@@ -506,17 +606,7 @@ export default function Home() {
                 </Link>
               </li>
               <li>
-                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.schedule}
-                </Link>
-              </li>
-              <li>
-                <Link href="/testimonials" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.testimonials}
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sm font-medium text-primary hover:text-primary/80">
+                <Link href="/contacts" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.contacts}
                 </Link>
               </li>
@@ -524,14 +614,12 @@ export default function Home() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <div className="hidden items-center rounded-full border border-gray-200 px-3 py-1 md:flex">
-              <input
-                type="text"
-                placeholder={t.search}
-                className="w-32 border-none bg-transparent text-sm outline-none"
-              />
-              <Search className="h-4 w-4 text-gray-400" />
-            </div>
+            <Link
+              href="/booking"
+              className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 md:block"
+            >
+              {t.hero.cta}
+            </Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -539,69 +627,98 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Promotional Banner */}
+      <div className="bg-primary/90 py-3 text-center text-white">
+        <div className="container mx-auto px-4">
+          <p className="flex items-center justify-center gap-2">
+            <Headphones className="h-5 w-5" />
+            <span>{t.promo}</span>
+          </p>
+        </div>
+      </div>
+
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="border-b bg-white py-4 shadow-sm md:hidden">
           <div className="container mx-auto px-4">
             <nav className="space-y-4">
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.home}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about-us" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.about}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/programs" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.programs}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/admissions" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.admissions}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.blog}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.schedule}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/testimonials" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                    {t.nav.testimonials}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="block py-2 text-sm font-medium text-primary hover:text-primary/80">
-                    {t.nav.contacts}
-                  </Link>
-                </li>
-              </ul>
-              <div className="flex items-center rounded-full border border-gray-200 px-3 py-2">
-                <input
-                  type="text"
-                  placeholder={t.search}
-                  className="w-full border-none bg-transparent text-sm outline-none"
-                />
-                <Search className="h-4 w-4 text-gray-400" />
+              <div className="space-y-2">
+                <button
+                  onClick={() => toggleDropdown("about-mobile")}
+                  className="flex w-full items-center justify-between py-2 text-sm font-medium text-gray-700"
+                >
+                  <span>{t.nav.about}</span>
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform ${activeDropdown === "about-mobile" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "about-mobile" && (
+                  <div className="ml-4 space-y-2 border-l border-gray-200 pl-4">
+                    {t.nav.aboutDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block py-1 text-sm text-gray-600 hover:text-primary"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
+
+              <div className="space-y-2">
+                <button
+                  onClick={() => toggleDropdown("courses-mobile")}
+                  className="flex w-full items-center justify-between py-2 text-sm font-medium text-gray-700"
+                >
+                  <span>{t.nav.courses}</span>
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform ${activeDropdown === "courses-mobile" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "courses-mobile" && (
+                  <div className="ml-4 space-y-2 border-l border-gray-200 pl-4">
+                    {t.nav.coursesDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block py-1 text-sm text-gray-600 hover:text-primary"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                {t.nav.schedule}
+              </Link>
+              <Link href="/prices" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                {t.nav.prices}
+              </Link>
+              <Link href="/blog" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                {t.nav.blog}
+              </Link>
+              <Link href="/contacts" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+                {t.nav.contacts}
+              </Link>
+
+              <Link
+                href="/booking"
+                className="mt-4 block w-full rounded-full bg-primary py-2 text-center text-sm font-medium text-white hover:bg-primary/90"
+              >
+                {t.hero.cta}
+              </Link>
             </nav>
           </div>
         </div>
       )}
 
       <main>
-        {/* Hero Section */}
-        <section className="relative">
+         {/* Hero Section */}
+         <section className="relative">
           <div className="relative h-[600px] w-full overflow-hidden">
             {heroImages.map((src, index) => (
               <div
@@ -678,7 +795,7 @@ export default function Home() {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="grid gap-8 md:grid-cols-2 md:gap-12">
-              <div className="transform transition-all duration-700 hover:translate-y-[-10px]">
+              <div>
                 <h2 className="mb-6 text-3xl font-bold text-primary">{t.welcome.title}</h2>
                 <p className="mb-6 text-lg text-gray-700">{t.welcome.description}</p>
                 <ul className="mb-8 space-y-3">
@@ -689,17 +806,17 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/about" className="inline-flex items-center text-primary hover:underline group">
+                <Link href="/about" className="inline-flex items-center text-primary hover:underline">
                   {t.welcome.cta}
-                  <ChevronRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ChevronRight className="ml-1 h-4 w-4" />
                 </Link>
               </div>
-              <div className="relative h-[400px] overflow-hidden rounded-lg shadow-lg transform transition-all duration-700 hover:shadow-2xl hover:scale-[1.02]">
+              <div className="relative h-[400px] overflow-hidden rounded-lg shadow-lg">
                 <Image
-                  src="/assets/students.jpg?height=400&width=600"
+                  src="/assets/slider/Painting.jpg?height=400&width=600"
                   alt="Tut School classroom"
                   fill
-                  className="object-cover transition-transform duration-2000 hover:scale-110"
+                  className="object-cover"
                 />
               </div>
             </div>
@@ -713,12 +830,7 @@ export default function Home() {
             <div className="mx-auto mb-12 h-1 w-20 bg-primary"></div>
             <div className="grid gap-8 md:grid-cols-3">
               {t.advantages.items.map((item, index) => (
-                <div
-                  key={index}
-                  className="rounded-lg bg-white p-8 shadow-md transition-all hover:shadow-lg hover:translate-y-[-5px]"
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                >
+                <div key={index} className="rounded-lg bg-white p-8 shadow-md transition-all hover:shadow-lg">
                   <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <span className="text-2xl font-bold">{index + 1}</span>
                   </div>
@@ -735,41 +847,27 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.courses.title}</h2>
             <p className="mb-12 text-center text-lg text-gray-600">{t.courses.subtitle}</p>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
               {t.courses.items.map((course, index) => (
                 <div
                   key={index}
-                  className="group overflow-hidden rounded-lg border border-gray-200 bg-white transition-all hover:shadow-lg hover:translate-y-[-10px]"
-                  onMouseEnter={() => setHoveredCourse(index)}
-                  onMouseLeave={() => setHoveredCourse(null)}
+                  className="group overflow-hidden rounded-lg border border-gray-200 bg-white transition-all hover:shadow-lg"
                 >
                   <div className="relative h-48">
                     <Image
-                      src={`/assets/coursesTwo.svg?height=200&width=300&text=${index + 1}`}
+                      src={`/assets/coursesOne.svg?height=200&width=300&text=${index + 1}`}
                       alt={course.title}
                       fill
-                      className={`object-cover transition-all duration-700 ${
-                        hoveredCourse === index ? "scale-110" : "scale-100"
-                      }`}
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-500 ${
-                        hoveredCourse === index ? "opacity-100" : "opacity-0"
-                      }`}
-                    ></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
                   </div>
                   <div className="p-6">
-                    <h3 className="mb-3 text-xl font-bold transition-colors duration-300 group-hover:text-primary">
-                      {course.title}
-                    </h3>
+                    <h3 className="mb-3 text-xl font-bold">{course.title}</h3>
                     <p className="mb-4 text-sm text-gray-600">{course.description}</p>
-                    <Link href="/programs" className="inline-flex items-center text-primary hover:underline group">
+                    <Link href="#" className="inline-flex items-center text-primary hover:underline">
                       {course.cta}
-                      <ChevronRight
-                        className={`ml-1 h-4 w-4 transition-transform duration-300 ${
-                          hoveredCourse === index ? "translate-x-1" : ""
-                        }`}
-                      />
+                      <ChevronRight className="ml-1 h-4 w-4" />
                     </Link>
                   </div>
                 </div>
@@ -783,38 +881,35 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="mb-8 flex items-center justify-between">
               <h2 className="text-3xl font-bold text-primary">{t.news.title}</h2>
-              <Link href="#" className="flex items-center text-sm font-medium text-primary hover:underline group">
+              <Link href="#" className="flex items-center text-sm font-medium text-primary hover:underline">
                 {t.news.viewAll}
-                <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <ChevronRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
             <div className="grid gap-6 md:grid-cols-3">
               {t.news.items.map((item, index) => (
                 <div
                   key={index}
-                  className="group overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg hover:translate-y-[-5px]"
+                  className="overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg"
                 >
-                  <div className="relative h-48 overflow-hidden">
+                  <div className="relative h-48">
                     <Image
-                      src={`/assets/courses/courses-1.svg?height=200&width=400&text=News ${index + 1}`}
+                      src={`/assets/coursesTwo.svg?height=200&width=400&text=News ${index + 1}`}
                       alt={item.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
                   </div>
                   <div className="p-6">
                     <div className="mb-2 flex items-center gap-2 text-sm text-gray-500">
                       <Calendar className="h-4 w-4" />
                       <span>{item.date}</span>
                     </div>
-                    <h3 className="mb-3 text-xl font-bold transition-colors duration-300 group-hover:text-primary">
-                      {item.title}
-                    </h3>
+                    <h3 className="mb-3 text-xl font-bold">{item.title}</h3>
                     <p className="mb-4 text-sm text-gray-600">{item.description}</p>
-                    <Link href="#" className="inline-flex items-center text-primary hover:underline group">
+                    <Link href="#" className="inline-flex items-center text-primary hover:underline">
                       {item.cta}
-                      <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      <ChevronRight className="ml-1 h-4 w-4" />
                     </Link>
                   </div>
                 </div>
@@ -830,10 +925,7 @@ export default function Home() {
             <div className="mx-auto mb-12 h-1 w-20 bg-primary"></div>
             <div className="grid gap-6 md:grid-cols-3">
               {t.testimonials.items.map((item, index) => (
-                <div
-                  key={index}
-                  className="rounded-lg bg-white p-6 shadow-md transition-all hover:shadow-xl hover:translate-y-[-5px]"
-                >
+                <div key={index} className="rounded-lg bg-white p-6 shadow-md">
                   <div className="mb-4 text-yellow-400">
                     <Star className="inline-block h-5 w-5 fill-current" />
                     <Star className="inline-block h-5 w-5 fill-current" />
@@ -861,35 +953,35 @@ export default function Home() {
             <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-4">
               <Link
                 href={`tel:${t.phone.replace(/\s+/g, "")}`}
-                className="flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-white transition-all hover:bg-primary/90 hover:translate-y-[-3px] hover:shadow-md"
+                className="flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-white transition-all hover:bg-primary/90"
               >
                 <Phone className="h-5 w-5" />
                 {t.contact.phone}
               </Link>
               <Link
-                href="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=routes&rtext=~55.894611%2C37.374147&rtt=auto&ruri=~&z=17"
-                className="flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-white transition-all hover:bg-blue-600 hover:translate-y-[-3px] hover:shadow-md"
+                href="#"
+                className="flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-white transition-all hover:bg-blue-600"
               >
                 <Navigation className="h-5 w-5" />
                 {t.contact.directions}
               </Link>
               <Link
                 href="#"
-                className="flex items-center gap-2 rounded-md bg-gray-700 px-4 py-2 text-white transition-all hover:bg-gray-800 hover:translate-y-[-3px] hover:shadow-md"
+                className="flex items-center gap-2 rounded-md bg-gray-700 px-4 py-2 text-white transition-all hover:bg-gray-800"
               >
                 <MessageSquare className="h-5 w-5" />
                 {t.contact.write}
               </Link>
               <Link
-                href="https://t.me/TUTschoolNovogorsk"
-                className="flex items-center gap-2 rounded-md bg-blue-400 px-4 py-2 text-white transition-all hover:bg-blue-500 hover:translate-y-[-3px] hover:shadow-md"
+                href="#"
+                className="flex items-center gap-2 rounded-md bg-blue-400 px-4 py-2 text-white transition-all hover:bg-blue-500"
               >
                 <Send className="h-5 w-5" />
                 {t.contact.telegram}
               </Link>
               <Link
-                href="https://api.whatsapp.com/send/?phone=%2B79167349246&text&type=phone_number&app_absent=0"
-                className="flex items-center gap-2 rounded-md bg-green-500 px-4 py-2 text-white transition-all hover:bg-green-600 hover:translate-y-[-3px] hover:shadow-md"
+                href="#"
+                className="flex items-center gap-2 rounded-md bg-green-500 px-4 py-2 text-white transition-all hover:bg-green-600"
               >
                 <MessageSquare className="h-5 w-5" />
                 {t.contact.whatsapp}
@@ -907,7 +999,7 @@ export default function Home() {
         {/* CTA Section */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <div className="overflow-hidden rounded-xl bg-primary shadow-xl transition-transform hover:scale-[1.01]">
+            <div className="overflow-hidden rounded-xl bg-primary shadow-xl">
               <div className="relative">
                 <div className="absolute inset-0">
                   <Image
@@ -921,8 +1013,8 @@ export default function Home() {
                   <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t.trial.title}</h2>
                   <p className="mx-auto mb-8 max-w-2xl text-lg">{t.trial.description}</p>
                   <Link
-                    href="/bookings"
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary transition-all hover:bg-gray-100 hover:gap-3 hover:shadow-lg"
+                    href="/booking"
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary transition-all hover:bg-gray-100 hover:gap-3"
                   >
                     {t.trial.cta}
                     <ArrowRight className="h-4 w-4" />
@@ -936,4 +1028,3 @@ export default function Home() {
     </div>
   )
 }
-
