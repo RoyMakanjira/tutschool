@@ -148,13 +148,11 @@ export default function Home() {
         ],
         courses: "КУРСЫ",
         coursesDropdown: [
-          { title: "Английский для детей", href: "/courses/english-kids" },
-          { title: "Английский для взрослых", href: "/courses/english-adults" },
-          { title: "Китайский язык", href: "/courses/chinese" },
-          { title: "Каллиграфия", href: "/courses/calligraphy" },
+          { title: "АНГЛИЙСКИЙ КУРС", href: "/courses/english-kids" },
+          { title: "ТАЙСКИЕ КУРСЫ", href: "/courses/english-adults" },
         ],
         schedule: "РАСПИСАНИЕ",
-        news: "Новости",
+        news: "НОВОСТИ",
         masterclass: "МАСТЕР-КЛАСС",
         contacts: "КОНТАКТЫ",
       },
@@ -313,10 +311,8 @@ export default function Home() {
         ],
         courses: "COURSES",
         coursesDropdown: [
-          { title: "English for children", href: "/courses/english-kids" },
-          { title: "English for adults", href: "/courses/english-adults" },
-          { title: "Chinese language", href: "/courses/chinese" },
-          { title: "Calligraphy", href: "/courses/calligraphy" },
+          { title: "English Courses", href: "/courses/english-kids" },
+          { title: "Thai Courses", href: "/courses/english-adults" },
         ],
         schedule: "SCHEDULE",
         news: "NEWS",
@@ -739,7 +735,7 @@ export default function Home() {
 
       <main>
          {/* Hero Section */}
-         <section className="relative">
+         <section className="relative mt-12">
           <div className="relative h-[600px] w-full overflow-hidden">
             {heroImages.map((src, index) => (
               <div
