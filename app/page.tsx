@@ -155,7 +155,7 @@ export default function Home() {
         ],
         schedule: "РАСПИСАНИЕ",
         news: "Новости",
-        blog: "БЛОГ",
+        masterclass: "МАСТЕР-КЛАСС",
         contacts: "КОНТАКТЫ",
       },
       hero: {
@@ -320,7 +320,7 @@ export default function Home() {
         ],
         schedule: "SCHEDULE",
         news: "NEWS",
-        blog: "BLOG",
+        masterclass: "MASTER CLASSES",
         contacts: "CONTACTS",
       },
       hero: {
@@ -625,13 +625,13 @@ export default function Home() {
                 </Link>
               </li>
               <li>
-                <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.news}
+                <Link href="/blog" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.masterclass}
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.blog}
+                <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.news}
                 </Link>
               </li>
               <li>
@@ -720,7 +720,7 @@ export default function Home() {
                 {t.nav.news}
               </Link>
               <Link href="/blog" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                {t.nav.blog}
+                {t.nav.masterclass}
               </Link>
               <Link href="/contacts" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                 {t.nav.contacts}
