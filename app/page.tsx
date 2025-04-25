@@ -38,12 +38,43 @@ export default function Home() {
   const [hoveredCourse, setHoveredCourse] = useState<number | null>(null)
   const [sliderDirection, setSliderDirection] = useState<"next" | "prev" | null>(null)
   const [activeSection, setActiveSection] = useState<string>("hero")
-  const [isScrolled, setIsScrolled] = useState(false);
+   const [isScrolled, setIsScrolled] = useState(false)
 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const [scrollY, setScrollY] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    // Set loaded state after a small delay to trigger initial animations
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+    }, 100)
+
+    // Handle scroll events for scroll-triggered animations
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+      setIsScrolled(window.scrollY > 100)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+ 
 
   useEffect(() => {
     // Set loaded state after a small delay to trigger initial animations
@@ -332,9 +363,9 @@ export default function Home() {
         chineseDropdown: [
           { title: "PRESCHOOLERS", href: "/courses/english-kids" },
           { title: "CHILDREN AGED 7-9", href: "/courses/english-adults" },
-            { title: "CHILDREN AGED 10-12", href: "/courses/english-kids" },
+          { title: "CHILDREN AGED 10-12", href: "/courses/english-kids" },
           { title: "TEENAGERS", href: "/courses/english-adults" },
-            { title: "ADULTS", href: "/courses/english-kids" },
+          { title: "ADULTS", href: "/courses/english-kids" },
         ],
         club: "CONVERSATION CLUB",
         clubDropdown: [
@@ -572,7 +603,9 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header className="border-b bg-white py-4 shadow-sm">
+      <header    className={`border-b bg-white py-4 shadow-sm transition-all duration-300 ${
+          isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""
+        }`}>
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
             <div className="relative h-14 w-14">
@@ -651,7 +684,7 @@ export default function Home() {
                     className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
                   />
                 </button>
-                {activeDropdown === "schedule" && (
+                {activeDropdown === "chinese" && (
                   <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
                     {t.nav.chineseDropdown.map((item, index) => (
                       <Link
@@ -668,7 +701,7 @@ export default function Home() {
               <li className="relative">
                 <button
                   onClick={() => toggleDropdown("club")}
-                  className={`flex items-center text-sm font-medium ${activeDropdown === "masterclass" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "club" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
                 >
                   {t.nav.club}
                   <ChevronDown
@@ -842,7 +875,7 @@ export default function Home() {
 
       <main>
          {/* Hero Section */}
-         <section className="relative mt-12">
+         <section className="relative">
           <div className="relative h-[600px] w-full overflow-hidden">
             {heroImages.map((src, index) => (
               <div
