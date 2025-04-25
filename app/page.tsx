@@ -9,8 +9,6 @@ import {
   MapPin,
   Phone,
   Mail,
-  Facebook,
-  Instagram,
   Globe,
   Star,
   MessageSquare,
@@ -40,6 +38,7 @@ export default function Home() {
   const [hoveredCourse, setHoveredCourse] = useState<number | null>(null)
   const [sliderDirection, setSliderDirection] = useState<"next" | "prev" | null>(null)
   const [activeSection, setActiveSection] = useState<string>("hero")
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -152,8 +151,16 @@ export default function Home() {
           { title: "ТАЙСКИЕ КУРСЫ", href: "/courses/english-adults" },
         ],
         schedule: "РАСПИСАНИЕ",
-        news: "НОВОСТИ",
+        scheduleDropdown: [
+          { title: "АНГЛИЙСКИЙ КУРС", href: "/courses/english-kids" },
+          { title: "ТАЙСКИЕ КУРСЫ", href: "/courses/english-adults" },
+        ],
         masterclass: "МАСТЕР-КЛАСС",
+        masterclassDropdown: [
+          { title: "АНГЛИЙСКИЙ КУРС", href: "/courses/english-kids" },
+          { title: "ТАЙСКИЕ КУРСЫ", href: "/courses/english-adults" },
+        ],
+        news: "НОВОСТИ",
         contacts: "КОНТАКТЫ",
       },
       hero: {
@@ -314,9 +321,17 @@ export default function Home() {
           { title: "English Courses", href: "/courses/english-kids" },
           { title: "Thai Courses", href: "/courses/english-adults" },
         ],
-        schedule: "SCHEDULE",
+        schedule: "РАСПИСАНИЕ",
+        scheduleDropdown: [
+          { title: "АНГЛИЙСКИЙ КУРС", href: "/courses/english-kids" },
+          { title: "ТАЙСКИЕ КУРСЫ", href: "/courses/english-adults" },
+        ],
+        masterclass: "МАСТЕР-КЛАСС",
+        masterclassDropdown: [
+          { title: "АНГЛИЙСКИЙ КУРС", href: "/courses/english-kids" },
+          { title: "ТАЙСКИЕ КУРСЫ", href: "/courses/english-adults" },
+        ],
         news: "NEWS",
-        masterclass: "MASTER CLASSES",
         contacts: "CONTACTS",
       },
       hero: {
@@ -565,6 +580,7 @@ export default function Home() {
           </div>
 
           {/* Desktop Navigation */}
+          
           <nav className="hidden md:block" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">
@@ -615,15 +631,53 @@ export default function Home() {
                   </div>
                 )}
               </li>
-              <li>
-                <Link href="/schedule" className="text-sm font-medium text-gray-700 hover:text-primary">
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("schedule")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "schedule" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
                   {t.nav.schedule}
-                </Link>
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "schedule" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "schedule" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.scheduleDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </li>
-              <li>
-                <Link href="/blog" className="text-sm font-medium text-gray-700 hover:text-primary">
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("masterclass")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "masterclass" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
                   {t.nav.masterclass}
-                </Link>
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "masterclass" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "masterclass" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.masterclassDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </li>
               <li>
                 <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
@@ -637,6 +691,7 @@ export default function Home() {
               </li>
             </ul>
           </nav>
+          
 
           <div className="flex items-center gap-4">
             <Link
@@ -709,14 +764,56 @@ export default function Home() {
                 )}
               </div>
 
-              <Link href="/schedule" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                {t.nav.schedule}
-              </Link>
+              <div className="space-y-2">
+                <button
+                  onClick={() => toggleDropdown("schedule-mobile")}
+                  className="flex w-full items-center justify-between py-2 text-sm font-medium text-gray-700"
+                >
+                  <span>{t.nav.schedule}</span>
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform ${activeDropdown === "schedule-mobile" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "schedule-mobile" && (
+                  <div className="ml-4 space-y-2 border-l border-gray-200 pl-4">
+                    {t.nav.scheduleDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block py-1 text-sm text-gray-600 hover:text-primary"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div className="space-y-2">
+                <button
+                  onClick={() => toggleDropdown("masterclass-mobile")}
+                  className="flex w-full items-center justify-between py-2 text-sm font-medium text-gray-700"
+                >
+                  <span>{t.nav.masterclass}</span>
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform ${activeDropdown === "masterclass-mobile" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "masterclass-mobile" && (
+                  <div className="ml-4 space-y-2 border-l border-gray-200 pl-4">
+                    {t.nav.masterclassDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block py-1 text-sm text-gray-600 hover:text-primary"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
               <Link href="/news" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                 {t.nav.news}
-              </Link>
-              <Link href="/blog" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                {t.nav.masterclass}
               </Link>
               <Link href="/contacts" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                 {t.nav.contacts}

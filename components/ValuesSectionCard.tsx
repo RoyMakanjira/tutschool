@@ -142,7 +142,7 @@ export default function ValuesSection({ language }: ValuesSectionProps) {
           <div className="grid grid-cols-2 gap-4">
             <div className="relative h-[200px] overflow-hidden rounded-lg shadow-lg">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Community.jpg-7gXaP13Ox9axrD5CR9JBk9jQHM5ZPe.jpeg"
+                src="/assets/gallery/Community.jpg"
                 alt="Students enjoying community activities"
                 fill
                 className="object-cover transition-transform duration-500 hover:scale-105"
@@ -150,7 +150,7 @@ export default function ValuesSection({ language }: ValuesSectionProps) {
             </div>
             <div className="relative h-[200px] overflow-hidden rounded-lg shadow-lg">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Community-2.jpg-WRi5egy6prolMlCeuUSDx5QQbMsBOX.jpeg"
+                src="/assets/gallery/Community-2.jpg"
                 alt="Students participating in cultural events"
                 fill
                 className="object-cover transition-transform duration-500 hover:scale-105"
@@ -190,7 +190,7 @@ export default function ValuesSection({ language }: ValuesSectionProps) {
           </div>
           <div className="relative h-[300px] overflow-hidden rounded-lg shadow-lg">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Cultural-Studies-1.jpg-D71dw1ncChFWmKMpsUAC5m2WVJ3i7K.jpeg"
+              src="/assets/gallery/Cultural-Studies-1.jpg"
               alt="Cultural studies calligraphy class"
               fill
               className="object-cover transition-transform duration-500 hover:scale-105"
