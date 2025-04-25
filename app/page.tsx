@@ -183,7 +183,7 @@ export default function Home() {
           { title: "ПОДРОСТКИ", href: "/courses/english-adults" },
           { title: "ВЗРОСЛЫЕ", href: "/courses/english-kids" },
         ],
-        chinese: "РАСПИСАНИЕ",
+        chinese: "КУРСЫ КИТАЙСКОГО",
         chineseDropdown: [
           { title: "ДОШКОЛЬНИКИ", href: "/courses/english-kids" },
           { title: "ДЕТИ 7-9 ЛЕТ", href: "/courses/english-adults" },
