@@ -138,27 +138,32 @@ export default function Home() {
       workingHours: "Пн-Пт: 9:00-21:00, Сб: 10:00-18:00",
       promo: "Запишитесь на пробный урок до 30 мая и получите скидку 20% на первый месяц обучения!",
       nav: {
-        about: "О НАС",
+        about: "О ШКОЛЕ",
         aboutDropdown: [
-          { title: "О школе", href: "/about" },
-          { title: "Наша команда", href: "/team" },
-          { title: "Отзывы", href: "/testimonials" },
-          { title: "Галерея", href: "/gallery" },
+          { title: "НАШИ ЦЕННОСТИ", href: "/about" },
+          { title: "РАСПИСАНИЕ И ЦЕНЫ", href: "/schedule" },
+          { title: "ПРЕПОДАВАТЕЛИ", href: "/testimonials" },
         ],
-        courses: "КУРСЫ",
+        courses: "КУРСЫ АНГЛИЙСКОГО",
         coursesDropdown: [
-          { title: "АНГЛИЙСКИЙ КУРС", href: "/courses/english-kids" },
-          { title: "ТАЙСКИЕ КУРСЫ", href: "/courses/english-adults" },
+          { title: "ДОШКОЛЬНИКИ", href: "/courses/english-kids" },
+          { title: "ДЕТИ 7-9 ЛЕТ", href: "/courses/english-adults" },
+          { title: "ДЕТИ 10-12 ЛЕТ", href: "/courses/english-kids" },
+          { title: "ПОДРОСТКИ", href: "/courses/english-adults" },
+          { title: "ВЗРОСЛЫЕ", href: "/courses/english-kids" },
         ],
-        schedule: "РАСПИСАНИЕ",
-        scheduleDropdown: [
-          { title: "АНГЛИЙСКИЙ КУРС", href: "/courses/english-kids" },
-          { title: "ТАЙСКИЕ КУРСЫ", href: "/courses/english-adults" },
+        chinese: "РАСПИСАНИЕ",
+        chineseDropdown: [
+          { title: "ДОШКОЛЬНИКИ", href: "/courses/english-kids" },
+          { title: "ДЕТИ 7-9 ЛЕТ", href: "/courses/english-adults" },
+          { title: "ДЕТИ 10-12 ЛЕТ", href: "/courses/english-kids" },
+          { title: "ПОДРОСТКИ", href: "/courses/english-adults" },
+          { title: "ВЗРОСЛЫЕ", href: "/courses/english-kids" },
         ],
-        masterclass: "МАСТЕР-КЛАСС",
-        masterclassDropdown: [
-          { title: "АНГЛИЙСКИЙ КУРС", href: "/courses/english-kids" },
-          { title: "ТАЙСКИЕ КУРСЫ", href: "/courses/english-adults" },
+        club: "РАЗГОВОРНЫЙ КЛУБ",
+        clubDropdown: [
+          { title: "ПОДРОСТКИ", href: "/courses/english-kids" },
+          { title: "ВЗРОСЛЫЕ", href: "/courses/english-adults" },
         ],
         news: "НОВОСТИ",
         contacts: "КОНТАКТЫ",
@@ -309,27 +314,32 @@ export default function Home() {
       workingHours: "Mon-Fri: 9:00-21:00, Sat: 10:00-18:00",
       promo: "Sign up for a trial lesson before May 30 and get a 20% discount on your first month of study!",
       nav: {
-        about: "ABOUT US",
+        about: "ABOUT THE SCHOOL",
         aboutDropdown: [
-          { title: "About the school", href: "/about" },
-          { title: "Our team", href: "/team" },
-          { title: "Testimonials", href: "/testimonials" },
-          { title: "Gallery", href: "/gallery" },
+          { title: "OUR VALUES", href: "/about" },
+          { title: "SCHEDULE AND PRICES", href: "/team" },
+          { title: "TEACHERS", href: "/testimonials" },
         ],
         courses: "COURSES",
         coursesDropdown: [
-          { title: "English Courses", href: "/courses/english-kids" },
-          { title: "Thai Courses", href: "/courses/english-adults" },
+          { title: "PRESCHOOLERS", href: "/courses/english-kids" },
+          { title: "CHILDREN AGED 7-9", href: "/courses/english-adults" },
+            { title: "CHILDREN AGED 10-12", href: "/courses/english-kids" },
+          { title: "TEENAGERS", href: "/courses/english-adults" },
+            { title: "ADULTS", href: "/courses/english-kids" },
         ],
-        schedule: "РАСПИСАНИЕ",
-        scheduleDropdown: [
-          { title: "АНГЛИЙСКИЙ КУРС", href: "/courses/english-kids" },
-          { title: "ТАЙСКИЕ КУРСЫ", href: "/courses/english-adults" },
+        chinese: "CHINESE LANGUAGE COURSES",
+        chineseDropdown: [
+          { title: "PRESCHOOLERS", href: "/courses/english-kids" },
+          { title: "CHILDREN AGED 7-9", href: "/courses/english-adults" },
+            { title: "CHILDREN AGED 10-12", href: "/courses/english-kids" },
+          { title: "TEENAGERS", href: "/courses/english-adults" },
+            { title: "ADULTS", href: "/courses/english-kids" },
         ],
-        masterclass: "МАСТЕР-КЛАСС",
-        masterclassDropdown: [
-          { title: "АНГЛИЙСКИЙ КУРС", href: "/courses/english-kids" },
-          { title: "ТАЙСКИЕ КУРСЫ", href: "/courses/english-adults" },
+        club: "CONVERSATION CLUB",
+        clubDropdown: [
+          { title: "TEENAGERS", href: "/courses/english-kids" },
+          { title: "ADULTS", href: "/courses/english-adults" },
         ],
         news: "NEWS",
         contacts: "CONTACTS",
@@ -633,17 +643,17 @@ export default function Home() {
               </li>
               <li className="relative">
                 <button
-                  onClick={() => toggleDropdown("schedule")}
-                  className={`flex items-center text-sm font-medium ${activeDropdown === "schedule" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                  onClick={() => toggleDropdown("chinese")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
                 >
-                  {t.nav.schedule}
+                  {t.nav.chinese}
                   <ChevronDown
-                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "schedule" ? "rotate-180" : ""}`}
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
                   />
                 </button>
                 {activeDropdown === "schedule" && (
                   <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                    {t.nav.scheduleDropdown.map((item, index) => (
+                    {t.nav.chineseDropdown.map((item, index) => (
                       <Link
                         key={index}
                         href={item.href}
@@ -657,17 +667,17 @@ export default function Home() {
               </li>
               <li className="relative">
                 <button
-                  onClick={() => toggleDropdown("masterclass")}
+                  onClick={() => toggleDropdown("club")}
                   className={`flex items-center text-sm font-medium ${activeDropdown === "masterclass" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
                 >
-                  {t.nav.masterclass}
+                  {t.nav.club}
                   <ChevronDown
-                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "masterclass" ? "rotate-180" : ""}`}
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "club" ? "rotate-180" : ""}`}
                   />
                 </button>
-                {activeDropdown === "masterclass" && (
+                {activeDropdown === "club" && (
                   <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                    {t.nav.masterclassDropdown.map((item, index) => (
+                    {t.nav.clubDropdown.map((item, index) => (
                       <Link
                         key={index}
                         href={item.href}
@@ -766,17 +776,17 @@ export default function Home() {
 
               <div className="space-y-2">
                 <button
-                  onClick={() => toggleDropdown("schedule-mobile")}
+                  onClick={() => toggleDropdown("chinese-mobile")}
                   className="flex w-full items-center justify-between py-2 text-sm font-medium text-gray-700"
                 >
-                  <span>{t.nav.schedule}</span>
+                  <span>{t.nav.chinese}</span>
                   <ChevronDown
-                    className={`h-4 w-4 transition-transform ${activeDropdown === "schedule-mobile" ? "rotate-180" : ""}`}
+                    className={`h-4 w-4 transition-transform ${activeDropdown === "chinese-mobile" ? "rotate-180" : ""}`}
                   />
                 </button>
-                {activeDropdown === "schedule-mobile" && (
+                {activeDropdown === "chinese-mobile" && (
                   <div className="ml-4 space-y-2 border-l border-gray-200 pl-4">
-                    {t.nav.scheduleDropdown.map((item, index) => (
+                    {t.nav.chineseDropdown.map((item, index) => (
                       <Link
                         key={index}
                         href={item.href}
@@ -793,14 +803,14 @@ export default function Home() {
                   onClick={() => toggleDropdown("masterclass-mobile")}
                   className="flex w-full items-center justify-between py-2 text-sm font-medium text-gray-700"
                 >
-                  <span>{t.nav.masterclass}</span>
+                  <span>{t.nav.club}</span>
                   <ChevronDown
                     className={`h-4 w-4 transition-transform ${activeDropdown === "masterclass-mobile" ? "rotate-180" : ""}`}
                   />
                 </button>
                 {activeDropdown === "masterclass-mobile" && (
                   <div className="ml-4 space-y-2 border-l border-gray-200 pl-4">
-                    {t.nav.masterclassDropdown.map((item, index) => (
+                    {t.nav.clubDropdown.map((item, index) => (
                       <Link
                         key={index}
                         href={item.href}
