@@ -56,7 +56,7 @@ export const PromotionalBanner = () => {
           <p className="text-center font-medium text-burgundy-900 sm:text-left">
             <span className="md:hidden">40% OFF all language courses!</span>
             <span className="hidden md:inline">
-              Save up to <span className="font-bold">40% OFF</span> on English, Chinese, Spanish & more courses
+              Save up to <span className="font-bold">40% OFF</span> on English & Chinese courses
             </span>
           </p>
           <div className="ml-3 hidden items-center md:flex">
