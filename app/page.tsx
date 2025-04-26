@@ -348,7 +348,7 @@ export default function Home() {
         about: "ABOUT THE SCHOOL",
         aboutDropdown: [
           { title: "OUR VALUES", href: "/our-values" },
-          { title: "SCHEDULE AND PRICES", href: "/team" },
+          { title: "SCHEDULE AND PRICES", href: "/schedule" },
           { title: "TEACHERS", href: "/testimonials" },
         ],
         courses: "COURSES",
@@ -626,7 +626,9 @@ export default function Home() {
 
           {/* Desktop Navigation */}
           
-          <nav className="hidden md:block" ref={dropdownRef}>
+                   {/* Desktop Navigation */}
+
+                   <nav className="hidden md:block" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">
                 <button
@@ -736,20 +738,20 @@ export default function Home() {
               </li>
             </ul>
           </nav>
-          
 
           <div className="flex items-center gap-4">
-              <Link href="/bookings" className="px-4 py-2 ml-2 rounded-lg bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-lg hover:shadow-xl">
+            <Link
+              href="/bookings"
+              className="px-4 py-2 ml-2 rounded-lg bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-lg hover:shadow-xl"
+            >
               {t.hero.cta}
-          </Link>
+            </Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
       </header>
-
-     
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
@@ -832,15 +834,15 @@ export default function Home() {
               </div>
               <div className="space-y-2">
                 <button
-                  onClick={() => toggleDropdown("masterclass-mobile")}
+                  onClick={() => toggleDropdown("club-mobile")}
                   className="flex w-full items-center justify-between py-2 text-sm font-medium text-gray-700"
                 >
                   <span>{t.nav.club}</span>
                   <ChevronDown
-                    className={`h-4 w-4 transition-transform ${activeDropdown === "masterclass-mobile" ? "rotate-180" : ""}`}
+                    className={`h-4 w-4 transition-transform ${activeDropdown === "club-mobile" ? "rotate-180" : ""}`}
                   />
                 </button>
-                {activeDropdown === "masterclass-mobile" && (
+                {activeDropdown === "club-mobile" && (
                   <div className="ml-4 space-y-2 border-l border-gray-200 pl-4">
                     {t.nav.clubDropdown.map((item, index) => (
                       <Link
