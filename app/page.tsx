@@ -38,7 +38,7 @@ export default function Home() {
   const [hoveredCourse, setHoveredCourse] = useState<number | null>(null)
   const [sliderDirection, setSliderDirection] = useState<"next" | "prev" | null>(null)
   const [activeSection, setActiveSection] = useState<string>("hero")
-   const [isScrolled, setIsScrolled] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -171,7 +171,7 @@ export default function Home() {
       nav: {
         about: "О ШКОЛЕ",
         aboutDropdown: [
-          { title: "НАШИ ЦЕННОСТИ", href: "/about" },
+          { title: "НАШИ ЦЕННОСТИ", href: "/our-values" },
           { title: "РАСПИСАНИЕ И ЦЕНЫ", href: "/schedule" },
           { title: "ПРЕПОДАВАТЕЛИ", href: "/testimonials" },
         ],
@@ -347,7 +347,7 @@ export default function Home() {
       nav: {
         about: "ABOUT THE SCHOOL",
         aboutDropdown: [
-          { title: "OUR VALUES", href: "/about" },
+          { title: "OUR VALUES", href: "/our-values" },
           { title: "SCHEDULE AND PRICES", href: "/team" },
           { title: "TEACHERS", href: "/testimonials" },
         ],
@@ -378,7 +378,7 @@ export default function Home() {
       hero: {
         title: "SCHOOL OF FOREIGN LANGUAGES AND ARTS",
         subtitle: "We help children and adults learn English and Chinese in a friendly atmosphere",
-        cta: "Book a trial lesson",
+        cta: "Book a lesson",
       },
       about: {
         title: "ABOUT US",
@@ -609,12 +609,14 @@ export default function Home() {
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
             <div className="relative h-14 w-14">
+              <Link href='/'>
               <Image
                 src="/logo.png?height=56&width=56"
                 alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                 fill
                 className="object-contain"
               />
+              </Link>
             </div>
             <div>
               <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
@@ -728,7 +730,7 @@ export default function Home() {
                 </Link>
               </li>
               <li>
-                <Link href="/contacts" className="text-sm font-medium text-gray-700 hover:text-primary">
+                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.contacts}
                 </Link>
               </li>
@@ -737,12 +739,9 @@ export default function Home() {
           
 
           <div className="flex items-center gap-4">
-            <Link
-              href="/bookings"
-              className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 md:block"
-            >
+              <Link href="/bookings" className="px-4 py-2 ml-2 rounded-lg bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-lg hover:shadow-xl">
               {t.hero.cta}
-            </Link>
+          </Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -858,7 +857,7 @@ export default function Home() {
               <Link href="/news" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                 {t.nav.news}
               </Link>
-              <Link href="/contacts" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
+              <Link href="/contact" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
                 {t.nav.contacts}
               </Link>
 
