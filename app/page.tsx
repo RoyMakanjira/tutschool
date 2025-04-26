@@ -40,6 +40,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState<string>("hero")
   const [isScrolled, setIsScrolled] = useState(false)
 
+ 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const [scrollY, setScrollY] = useState(0)
@@ -73,8 +74,6 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
-
- 
 
   useEffect(() => {
     // Set loaded state after a small delay to trigger initial animations
@@ -156,7 +155,7 @@ export default function Home() {
       document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [])
-
+  
   const translations = {
     ru: {
       schoolName: "Tut School",
@@ -587,10 +586,10 @@ export default function Home() {
               </svg>
             </a>
             <a href="#" className="text-blue-500 hover:text-burgundy-900">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12zm-12 7.5c-4.142 0-7.5-3.358-7.5-7.5s3.358-7.5 7.5-7.5 7.5 3.358 7.5 7.5-3.358 7.5-7.5 7.5zm-2.5-10.5h5v1h-5v-1zm0 2h5v1h-5v-1zm0 2h5v1h-5v-1zm0 2h3v1h-3v-1z" />
-              </svg>
-            </a>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.193-2.98 5.518-4.99c.22-.196-.048-.307-.338-.11l-6.81 4.29-2.96-.92c-.64-.203-.658-.64.135-.954l11.57-4.46c.538-.196 1.006.128.832.941z"/>
+  </svg>
+</a>
             <button
               onClick={toggleLanguage}
               className="ml-2 flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 text-xs hover:bg-gray-200"
@@ -692,12 +691,12 @@ export default function Home() {
                   <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
                     {t.nav.chineseDropdown.map((item, index) => (
                       <Link
-                        key={index}
-                        href={item.href}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                        {item.title}
-                      </Link>
+                      key={index}
+                      href={item.href}
+                      className="block px-3 py-1 text-xs text-gray-100 hover:bg-gray-100 hover:bg-opacity-10 rounded"
+                    >
+                      {item.title}
+                    </Link>
                     ))}
                   </div>
                 )}
@@ -740,12 +739,12 @@ export default function Home() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link
-              href="/bookings"
-              className="px-4 py-2 ml-2 rounded-lg bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-lg hover:shadow-xl"
-            >
-              {t.hero.cta}
-            </Link>
+          <Link
+  href="/bookings"
+  className="px-2.5 py-1 text-xs ml-1.5 rounded bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-sm hover:shadow"
+>
+  {t.hero.cta}
+</Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -864,11 +863,11 @@ export default function Home() {
               </Link>
 
               <Link
-                href="/booking"
-                className="mt-4 block w-full rounded-full bg-primary py-2 text-center text-sm font-medium text-white hover:bg-primary/90"
-              >
-                {t.hero.cta}
-              </Link>
+  href="/bookings"
+  className="px-3 py-1.5 text-xs rounded-md bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] active:scale-95 transition-all shadow-sm"
+>
+  {t.hero.cta}
+</Link>
             </nav>
           </div>
         </div>
@@ -989,8 +988,6 @@ export default function Home() {
         {/* Advantages Section */}
         <section className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
-            <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.advantages.title}</h2>
-            <div className="mx-auto mb-12 h-1 w-20 bg-primary"></div>
             <div className="grid gap-8 md:grid-cols-3">
               {t.advantages.items.map((item, index) => (
                 <div key={index} className="rounded-lg bg-white p-8 shadow-md transition-all hover:shadow-lg">
@@ -1008,8 +1005,6 @@ export default function Home() {
         {/* Courses Section */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.courses.title}</h2>
-            <p className="mb-12 text-center text-lg text-gray-600">{t.courses.subtitle}</p>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
               {t.courses.items.map((course, index) => (
                 <div
@@ -1043,7 +1038,6 @@ export default function Home() {
         <section className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
             <div className="mb-8 flex items-center justify-between">
-              <h2 className="text-3xl font-bold text-primary">{t.news.title}</h2>
               <Link href="#" className="flex items-center text-sm font-medium text-primary hover:underline">
                 {t.news.viewAll}
                 <ChevronRight className="ml-1 h-4 w-4" />
