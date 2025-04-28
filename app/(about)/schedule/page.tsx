@@ -50,18 +50,7 @@ export default function SchedulePage() {
         window.removeEventListener("scroll", handleScroll)
       }
     }, [])
-  
-    useEffect(() => {
-      const handleScroll = () => {
-        setScrollY(window.scrollY)
-        setIsScrolled(window.scrollY > 100)
-      }
-  
-      window.addEventListener("scroll", handleScroll)
-      return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
-  
-   
+ 
   
     useEffect(() => {
       // Set loaded state after a small delay to trigger initial animations
@@ -352,12 +341,16 @@ export default function SchedulePage() {
   }
 
   const toggleDropdown = (dropdown: string) => {
-    if (activeDropdown === dropdown) {
-      setActiveDropdown(null)
-    } else {
-      setActiveDropdown(dropdown)
-    }
-  }
+    // Close all other dropdowns immediately
+    setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
+    
+    // Add slight delay for better touch response
+    setTimeout(() => {
+      if (activeDropdown !== dropdown) {
+        setActiveDropdown(dropdown);
+      }
+    }, 50);
+  };
 
 
   
@@ -557,119 +550,170 @@ export default function SchedulePage() {
       </header>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="border-b bg-white py-4 shadow-sm md:hidden">
-          <div className="container mx-auto px-4">
-            <nav className="space-y-4">
-              <div className="space-y-2">
-                <button
-                  onClick={() => toggleDropdown("about-mobile")}
-                  className="flex w-full items-center justify-between py-2 text-sm font-medium text-gray-700"
-                >
-                  <span>{t.nav.about}</span>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${activeDropdown === "about-mobile" ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {activeDropdown === "about-mobile" && (
-                  <div className="ml-4 space-y-2 border-l border-gray-200 pl-4">
-                    {t.nav.aboutDropdown.map((item, index) => (
-                      <Link
-                        key={index}
-                        href={item.href}
-                        className="block py-1 text-sm text-gray-600 hover:text-primary"
-                      >
-                        {item.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+      <div
+        className={`fixed inset-x-0 top-[${isScrolled ? "60px" : "auto"}] z-40 border-b bg-white shadow-sm md:hidden overflow-auto transition-all duration-300 ease-in-out ${
+          mobileMenuOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
+        }`}
+        style={{ top: isScrolled ? "60px" : "auto" }}
+      >
+        <div className="container mx-auto px-4 py-4">
+          <nav className="space-y-4">
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("about-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "about-mobile"}
+              >
+                <span>{t.nav.about}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "about-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "about-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.aboutDropdown.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
               </div>
+            </div>
 
-              <div className="space-y-2">
-                <button
-                  onClick={() => toggleDropdown("courses-mobile")}
-                  className="flex w-full items-center justify-between py-2 text-sm font-medium text-gray-700"
-                >
-                  <span>{t.nav.courses}</span>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${activeDropdown === "courses-mobile" ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {activeDropdown === "courses-mobile" && (
-                  <div className="ml-4 space-y-2 border-l border-gray-200 pl-4">
-                    {t.nav.coursesDropdown.map((item, index) => (
-                      <Link
-                        key={index}
-                        href={item.href}
-                        className="block py-1 text-sm text-gray-600 hover:text-primary"
-                      >
-                        {item.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("courses-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "courses-mobile"}
+              >
+                <span>{t.nav.courses}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "courses-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "courses-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.coursesDropdown.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
               </div>
+            </div>
 
-              <div className="space-y-2">
-                <button
-                  onClick={() => toggleDropdown("chinese-mobile")}
-                  className="flex w-full items-center justify-between py-2 text-sm font-medium text-gray-700"
-                >
-                  <span>{t.nav.chinese}</span>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${activeDropdown === "chinese-mobile" ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {activeDropdown === "chinese-mobile" && (
-                  <div className="ml-4 space-y-2 border-l border-gray-200 pl-4">
-                    {t.nav.chineseDropdown.map((item, index) => (
-                      <Link
-                        key={index}
-                        href={item.href}
-                        className="block py-1 text-sm text-gray-600 hover:text-primary"
-                      >
-                        {item.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("chinese-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "chinese-mobile"}
+              >
+                <span>{t.nav.chinese}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "chinese-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "chinese-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.chineseDropdown.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
               </div>
-              <div className="space-y-2">
-                <button
-                  onClick={() => toggleDropdown("club-mobile")}
-                  className="flex w-full items-center justify-between py-2 text-sm font-medium text-gray-700"
-                >
-                  <span>{t.nav.club}</span>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${activeDropdown === "club-mobile" ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {activeDropdown === "club-mobile" && (
-                  <div className="ml-4 space-y-2 border-l border-gray-200 pl-4">
-                    {t.nav.clubDropdown.map((item, index) => (
-                      <Link
-                        key={index}
-                        href={item.href}
-                        className="block py-1 text-sm text-gray-600 hover:text-primary"
-                      >
-                        {item.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+            </div>
+
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("club-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "club-mobile"}
+              >
+                <span>{t.nav.club}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "club-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "club-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.clubDropdown.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
               </div>
-              <Link href="/news" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                {t.nav.news}
-              </Link>
-              <Link href="/contact" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary">
-                {t.nav.contacts}
-              </Link>
-            </nav>
-          </div>
+            </div>
+
+            <Link
+              href="/news"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+            >
+              {t.nav.news}
+            </Link>
+
+            <Link
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+            >
+              {t.nav.contacts}
+            </Link>
+
+            <Link
+              href="/bookings"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block w-full text-center px-4 py-3 mt-4 text-sm rounded-md bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] active:scale-98 transition-all shadow-sm touch-manipulation"
+            >
+              Book a Lesson
+            </Link>
+          </nav>
         </div>
-      )}
-           <main className="min-h-screen bg-gray-50 pb-16">
+      </div>
+
+      <main className="min-h-screen bg-gray-50 pb-16">
         {/* Hero Section */}
         <section className="bg-primary py-16 text-white">
           <div className="container mx-auto px-4">
