@@ -114,7 +114,7 @@ export default function SchedulePage() {
               { title: "ДЕТИ 7-9 ЛЕТ", href: "/courses/english-adults" },
               { title: "ДЕТИ 10-12 ЛЕТ", href: "/courses/english-kids" },
               { title: "ПОДРОСТКИ", href: "/courses/english-adults" },
-              { title: "ВЗРОСЛЫЕ", href: "/courses/english-kids" },
+              { title: "ВЗРОСЛЫЕ", href: "/adults" },
             ],
             chinese: "КУРСЫ КИТАЙСКОГО",
             chineseDropdown: [
@@ -218,7 +218,7 @@ export default function SchedulePage() {
               { title: "CHILDREN AGED 7-9", href: "/courses/english-adults" },
                 { title: "CHILDREN AGED 10-12", href: "/courses/english-kids" },
               { title: "TEENAGERS", href: "/courses/english-adults" },
-                { title: "ADULTS", href: "/courses/english-kids" },
+                { title: "ADULTS", href: "/adults" },
             ],
             chinese: "CHINESE LANGUAGE COURSES",
             chineseDropdown: [

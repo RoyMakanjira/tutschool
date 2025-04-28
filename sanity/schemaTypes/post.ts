@@ -44,11 +44,6 @@ export default {
         type: "text",
         rows: 3,
       },
-      {
-        name: "body",
-        title: "Body",
-        type: "blockContent",
-      },
     ],
     preview: {
       select: {

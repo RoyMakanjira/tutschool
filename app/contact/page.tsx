@@ -252,11 +252,11 @@ export default function Contact() {
         ],
         courses: "COURSES",
         coursesDropdown: [
-          { title: "PRESCHOOLERS", href: "/courses/english-kids" },
+          { title: "PRESCHOOLERS", href: "/preschoolers" },
           { title: "CHILDREN AGED 7-9", href: "/courses/english-adults" },
             { title: "CHILDREN AGED 10-12", href: "/courses/english-kids" },
           { title: "TEENAGERS", href: "/courses/english-adults" },
-            { title: "ADULTS", href: "/courses/english-kids" },
+            { title: "ADULTS", href: "/adults" },
         ],
         chinese: "CHINESE LANGUAGE COURSES",
         chineseDropdown: [
