@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState, type ReactNode } from "react"
+import { cn } from "@/lib/utils"
 
 interface AnimatedSectionProps {
   children: ReactNode
@@ -425,6 +426,77 @@ export function ParallaxSection({ children, speed = 0.2, className = "" }: Paral
     </div>
   )
 }
+
+interface FadeInProps {
+  children: React.ReactNode;
+  delay?: number;
+  direction?: "up" | "down" | "left" | "right";
+  duration?: number;
+  threshold?: number;
+  className?: string;
+}
+
+export const FadeIn: React.FC<FadeInProps> = ({
+  children,
+  delay = 0,
+  direction = "up",
+  duration = 600,
+  threshold = 0.1,
+  className,
+}) => {
+  const elementRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const current = elementRef.current;
+    if (!current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(current);
+          }
+        });
+      },
+      { threshold }
+    );
+
+    observer.observe(current);
+
+    return () => {
+      if (current) {
+        observer.unobserve(current);
+      }
+    };
+  }, [threshold]);
+
+  const directionStyles = {
+    up: "translate-y-10",
+    down: "translate-y-[-10px]",
+    left: "translate-x-10",
+    right: "translate-x-[-10px]",
+  };
+
+  return (
+    <div
+      ref={elementRef}
+      className={cn(
+        "transition-all",
+        directionStyles[direction],
+        isVisible ? "opacity-100 transform-none" : "opacity-0",
+        className
+      )}
+      style={{
+        transitionDuration: `${duration}ms`,
+        transitionDelay: `${delay}ms`,
+      }}
+    >
+      {children}
+    </div>
+  );
+};
 
 interface RevealMaskProps {
   children: ReactNode

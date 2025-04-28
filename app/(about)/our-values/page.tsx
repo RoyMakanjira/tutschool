@@ -80,11 +80,11 @@ export default function ValuesPage() {
         aboutDropdown: [
           { title: "НАШИ ЦЕННОСТИ", href: "/our-values" },
           { title: "РАСПИСАНИЕ И ЦЕНЫ", href: "/schedule" },
-          { title: "ПРЕПОДАВАТЕЛИ", href: "/testimonials" },
+          { title: "ПРЕПОДАВАТЕЛИ", href: "/teachers" },
         ],
         courses: "КУРСЫ АНГЛИЙСКОГО",
         coursesDropdown: [
-          { title: "ДОШКОЛЬНИКИ", href: "/courses/english-kids" },
+          { title: "ДОШКОЛЬНИКИ", href: "/preschoolers" },
           { title: "ДЕТИ 7-9 ЛЕТ", href: "/courses/english-adults" },
           { title: "ДЕТИ 10-12 ЛЕТ", href: "/courses/english-kids" },
           { title: "ПОДРОСТКИ", href: "/courses/english-adults" },
@@ -171,11 +171,11 @@ export default function ValuesPage() {
         aboutDropdown: [
           { title: "OUR VALUES", href: "/our-values" },
           { title: "SCHEDULE AND PRICES", href: "/schedule" },
-          { title: "TEACHERS", href: "/testimonials" },
+          { title: "TEACHERS", href: "/teachers" },
         ],
         courses: "ENGLISH COURSES",
         coursesDropdown: [
-          { title: "PRESCHOOLERS", href: "/courses/english-kids" },
+          { title: "PRESCHOOLERS", href: "/preschoolers" },
           { title: "CHILDREN AGED 7-9", href: "/courses/english-adults" },
           { title: "CHILDREN AGED 10-12", href: "/courses/english-kids" },
           { title: "TEENAGERS", href: "/courses/english-adults" },

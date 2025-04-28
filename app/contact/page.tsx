@@ -120,7 +120,7 @@ export default function Contact() {
         aboutDropdown: [
           { title: "НАШИ ЦЕННОСТИ", href: "/our-values" },
           { title: "РАСПИСАНИЕ И ЦЕНЫ", href: "/schedule" },
-          { title: "ПРЕПОДАВАТЕЛИ", href: "/testimonials" },
+          { title: "ПРЕПОДАВАТЕЛИ", href: "/teachers" },
         ],
         courses: "КУРСЫ АНГЛИЙСКОГО",
         coursesDropdown: [

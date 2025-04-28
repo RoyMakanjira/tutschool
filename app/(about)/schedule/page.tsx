@@ -106,11 +106,11 @@ export default function SchedulePage() {
             aboutDropdown: [
               { title: "НАШИ ЦЕННОСТИ", href: "/our-values" },
               { title: "РАСПИСАНИЕ И ЦЕНЫ", href: "/schedule" },
-              { title: "ПРЕПОДАВАТЕЛИ", href: "/testimonials" },
+              { title: "ПРЕПОДАВАТЕЛИ", href: "/teachers" },
             ],
             courses: "КУРСЫ АНГЛИЙСКОГО",
             coursesDropdown: [
-              { title: "ДОШКОЛЬНИКИ", href: "/courses/english-kids" },
+              { title: "ДОШКОЛЬНИКИ", href: "/preschoolers" },
               { title: "ДЕТИ 7-9 ЛЕТ", href: "/courses/english-adults" },
               { title: "ДЕТИ 10-12 ЛЕТ", href: "/courses/english-kids" },
               { title: "ПОДРОСТКИ", href: "/courses/english-adults" },
@@ -210,11 +210,11 @@ export default function SchedulePage() {
             aboutDropdown: [
               { title: "OUR VALUES", href: "/our-values" },
               { title: "SCHEDULE AND PRICES", href: "/schedule" },
-              { title: "TEACHERS", href: "/testimonials" },
+              { title: "TEACHERS", href: "/teachers" },
             ],
             courses: "COURSES",
             coursesDropdown: [
-              { title: "PRESCHOOLERS", href: "/courses/english-kids" },
+              { title: "PRESCHOOLERS", href: "/preschoolers" },
               { title: "CHILDREN AGED 7-9", href: "/courses/english-adults" },
                 { title: "CHILDREN AGED 10-12", href: "/courses/english-kids" },
               { title: "TEENAGERS", href: "/courses/english-adults" },
@@ -427,9 +427,9 @@ export default function SchedulePage() {
                    <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
                  </div>
                </div>
-     
                {/* Desktop Navigation */}
-               
+          
+
                <nav className="hidden md:block" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">
@@ -494,12 +494,12 @@ export default function SchedulePage() {
                   <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
                     {t.nav.chineseDropdown.map((item, index) => (
                       <Link
-                      key={index}
-                      href={item.href}
-                      className="block px-3 py-1 text-xs text-gray-100 hover:bg-gray-100 hover:bg-opacity-10 rounded"
-                    >
-                      {item.title}
-                    </Link>
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -542,6 +542,12 @@ export default function SchedulePage() {
           </nav>
 
           <div className="flex items-center gap-4">
+          <Link
+  href="/bookings"
+  className="px-2.5 py-1 text-xs ml-1.5 rounded bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-sm hover:shadow"
+>
+  Book a Lesson
+</Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -549,8 +555,8 @@ export default function SchedulePage() {
         </div>
       </header>
 
-      {/* Mobile Menu */}
-      <div
+            {/* Mobile Menu */}
+            <div
         className={`fixed inset-x-0 top-[${isScrolled ? "60px" : "auto"}] z-40 border-b bg-white shadow-sm md:hidden overflow-auto transition-all duration-300 ease-in-out ${
           mobileMenuOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
         }`}

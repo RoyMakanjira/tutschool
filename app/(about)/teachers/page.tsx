@@ -3,47 +3,27 @@
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import ValuesSectionCard from "@/components/ValuesSectionCard"
-import { ScrollProgress, ScrollSpy } from "@/components/animations/scroll-animations"
 import {
   MapPin,
   Phone,
   Mail,
   Globe,
-  Star,
-  MessageSquare,
-  Navigation,
-  Send,
   ChevronRight,
-  Calendar,
-  User,
   ArrowRight,
   Menu,
   X,
   ChevronDown,
   Clock,
-  TextIcon as Telegram,
-  ChevronLeft, Youtube,
-  Headphones,
   Landmark,
 } from "lucide-react"
-import PromotionalBanner from "@/components/PromotionalBanner"
 
-export default function Home() {
+
+export default function Teachers() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
-  const autoPlayRef = useRef<NodeJS.Timeout | null>(null)
-  const [hoveredCourse, setHoveredCourse] = useState<number | null>(null)
-  const [sliderDirection, setSliderDirection] = useState<"next" | "prev" | null>(null)
-  const [activeSection, setActiveSection] = useState<string>("hero")
   const [isScrolled, setIsScrolled] = useState(false)
-
- 
   const dropdownRef = useRef<HTMLDivElement>(null)
-
   const [scrollY, setScrollY] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -77,74 +57,6 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    // Set loaded state after a small delay to trigger initial animations
-    const timer = setTimeout(() => {
-      setIsLoaded(true)
-    }, 100)
-
-    // Handle scroll events for scroll-triggered animations
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
-
-  const heroImages = [
-    "/assets/slider/Slider-image-1.jpg?height=600&width=1600&text=Students in classroom",
-    "/assets/slider/Slider-Image-2.jpg?height=600&width=1600&text=Language Learning",
-    "/assets/slider/Slider-image-3.jpg?height=600&width=1600&text=Arts and Creativity",
-    "/assets/slider/Slider-image-4.jpg?heitht=600&width=1600&text=School Events",
-  ]
-
-  useEffect(() => {
-    if (isAutoPlaying) {
-      autoPlayRef.current = setInterval(() => {
-        setSliderDirection("next")
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length)
-      }, 5000)
-    }
-
-    return () => {
-      if (autoPlayRef.current) {
-        clearInterval(autoPlayRef.current)
-      }
-    }
-  }, [isAutoPlaying, heroImages.length])
-
-  const goToNextSlide = () => {
-    if (autoPlayRef.current) {
-      clearInterval(autoPlayRef.current)
-      setIsAutoPlaying(false)
-    }
-    setSliderDirection("next")
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length)
-  }
-
-  const goToPrevSlide = () => {
-    if (autoPlayRef.current) {
-      clearInterval(autoPlayRef.current)
-      setIsAutoPlaying(false)
-    }
-    setSliderDirection("prev")
-    setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? heroImages.length - 1 : prevIndex - 1))
-  }
-
-  const goToSlide = (index: number) => {
-    if (autoPlayRef.current) {
-      clearInterval(autoPlayRef.current)
-      setIsAutoPlaying(false)
-    }
-    setSliderDirection(index > currentImageIndex ? "next" : "prev")
-    setCurrentImageIndex(index)
-  }
-
-  useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setActiveDropdown(null)
@@ -156,7 +68,7 @@ export default function Home() {
       document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [])
-  
+
   const translations = {
     ru: {
       schoolName: "Tut School",
@@ -199,120 +111,116 @@ export default function Home() {
         news: "НОВОСТИ",
         contacts: "КОНТАКТЫ",
       },
-      hero: {
-        title: "ШКОЛА ИНОСТРАННЫХ ЯЗЫКОВ И ИСКУССТВ",
-        subtitle: "Мы помогаем детям и взрослым освоить английский и китайский языки в дружеской атмосфере",
+      teachers: {
+        title: "НАШИ ПРЕПОДАВАТЕЛИ",
+        subtitle: "Познакомьтесь с нашей командой профессиональных педагогов",
         cta: "Записаться на пробный урок",
+        breadcrumbs: {
+          home: "Главная",
+          teachers: "Преподаватели",
+        },
       },
-      about: {
-        title: "О НАС",
-        description:
-          "Мы языковая студия, английский и китайский языки для детей и взрослых. Нашим клиентам нравится качество преподавания и дружеская атмосфера. У нас вы не только найдете компанию для изучения языков, но и обретете новых друзей.",
-        cta: "Подробнее",
-      },
-      welcome: {
-        title: "ДОБРО ПОЖАЛОВАТЬ В TUT SCHOOL",
-        description:
-          "Наша школа предлагает уникальную возможность изучать языки и искусство в одном месте. Мы создаем вдохновляющую среду, где каждый студент может раскрыть свой потенциал.",
-        points: [
-          "Индивидуальный подход к каждому ученику",
-          "Современные методики преподавания",
-          "Комфортные классы и дружелюбная атмосфера",
-          "Регулярные культурные мероприятия",
+      teachersList: [
+        {
+          name: "Анна Петрова",
+          position: "Преподаватель английского языка",
+          education: "Московский государственный лингвистический университет",
+          experience: "Опыт преподавания: 8 лет",
+          description:
+            "Анна специализируется на обучении детей младшего и среднего школьного возраста. Использует коммуникативную методику и игровые подходы для эффективного усвоения материала.",
+          certifications: ["CELTA", "TKT"],
+          languages: ["Английский (C2)", "Испанский (B1)"],
+        },
+        {
+          name: "Дмитрий Иванов",
+          position: "Старший преподаватель английского языка",
+          education: "Кембриджский университет, Великобритания",
+          experience: "Опыт преподавания: 12 лет",
+          description:
+            "Дмитрий работает со взрослыми студентами и подростками, готовит к международным экзаменам IELTS и TOEFL. Имеет опыт работы в языковых школах Великобритании.",
+          certifications: ["DELTA", "IELTS Examiner"],
+          languages: ["Английский (C2)", "Немецкий (B2)"],
+        },
+        {
+          name: "Елена Смирнова",
+          position: "Преподаватель китайского языка",
+          education: "Пекинский университет, Китай",
+          experience: "Опыт преподавания: 6 лет",
+          description:
+            "Елена преподает китайский язык для всех возрастных групп. Разработала авторскую методику изучения иероглифов для русскоговорящих студентов.",
+          certifications: ["HSK 6", "TCFL"],
+          languages: ["Китайский (C2)", "Английский (C1)"],
+        },
+        {
+          name: "Михаил Козлов",
+          position: "Преподаватель английского и испанского языков",
+          education: "Мадридский университет Комплутенсе, Испания",
+          experience: "Опыт преподавания: 10 лет",
+          description:
+            "Михаил ведет курсы делового английского и общего испанского языка. Специализируется на интенсивных программах для взрослых.",
+          certifications: ["CELTA", "DELE C2"],
+          languages: ["Английский (C2)", "Испанский (C2)", "Итальянский (B1)"],
+        },
+        {
+          name: "Ольга Николаева",
+          position: "Преподаватель английского языка для дошкольников",
+          education: "Московский педагогический государственный университет",
+          experience: "Опыт преподавания: 7 лет",
+          description:
+            "Ольга специализируется на раннем языковом развитии детей от 3 до 6 лет. Использует методику полного физического реагирования (TPR) и музыкальные элементы в обучении.",
+          certifications: ["TKT: Young Learners"],
+          languages: ["Английский (C1)", "Французский (A2)"],
+        },
+        {
+          name: "Сергей Васильев",
+          position: "Преподаватель китайского языка и каллиграфии",
+          education: "Шанхайский университет иностранных языков, Китай",
+          experience: "Опыт преподавания: 9 лет",
+          description:
+            "Сергей преподает не только китайский язык, но и традиционную китайскую каллиграфию. Проводит мастер-классы по культуре и искусству Китая.",
+          certifications: ["HSK 6", "HSKK Advanced"],
+          languages: ["Китайский (C2)", "Английский (B2)"],
+        },
+      ],
+      qualifications: {
+        title: "КВАЛИФИКАЦИИ И СЕРТИФИКАТЫ",
+        description: "Наши преподаватели имеют международные сертификаты и постоянно повышают свою квалификацию",
+        items: [
+          "Сертификаты CELTA и DELTA от Кембриджского университета",
+          "Сертификаты TKT (Teaching Knowledge Test)",
+          "Сертификаты HSK и HSKK для преподавателей китайского языка",
+          "Сертификаты IELTS Examiner и TOEFL Instructor",
+          "Регулярное участие в методических семинарах и конференциях",
         ],
-        cta: "Узнать больше о нашей школе",
       },
-      advantages: {
-        title: "НАШИ ПРЕИМУЩЕСТВА",
+      methodology: {
+        title: "НАША МЕТОДОЛОГИЯ",
+        description: "Мы используем коммуникативный подход и современные методики преподавания",
         items: [
           {
-            title: "Опытные преподаватели",
-            description: "Наши учителя имеют международные сертификаты и многолетний опыт преподавания",
+            title: "Коммуникативный подход",
+            description: "Фокус на развитии разговорных навыков и практическом использовании языка",
           },
           {
-            title: "Английский и китайский",
-            description: "Предлагаем курсы по двум востребованным языкам для детей и взрослых",
+            title: "Индивидуальный подход",
+            description: "Учет особенностей и потребностей каждого студента",
           },
           {
-            title: "Школа искусств",
-            description: "Помимо языковых курсов у нас есть творческие занятия и мастер-классы",
+            title: "Интерактивное обучение",
+            description: "Использование игр, ролевых ситуаций и мультимедийных материалов",
           },
         ],
       },
-      courses: {
-        title: "НАШИ КУРСЫ",
-        subtitle: "Выберите программу, которая подходит именно вам",
-        items: [
-          {
-            title: "Английский для детей",
-            description: "Возраст: 5-10 лет. Игровой формат обучения с акцентом на разговорную речь.",
-            cta: "Подробнее",
-          },
-          {
-            title: "Китайский для детей",
-            description: "Возраст: 5-10 лет. Знакомство с иероглифами и основами китайской культуры.",
-            cta: "Подробнее",
-          },
-          {
-            title: "Английский для взрослых",
-            description: "Общий и деловой английский для всех уровней от начинающего до продвинутого.",
-            cta: "Подробнее",
-          },
-          {
-            title: "Китайская каллиграфия",
-            description: "Творческие занятия по китайской каллиграфии для детей и взрослых.",
-            cta: "Подробнее",
-          },
+      joinTeam: {
+        title: "ПРИСОЕДИНЯЙТЕСЬ К НАШЕЙ КОМАНДЕ",
+        description: "Мы всегда рады талантливым и увлеченным преподавателям",
+        requirements: [
+          "Высшее лингвистическое или педагогическое образование",
+          "Опыт преподавания от 2 лет",
+          "Владение современными методиками преподавания",
+          "Любовь к своему делу и желание развиваться",
         ],
-      },
-      news: {
-        title: "НОВОСТИ И СОБЫТИЯ",
-        viewAll: "Смотреть все",
-        items: [
-          {
-            date: "15 мая 2024",
-            title: "Летний интенсив по английскому",
-            description: "Запускаем интенсивный курс английского языка для школьников на летних каникулах.",
-            cta: "Читать далее",
-          },
-          {
-            date: "10 мая 2024",
-            title: "Мастер-класс по китайской каллиграфии",
-            description: "Приглашаем на творческий мастер-класс по традиционной китайской каллиграфии.",
-            cta: "Читать далее",
-          },
-          {
-            date: "5 мая 2024",
-            title: "Новые группы для дошкольников",
-            description: "Открываем набор в новые группы английского языка для детей 4-6 лет.",
-            cta: "Читать далее",
-          },
-        ],
-      },
-      testimonials: {
-        title: "ОТЗЫВЫ НАШИХ УЧЕНИКОВ",
-        items: [
-          {
-            name: "Анна К.",
-            text: "Мой ребенок с удовольствием ходит на занятия английским. За полгода виден значительный прогресс, особенно в разговорной речи.",
-          },
-          {
-            name: "Дмитрий С.",
-            text: "Отличная школа с профессиональными преподавателями. Занимаюсь китайским уже год, и результаты превзошли мои ожидания.",
-          },
-          {
-            name: "Елена В.",
-            text: "Очень нравится дружелюбная атмосфера и индивидуальный подход. Преподаватели всегда готовы помочь и ответить на все вопросы.",
-          },
-        ],
-      },
-      contact: {
-        title: "СВЯЗАТЬСЯ С НАМИ",
-        phone: "Позвонить",
-        directions: "Как доехать",
-        write: "Написать",
-        telegram: "Telegram",
-        whatsapp: "WhatsApp",
+        cta: "Отправить резюме",
       },
       trial: {
         title: "ЗАПИШИТЕСЬ НА БЕСПЛАТНЫЙ ПРОБНЫЙ УРОК",
@@ -355,9 +263,9 @@ export default function Home() {
         coursesDropdown: [
           { title: "PRESCHOOLERS", href: "/preschoolers" },
           { title: "CHILDREN AGED 7-9", href: "/courses/english-adults" },
-            { title: "CHILDREN AGED 10-12", href: "/courses/english-kids" },
+          { title: "CHILDREN AGED 10-12", href: "/courses/english-kids" },
           { title: "TEENAGERS", href: "/courses/english-adults" },
-            { title: "ADULTS", href: "/courses/english-kids" },
+          { title: "ADULTS", href: "/courses/english-kids" },
         ],
         chinese: "CHINESE LANGUAGE COURSES",
         chineseDropdown: [
@@ -375,120 +283,116 @@ export default function Home() {
         news: "NEWS",
         contacts: "CONTACTS",
       },
-      hero: {
-        title: "SCHOOL OF FOREIGN LANGUAGES AND ARTS",
-        subtitle: "We help children and adults learn English and Chinese in a friendly atmosphere",
-        cta: "Book a lesson",
+      teachers: {
+        title: "OUR TEACHERS",
+        subtitle: "Meet our team of professional educators",
+        cta: "Book a trial lesson",
+        breadcrumbs: {
+          home: "Home",
+          teachers: "Teachers",
+        },
       },
-      about: {
-        title: "ABOUT US",
-        description:
-          "We are a language studio offering English and Chinese languages for children and adults. Our clients appreciate the quality of teaching and friendly atmosphere. With us, you will not only find a company to learn languages but also make new friends.",
-        cta: "Learn More",
-      },
-      welcome: {
-        title: "WELCOME TO TUT SCHOOL",
-        description:
-          "Our school offers a unique opportunity to study languages and art in one place. We create an inspiring environment where every student can reach their potential.",
-        points: [
-          "Individual approach to each student",
-          "Modern teaching methods",
-          "Comfortable classrooms and friendly atmosphere",
-          "Regular cultural events",
+      teachersList: [
+        {
+          name: "Anna Petrova",
+          position: "English Language Teacher",
+          education: "Moscow State Linguistic University",
+          experience: "Teaching experience: 8 years",
+          description:
+            "Anna specializes in teaching children of primary and middle school age. She uses communicative methodology and game-based approaches for effective learning.",
+          certifications: ["CELTA", "TKT"],
+          languages: ["English (C2)", "Spanish (B1)"],
+        },
+        {
+          name: "Dmitry Ivanov",
+          position: "Senior English Language Teacher",
+          education: "University of Cambridge, UK",
+          experience: "Teaching experience: 12 years",
+          description:
+            "Dmitry works with adult students and teenagers, preparing them for international exams like IELTS and TOEFL. He has experience working in language schools in the UK.",
+          certifications: ["DELTA", "IELTS Examiner"],
+          languages: ["English (C2)", "German (B2)"],
+        },
+        {
+          name: "Elena Smirnova",
+          position: "Chinese Language Teacher",
+          education: "Peking University, China",
+          experience: "Teaching experience: 6 years",
+          description:
+            "Elena teaches Chinese for all age groups. She has developed her own methodology for teaching Chinese characters to Russian-speaking students.",
+          certifications: ["HSK 6", "TCFL"],
+          languages: ["Chinese (C2)", "English (C1)"],
+        },
+        {
+          name: "Mikhail Kozlov",
+          position: "English and Spanish Language Teacher",
+          education: "Complutense University of Madrid, Spain",
+          experience: "Teaching experience: 10 years",
+          description:
+            "Mikhail teaches business English and general Spanish courses. He specializes in intensive programs for adults.",
+          certifications: ["CELTA", "DELE C2"],
+          languages: ["English (C2)", "Spanish (C2)", "Italian (B1)"],
+        },
+        {
+          name: "Olga Nikolaeva",
+          position: "English Teacher for Preschoolers",
+          education: "Moscow Pedagogical State University",
+          experience: "Teaching experience: 7 years",
+          description:
+            "Olga specializes in early language development for children aged 3 to 6. She uses Total Physical Response (TPR) methodology and musical elements in her teaching.",
+          certifications: ["TKT: Young Learners"],
+          languages: ["English (C1)", "French (A2)"],
+        },
+        {
+          name: "Sergey Vasiliev",
+          position: "Chinese Language and Calligraphy Teacher",
+          education: "Shanghai International Studies University, China",
+          experience: "Teaching experience: 9 years",
+          description:
+            "Sergey teaches not only Chinese language but also traditional Chinese calligraphy. He conducts workshops on Chinese culture and art.",
+          certifications: ["HSK 6", "HSKK Advanced"],
+          languages: ["Chinese (C2)", "English (B2)"],
+        },
+      ],
+      qualifications: {
+        title: "QUALIFICATIONS AND CERTIFICATES",
+        description: "Our teachers hold international certificates and continuously improve their qualifications",
+        items: [
+          "CELTA and DELTA certificates from Cambridge University",
+          "TKT (Teaching Knowledge Test) certificates",
+          "HSK and HSKK certificates for Chinese language teachers",
+          "IELTS Examiner and TOEFL Instructor certificates",
+          "Regular participation in methodological seminars and conferences",
         ],
-        cta: "Learn more about our school",
       },
-      advantages: {
-        title: "OUR ADVANTAGES",
+      methodology: {
+        title: "OUR METHODOLOGY",
+        description: "We use a communicative approach and modern teaching methods",
         items: [
           {
-            title: "Experienced Teachers",
-            description: "Our teachers have international certificates and many years of teaching experience",
+            title: "Communicative Approach",
+            description: "Focus on developing speaking skills and practical language use",
           },
           {
-            title: "English and Chinese",
-            description: "We offer courses in two in-demand languages for children and adults",
+            title: "Individual Approach",
+            description: "Taking into account the characteristics and needs of each student",
           },
           {
-            title: "School of Arts",
-            description: "In addition to language courses, we have creative classes and master classes",
+            title: "Interactive Learning",
+            description: "Using games, role-playing situations, and multimedia materials",
           },
         ],
       },
-      courses: {
-        title: "OUR COURSES",
-        subtitle: "Choose the program that suits you best",
-        items: [
-          {
-            title: "English for Children",
-            description: "Ages: 5-10 years. Game-based learning format with an emphasis on speaking skills.",
-            cta: "Learn More",
-          },
-          {
-            title: "Chinese for Children",
-            description: "Ages: 5-10 years. Introduction to characters and basics of Chinese culture.",
-            cta: "Learn More",
-          },
-          {
-            title: "English for Adults",
-            description: "General and business English for all levels from beginner to advanced.",
-            cta: "Learn More",
-          },
-          {
-            title: "Chinese Calligraphy",
-            description: "Creative classes in Chinese calligraphy for children and adults.",
-            cta: "Learn More",
-          },
+      joinTeam: {
+        title: "JOIN OUR TEAM",
+        description: "We are always looking for talented and passionate teachers",
+        requirements: [
+          "Higher linguistic or pedagogical education",
+          "Teaching experience of at least 2 years",
+          "Knowledge of modern teaching methods",
+          "Passion for teaching and desire to develop",
         ],
-      },
-      news: {
-        title: "NEWS AND EVENTS",
-        viewAll: "View all",
-        items: [
-          {
-            date: "May 15, 2024",
-            title: "Summer English Intensive Course",
-            description: "We are launching an intensive English course for school students during summer holidays.",
-            cta: "Read more",
-          },
-          {
-            date: "May 10, 2024",
-            title: "Chinese Calligraphy Workshop",
-            description: "Join us for a creative workshop on traditional Chinese calligraphy.",
-            cta: "Read more",
-          },
-          {
-            date: "May 5, 2024",
-            title: "New Groups for Preschoolers",
-            description: "We are opening enrollment for new English language groups for children aged 4-6.",
-            cta: "Read more",
-          },
-        ],
-      },
-      testimonials: {
-        title: "TESTIMONIALS FROM OUR STUDENTS",
-        items: [
-          {
-            name: "Anna K.",
-            text: "My child enjoys attending English classes. There has been significant progress over six months, especially in speaking skills.",
-          },
-          {
-            name: "Dmitry S.",
-            text: "Excellent school with professional teachers. I've been studying Chinese for a year, and the results have exceeded my expectations.",
-          },
-          {
-            name: "Elena V.",
-            text: "I really like the friendly atmosphere and individual approach. The teachers are always ready to help and answer all questions.",
-          },
-        ],
-      },
-      contact: {
-        title: "CONTACT US",
-        phone: "Call",
-        directions: "Directions",
-        write: "Write",
-        telegram: "Telegram",
-        whatsapp: "WhatsApp",
+        cta: "Send Resume",
       },
       trial: {
         title: "SIGN UP FOR A FREE TRIAL LESSON",
@@ -530,30 +434,10 @@ export default function Home() {
     }
   }
 
-   // Section IDs for scroll spy
-   const sectionIds = [
-    "hero",
-    "welcome",
-    "featured-courses",
-    "values",
-    "methodology",
-    "success-stories",
-    "language-levels",
-    "events",
-    "faq",
-    "cta",
-  ]
-
   return (
     <div className="flex min-h-screen flex-col">
-{/* Top Bar */}
-      <ScrollProgress />
+      {/* Top Bar */}
 
-      {/* Scroll Spy for section tracking */}
-      <ScrollSpy sectionIds={sectionIds} onChange={(id) => setActiveSection(id)} threshold={0.3} />
-      
-       {/* Promotional Banner */}
-       <PromotionalBanner />
       <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
           <div className="flex flex-wrap items-center gap-4">
@@ -579,22 +463,24 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            
-          <a href="#" className="text-red-600 hover:text-burgundy-900">
+            <a href="#" className="text-red-600 hover:text-burgundy-900">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.052-1.713-1.033-1.033-1.49-1.172-1.744-1.172-.356 0-.458.102-.458.593v1.573c0 .424-.136.593-1.252.593-1.844 0-3.896-1.118-5.336-3.202-2.168-3.4-2.762-5.944-2.762-6.47 0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.864 2.5 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.316c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.407.44-.407h2.744c.373 0 .508.204.508.66v3.54c0 .373.17.508.271.508.22 0 .407-.135.814-.542 1.27-1.422 2.168-3.624 2.168-3.624.118-.254.305-.491.745-.491h1.744c.525 0 .644.27.525.66-.22 1.015-2.32 3.979-2.32 3.979-.186.305-.254.44 0 .78.186.254.796.779 1.2 1.252.745.847 1.32 1.558 1.473 2.052.17.491-.085.745-.576.745z" />
               </svg>
             </a>
-            <a href="https://api.whatsapp.com/send/?phone=%2B79167349246&text&type=phone_number&app_absent=0" className="text-green-600 hover:text-burgundy-900">
+            <a
+              href="https://api.whatsapp.com/send/?phone=%2B79167349246&text&type=phone_number&app_absent=0"
+              className="text-green-600 hover:text-burgundy-900"
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20.472 3.5C18.188 1.24 15.073 0 11.786 0 5.354 0 .13 5.214.13 11.636c0 2.05.546 4.05 1.585 5.812L.13 24l6.726-1.763c1.698.925 3.607 1.41 5.55 1.41h.005c6.43 0 11.65-5.215 11.65-11.637 0-3.109-1.21-6.026-3.413-8.225l-.175-.285zM11.786 21.273h-.004c-1.743 0-3.45-.468-4.942-1.35l-.355-.21-3.676.964.985-3.595-.232-.368c-.975-1.55-1.49-3.335-1.49-5.17 0-5.356 4.364-9.713 9.728-9.713 2.6 0 5.034 1.012 6.868 2.85 1.832 1.837 2.842 4.276 2.84 6.873-.004 5.356-4.367 9.719-9.722 9.719zm5.333-7.278c-.294-.147-1.734-.856-2.002-.951-.268-.097-.463-.146-.658.146-.195.293-.757.951-.928 1.147-.17.195-.342.22-.635.073-.294-.147-1.24-.456-2.363-1.456-.873-.778-1.463-1.738-1.634-2.032-.171-.293-.018-.451.128-.597.132-.132.294-.342.44-.513.148-.17.197-.293.296-.488.098-.195.05-.366-.025-.513-.073-.147-.657-1.583-.9-2.168-.244-.585-.487-.487-.658-.487-.17 0-.367-.025-.562-.025-.195 0-.513.073-.781.366-.269.293-1.025.999-1.025 2.435 0 1.436 1.05 2.824 1.196 3.02.146.195 2.057 3.142 4.988 4.407.697.268 1.24.428 1.664.55.7.222 1.337.19 1.839.115.56-.085 1.734-.71 1.977-1.395.244-.684.244-1.27.17-1.393-.073-.122-.268-.196-.562-.342z" />
               </svg>
             </a>
             <a href="https://t.me/TUTschoolNovogorsk" className="text-blue-500 hover:text-burgundy-900">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.193-2.98 5.518-4.99c.22-.196-.048-.307-.338-.11l-6.81 4.29-2.96-.92c-.64-.203-.658-.64.135-.954l11.57-4.46c.538-.196 1.006.128.832.941z"/>
-  </svg>
-</a>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.193-2.98 5.518-4.99c.22-.196-.048-.307-.338-.11l-6.81 4.29-2.96-.92c-.64-.203-.658-.64.135-.954l11.57-4.46c.538-.196 1.006.128.832.941z" />
+              </svg>
+            </a>
             <button
               onClick={toggleLanguage}
               className="ml-2 flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 text-xs hover:bg-gray-200"
@@ -607,19 +493,21 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header    className={`border-b bg-white py-4 shadow-sm transition-all duration-300 ${
+      <header
+        className={`border-b bg-white py-4 shadow-sm transition-all duration-300 ${
           isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""
-        }`}>
+        }`}
+      >
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
             <div className="relative h-14 w-14">
-              <Link href='/'>
-              <Image
-                src="/logo.png?height=56&width=56"
-                alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
-                fill
-                className="object-contain"
-              />
+              <Link href="/">
+                <Image
+                  src="/logo.png?height=56&width=56"
+                  alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
+                  fill
+                  className="object-contain"
+                />
               </Link>
             </div>
             <div>
@@ -629,8 +517,6 @@ export default function Home() {
           </div>
 
           {/* Desktop Navigation */}
-          
-
           <nav className="hidden md:block" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">
@@ -743,12 +629,12 @@ export default function Home() {
           </nav>
 
           <div className="flex items-center gap-4">
-          <Link
-  href="/bookings"
-  className="px-2.5 py-1 text-xs ml-1.5 rounded bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-sm hover:shadow"
->
-  {t.hero.cta}
-</Link>
+            <Link
+              href="/bookings"
+              className="px-2.5 py-1 text-xs ml-1.5 rounded bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-sm hover:shadow"
+            >
+              {t.teachers.cta}
+            </Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -756,8 +642,8 @@ export default function Home() {
         </div>
       </header>
 
-            {/* Mobile Menu */}
-            <div
+      {/* Mobile Menu */}
+      <div
         className={`fixed inset-x-0 top-[${isScrolled ? "60px" : "auto"}] z-40 border-b bg-white shadow-sm md:hidden overflow-auto transition-all duration-300 ease-in-out ${
           mobileMenuOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
         }`}
@@ -914,129 +800,114 @@ export default function Home() {
               onClick={() => setMobileMenuOpen(false)}
               className="block w-full text-center px-4 py-3 mt-4 text-sm rounded-md bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] active:scale-98 transition-all shadow-sm touch-manipulation"
             >
-              {t.hero.cta}
+              {t.teachers.cta}
             </Link>
           </nav>
         </div>
       </div>
 
       <main>
-         {/* Hero Section */}
-         <section className="relative">
-          <div className="relative h-[600px] w-full overflow-hidden">
-            {heroImages.map((src, index) => (
-              <div
-                key={index}
-                className={`absolute inset-0 transition-all duration-1000 ${
-                  index === currentImageIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-                } ${
-                  sliderDirection === "next" && index === currentImageIndex
-                    ? "animate-slide-in-right"
-                    : sliderDirection === "prev" && index === currentImageIndex
-                      ? "animate-slide-in-left"
-                      : ""
-                }`}
-              >
-                <Image
-                  src={src || "/assets/happy-student.jpg"}
-                  alt={language === "ru" ? `Слайд ${index + 1}` : `Slide ${index + 1}`}
-                  fill
-                  className="object-cover transform transition-transform duration-10000 hover:scale-105"
-                  priority={index === 0}
-                />
-              </div>
-            ))}
-            <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/70 to-transparent"></div>
-            <div className="absolute inset-0 z-30 flex flex-col items-start justify-center px-4 text-white md:px-12 lg:px-20">
-              <div className="max-w-2xl">
-                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl animate-fade-in-up">
-                  {t.hero.title}
-                </h2>
-                <p className="mb-8 text-lg md:text-xl animate-fade-in-up animation-delay-300">{t.hero.subtitle}</p>
-                <Link
-                  href="/bookings"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white transition-all hover:bg-primary/90 hover:gap-3 animate-fade-in-up animation-delay-600"
-                >
-                  {t.hero.cta}
-                  <ArrowRight className="h-4 w-4" />
+        {/* Hero Section */}
+        <section className="bg-gray-50 py-12">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col items-center text-center">
+              <div className="mb-6 flex items-center gap-2 text-sm text-gray-500">
+                <Link href="/" className="hover:text-primary">
+                  {t.teachers.breadcrumbs.home}
                 </Link>
+                <ChevronRight className="h-4 w-4" />
+                <span>{t.teachers.breadcrumbs.teachers}</span>
               </div>
+              <h1 className="mb-4 text-4xl font-bold text-primary">{t.teachers.title}</h1>
+              <p className="mx-auto max-w-2xl text-lg text-gray-600">{t.teachers.subtitle}</p>
             </div>
+          </div>
+        </section>
 
-            {/* Carousel Navigation Arrows */}
-            <button
-              onClick={goToPrevSlide}
-              className="absolute left-4 top-1/2 z-30 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white transition-all hover:bg-black/50"
-              aria-label="Previous slide"
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </button>
-            <button
-              onClick={goToNextSlide}
-              className="absolute right-4 top-1/2 z-30 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white transition-all hover:bg-black/50"
-              aria-label="Next slide"
-            >
-              <ChevronRight className="h-6 w-6" />
-            </button>
-
-            {/* Carousel Navigation Dots */}
-            <div className="absolute bottom-6 left-0 right-0 z-30 flex justify-center gap-2">
-              {heroImages.map((_, index) => (
-                <button
+        {/* Teachers List Section */}
+        <section id="teachers-list" className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {t.teachersList.map((teacher, index) => (
+                <div
                   key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`h-2 w-2 rounded-full transition-all ${
-                    index === currentImageIndex ? "bg-white w-6" : "bg-white/50"
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
+                  className="overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg"
+                >
+                  <div className="relative h-64">
+                    <Image
+                      src={`/placeholder.svg?height=300&width=400&text=Teacher ${index + 1}`}
+                      alt={teacher.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="mb-2 text-xl font-bold">{teacher.name}</h3>
+                    <p className="mb-4 text-sm font-medium text-primary">{teacher.position}</p>
+                    <div className="mb-4 space-y-2 text-sm text-gray-600">
+                      <p>{teacher.education}</p>
+                      <p>{teacher.experience}</p>
+                    </div>
+                    <p className="mb-4 text-sm text-gray-600">{teacher.description}</p>
+                    <div className="mb-3">
+                      <p className="mb-1 text-xs font-semibold uppercase text-gray-500">
+                        {language === "ru" ? "Сертификаты" : "Certifications"}:
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {teacher.certifications.map((cert, i) => (
+                          <span
+                            key={i}
+                            className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
+                          >
+                            {cert}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <p className="mb-1 text-xs font-semibold uppercase text-gray-500">
+                        {language === "ru" ? "Языки" : "Languages"}:
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {teacher.languages.map((lang, i) => (
+                          <span key={i} className="text-xs text-gray-600">
+                            {lang}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Welcome Section */}
-        <section className="py-16">
+        {/* Qualifications Section */}
+        <section id="qualifications" className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
-            <div className="grid gap-8 md:grid-cols-2 md:gap-12">
-              <div>
-                <h2 className="mb-6 text-3xl font-bold text-primary">{t.welcome.title}</h2>
-                <p className="mb-6 text-lg text-gray-700">{t.welcome.description}</p>
-                <ul className="mb-8 space-y-3">
-                  {t.welcome.points.map((point, index) => (
-                    <li key={index} className="flex items-start">
-                      <ChevronRight className="mr-2 h-5 w-5 flex-shrink-0 text-primary" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/about" className="inline-flex items-center text-primary hover:underline">
-                  {t.welcome.cta}
-                  <ChevronRight className="ml-1 h-4 w-4" />
-                </Link>
-              </div>
-              <div className="relative h-[400px] overflow-hidden rounded-lg shadow-lg">
-                <Image
-                  src="/assets/slider/Painting.jpg?height=400&width=600"
-                  alt="Tut School classroom"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+            <div className="mx-auto max-w-3xl text-center">
+              <h2 className="mb-6 text-3xl font-bold text-primary">{t.qualifications.title}</h2>
+              <p className="mb-8 text-lg text-gray-600">{t.qualifications.description}</p>
+              <ul className="space-y-4 text-left">
+                {t.qualifications.items.map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <ChevronRight className="mr-2 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </section>
 
-        {/* Values Section */}
-
-        <ValuesSectionCard language={language} />
-  
-
-        {/* Advantages Section */}
-        <section className="bg-gray-50 py-16">
+        {/* Methodology Section */}
+        <section id="methodology" className="py-16">
           <div className="container mx-auto px-4">
+            <h2 className="mb-6 text-center text-3xl font-bold text-primary">{t.methodology.title}</h2>
+            <p className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-600">{t.methodology.description}</p>
             <div className="grid gap-8 md:grid-cols-3">
-              {t.advantages.items.map((item, index) => (
+              {t.methodology.items.map((item, index) => (
                 <div key={index} className="rounded-lg bg-white p-8 shadow-md transition-all hover:shadow-lg">
                   <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <span className="text-2xl font-bold">{index + 1}</span>
@@ -1049,159 +920,40 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Courses Section */}
-        <section className="py-16">
+        {/* Join Our Team Section */}
+        <section id="join-team" className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {t.courses.items.map((course, index) => (
-                <div
-                  key={index}
-                  className="group overflow-hidden rounded-lg border border-gray-200 bg-white transition-all hover:shadow-lg"
+            <div className="mx-auto max-w-3xl rounded-lg bg-white p-8 shadow-lg">
+              <h2 className="mb-6 text-center text-3xl font-bold text-primary">{t.joinTeam.title}</h2>
+              <p className="mb-8 text-center text-lg text-gray-600">{t.joinTeam.description}</p>
+              <div className="mb-8">
+                <h3 className="mb-4 text-xl font-semibold">
+                  {language === "ru" ? "Требования к кандидатам" : "Requirements"}:
+                </h3>
+                <ul className="space-y-3">
+                  {t.joinTeam.requirements.map((req, index) => (
+                    <li key={index} className="flex items-start">
+                      <ChevronRight className="mr-2 h-5 w-5 flex-shrink-0 text-primary" />
+                      <span>{req}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="text-center">
+                <Link
+                  href="/careers"
+                  className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 font-medium text-white transition-all hover:bg-primary/90"
                 >
-                  <div className="relative h-48">
-                    <Image
-                      src={`/assets/coursesOne.svg?height=200&width=300&text=${index + 1}`}
-                      alt={course.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="mb-3 text-xl font-bold">{course.title}</h3>
-                    <p className="mb-4 text-sm text-gray-600">{course.description}</p>
-                    <Link href="#" className="inline-flex items-center text-primary hover:underline">
-                      {course.cta}
-                      <ChevronRight className="ml-1 h-4 w-4" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* News Section */}
-        <section className="bg-gray-50 py-16">
-          <div className="container mx-auto px-4">
-            <div className="mb-8 flex items-center justify-between">
-              <Link href="#" className="flex items-center text-sm font-medium text-primary hover:underline">
-                {t.news.viewAll}
-                <ChevronRight className="ml-1 h-4 w-4" />
-              </Link>
-            </div>
-            <div className="grid gap-6 md:grid-cols-3">
-              {t.news.items.map((item, index) => (
-                <div
-                  key={index}
-                  className="overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg"
-                >
-                  <div className="relative h-48">
-                    <Image
-                      src={`/assets/coursesTwo.svg?height=200&width=400&text=News ${index + 1}`}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <div className="mb-2 flex items-center gap-2 text-sm text-gray-500">
-                      <Calendar className="h-4 w-4" />
-                      <span>{item.date}</span>
-                    </div>
-                    <h3 className="mb-3 text-xl font-bold">{item.title}</h3>
-                    <p className="mb-4 text-sm text-gray-600">{item.description}</p>
-                    <Link href="#" className="inline-flex items-center text-primary hover:underline">
-                      {item.cta}
-                      <ChevronRight className="ml-1 h-4 w-4" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.testimonials.title}</h2>
-            <div className="mx-auto mb-12 h-1 w-20 bg-primary"></div>
-            <div className="grid gap-6 md:grid-cols-3">
-              {t.testimonials.items.map((item, index) => (
-                <div key={index} className="rounded-lg bg-white p-6 shadow-md">
-                  <div className="mb-4 text-yellow-400">
-                    <Star className="inline-block h-5 w-5 fill-current" />
-                    <Star className="inline-block h-5 w-5 fill-current" />
-                    <Star className="inline-block h-5 w-5 fill-current" />
-                    <Star className="inline-block h-5 w-5 fill-current" />
-                    <Star className="inline-block h-5 w-5 fill-current" />
-                  </div>
-                  <p className="mb-4 italic text-gray-600">"{item.text}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-                      <User className="h-5 w-5" />
-                    </div>
-                    <span className="font-medium">{item.name}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Contact Section */}
-        <section className="bg-gray-50 py-16">
-          <div className="container mx-auto px-4">
-            <h2 className="mb-8 text-center text-3xl font-bold text-primary">{t.contact.title}</h2>
-            <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-4">
-              <Link
-                href={`tel:${t.phone.replace(/\s+/g, "")}`}
-                className="flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-white transition-all hover:bg-primary/90"
-              >
-                <Phone className="h-5 w-5" />
-                {t.contact.phone}
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-white transition-all hover:bg-blue-600"
-              >
-                <Navigation className="h-5 w-5" />
-                {t.contact.directions}
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-2 rounded-md bg-gray-700 px-4 py-2 text-white transition-all hover:bg-gray-800"
-              >
-                <MessageSquare className="h-5 w-5" />
-                {t.contact.write}
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-2 rounded-md bg-blue-400 px-4 py-2 text-white transition-all hover:bg-blue-500"
-              >
-                <Send className="h-5 w-5" />
-                {t.contact.telegram}
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-2 rounded-md bg-green-500 px-4 py-2 text-white transition-all hover:bg-green-600"
-              >
-                <MessageSquare className="h-5 w-5" />
-                {t.contact.whatsapp}
-              </Link>
-            </div>
-            <div className="mt-8 text-center">
-              <p className="text-gray-600">
-                <MapPin className="mr-1 inline-block h-4 w-4" />
-                {t.address}
-              </p>
+                  {t.joinTeam.cta}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-16">
+        <section id="cta" className="py-16">
           <div className="container mx-auto px-4">
             <div className="overflow-hidden rounded-xl bg-primary shadow-xl">
               <div className="relative">
@@ -1229,6 +981,96 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 py-12 text-white">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <div className="flex items-center gap-3">
+                <div className="relative h-12 w-12 overflow-hidden rounded-md bg-white">
+                  <Image
+                    src="/logo.png?height=48&width=48"
+                    alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">{t.schoolName}</h3>
+                  <p className="text-sm text-gray-400">{t.schoolSubtitle}</p>
+                </div>
+              </div>
+              <p className="mt-4 text-sm text-gray-400">
+                {language === "ru"
+                  ? "Школа иностранных языков и искусств для детей и взрослых"
+                  : "School of foreign languages and arts for children and adults"}
+              </p>
+            </div>
+
+            <div>
+              <h3 className="mb-4 text-lg font-semibold">{t.footer.quickLinks}</h3>
+              <ul className="space-y-2">
+                {t.footer.links.map((link, index) => (
+                  <li key={index}>
+                    <Link href="#" className="text-sm text-gray-400 hover:text-white">
+                      {link}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="mb-4 text-lg font-semibold">{t.footer.contacts}</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <MapPin className="h-5 w-5 flex-shrink-0 text-gray-400" />
+                  <span className="text-sm text-gray-400">{t.address}</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone className="h-5 w-5 text-gray-400" />
+                  <a href={`tel:${t.phone.replace(/\s+/g, "")}`} className="text-sm text-gray-400 hover:text-white">
+                    {t.phone}
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail className="h-5 w-5 text-gray-400" />
+                  <a href={`mailto:${t.email}`} className="text-sm text-gray-400 hover:text-white">
+                    {t.email}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="mb-4 text-lg font-semibold">{t.footer.workingHours.title}</h3>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>{t.footer.workingHours.weekdays}</li>
+                <li>{t.footer.workingHours.saturday}</li>
+                <li>{t.footer.workingHours.sunday}</li>
+              </ul>
+
+              <h3 className="mb-2 mt-6 text-lg font-semibold">{t.footer.socialMedia}</h3>
+              <div className="flex gap-4">
+                <a href="#" className="text-gray-400 hover:text-white">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.052-1.713-1.033-1.033-1.49-1.172-1.744-1.172-.356 0-.458.102-.458.593v1.573c0 .424-.136.593-1.252.593-1.844 0-3.896-1.118-5.336-3.202-2.168-3.4-2.762-5.944-2.762-6.47 0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.864 2.5 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.316c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.407.44-.407h2.744c.373 0 .508.204.508.66v3.54c0 .373.17.508.271.508.22 0 .407-.135.814-.542 1.27-1.422 2.168-3.624 2.168-3.624.118-.254.305-.491.745-.491h1.744c.525 0 .644.27.525.66-.22 1.015-2.32 3.979-2.32 3.979-.186.305-.254.44 0 .78.186.254.796.779 1.2 1.252.745.847 1.32 1.558 1.473 2.052.17.491-.085.745-.576.745z" />
+                  </svg>
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.472 3.5C18.188 1.24 15.073 0 11.786 0 5.354 0 .13 5.214.13 11.636c0 2.05.546 4.05 1.585 5.812L.13 24l6.726-1.763c1.698.925 3.607 1.41 5.55 1.41h.005c6.43 0 11.65-5.215 11.65-11.637 0-3.109-1.21-6.026-3.413-8.225l-.175-.285zM11.786 21.273h-.004c-1.743 0-3.45-.468-4.942-1.35l-.355-.21-3.676.964.985-3.595-.232-.368c-.975-1.55-1.49-3.335-1.49-5.17 0-5.356 4.364-9.713 9.728-9.713 2.6 0 5.034 1.012 6.868 2.85 1.832 1.837 2.842 4.276 2.84 6.873-.004 5.356-4.367 9.719-9.722 9.719zm5.333-7.278c-.294-.147-1.734-.856-2.002-.951-.268-.097-.463-.146-.658.146-.195.293-.757.951-.928 1.147-.17.195-.342.22-.635.073-.294-.147-1.24-.456-2.363-1.456-.873-.778-1.463-1.738-1.634-2.032-.171-.293-.018-.451.128-.597.132-.132.294-.342.44-.513.148-.17.197-.293.296-.488.098-.195.05-.366-.025-.513-.073-.147-.657-1.583-.9-2.168-.244-.585-.487-.487-.658-.487-.17 0-.367-.025-.562-.025-.195 0-.513.073-.781.366-.269.293-1.025.999-1.025 2.435 0 1.436 1.05 2.824 1.196 3.02.146.195 2.057 3.142 4.988 4.407.697.268 1.24.428 1.664.55.7.222 1.337.19 1.839.115.56-.085 1.734-.71 1.977-1.395.244-.684.244-1.27.17-1.393-.073-.122-.268-.196-.562-.342z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="mt-8 border-t border-gray-800 pt-8 text-center">
+            <p className="text-sm text-gray-500">{t.footer.copyright}</p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
