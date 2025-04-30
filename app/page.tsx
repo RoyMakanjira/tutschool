@@ -178,9 +178,9 @@ export default function Home() {
         courses: "КУРСЫ АНГЛИЙСКОГО",
         coursesDropdown: [
           { title: "ДОШКОЛЬНИКИ", href: "/preschoolers" },
-          { title: "ДЕТИ 7-9 ЛЕТ", href: "/courses/english-adults" },
-          { title: "ДЕТИ 10-12 ЛЕТ", href: "/courses/english-kids" },
-          { title: "ПОДРОСТКИ", href: "/courses/english-adults" },
+          { title: "ДЕТИ 7-9 ЛЕТ", href: "/aged-7-9" },
+          { title: "ДЕТИ 10-12 ЛЕТ", href: "/aged-10-12" },
+          { title: "ПОДРОСТКИ", href: "/teenagers" },
           { title: "ВЗРОСЛЫЕ", href: "/adults" },
         ],
         chinese: "КУРСЫ КИТАЙСКОГО",
