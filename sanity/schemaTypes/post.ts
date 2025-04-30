@@ -39,10 +39,9 @@ export default {
         type: "datetime",
       },
       {
-        name: "excerpt",
-        title: "Excerpt",
-        type: "text",
-        rows: 3,
+        name: "pitch",
+        title: "Post",
+        type: "markdown",
       },
     ],
     preview: {

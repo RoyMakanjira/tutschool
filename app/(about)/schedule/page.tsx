@@ -101,6 +101,7 @@ export default function SchedulePage() {
           chineseLanguage: "Китайский язык",
           pricesTitle: "Стоимость обучения",
           pricesSubtitle: "Выберите подходящий тариф",
+          cta: "Записаться на пробный урок",
           nav: {
             about: "О ШКОЛЕ",
             aboutDropdown: [
@@ -111,9 +112,9 @@ export default function SchedulePage() {
             courses: "КУРСЫ АНГЛИЙСКОГО",
             coursesDropdown: [
               { title: "ДОШКОЛЬНИКИ", href: "/preschoolers" },
-              { title: "ДЕТИ 7-9 ЛЕТ", href: "/courses/english-adults" },
-              { title: "ДЕТИ 10-12 ЛЕТ", href: "/courses/english-kids" },
-              { title: "ПОДРОСТКИ", href: "/courses/english-adults" },
+              { title: "ДЕТИ 7-9 ЛЕТ", href: "/aged-7-9" },
+              { title: "ДЕТИ 10-12 ЛЕТ", href: "/aged-10-12" },
+              { title: "ПОДРОСТКИ", href: "/teenagers" },
               { title: "ВЗРОСЛЫЕ", href: "/adults" },
             ],
             chinese: "КУРСЫ КИТАЙСКОГО",
@@ -205,6 +206,7 @@ export default function SchedulePage() {
           chineseLanguage: "Chinese Language",
           pricesTitle: "Tuition Fees",
           pricesSubtitle: "Choose the right plan for you",
+          cta: "Book a lesson",
           nav: {
             about: "ABOUT THE SCHOOL",
             aboutDropdown: [
@@ -215,9 +217,9 @@ export default function SchedulePage() {
             courses: "COURSES",
             coursesDropdown: [
               { title: "PRESCHOOLERS", href: "/preschoolers" },
-              { title: "CHILDREN AGED 7-9", href: "/courses/english-adults" },
-                { title: "CHILDREN AGED 10-12", href: "/courses/english-kids" },
-              { title: "TEENAGERS", href: "/courses/english-adults" },
+              { title: "CHILDREN AGED 7-9", href: "/aged-7-9" },
+                { title: "CHILDREN AGED 10-12", href: "/aged-10-12" },
+              { title: "TEENAGERS", href: "/teenagers" },
                 { title: "ADULTS", href: "/adults" },
             ],
             chinese: "CHINESE LANGUAGE COURSES",
@@ -543,11 +545,11 @@ export default function SchedulePage() {
 
           <div className="flex items-center gap-4">
           <Link
-  href="/bookings"
-  className="px-2.5 py-1 text-xs ml-1.5 rounded bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-sm hover:shadow"
->
-  Book a Lesson
-</Link>
+            href="/bookings"
+            className="px-2.5 py-1 text-xs ml-1.5 rounded bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-sm hover:shadow"
+          >
+          {t.cta}
+        </Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -713,7 +715,7 @@ export default function SchedulePage() {
               onClick={() => setMobileMenuOpen(false)}
               className="block w-full text-center px-4 py-3 mt-4 text-sm rounded-md bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] active:scale-98 transition-all shadow-sm touch-manipulation"
             >
-              Book a Lesson
+              {t.cta}
             </Link>
           </nav>
         </div>
