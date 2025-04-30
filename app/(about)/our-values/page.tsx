@@ -100,8 +100,8 @@ export default function ValuesPage() {
         ],
         club: "РАЗГОВОРНЫЙ КЛУБ",
         clubDropdown: [
-          { title: "ПОДРОСТКИ", href: "/courses/english-kids" },
-          { title: "ВЗРОСЛЫЕ", href: "/courses/english-adults" },
+          { title: "ПОДРОСТКИ", href: "/conversation-club/teenagers" },
+          { title: "ВЗРОСЛЫЕ", href: "/conversation-club/adults" },
         ],
         news: "НОВОСТИ",
         contacts: "КОНТАКТЫ",

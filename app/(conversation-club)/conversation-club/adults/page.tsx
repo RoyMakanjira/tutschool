@@ -3,28 +3,40 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { motion, AnimatePresence } from "framer-motion"
 import {
-  ArrowRight, Check, Clock, Calendar, Phone, Mail, ChevronDown, X, Menu, Globe
+  MessageSquare, Globe, BookOpen, Clock, Phone, Mail,
+  ChevronDown, X, Menu, Globe2, Users, Award, Briefcase,
+  ArrowRight, Check, Landmark
 } from "lucide-react"
 import { FadeIn } from "@/components/animations/scroll-animations"
 
-export default function Aged7to9Page() {
+export default function AdultsPage() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState(0)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
 
+ 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
+  const [scrollY, setScrollY] = useState(0)
+  const [isLoaded, setIsLoaded] = useState(false)
+
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 100)
+    // Set loaded state after a small delay to trigger initial animations
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+    }, 100)
+
+    // Handle scroll events for scroll-triggered animations
     const handleScroll = () => {
       setScrollY(window.scrollY)
-      setIsScrolled(window.scrollY > 100)
     }
+
     window.addEventListener("scroll", handleScroll)
+
     return () => {
       clearTimeout(timer)
       window.removeEventListener("scroll", handleScroll)
@@ -32,13 +44,55 @@ export default function Aged7to9Page() {
   }, [])
 
   useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+      setIsScrolled(window.scrollY > 100)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  useEffect(() => {
+    // Set loaded state after a small delay to trigger initial animations
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+    }, 100)
+
+    // Handle scroll events for scroll-triggered animations
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+
+  useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setActiveDropdown(null)
       }
     }
+
     document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+      setIsScrolled(window.scrollY > 100)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   const translations = {
@@ -48,10 +102,8 @@ export default function Aged7to9Page() {
       phone: "+7 (983) 600-00-00",
       email: "info@tut-school.ru",
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
-      rating: "4.8 на Яндексе",
-      search: "Поиск",
       workingHours: "Пн-Пт: 9:00-21:00, Сб: 10:00-18:00",
-      promo: "Запишитесь на пробный урок до 30 мая и получите скидку 20% на первый месяц обучения!",
+      promo: "Запишитесь на пробный урок и получите скидку 20% на первый месяц обучения!",
       nav: {
         about: "О ШКОЛЕ",
         aboutDropdown: [
@@ -69,11 +121,11 @@ export default function Aged7to9Page() {
         ],
         chinese: "КУРСЫ КИТАЙСКОГО",
         chineseDropdown: [
-          { title: "ДОШКОЛЬНИКИ", href: "/preschoolers" },
-          { title: "ДЕТИ 7-9 ЛЕТ", href: "/(courses)/aged-7-9" },
-          { title: "ДЕТИ 10-12 ЛЕТ", href: "/(courses)/aged-10-12" },
-          { title: "ПОДРОСТКИ", href: "/(courses)/teenagers" },
-          { title: "ВЗРОСЛЫЕ", href: "/(courses)/adults" },
+          { title: "ДОШКОЛЬНИКИ", href: "/courses/english-kids" },
+          { title: "ДЕТИ 7-9 ЛЕТ", href: "/courses/english-adults" },
+          { title: "ДЕТИ 10-12 ЛЕТ", href: "/courses/english-kids" },
+          { title: "ПОДРОСТКИ", href: "/courses/english-adults" },
+          { title: "ВЗРОСЛЫЕ", href: "/courses/english-kids" },
         ],
         club: "РАЗГОВОРНЫЙ КЛУБ",
         clubDropdown: [
@@ -84,27 +136,86 @@ export default function Aged7to9Page() {
         contacts: "КОНТАКТЫ",
       },
       hero: {
-        title: "Английский для детей 7-9 лет",
-        subtitle: "Интерактивные занятия для младших школьников. Развитие всех языковых навыков через игры, чтение и творчество.",
-        cta: "Записаться на пробный урок",
+        title: "Разговорный клуб для взрослых",
+        subtitle: "Совершенствуйте свой английский в непринужденной атмосфере с носителями языка",
+        cta: "Записаться на пробный урок"
       },
-      benefits: [
-        { title: "Интерактивные уроки", description: "Обучение через игры, проекты и командную работу" },
-        { title: "Маленькие группы", description: "4-8 детей для индивидуального подхода" },
-        { title: "Опытные педагоги", description: "Специалисты по работе с младшими школьниками" },
-        { title: "Современные методики", description: "Коммуникативный подход и творческие задания" },
+      features: [
+        {
+          title: "Живое общение",
+          description: "Практика разговорного английского в группах до 6 человек",
+          icon: MessageSquare
+        },
+        {
+          title: "Носители языка",
+          description: "Общение с преподавателями из Великобритании и США",
+          icon: Globe
+        },
+        {
+          title: "Актуальные темы",
+          description: "Обсуждение последних новостей, культуры и бизнеса",
+          icon: BookOpen
+        },
+        {
+          title: "Гибкий график",
+          description: "Занятия в удобное время, включая вечерние группы",
+          icon: Clock
+        }
       ],
       activities: [
-        { title: "Чтение и рассказы", description: "Работа с адаптированными текстами и устные рассказы", image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Игровая грамматика", description: "Освоение грамматики через интерактивные упражнения", image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Творческие проекты", description: "Рисование, поделки и театральные постановки на английском", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        {
+          title: "Деловые встречи",
+          description: "Практика бизнес-английского и профессиональной лексики",
+          image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"
+        },
+        {
+          title: "Культурные вечера",
+          description: "Знакомство с традициями и обычаями англоязычных стран",
+          image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg"
+        },
+        {
+          title: "Киноклуб",
+          description: "Просмотр и обсуждение фильмов на английском языке",
+          image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg"
+        }
       ],
-      schedule: [
-        { day: "Вторник", times: ["16:00 - 17:00"] },
-        { day: "Четверг", times: ["16:00 - 17:00"] },
-        { day: "Суббота", times: ["11:00 - 12:00"] },
+      levels: [
+        {
+          name: "Beginner",
+          description: "Для тех, кто только начинает изучать английский"
+        },
+        {
+          name: "Intermediate",
+          description: "Для продолжающих изучение английского"
+        },
+        {
+          name: "Advanced",
+          description: "Для свободно владеющих английским"
+        }
       ],
-      languageToggle: "English",
+      pricing: {
+        title: "Стоимость занятий",
+        plans: [
+          {
+            name: "Разовое посещение",
+            price: "1,500 ₽",
+            features: ["1 занятие", "2 часа", "Группа до 6 человек"]
+          },
+          {
+            name: "Абонемент на месяц",
+            price: "5,000 ₽",
+            features: ["4 занятия", "2 часа каждое", "Группа до 6 человек"],
+            popular: true
+          },
+          {
+            name: "Индивидуальное занятие",
+            price: "2,500 ₽",
+            features: ["1 занятие", "1 час", "Индивидуальный подход"]
+          }
+        ]
+
+      },
+      languageToggle: "Русский",
     },
     en: {
       schoolName: "Tut School",
@@ -112,10 +223,8 @@ export default function Aged7to9Page() {
       phone: "+7 (983) 600-00-00",
       email: "info@tut-school.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
-      rating: "4.8 on Yandex",
-      search: "Search",
       workingHours: "Mon-Fri: 9:00-21:00, Sat: 10:00-18:00",
-      promo: "Sign up for a trial lesson before May 30 and get a 20% discount on your first month of study!",
+      promo: "Sign up for a trial lesson and get a 20% discount on your first month of study!",
       nav: {
         about: "ABOUT THE SCHOOL",
         aboutDropdown: [
@@ -123,88 +232,161 @@ export default function Aged7to9Page() {
           { title: "SCHEDULE AND PRICES", href: "/schedule" },
           { title: "TEACHERS", href: "/teachers" },
         ],
-        courses: "ENGLISH COURSES",
+        courses: "COURSES",
         coursesDropdown: [
           { title: "PRESCHOOLERS", href: "/preschoolers" },
           { title: "CHILDREN AGED 7-9", href: "/aged-7-9" },
-          { title: "CHILDREN AGED 10-12", href: "/aged-10-12" },
+            { title: "CHILDREN AGED 10-12", href: "/aged-10-12" },
           { title: "TEENAGERS", href: "/teenagers" },
-          { title: "ADULTS", href: "/adults" },
+            { title: "ADULTS", href: "/adults" },
         ],
         chinese: "CHINESE LANGUAGE COURSES",
         chineseDropdown: [
-          { title: "PRESCHOOLERS", href: "/preschoolers" },
-          { title: "CHILDREN AGED 7-9", href: "/(courses)/aged-7-9" },
-          { title: "CHILDREN AGED 10-12", href: "/(courses)/aged-10-12" },
-          { title: "TEENAGERS", href: "/(courses)/teenagers" },
-          { title: "ADULTS", href: "/(courses)/adults" },
+          { title: "PRESCHOOLERS", href: "/courses/english-kids" },
+          { title: "CHILDREN AGED 7-9", href: "/courses/english-adults" },
+          { title: "CHILDREN AGED 10-12", href: "/courses/english-kids" },
+          { title: "TEENAGERS", href: "/courses/english-adults" },
+          { title: "ADULTS", href: "/courses/english-kids" },
         ],
         club: "CONVERSATION CLUB",
         clubDropdown: [
           { title: "TEENAGERS", href: "/conversation-club/teenagers" },
-          { title: "ADULTS", href: "/conversation-club/adults " },
+          { title: "ADULTS", href: "/conversation-club/adults" },
         ],
         news: "NEWS",
         contacts: "CONTACTS",
       },
       hero: {
-        title: "English for children aged 7-9",
-        subtitle: "Interactive lessons for young schoolchildren. All language skills developed through games, reading, and creativity.",
-        cta: "Book a trial lesson",
+        title: "Conversation Club for Adults",
+        subtitle: "Improve your English in a relaxed atmosphere with native speakers",
+        cta: "Book a trial lesson"
       },
-      benefits: [
-        { title: "Interactive lessons", description: "Learning through games, projects, and teamwork" },
-        { title: "Small groups", description: "4-8 children for individual attention" },
-        { title: "Experienced teachers", description: "Specialists in working with young schoolchildren" },
-        { title: "Modern methods", description: "Communicative approach and creative tasks" },
+      features: [
+        {
+          title: "Live Communication",
+          description: "Practice spoken English in groups of up to 6 people",
+          icon: MessageSquare
+        },
+        {
+          title: "Native Speakers",
+          description: "Communication with teachers from the UK and USA",
+          icon: Globe
+        },
+        {
+          title: "Current Topics",
+          description: "Discussion of latest news, culture and business",
+          icon: BookOpen
+        },
+        {
+          title: "Flexible Schedule",
+          description: "Classes at convenient times, including evening groups",
+          icon: Clock
+        }
       ],
       activities: [
-        { title: "Reading & storytelling", description: "Working with adapted texts and oral storytelling", image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Grammar games", description: "Learning grammar through interactive exercises", image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Creative projects", description: "Drawing, crafts, and drama in English", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        {
+          title: "Business Meetings",
+          description: "Practice business English and professional vocabulary",
+          image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"
+        },
+        {
+          title: "Cultural Evenings",
+          description: "Introduction to traditions and customs of English-speaking countries",
+          image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg"
+        },
+        {
+          title: "Movie Club",
+          description: "Watching and discussing movies in English",
+          image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg"
+        }
       ],
-      schedule: [
-        { day: "Tuesday", times: ["16:00 - 17:00"] },
-        { day: "Thursday", times: ["16:00 - 17:00"] },
-        { day: "Saturday", times: ["11:00 - 12:00"] },
+      levels: [
+        {
+          name: "Beginner",
+          description: "For those just starting to learn English"
+        },
+        {
+          name: "Intermediate",
+          description: "For continuing English learners"
+        },
+        {
+          name: "Advanced",
+          description: "For fluent English speakers"
+        }
       ],
+      pricing: {
+        title: "Pricing",
+        plans: [
+          {
+            name: "Single Visit",
+            price: "1,500 RUB",
+            features: ["1 class", "2 hours", "Group up to 6 people"]
+          },
+          {
+            name: "Monthly Pass",
+            price: "5,000 RUB",
+            features: ["4 classes", "2 hours each", "Group up to 6 people"],
+            popular: true
+          },
+          {
+            name: "Private Lesson",
+            price: "2,500 RUB",
+            features: ["1 class", "1 hour", "Individual approach"]
+          }
+        ]
+      },
       languageToggle: "Русский",
     },
   }
 
   const t = translations[language]
 
-  const toggleLanguage = () => setLanguage(language === "ru" ? "en" : "ru")
-  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen)
-  const toggleDropdown = (dropdown: string) => setActiveDropdown(activeDropdown === dropdown ? null : dropdown)
+  const toggleLanguage = () => {
+    setLanguage(language === "ru" ? "en" : "ru")
+  }
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
+  const toggleDropdown = (dropdown: string) => {
+    if (activeDropdown === dropdown) {
+      setActiveDropdown(null)
+    } else {
+      setActiveDropdown(dropdown)
+    }
+  }
 
   return (
     <div className="flex min-h-screen flex-col">
       <FadeIn>
-     
       <div className="bg-gray-100 py-2 text-sm">
-             <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
-               <div className="flex flex-wrap items-center gap-4">
-                 <div className="flex items-center gap-2">
-                   <Clock className="h-4 w-4 text-primary" />
-                   <span className="text-gray-600">{t.workingHours}</span>
-                 </div>
-                 <div className="flex items-center gap-2">
-                   <Phone className="h-4 w-4 text-primary" />
-                   <a href={`tel:${t.phone.replace(/\s+/g, "")}`} className="text-gray-600 hover:text-primary">
-                     {t.phone}
-                   </a>
-                 </div>
-                 <div className="hidden items-center gap-2 md:flex">
-                   <Mail className="h-4 w-4 text-primary" />
-                   <a href={`mailto:${t.email}`} className="text-gray-600 hover:text-primary">
-                     {t.email}
-                   </a>
-                 </div>
-               </div>
-               <div className="flex items-center gap-3">
-                 
-               <a href="#" className="text-red-600 hover:text-burgundy-900">
+        <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Clock className="h-4 w-4 text-primary" />
+              <span className="text-gray-600">{t.workingHours}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Phone className="h-4 w-4 text-primary" />
+              <a href={`tel:${t.phone.replace(/\s+/g, "")}`} className="text-gray-600 hover:text-primary">
+                {t.phone}
+              </a>
+            </div>
+            <div className="flex items-center gap-2">
+              <Landmark className="h-4 w-4 text-primary" />
+              <span className="text-gray-600">{t.address}</span>
+            </div>
+            <div className="hidden items-center gap-2 md:flex">
+              <Mail className="h-4 w-4 text-primary" />
+              <a href={`mailto:${t.email}`} className="text-gray-600 hover:text-primary">
+                {t.email}
+              </a>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            
+          <a href="#" className="text-red-600 hover:text-burgundy-900">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.052-1.713-1.033-1.033-1.49-1.172-1.744-1.172-.356 0-.458.102-.458.593v1.573c0 .424-.136.593-1.252.593-1.844 0-3.896-1.118-5.336-3.202-2.168-3.4-2.762-5.944-2.762-6.47 0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.864 2.5 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.316c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.407.44-.407h2.744c.373 0 .508.204.508.66v3.54c0 .373.17.508.271.508.22 0 .407-.135.814-.542 1.27-1.422 2.168-3.624 2.168-3.624.118-.254.305-.491.745-.491h1.744c.525 0 .644.27.525.66-.22 1.015-2.32 3.979-2.32 3.979-.186.305-.254.44 0 .78.186.254.796.779 1.2 1.252.745.847 1.32 1.558 1.473 2.052.17.491-.085.745-.576.745z" />
               </svg>
@@ -215,46 +397,47 @@ export default function Aged7to9Page() {
               </svg>
             </a>
             <a href="https://t.me/TUTschoolNovogorsk" className="text-blue-500 hover:text-burgundy-900">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.193-2.98 5.518-4.99c.22-.196-.048-.307-.338-.11l-6.81 4.29-2.96-.92c-.64-.203-.658-.64.135-.954l11.57-4.46c.538-.196 1.006.128.832.941z"/>
-              </svg>
-           </a>
-                 <button
-                   onClick={toggleLanguage}
-                   className="ml-2 flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 text-xs hover:bg-gray-200"
-                 >
-                   <Globe className="h-3 w-3" />
-                   {t.languageToggle}
-                 </button>
-               </div>
-             </div>
-           </div>
-     
-           {/* Header */}
-           <header    className={`border-b bg-white py-4 shadow-sm transition-all duration-300 ${
-               isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""
-             }`}>
-             <div className="container mx-auto flex items-center justify-between px-4">
-               <div className="flex items-center gap-3">
-                 <div className="relative h-14 w-14">
-                  <Link href='/'>
-                   <Image
-                     src="/logo.png?height=56&width=56"
-                     alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
-                     fill
-                     className="object-contain"
-                   />
-                   </Link>
-                 </div>
-                 <div>
-                   <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
-                   <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
-                 </div>
-               </div>
-     
-               {/* Desktop Navigation */}
-               
-               <nav className="hidden md:block" ref={dropdownRef}>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.193-2.98 5.518-4.99c.22-.196-.048-.307-.338-.11l-6.81 4.29-2.96-.92c-.64-.203-.658-.64.135-.954l11.57-4.46c.538-.196 1.006.128.832.941z"/>
+  </svg>
+</a>
+            <button
+              onClick={toggleLanguage}
+              className="ml-2 flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 text-xs hover:bg-gray-200"
+            >
+              <Globe className="h-3 w-3" />
+              {t.languageToggle}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Header */}
+      <header    className={`border-b bg-white py-4 shadow-sm transition-all duration-300 ${
+          isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""
+        }`}>
+        <div className="container mx-auto flex items-center justify-between px-4">
+          <div className="flex items-center gap-3">
+            <div className="relative h-14 w-14">
+              <Link href='/'>
+              <Image
+                src="/logo.png?height=56&width=56"
+                alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
+                fill
+                className="object-contain"
+              />
+              </Link>
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
+              <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
+            </div>
+          </div>
+
+          {/* Desktop Navigation */}
+          
+
+          <nav className="hidden md:block" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">
                 <button
@@ -366,12 +549,6 @@ export default function Aged7to9Page() {
           </nav>
 
           <div className="flex items-center gap-4">
-          <Link
-  href="/bookings"
-  className="px-2.5 py-1 text-xs ml-1.5 rounded bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-sm hover:shadow"
->
-  {t.hero.title}
-</Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -531,118 +708,223 @@ export default function Aged7to9Page() {
             >
               {t.nav.contacts}
             </Link>
-
-            <Link
-              href="/bookings"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block w-full text-center px-4 py-3 mt-4 text-sm rounded-md bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] active:scale-98 transition-all shadow-sm touch-manipulation"
-            >
-              {t.hero.title}
-            </Link>
           </nav>
         </div>
       </div>
 
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-[#5C162E]/10 to-[#7A1F3D]/10 py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold text-[#5C162E] mb-6">
+        <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#5C162E] to-[#7A1F3D]">
+          <div className="absolute inset-0">
+            <Image
+              src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"
+              alt="Adults learning English"
+              fill
+              className="object-cover opacity-20"
+            />
+          </div>
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-5xl md:text-6xl font-bold text-white mb-6"
+              >
                 {t.hero.title}
-              </h1>
-              <p className="text-xl text-gray-600 mb-8">
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-xl md:text-2xl text-white/90 mb-8"
+              >
                 {t.hero.subtitle}
-              </p>
-              <button className="bg-[#5C162E] text-white px-8 py-3 rounded-lg hover:bg-[#7A1F3D] transition-colors">
-                {t.hero.cta}
-              </button>
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+              >
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-white text-[#5C162E] px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-medium text-lg"
+                >
+                  {t.hero.cta}
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white/10 transition-colors font-medium text-lg"
+                >
+                  {language === 'ru' ? 'Узнать больше' : 'Learn More'}
+                </motion.button>
+              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className="py-16 bg-white">
+        {/* Features Section */}
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">
-              {language === 'ru' ? 'Преимущества' : 'Benefits'}
-            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {t.benefits.map((benefit, index) => (
-                <div key={index} className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-[#5C162E]">
-                  <h3 className="text-xl font-semibold mb-3 text-[#5C162E]">{benefit.title}</h3>
-                  <p className="text-gray-600">{benefit.description}</p>
-                </div>
+              {t.features.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-gray-50 p-8 rounded-xl border border-gray-200 hover:border-[#5C162E] transition-colors"
+                >
+                  <feature.icon className="w-12 h-12 text-[#5C162E] mb-6" />
+                  <h3 className="text-xl font-semibold mb-3 text-[#5C162E]">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
         {/* Activities Section */}
-        <section className="py-16 bg-gray-50">
+        <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">
               {language === 'ru' ? 'Наши занятия' : 'Our Activities'}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {t.activities.map((activity, index) => (
-                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
-                  <div className="relative h-48 overflow-hidden">
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="relative h-64">
                     <Image
                       src={activity.image}
                       alt={activity.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#5C162E]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
-                  <div className="p-6">
+                  <div className="p-8">
                     <h3 className="text-xl font-semibold mb-3 text-[#5C162E]">{activity.title}</h3>
-                    <p className="text-gray-600">{activity.description}</p>
+                    <p className="text-gray-600 mb-4">{activity.description}</p>
+                    <button className="text-[#5C162E] font-medium flex items-center hover:text-[#7A1F3D] transition-colors">
+                      {language === 'ru' ? 'Подробнее' : 'Learn More'}
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </button>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Schedule Section */}
-        <section className="py-16 bg-white">
+        {/* Levels Section */}
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">
-              {language === 'ru' ? 'Расписание' : 'Schedule'}
+              {language === 'ru' ? 'Уровни обучения' : 'Learning Levels'}
             </h2>
-            <div className="max-w-md mx-auto">
-              {t.schedule.map((item, index) => (
-                <div key={index} className="flex justify-between items-center py-4 border-b last:border-b-0">
-                  <div className="flex items-center">
-                    <Calendar className="w-5 h-5 text-[#5C162E] mr-2" />
-                    <span className="font-medium">{item.day}</span>
-                  </div>
-                  <div className="flex items-center text-gray-600">
-                    <Clock className="w-5 h-5 text-[#5C162E] mr-2" />
-                    <span>{item.times[0]}</span>
-                  </div>
-                </div>
+            <div className="max-w-4xl mx-auto">
+              <div className="flex flex-wrap justify-center gap-4 mb-8">
+                {t.levels.map((level, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveTab(index)}
+                    className={`px-6 py-3 rounded-lg font-medium transition-all ${activeTab === index
+                      ? 'bg-[#5C162E] text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                  >
+                    {level.name}
+                  </button>
+                ))}
+              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="text-center bg-gray-50 p-8 rounded-xl"
+                >
+                  <p className="text-gray-600 text-lg">
+                    {t.levels[activeTab].description}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section className="py-20 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">
+              {t.pricing.title}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {t.pricing.plans.map((plan, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={`bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow ${plan.popular ? 'border-2 border-[#5C162E]' : ''
+                    }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute top-0 right-0 bg-[#5C162E] text-white px-4 py-1 rounded-bl-xl">
+                      {language === 'ru' ? 'Популярный' : 'Popular'}
+                    </div>
+                  )}
+                  <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
+                  <p className="text-3xl font-bold mb-6">{plan.price}</p>
+                  <ul className="space-y-3 mb-8">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center text-gray-600">
+                        <Check className="w-5 h-5 text-[#5C162E] mr-2" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full bg-[#5C162E] text-white py-4 rounded-lg hover:bg-[#7A1F3D] transition-colors font-medium"
+                  >
+                    {language === 'ru' ? 'Выбрать' : 'Select'}
+                  </motion.button>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-[#5C162E] text-white">
+        <section className="py-20 bg-[#5C162E] text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6">
               {language === 'ru' ? 'Запишитесь на пробный урок' : 'Book a trial lesson'}
             </h2>
-            <p className="text-xl mb-8 opacity-90">
+            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
               {t.promo}
             </p>
-            <button className="bg-white text-[#5C162E] px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white text-[#5C162E] px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-medium text-lg"
+            >
               {t.hero.cta}
-            </button>
+            </motion.button>
           </div>
         </section>
       </FadeIn>
     </div>
   )
-}
+} 

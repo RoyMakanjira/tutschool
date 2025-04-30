@@ -193,8 +193,8 @@ export default function Home() {
         ],
         club: "РАЗГОВОРНЫЙ КЛУБ",
         clubDropdown: [
-          { title: "ПОДРОСТКИ", href: "/courses/english-kids" },
-          { title: "ВЗРОСЛЫЕ", href: "/courses/english-adults" },
+          { title: "ПОДРОСТКИ", href: "/conversation-club/adults" },
+          { title: "ВЗРОСЛЫЕ", href: "/conversation-club/teenagers" },
         ],
         news: "НОВОСТИ",
         contacts: "КОНТАКТЫ",
@@ -369,8 +369,8 @@ export default function Home() {
         ],
         club: "CONVERSATION CLUB",
         clubDropdown: [
-          { title: "TEENAGERS", href: "/courses/english-kids" },
-          { title: "ADULTS", href: "/courses/english-adults" },
+          { title: "TEENAGERS", href: "/conversation-club/adults" },
+          { title: "ADULTS", href: "//conversation-club/adults" },
         ],
         news: "NEWS",
         contacts: "CONTACTS",

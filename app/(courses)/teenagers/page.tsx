@@ -80,8 +80,8 @@ export default function TeenagersPage() {
         ],
         club: "РАЗГОВОРНЫЙ КЛУБ",
         clubDropdown: [
-          { title: "ПОДРОСТКИ", href: "/(courses)/teenagers" },
-          { title: "ВЗРОСЛЫЕ", href: "/(courses)/adults" },
+          { title: "ПОДРОСТКИ", href: "/conversation-club/teenagers" },
+          { title: "ВЗРОСЛЫЕ", href: "/conversation-club/adults" },
         ],
         news: "НОВОСТИ",
         contacts: "КОНТАКТЫ",
@@ -174,8 +174,8 @@ export default function TeenagersPage() {
         ],
         club: "CONVERSATION CLUB",
         clubDropdown: [
-          { title: "TEENAGERS", href: "/(courses)/teenagers" },
-          { title: "ADULTS", href: "/(courses)/adults" },
+          { title: "TEENAGERS", href: "/conversation-club/teenagers" },
+          { title: "ADULTS", href: "/conversation-club/adults" },
         ],
         news: "NEWS",
         contacts: "CONTACTS",

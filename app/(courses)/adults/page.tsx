@@ -124,8 +124,8 @@ export default function AdultsPage() {
         ],
         club: "РАЗГОВОРНЫЙ КЛУБ",
         clubDropdown: [
-          { title: "ПОДРОСТКИ", href: "/courses/english-kids" },
-          { title: "ВЗРОСЛЫЕ", href: "/courses/english-adults" },
+          { title: "ПОДРОСТКИ", href: "/conversation-club/teenagers" },
+          { title: "ВЗРОСЛЫЕ", href: "/conversation-club/adults" },
         ],
         news: "НОВОСТИ",
         contacts: "КОНТАКТЫ",
@@ -277,8 +277,8 @@ export default function AdultsPage() {
         ],
         club: "CONVERSATION CLUB",
         clubDropdown: [
-          { title: "TEENAGERS", href: "/courses/english-kids" },
-          { title: "ADULTS", href: "/courses/english-adults" },
+          { title: "TEENAGERS", href: "/conversation-club/teenagers" },
+          { title: "ADULTS", href: "/conversation-club/adults" },
         ],
         news: "NEWS",
         contacts: "CONTACTS",
