@@ -72,11 +72,11 @@ export default function TeenagersPage() {
         ],
         chinese: "КУРСЫ КИТАЙСКОГО",
         chineseDropdown: [
-          { title: "ДОШКОЛЬНИКИ", href: "/preschoolers" },
-          { title: "ДЕТИ 7-9 ЛЕТ", href: "/(courses)/aged-7-9" },
-          { title: "ДЕТИ 10-12 ЛЕТ", href: "/(courses)/aged-10-12" },
-          { title: "ПОДРОСТКИ", href: "/(courses)/teenagers" },
-          { title: "ВЗРОСЛЫЕ", href: "/(courses)/adults" },
+          { title: "ДОШКОЛЬНИКИ", href: "/chinese/preschoolers" },
+          { title: "ДЕТИ 7-9 ЛЕТ", href: "/chinese/aged-7-9" },
+          { title: "ДЕТИ 10-12 ЛЕТ", href: "/chinese/aged-10-12" },
+          { title: "ПОДРОСТКИ", href: "/chinese/teenagers" },
+          { title: "ВЗРОСЛЫЕ", href: "/chinese/adults" },
         ],
         club: "РАЗГОВОРНЫЙ КЛУБ",
         clubDropdown: [
@@ -166,11 +166,11 @@ export default function TeenagersPage() {
         ],
         chinese: "CHINESE LANGUAGE COURSES",
         chineseDropdown: [
-          { title: "PRESCHOOLERS", href: "/preschoolers" },
-          { title: "CHILDREN AGED 7-9", href: "/(courses)/aged-7-9" },
-          { title: "CHILDREN AGED 10-12", href: "/(courses)/aged-10-12" },
-          { title: "TEENAGERS", href: "/(courses)/teenagers" },
-          { title: "ADULTS", href: "/(courses)/adults" },
+          { title: "PRESCHOOLERS", href: "/chinese/preschoolers" },
+          { title: "CHILDREN AGED 7-9", href: "/chinese/aged-7-9" },
+          { title: "CHILDREN AGED 10-12", href: "/chinese/aged-10-12" },
+          { title: "TEENAGERS", href: "/chinese/teenagers" },
+          { title: "ADULTS", href: "/chinese/adults" },
         ],
         club: "CONVERSATION CLUB",
         clubDropdown: [
