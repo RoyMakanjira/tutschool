@@ -1,400 +1,900 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import {
-  BookOpen, Globe, Users, Award, Clock, Briefcase,
-  ArrowRight, Check, Landmark, Star, Brain, Trophy,
-  GraduationCap, BookText, Languages, Target
-} from "lucide-react"
-import { FadeIn } from "@/components/animations/scroll-animations"
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Phone, Check, ArrowRight, Landmark, BookOpen, Users, Clock, Trophy, ChevronDown, Mail, X, Menu, Globe } from "lucide-react";
+import { FadeIn } from "@/components/animations/scroll-animations";
 
-export default function AdultsPage() {
-  const [language, setLanguage] = useState<"ru" | "en">("ru")
-  const [activeTab, setActiveTab] = useState(0)
 
-  const translations = {
-    ru: {
-      hero: {
-        title: "Китайский язык для взрослых",
-        subtitle: "Профессиональное обучение китайскому языку для карьерного роста",
-        cta: "Записаться на пробный урок"
-      },
-      features: [
-        {
-          title: "Профессиональные преподаватели",
-          description: "Опытные преподаватели с международной сертификацией",
-          icon: GraduationCap
-        },
-        {
-          title: "Деловой китайский",
-          description: "Специализированные курсы для бизнеса и карьеры",
-          icon: Briefcase
-        },
-        {
-          title: "Гибкий график",
-          description: "Занятия в удобное для вас время",
-          icon: Clock
-        },
-        {
-          title: "Сертификация",
-          description: "Подготовка к международным экзаменам HSK",
-          icon: Award
-        }
-      ],
-      activities: [
-        {
-          title: "Деловое общение",
-          description: "Изучение бизнес-этикета и переговоров",
-          image: "/images/mandarin-business-1.jpg"
-        },
-        {
-          title: "Культурные аспекты",
-          description: "Изучение традиций и обычаев Китая",
-          image: "/images/mandarin-business-2.jpg"
-        },
-        {
-          title: "Профессиональная лексика",
-          description: "Специализированная терминология",
-          image: "/images/mandarin-business-3.jpg"
-        }
-      ],
-      levels: [
-        {
-          name: "Начальный",
-          description: "Основы китайского языка и базовые коммуникативные навыки"
-        },
-        {
-          name: "Средний",
-          description: "Расширение словарного запаса и грамматических структур"
-        },
-        {
-          name: "Продвинутый",
-          description: "Свободное общение и подготовка к экзаменам"
-        }
-      ],
-      pricing: {
-        title: "Стоимость занятий",
-        plans: [
-          {
-            name: "Разовое посещение",
-            price: "1,500 ₽",
-            features: ["1 занятие", "90 минут", "Группа до 6 человек"]
-          },
-          {
-            name: "Абонемент на месяц",
-            price: "5,000 ₽",
-            features: ["8 занятий", "90 минут каждое", "Группа до 6 человек"],
-            popular: true
-          },
-          {
-            name: "Индивидуальное занятие",
-            price: "2,500 ₽",
-            features: ["1 занятие", "90 минут", "Индивидуальный подход"]
+export default function ChineseAdults() {
+      const [language, setLanguage] = useState<"ru" | "en">("ru")
+      const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+      const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+      const [isScrolled, setIsScrolled] = useState(false)
+    
+     
+      const dropdownRef = useRef<HTMLDivElement>(null)
+    
+  
+  
+    
+      useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+          if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+            setActiveDropdown(null)
           }
-        ]
-      }
-    },
-    en: {
-      hero: {
-        title: "Chinese for Adults",
-        subtitle: "Professional Chinese language training for career advancement",
-        cta: "Book a trial lesson"
-      },
-      features: [
-        {
-          title: "Professional Teachers",
-          description: "Experienced teachers with international certification",
-          icon: GraduationCap
-        },
-        {
-          title: "Business Chinese",
-          description: "Specialized courses for business and career",
-          icon: Briefcase
-        },
-        {
-          title: "Flexible Schedule",
-          description: "Classes at your convenient time",
-          icon: Clock
-        },
-        {
-          title: "Certification",
-          description: "Preparation for international HSK exams",
-          icon: Award
         }
-      ],
-      activities: [
-        {
-          title: "Business Communication",
-          description: "Study of business etiquette and negotiations",
-          image: "/images/mandarin-business-1.jpg"
-        },
-        {
-          title: "Cultural Aspects",
-          description: "Study of Chinese traditions and customs",
-          image: "/images/mandarin-business-2.jpg"
-        },
-        {
-          title: "Professional Vocabulary",
-          description: "Specialized terminology",
-          image: "/images/mandarin-business-3.jpg"
+    
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside)
         }
-      ],
-      levels: [
-        {
-          name: "Beginner",
-          description: "Chinese language basics and basic communication skills"
-        },
-        {
-          name: "Intermediate",
-          description: "Expanding vocabulary and grammatical structures"
-        },
-        {
-          name: "Advanced",
-          description: "Free communication and exam preparation"
-        }
-      ],
-      pricing: {
-        title: "Pricing Plans",
-        plans: [
-          {
-            name: "Single Visit",
-            price: "1,500 ₽",
-            features: ["1 lesson", "90 minutes", "Group up to 6 students"]
+      }, [])
+
+      const translations = {
+        ru: {
+          
+          title: "Китайский язык для взрослых",
+          subtitle: "Эффективное обучение китайскому языку для работы, путешествий и саморазвития",
+          schoolName: "Tut School",
+          schoolSubtitle: "Курсы иностранных языков, Школа искусств",
+          phone: "+7 (983) 600-00-00",
+          email: "info@tut-school.ru",
+          address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
+          rating: "4.8 на Яндексе",
+          search: "Поиск",
+         workingHours: "Пн-Пт: 9:00-21:00, Сб: 10:00-18:00",
+          description: "Наша программа сочетает современные методики с индивидуальным подходом, помогая достичь ваших языковых целей.",
+          nav: {
+            about: "О ШКОЛЕ",
+            aboutDropdown: [
+              { title: "НАШИ ЦЕННОСТИ", href: "/our-values" },
+              { title: "РАСПИСАНИЕ И ЦЕНЫ", href: "/schedule" },
+              { title: "ПРЕПОДАВАТЕЛИ", href: "/teachers" },
+            ],
+            courses: "КУРСЫ АНГЛИЙСКОГО",
+            coursesDropdown: [
+              { title: "ДОШКОЛЬНИКИ", href: "/preschoolers" },
+              { title: "ДЕТИ 7-9 ЛЕТ", href: "/aged-7-9" },
+              { title: "ДЕТИ 10-12 ЛЕТ", href: "/aged-10-12" },
+              { title: "ПОДРОСТКИ", href: "/teenagers" },
+              { title: "ВЗРОСЛЫЕ", href: "/adults" },
+            ],
+            chinese: "КУРСЫ КИТАЙСКОГО",
+            chineseDropdown: [
+              { title: "ДОШКОЛЬНИКИ", href: "/chinese/preschoolers" },
+              { title: "ДЕТИ 7-9 ЛЕТ", href: "/chinese/aged-7-9" },
+              { title: "ДЕТИ 10-12 ЛЕТ", href: "/chinese/aged-10-12" },
+              { title: "ПОДРОСТКИ", href: "/chinese/teenagers" },
+              { title: "ВЗРОСЛЫЕ", href: "/chinese/adults" },
+            ],
+            club: "РАЗГОВОРНЫЙ КЛУБ",
+            clubDropdown: [
+              { title: "ПОДРОСТКИ", href: "/conversation-club/adults" },
+              { title: "ВЗРОСЛЫЕ", href: "/conversation-club/teenagers" },
+            ],
+            news: "НОВОСТИ",
+            contacts: "КОНТАКТЫ",
           },
-          {
-            name: "Monthly Pass",
-            price: "5,000 ₽",
-            features: ["8 lessons", "90 minutes each", "Group up to 6 students"],
-            popular: true
+          levels: {
+            title: "Уровни обучения",
+            items: [
+              {
+                title: "Начальный (HSK 1-2)",
+                description: "Базовая коммуникация, основы иероглифики и грамматики"
+              },
+              {
+                title: "Средний (HSK 3-4)",
+                description: "Уверенное общение, деловой китайский, углубленная грамматика"
+              },
+              {
+                title: "Продвинутый (HSK 5-6)",
+                description: "Свободное владение, культурные нюансы, профессиональная коммуникация"
+              }
+            ]
           },
-          {
-            name: "Individual Lesson",
-            price: "2,500 ₽",
-            features: ["1 lesson", "90 minutes", "Individual approach"]
-          }
-        ]
-      }
-    }
+          features: {
+            title: "Особенности программы",
+            items: [
+              {
+                icon: "BookOpen",
+                title: "Комплексный подход",
+                description: "Развитие всех языковых навыков: говорение, письмо, чтение, аудирование"
+              },
+              {
+                icon: "Users",
+                title: "Практика с носителями",
+                description: "Регулярные разговорные клубы с носителями языка"
+              },
+              {
+                icon: "Clock",
+                title: "Гибкий график",
+                description: "Утренние, вечерние занятия и группы выходного дня"
+              },
+              {
+                icon: "Trophy",
+                title: "Подготовка к HSK",
+                description: "Целенаправленная подготовка к международным экзаменам"
+              }
+            ]
+          },
+          benefits: {
+            title: "Преимущества обучения у нас",
+            items: [
+              "Индивидуальный план обучения",
+              "Современные учебные материалы",
+              "Онлайн-поддержка между занятиями",
+              "Регулярная практика с носителями языка",
+              "Подготовка к международным экзаменам",
+              "Бизнес-китайский по запросу"
+            ]
+          },
+          schedule: {
+            title: "Расписание занятий",
+            description: "Выберите удобный формат обучения",
+            formats: [
+              {
+                title: "Утренние группы",
+                time: "Пн, Ср, Пт: 7:30 - 9:00"
+              },
+              {
+                title: "Вечерние группы",
+                time: "Вт, Чт: 19:00 - 20:30"
+              },
+              {
+                title: "Группы выходного дня",
+                time: "Сб: 10:00 - 13:00"
+              }
+            ]
+          },
+          pricing: {
+            title: "Стоимость обучения",
+            options: [
+              {
+                title: "Стандарт",
+                price: "8 000 ₽/месяц",
+                features: [
+                  "2 занятия в неделю",
+                  "Группа до 8 человек",
+                  "Онлайн-материалы",
+                  "Домашние задания"
+                ]
+              },
+              {
+                title: "Интенсив",
+                price: "12 000 ₽/месяц",
+                features: [
+                  "3 занятия в неделю",
+                  "Группа до 6 человек",
+                  "Разговорный клуб",
+                  "Подготовка к HSK"
+                ]
+              },
+              {
+                title: "Премиум",
+                price: "20 000 ₽/месяц",
+                features: [
+                  "Индивидуальные занятия",
+                  "Гибкий график",
+                  "Бизнес-китайский",
+                  "VIP-поддержка"
+                ]
+              }
+            ]
+          },
+          cta: {
+            title: "Начните изучать китайский язык уже сегодня",
+            description: "Запишитесь на бесплатный пробный урок и определите свой уровень",
+            button: "Записаться на пробный урок"
+          },
+          languageToggle: "English",
+        },
+        en: {
+          title: "Chinese for Adults",
+          subtitle: "Effective Chinese language learning for work, travel, and personal development",
+          schoolName: "Tut School",
+          schoolSubtitle: "Foreign Language Courses, School of Arts",
+          phone: "+7 (983) 600-00-00",
+          email: "info@tut-school.ru",
+          address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
+          rating: "4.8 on Yandex",
+          search: "Search",
+          workingHours: "Mon-Fri: 9:00-21:00, Sat: 10:00-18:00",
+          description: "Our program combines modern methodologies with a personalized approach to help you achieve your language goals.",
+          nav: {
+            about: "ABOUT THE SCHOOL",
+            aboutDropdown: [
+              { title: "OUR VALUES", href: "/our-values" },
+              { title: "SCHEDULE AND PRICES", href: "/schedule" },
+              { title: "TEACHERS", href: "/teachers" },
+            ],
+            courses: "COURSES",
+            coursesDropdown: [
+              { title: "PRESCHOOLERS", href: "/preschoolers" },
+              { title: "CHILDREN AGED 7-9", href: "/aged-7-9" },
+                { title: "CHILDREN AGED 10-12", href: "/aged-10-12" },
+              { title: "TEENAGERS", href: "/teenagers" },
+                { title: "ADULTS", href: "/adults" },
+            ],
+            chinese: "CHINESE LANGUAGE COURSES",
+            chineseDropdown: [
+              { title: "PRESCHOOLERS", href: "/chinese/preschoolers" },
+              { title: "CHILDREN AGED 7-9", href: "/chinese/aged-7-9" },
+              { title: "CHILDREN AGED 10-12", href: "/chinese/aged-10-12" },
+              { title: "TEENAGERS", href: "/chinese/teenagers" },
+              { title: "ADULTS", href: "/chinese/adults" },
+            ],
+            club: "CONVERSATION CLUB",
+            clubDropdown: [
+              { title: "TEENAGERS", href: "/conversation-club/adults" },
+              { title: "ADULTS", href: "//conversation-club/adults" },
+            ],
+            news: "NEWS",
+            contacts: "CONTACTS",
+          },
+          levels: {
+            title: "Learning Levels",
+            items: [
+              {
+                title: "Beginner (HSK 1-2)",
+                description: "Basic communication, fundamentals of characters and grammar"
+              },
+              {
+                title: "Intermediate (HSK 3-4)",
+                description: "Confident communication, business Chinese, advanced grammar"
+              },
+              {
+                title: "Advanced (HSK 5-6)",
+                description: "Fluent proficiency, cultural nuances, professional communication"
+              }
+            ]
+          },
+          features: {
+            title: "Program Features",
+            items: [
+              {
+                icon: "BookOpen",
+                title: "Comprehensive Approach",
+                description: "Development of all language skills: speaking, writing, reading, listening"
+              },
+              {
+                icon: "Users",
+                title: "Native Speaker Practice",
+                description: "Regular conversation clubs with native speakers"
+              },
+              {
+                icon: "Clock",
+                title: "Flexible Schedule",
+                description: "Morning, evening, and weekend group options"
+              },
+              {
+                icon: "Trophy",
+                title: "HSK Preparation",
+                description: "Targeted preparation for international exams"
+              }
+            ]
+          },
+          benefits: {
+            title: "Why Choose Us",
+            items: [
+              "Personalized learning plan",
+              "Modern learning materials",
+              "Online support between classes",
+              "Regular practice with native speakers",
+              "International exam preparation",
+              "Business Chinese upon request"
+            ]
+          },
+          schedule: {
+            title: "Class Schedule",
+            description: "Choose your preferred learning format",
+            formats: [
+              {
+                title: "Morning Groups",
+                time: "Mon, Wed, Fri: 7:30 - 9:00"
+              },
+              {
+                title: "Evening Groups",
+                time: "Tue, Thu: 19:00 - 20:30"
+              },
+              {
+                title: "Weekend Groups",
+                time: "Sat: 10:00 - 13:00"
+              }
+            ]
+          },
+          pricing: {
+            title: "Pricing",
+            options: [
+              {
+                title: "Standard",
+                price: "8,000 ₽/month",
+                features: [
+                  "2 lessons per week",
+                  "Up to 8 students",
+                  "Online materials",
+                  "Homework assignments"
+                ]
+              },
+              {
+                title: "Intensive",
+                price: "12,000 ₽/month",
+                features: [
+                  "3 lessons per week",
+                  "Up to 6 students",
+                  "Conversation club",
+                  "HSK preparation"
+                ]
+              },
+              {
+                title: "Premium",
+                price: "20,000 ₽/month",
+                features: [
+                  "Individual lessons",
+                  "Flexible schedule",
+                  "Business Chinese",
+                  "VIP support"
+                ]
+              }
+            ]
+          },
+          cta: {
+            title: "Start Learning Chinese Today",
+            description: "Book a free trial lesson and determine your level",
+            button: "Book a Trial Lesson"
+          },
+          languageToggle: "Русский",
+        }
+      };
+      const t = translations[language]
+
+  const toggleLanguage = () => {
+    setLanguage(language === "ru" ? "en" : "ru")
   }
 
-  const t = translations[language]
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
+  const toggleDropdown = (dropdown: string) => {
+    if (activeDropdown === dropdown) {
+      setActiveDropdown(null)
+    } else {
+      setActiveDropdown(dropdown)
+    }
+  }
+    
 
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-emerald-50 to-white">
-      <FadeIn>
-        {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0">
-            <Image
-              src="/images/mandarin-business-hero.jpg"
-              alt="Adults learning Chinese"
-              fill
-              className="object-cover opacity-20"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-emerald-900/80 to-emerald-800/80" />
-          </div>
-          <div className="max-w-4xl mx-auto text-center relative z-10">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-5xl md:text-6xl font-bold text-white mb-6"
-            >
-              {t.hero.title}
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-white/90 mb-8"
-            >
-              {t.hero.subtitle}
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-emerald-800 px-8 py-4 rounded-lg hover:bg-emerald-50 transition-colors font-medium text-lg shadow-lg"
-              >
-                {t.hero.cta}
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white/10 transition-colors font-medium text-lg"
-              >
-                {language === 'ru' ? 'Узнать больше' : 'Learn More'}
-              </motion.button>
-            </motion.div>
-          </div>
-        </section>
+    <div className="min-h-screen bg-white">
 
-        {/* Features Section */}
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {t.features.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white p-8 rounded-xl border border-emerald-100 hover:border-emerald-300 transition-colors shadow-sm hover:shadow-md"
-                >
-                  <feature.icon className="w-12 h-12 text-emerald-600 mb-6" />
-                  <h3 className="text-xl font-semibold mb-3 text-emerald-800">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
-                </motion.div>
-              ))}
+<div className="bg-gray-100 py-2 text-sm">
+        <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Clock className="h-4 w-4 text-primary" />
+              <span className="text-gray-600">{t.workingHours}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Phone className="h-4 w-4 text-primary" />
+              <a href={`tel:${t.phone.replace(/\s+/g, "")}`} className="text-gray-600 hover:text-primary">
+                {t.phone}
+              </a>
+            </div>
+            <div className="flex items-center gap-2">
+              <Landmark className="h-4 w-4 text-primary" />
+              <span className="text-gray-600">{t.address}</span>
+            </div>
+            <div className="hidden items-center gap-2 md:flex">
+              <Mail className="h-4 w-4 text-primary" />
+              <a href={`mailto:${t.email}`} className="text-gray-600 hover:text-primary">
+                {t.email}
+              </a>
             </div>
           </div>
-        </section>
+          <div className="flex items-center gap-3">
+            
+          <a href="#" className="text-red-600 hover:text-burgundy-900">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.052-1.713-1.033-1.033-1.49-1.172-1.744-1.172-.356 0-.458.102-.458.593v1.573c0 .424-.136.593-1.252.593-1.844 0-3.896-1.118-5.336-3.202-2.168-3.4-2.762-5.944-2.762-6.47 0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.864 2.5 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.316c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.407.44-.407h2.744c.373 0 .508.204.508.66v3.54c0 .373.17.508.271.508.22 0 .407-.135.814-.542 1.27-1.422 2.168-3.624 2.168-3.624.118-.254.305-.491.745-.491h1.744c.525 0 .644.27.525.66-.22 1.015-2.32 3.979-2.32 3.979-.186.305-.254.44 0 .78.186.254.796.779 1.2 1.252.745.847 1.32 1.558 1.473 2.052.17.491-.085.745-.576.745z" />
+              </svg>
+            </a>
+            <a href="https://api.whatsapp.com/send/?phone=%2B79167349246&text&type=phone_number&app_absent=0" className="text-green-600 hover:text-burgundy-900">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.472 3.5C18.188 1.24 15.073 0 11.786 0 5.354 0 .13 5.214.13 11.636c0 2.05.546 4.05 1.585 5.812L.13 24l6.726-1.763c1.698.925 3.607 1.41 5.55 1.41h.005c6.43 0 11.65-5.215 11.65-11.637 0-3.109-1.21-6.026-3.413-8.225l-.175-.285zM11.786 21.273h-.004c-1.743 0-3.45-.468-4.942-1.35l-.355-.21-3.676.964.985-3.595-.232-.368c-.975-1.55-1.49-3.335-1.49-5.17 0-5.356 4.364-9.713 9.728-9.713 2.6 0 5.034 1.012 6.868 2.85 1.832 1.837 2.842 4.276 2.84 6.873-.004 5.356-4.367 9.719-9.722 9.719zm5.333-7.278c-.294-.147-1.734-.856-2.002-.951-.268-.097-.463-.146-.658.146-.195.293-.757.951-.928 1.147-.17.195-.342.22-.635.073-.294-.147-1.24-.456-2.363-1.456-.873-.778-1.463-1.738-1.634-2.032-.171-.293-.018-.451.128-.597.132-.132.294-.342.44-.513.148-.17.197-.293.296-.488.098-.195.05-.366-.025-.513-.073-.147-.657-1.583-.9-2.168-.244-.585-.487-.487-.658-.487-.17 0-.367-.025-.562-.025-.195 0-.513.073-.781.366-.269.293-1.025.999-1.025 2.435 0 1.436 1.05 2.824 1.196 3.02.146.195 2.057 3.142 4.988 4.407.697.268 1.24.428 1.664.55.7.222 1.337.19 1.839.115.56-.085 1.734-.71 1.977-1.395.244-.684.244-1.27.17-1.393-.073-.122-.268-.196-.562-.342z" />
+              </svg>
+            </a>
+            <a href="https://t.me/TUTschoolNovogorsk" className="text-blue-500 hover:text-burgundy-900">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.193-2.98 5.518-4.99c.22-.196-.048-.307-.338-.11l-6.81 4.29-2.96-.92c-.64-.203-.658-.64.135-.954l11.57-4.46c.538-.196 1.006.128.832.941z"/>
+  </svg>
+</a>
+            <button
+              onClick={toggleLanguage}
+              className="ml-2 flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 text-xs hover:bg-gray-200"
+            >
+              <Globe className="h-3 w-3" />
+              {t.languageToggle}
+            </button>
+          </div>
+        </div>
+      </div>
 
-        {/* Activities Section */}
-        <section className="py-20 bg-emerald-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12 text-emerald-800">
-              {language === 'ru' ? 'Наши занятия' : 'Our Activities'}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {t.activities.map((activity, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <div className="relative h-64">
-                    <Image
-                      src={activity.image}
-                      alt={activity.title}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/80 to-transparent" />
-                  </div>
-                  <div className="p-8">
-                    <h3 className="text-xl font-semibold mb-3 text-emerald-800">{activity.title}</h3>
-                    <p className="text-gray-600 mb-4">{activity.description}</p>
-                    <button className="text-emerald-600 font-medium flex items-center hover:text-emerald-700 transition-colors">
-                      {language === 'ru' ? 'Подробнее' : 'Learn More'}
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
+      {/* Header */}
+      <header    className={`border-b bg-white py-4 shadow-sm transition-all duration-300 ${
+          isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : "relative z-50"
+        }`}>
+        <div className="container mx-auto flex items-center justify-between px-4">
+          <div className="flex items-center gap-3">
+            <div className="relative h-14 w-14">
+              <Link href='/'>
+              <Image
+                src="/logo.png?height=56&width=56"
+                alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
+                fill
+                className="object-contain"
+              />
+              </Link>
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
+              <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
             </div>
           </div>
-        </section>
 
-        {/* Levels Section */}
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12 text-emerald-800">
-              {language === 'ru' ? 'Уровни обучения' : 'Learning Levels'}
-            </h2>
-            <div className="max-w-4xl mx-auto">
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                {t.levels.map((level, index) => (
-                  <button
+          {/* Desktop Navigation */}
+          
+
+          <nav className="hidden md:block" ref={dropdownRef}>
+            <ul className="flex gap-6">
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("about")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "about" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.about}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "about" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.aboutDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("courses")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "courses" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.courses}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "courses" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "courses" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.coursesDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("chinese")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.chinese}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "chinese" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.chineseDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("club")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "club" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.club}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "club" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "club" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.clubDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li>
+                <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.news}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.contacts}
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+            {/* Mobile Menu */}
+            <div
+        className={`fixed inset-x-0 top-[${isScrolled ? "60px" : "auto"}] z-40 border-b bg-white shadow-sm md:hidden overflow-auto transition-all duration-300 ease-in-out ${
+          mobileMenuOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
+        }`}
+        style={{ top: isScrolled ? "60px" : "auto" }}
+      >
+        <div className="container mx-auto px-4 py-4">
+          <nav className="space-y-4">
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("about-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "about-mobile"}
+              >
+                <span>{t.nav.about}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "about-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "about-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.aboutDropdown.map((item, index) => (
+                  <Link
                     key={index}
-                    onClick={() => setActiveTab(index)}
-                    className={`px-6 py-3 rounded-lg font-medium transition-all ${activeTab === index
-                        ? 'bg-emerald-600 text-white'
-                        : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
-                      }`}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
                   >
-                    {level.name}
-                  </button>
+                    {item.title}
+                  </Link>
                 ))}
               </div>
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="text-center bg-emerald-50 p-8 rounded-xl text-emerald-800"
-              >
-                <p className="text-lg">
-                  {t.levels[activeTab].description}
-                </p>
-              </motion.div>
             </div>
-          </div>
-        </section>
 
-        {/* Pricing Section */}
-        <section className="py-20 bg-emerald-50">
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("courses-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "courses-mobile"}
+              >
+                <span>{t.nav.courses}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "courses-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "courses-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.coursesDropdown.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("chinese-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "chinese-mobile"}
+              >
+                <span>{t.nav.chinese}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "chinese-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "chinese-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.chineseDropdown.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("club-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "club-mobile"}
+              >
+                <span>{t.nav.club}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "club-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "club-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.clubDropdown.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <Link
+              href="/news"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+            >
+              {t.nav.news}
+            </Link>
+
+            <Link
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+            >
+              {t.nav.contacts}
+            </Link>
+          </nav>
+        </div>
+      </div>
+
+      <section className="relative h-[500px] overflow-hidden">
+        <Image
+          src="https://images.pexels.com/photos/5676744/pexels-photo-5676744.jpeg"
+          alt="Chinese language learning"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-[#5C162E]/80"></div>
+        <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12 text-emerald-800">
+            <FadeIn>
+              <h1 className="mb-4 max-w-2xl text-4xl font-bold text-white md:text-5xl lg:text-6xl">
+                {t.title}
+              </h1>
+              <p className="mb-8 max-w-xl text-lg text-white/90 md:text-xl">
+                {t.subtitle}
+              </p>
+              <Link
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-[#5C162E] transition-all hover:bg-white/90"
+              >
+                {t.cta.button}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* Levels Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <FadeIn>
+            <h2 className="mb-12 text-center text-3xl font-bold text-[#5C162E]">
+              {t.levels.title}
+            </h2>
+          </FadeIn>
+          <div className="grid gap-8 md:grid-cols-3">
+            {t.levels.items.map((level, index) => (
+              <FadeIn key={index} delay={index * 0.1}>
+                <div className="rounded-lg bg-white p-6 shadow-lg transition-all hover:shadow-xl">
+                  <h3 className="mb-4 text-xl font-bold text-[#5C162E]">{level.title}</h3>
+                  <p className="text-gray-600">{level.description}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4">
+          <FadeIn>
+            <h2 className="mb-12 text-center text-3xl font-bold text-[#5C162E]">
+              {t.features.title}
+            </h2>
+          </FadeIn>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {t.features.items.map((feature, index) => (
+              <FadeIn key={index} delay={index * 0.1}>
+                <div className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:shadow-xl">
+                  {feature.icon === "BookOpen" && <BookOpen className="mx-auto mb-4 h-8 w-8 text-[#5C162E]" />}
+                  {feature.icon === "Users" && <Users className="mx-auto mb-4 h-8 w-8 text-[#5C162E]" />}
+                  {feature.icon === "Clock" && <Clock className="mx-auto mb-4 h-8 w-8 text-[#5C162E]" />}
+                  {feature.icon === "Trophy" && <Trophy className="mx-auto mb-4 h-8 w-8 text-[#5C162E]" />}
+                  <h3 className="mb-2 text-lg font-bold text-[#5C162E]">{feature.title}</h3>
+                  <p className="text-sm text-gray-600">{feature.description}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-12 md:grid-cols-2">
+            <FadeIn>
+              <div>
+                <h2 className="mb-6 text-3xl font-bold text-[#5C162E]">{t.benefits.title}</h2>
+                <ul className="space-y-4">
+                  {t.benefits.items.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <Check className="mt-1 h-5 w-5 flex-shrink-0 text-[#5C162E]" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeIn>
+            <FadeIn delay={0.2}>
+              <div className="relative h-[300px] overflow-hidden rounded-lg">
+                <Image
+                  src="https://images.pexels.com/photos/6147369/pexels-photo-6147369.jpeg"
+                  alt="Chinese class"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* Schedule Section */}
+      <section className="bg-[#5C162E] py-16 text-white">
+        <div className="container mx-auto px-4">
+          <FadeIn>
+            <h2 className="mb-8 text-center text-3xl font-bold">{t.schedule.title}</h2>
+            <p className="mb-12 text-center text-lg text-white/90">{t.schedule.description}</p>
+          </FadeIn>
+          <div className="grid gap-8 md:grid-cols-3">
+            {t.schedule.formats.map((format, index) => (
+              <FadeIn key={index} delay={index * 0.1}>
+                <div className="rounded-lg bg-white/10 p-6 backdrop-blur-sm">
+                  <h3 className="mb-4 text-xl font-bold">{format.title}</h3>
+                  <p className="text-white/90">{format.time}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <FadeIn>
+            <h2 className="mb-12 text-center text-3xl font-bold text-[#5C162E]">
               {t.pricing.title}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {t.pricing.plans.map((plan, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow relative ${plan.popular ? 'border-2 border-emerald-600' : ''
-                    }`}
-                >
-                  {plan.popular && (
-                    <div className="absolute top-0 right-0 bg-emerald-600 text-white px-4 py-1 rounded-bl-xl">
-                      {language === 'ru' ? 'Популярный' : 'Popular'}
-                    </div>
-                  )}
-                  <h3 className="text-xl font-bold mb-4 text-emerald-800">{plan.name}</h3>
-                  <p className="text-3xl font-bold mb-6 text-emerald-600">{plan.price}</p>
-                  <ul className="space-y-3 mb-8">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-gray-600">
-                        <Check className="w-5 h-5 text-emerald-600 mr-2" />
-                        {feature}
+          </FadeIn>
+          <div className="grid gap-8 md:grid-cols-3">
+            {t.pricing.options.map((option, index) => (
+              <FadeIn key={index} delay={index * 0.1}>
+                <div className="rounded-lg bg-white p-6 shadow-lg transition-all hover:shadow-xl">
+                  <h3 className="mb-2 text-xl font-bold text-[#5C162E]">{option.title}</h3>
+                  <p className="mb-6 text-2xl font-bold text-[#5C162E]">{option.price}</p>
+                  <ul className="space-y-3">
+                    {option.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-[#5C162E]" />
+                        <span className="text-gray-600">{feature}</span>
                       </li>
                     ))}
                   </ul>
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full bg-emerald-600 text-white py-4 rounded-lg hover:bg-emerald-700 transition-colors font-medium"
-                  >
-                    {language === 'ru' ? 'Выбрать' : 'Select'}
-                  </motion.button>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </FadeIn>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CTA Section */}
-        <section className="py-20 bg-emerald-800 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-6">
-              {language === 'ru' ? 'Запишитесь на пробный урок' : 'Book a trial lesson'}
-            </h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              {language === 'ru' ? 'Запишитесь на пробный урок и получите скидку 20% на первый месяц обучения!' : 'Sign up for a trial lesson and get a 20% discount on your first month of study!'}
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-emerald-800 px-8 py-4 rounded-lg hover:bg-emerald-50 transition-colors font-medium text-lg shadow-lg"
-            >
-              {t.hero.cta}
-            </motion.button>
+      {/* CTA Section */}
+      <section className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <FadeIn>
+              <h2 className="mb-4 text-3xl font-bold text-[#5C162E]">{t.cta.title}</h2>
+              <p className="mb-8 text-lg text-gray-600">{t.cta.description}</p>
+              <Link
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-full bg-[#5C162E] px-8 py-3 font-medium text-white transition-all hover:bg-[#5C162E]/90"
+              >
+                {t.cta.button}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </FadeIn>
           </div>
-        </section>
-      </FadeIn>
+        </div>
+      </section>
     </div>
-  )
+  );
 }
