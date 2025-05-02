@@ -409,30 +409,30 @@ export default function ValuesPage() {
                   </div>
                 )}
               </li>
-              <li className="relative">
-                <button
-                  onClick={() => toggleDropdown("chinese")}
-                  className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-                >
-                  {t.nav.chinese}
-                  <ChevronDown
-                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {activeDropdown === "chinese" && (
-                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                    {t.nav.chineseDropdown.map((item, index) => (
-                      <Link
-                      key={index}
-                      href={item.href}
-                      className="block px-3 py-1 text-xs text-gray-100 hover:bg-gray-100 hover:bg-opacity-10 rounded"
-                    >
-                      {item.title}
-                    </Link>
-                    ))}
-                  </div>
-                )}
-              </li>
+                            <li className="relative">
+                              <button
+                                onClick={() => toggleDropdown("chinese")}
+                                className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                              >
+                                {t.nav.chinese}
+                                <ChevronDown
+                                  className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
+                                />
+                              </button>
+                              {activeDropdown === "chinese" && (
+                                <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                                  {t.nav.chineseDropdown.map((item, index) => (
+                                    <Link
+                                      key={index}
+                                      href={item.href}
+                                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    >
+                                      {item.title}
+                                    </Link>
+                                  ))}
+                                </div>
+                              )}
+                            </li>
               <li className="relative">
                 <button
                   onClick={() => toggleDropdown("club")}
