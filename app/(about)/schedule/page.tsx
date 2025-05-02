@@ -544,12 +544,6 @@ export default function SchedulePage() {
           </nav>
 
           <div className="flex items-center gap-4">
-          <Link
-            href="/bookings"
-            className="px-2.5 py-1 text-xs ml-1.5 rounded bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-sm hover:shadow"
-          >
-          {t.cta}
-        </Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -709,17 +703,10 @@ export default function SchedulePage() {
             >
               {t.nav.contacts}
             </Link>
-
-            <Link
-              href="/bookings"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block w-full text-center px-4 py-3 mt-4 text-sm rounded-md bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] active:scale-98 transition-all shadow-sm touch-manipulation"
-            >
-              {t.cta}
-            </Link>
           </nav>
         </div>
       </div>
+
 
       <main className="min-h-screen bg-gray-50 pb-16">
         {/* Hero Section */}

@@ -443,10 +443,10 @@ export default function ChineseAdults() {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
+                    {/* Desktop Navigation */}
           
 
-          <nav className="hidden md:block" ref={dropdownRef}>
+                    <nav className="hidden md:block" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">
                 <button
@@ -720,6 +720,7 @@ export default function ChineseAdults() {
           </nav>
         </div>
       </div>
+
 
       <section className="relative h-[500px] overflow-hidden">
         <Image

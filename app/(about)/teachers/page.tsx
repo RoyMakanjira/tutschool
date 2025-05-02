@@ -516,8 +516,10 @@ export default function Teachers() {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:block" ref={dropdownRef}>
+           {/* Desktop Navigation */}
+          
+
+           <nav className="hidden md:block" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">
                 <button
@@ -629,12 +631,6 @@ export default function Teachers() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link
-              href="/bookings"
-              className="px-2.5 py-1 text-xs ml-1.5 rounded bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-sm hover:shadow"
-            >
-              {t.teachers.cta}
-            </Link>
             <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -642,8 +638,8 @@ export default function Teachers() {
         </div>
       </header>
 
-      {/* Mobile Menu */}
-      <div
+            {/* Mobile Menu */}
+            <div
         className={`fixed inset-x-0 top-[${isScrolled ? "60px" : "auto"}] z-40 border-b bg-white shadow-sm md:hidden overflow-auto transition-all duration-300 ease-in-out ${
           mobileMenuOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
         }`}
@@ -794,17 +790,10 @@ export default function Teachers() {
             >
               {t.nav.contacts}
             </Link>
-
-            <Link
-              href="/bookings"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block w-full text-center px-4 py-3 mt-4 text-sm rounded-md bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] active:scale-98 transition-all shadow-sm touch-manipulation"
-            >
-              {t.teachers.cta}
-            </Link>
           </nav>
         </div>
       </div>
+
 
       <main>
         {/* Hero Section */}

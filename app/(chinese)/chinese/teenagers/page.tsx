@@ -276,9 +276,11 @@ export default function ChineseTeenagersPage() {
           </div>
 
           {/* Desktop Navigation */}
+
+                {/* Desktop Navigation */}
           
 
-          <nav className="hidden md:block" ref={dropdownRef}>
+                <nav className="hidden md:block" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">
                 <button
@@ -552,6 +554,7 @@ export default function ChineseTeenagersPage() {
           </nav>
         </div>
       </div>
+
       <section className="relative h-[400px] overflow-hidden md:h-[500px]">
         <Image
           src="https://images.pexels.com/photos/8500238/pexels-photo-8500238.jpeg"

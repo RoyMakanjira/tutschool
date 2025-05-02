@@ -358,8 +358,10 @@ export default function ValuesPage() {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:block" ref={dropdownRef}>
+           {/* Desktop Navigation */}
+          
+
+           <nav className="hidden md:block" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">
                 <button
@@ -409,30 +411,30 @@ export default function ValuesPage() {
                   </div>
                 )}
               </li>
-                            <li className="relative">
-                              <button
-                                onClick={() => toggleDropdown("chinese")}
-                                className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-                              >
-                                {t.nav.chinese}
-                                <ChevronDown
-                                  className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
-                                />
-                              </button>
-                              {activeDropdown === "chinese" && (
-                                <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                                  {t.nav.chineseDropdown.map((item, index) => (
-                                    <Link
-                                      key={index}
-                                      href={item.href}
-                                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    >
-                                      {item.title}
-                                    </Link>
-                                  ))}
-                                </div>
-                              )}
-                            </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("chinese")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.chinese}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "chinese" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.chineseDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
               <li className="relative">
                 <button
                   onClick={() => toggleDropdown("club")}
@@ -630,17 +632,10 @@ export default function ValuesPage() {
             >
               {t.nav.contacts}
             </Link>
-
-            <Link
-              href="/bookings"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block w-full text-center px-4 py-3 mt-4 text-sm rounded-md bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] active:scale-98 transition-all shadow-sm touch-manipulation"
-            >
-              Book a Lesson
-            </Link>
           </nav>
         </div>
       </div>
+
 
       <main className="flex-1 bg-gray-50">
         {/* Hero Section */}
