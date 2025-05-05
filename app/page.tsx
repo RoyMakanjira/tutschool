@@ -28,6 +28,7 @@ import {
   Landmark,
 } from "lucide-react"
 import PromotionalBanner from "@/components/PromotionalBanner"
+import Masterclasses from "./masterclasses/page"
 
 export default function Home() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
@@ -197,6 +198,7 @@ export default function Home() {
           { title: "ВЗРОСЛЫЕ", href: "/conversation-club/teenagers" },
         ],
         news: "НОВОСТИ",
+        masterclasses: "МАСТЕР-КЛАССЫ",
         contacts: "КОНТАКТЫ",
       },
       hero: {
@@ -349,6 +351,7 @@ export default function Home() {
           { title: "ADULTS", href: "//conversation-club/adults" },
         ],
         news: "NEWS",
+        masterclasses: "MASTERCLASS",
         contacts: "CONTACTS",
       },
       hero: {
@@ -688,6 +691,11 @@ export default function Home() {
                 </Link>
               </li>
               <li>
+                <Link href="/masterclasses" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.masterclasses}
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.contacts}
                 </Link>
@@ -847,7 +855,13 @@ export default function Home() {
             >
               {t.nav.news}
             </Link>
-
+            <Link
+              href="/masterclasses"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+            >
+              {t.nav.masterclasses}
+            </Link>
             <Link
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}
