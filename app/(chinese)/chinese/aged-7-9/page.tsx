@@ -78,6 +78,7 @@ export default function ChineseAged79Page() {
           { title: "ВЗРОСЛЫЕ", href: "/conversation-club/teenagers" },
         ],
         news: "НОВОСТИ",
+        masterclasses: "МАСТЕР-КЛАССЫ",
         contacts: "КОНТАКТЫ",
       },
       description: "Наш курс китайского языка специально разработан для детей 7-9 лет. Мы используем игровой подход к обучению, который делает процесс изучения языка увлекательным и эффективным.",
@@ -162,6 +163,7 @@ export default function ChineseAged79Page() {
           { title: "ADULTS", href: "//conversation-club/adults" },
         ],
         news: "NEWS",
+        masterclasses: "MASTERCLASS",
         contacts: "CONTACTS",
       },
       description: "Our Chinese language course is specially designed for children aged 7-9. We use a playful approach to learning that makes the language learning process engaging and effective.",
@@ -405,6 +407,11 @@ export default function ChineseAged79Page() {
                 )}
               </li>
               <li>
+                <Link href="/masterclasses" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.masterclasses}
+                </Link>
+              </li>
+              <li>
                 <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.news}
                 </Link>
@@ -561,7 +568,13 @@ export default function ChineseAged79Page() {
                 ))}
               </div>
             </div>
-
+            <Link
+              href="/masterclasses"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+            >
+              {t.nav.masterclasses}
+            </Link>
             <Link
               href="/news"
               onClick={() => setMobileMenuOpen(false)}

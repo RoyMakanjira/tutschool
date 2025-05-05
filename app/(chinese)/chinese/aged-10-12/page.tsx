@@ -72,6 +72,7 @@ export default function Aged10to12Page()  {
                 { title: "ВЗРОСЛЫЕ", href: "/conversation-club/teenagers" },
               ],
               news: "НОВОСТИ",
+              masterclasses: "МАСТЕР-КЛАССЫ",
               contacts: "КОНТАКТЫ",
             },
             chineseAged1012: {
@@ -172,6 +173,7 @@ export default function Aged10to12Page()  {
                 { title: "ADULTS", href: "/conversation-club/adults" },
               ],
               news: "NEWS",
+              masterclasses: "MASTERCLASS",
               contacts: "CONTACTS",
             },
             chineseAged1012: {
@@ -431,6 +433,11 @@ export default function Aged10to12Page()  {
                       )}
                     </li>
                     <li>
+                      <Link href="/masterclasses" className="text-sm font-medium text-gray-700 hover:text-primary">
+                        {t.nav.masterclasses}
+                      </Link>
+                    </li>
+                    <li>
                       <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
                         {t.nav.news}
                       </Link>
@@ -587,7 +594,13 @@ export default function Aged10to12Page()  {
                       ))}
                     </div>
                   </div>
-      
+                  <Link
+                    href="/masterclasses"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {t.nav.masterclasses}
+                  </Link>
                   <Link
                     href="/news"
                     onClick={() => setMobileMenuOpen(false)}
