@@ -222,23 +222,6 @@ export default function Home() {
         ],
         cta: "Узнать больше о нашей школе",
       },
-      advantages: {
-        title: "НАШИ ПРЕИМУЩЕСТВА",
-        items: [
-          {
-            title: "Опытные преподаватели",
-            description: "Наши учителя имеют международные сертификаты и многолетний опыт преподавания",
-          },
-          {
-            title: "Английский и китайский",
-            description: "Предлагаем курсы по двум востребованным языкам для детей и взрослых",
-          },
-          {
-            title: "Школа искусств",
-            description: "Помимо языковых курсов у нас есть творческие занятия и мастер-классы",
-          },
-        ],
-      },
       courses: {
         title: "НАШИ КУРСЫ",
         subtitle: "Выберите программу, которая подходит именно вам",
@@ -397,23 +380,6 @@ export default function Home() {
           "Regular cultural events",
         ],
         cta: "Learn more about our school",
-      },
-      advantages: {
-        title: "OUR ADVANTAGES",
-        items: [
-          {
-            title: "Experienced Teachers",
-            description: "Our teachers have international certificates and many years of teaching experience",
-          },
-          {
-            title: "English and Chinese",
-            description: "We offer courses in two in-demand languages for children and adults",
-          },
-          {
-            title: "School of Arts",
-            description: "In addition to language courses, we have creative classes and master classes",
-          },
-        ],
       },
       courses: {
         title: "OUR COURSES",
@@ -1018,54 +984,6 @@ export default function Home() {
         <ValuesSectionCard language={language} />
   
 
-        {/* Advantages Section */}
-        <section className="bg-gray-50 py-16">
-          <div className="container mx-auto px-4">
-            <div className="grid gap-8 md:grid-cols-3">
-              {t.advantages.items.map((item, index) => (
-                <div key={index} className="rounded-lg bg-white p-8 shadow-md transition-all hover:shadow-lg">
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <span className="text-2xl font-bold">{index + 1}</span>
-                  </div>
-                  <h3 className="mb-4 text-xl font-bold">{item.title}</h3>
-                  <p className="text-gray-600">{item.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Courses Section */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {t.courses.items.map((course, index) => (
-                <div
-                  key={index}
-                  className="group overflow-hidden rounded-lg border border-gray-200 bg-white transition-all hover:shadow-lg"
-                >
-                  <div className="relative h-48">
-                    <Image
-                      src={`/assets/coursesOne.svg?height=200&width=300&text=${index + 1}`}
-                      alt={course.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="mb-3 text-xl font-bold">{course.title}</h3>
-                    <p className="mb-4 text-sm text-gray-600">{course.description}</p>
-                    <Link href="#" className="inline-flex items-center text-primary hover:underline">
-                      {course.cta}
-                      <ChevronRight className="ml-1 h-4 w-4" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* News Section */}
         <section className="bg-gray-50 py-16">
