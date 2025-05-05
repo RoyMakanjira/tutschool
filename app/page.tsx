@@ -686,13 +686,13 @@ export default function Home() {
                 )}
               </li>
               <li>
-                <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.news}
+                <Link href="/masterclasses" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.masterclasses}
                 </Link>
               </li>
               <li>
-                <Link href="/masterclasses" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.masterclasses}
+                <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.news}
                 </Link>
               </li>
               <li>
@@ -847,20 +847,19 @@ export default function Home() {
                 ))}
               </div>
             </div>
-
-            <Link
-              href="/news"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
-            >
-              {t.nav.news}
-            </Link>
             <Link
               href="/masterclasses"
               onClick={() => setMobileMenuOpen(false)}
               className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
             >
               {t.nav.masterclasses}
+            </Link>
+            <Link
+              href="/news"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+            >
+              {t.nav.news}
             </Link>
             <Link
               href="/contact"
