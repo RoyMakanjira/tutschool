@@ -223,28 +223,21 @@ export default function Home() {
         cta: "Узнать больше о нашей школе",
       },
       courses: {
-        title: "НАШИ КУРСЫ",
-        subtitle: "Выберите программу, которая подходит именно вам",
+        title: "НОВОСТИ И СОБЫТИЯ",
+        viewAll: "Смотреть все",
         items: [
           {
-            title: "Английский для детей",
-            description: "Возраст: 5-10 лет. Игровой формат обучения с акцентом на разговорную речь.",
-            cta: "Подробнее",
+            
+            title: "Английский для дошкольников",
+            cta: "Читать далее",
           },
           {
-            title: "Китайский для детей",
-            description: "Возраст: 5-10 лет. Знакомство с иероглифами и основами китайской культуры.",
-            cta: "Подробнее",
+            title: "Китайский для дошкольников",
+            cta: "Читать далее",
           },
           {
-            title: "Английский для взрослых",
-            description: "Общий и деловой английский для всех уровней от начинающего до продвинутого.",
-            cta: "Подробнее",
-          },
-          {
-            title: "Китайская каллиграфия",
-            description: "Творческие занятия по китайской каллиграфии для детей и взрослых.",
-            cta: "Подробнее",
+            title: "Творчество",
+            cta: "Читать далее",
           },
         ],
       },
@@ -382,28 +375,22 @@ export default function Home() {
         cta: "Learn more about our school",
       },
       courses: {
-        title: "OUR COURSES",
-        subtitle: "Choose the program that suits you best",
+        title: "NEWS AND EVENTS",
+        viewAll: "View all",
         items: [
           {
-            title: "English for Children",
-            description: "Ages: 5-10 years. Game-based learning format with an emphasis on speaking skills.",
-            cta: "Learn More",
+            
+            title: "English for Preschoolers",
+            cta: "Read more",
           },
           {
-            title: "Chinese for Children",
-            description: "Ages: 5-10 years. Introduction to characters and basics of Chinese culture.",
-            cta: "Learn More",
+            
+            title: "Chinese for Preschoolers",
+            cta: "Read more",
           },
           {
-            title: "English for Adults",
-            description: "General and business English for all levels from beginner to advanced.",
-            cta: "Learn More",
-          },
-          {
-            title: "Chinese Calligraphy",
-            description: "Creative classes in Chinese calligraphy for children and adults.",
-            cta: "Learn More",
+            title: "Arts",
+            cta: "Read more",
           },
         ],
       },
@@ -982,8 +969,43 @@ export default function Home() {
         {/* Values Section */}
 
         <ValuesSectionCard language={language} />
-  
 
+        {/* Courses Sections */}
+
+             <section className="bg-gray-50 py-16">
+          <div className="container mx-auto px-4">
+            <div className="mb-8 flex items-center justify-between">
+              <Link href="#" className="flex items-center text-sm font-medium text-primary hover:underline">
+                {t.courses.viewAll}
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </Link>
+            </div>
+            <div className="grid gap-6 md:grid-cols-3">
+              {t.courses.items.map((item, index) => (
+                <div
+                  key={index}
+                  className="overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg"
+                >
+                  <div className="relative h-48">
+                    <Image
+                      src={`/assets/coursesOne.svg?height=200&width=400&text=News ${index + 1}`}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="mb-3 text-xl font-bold">{item.title}</h3>
+                    <Link href="#" className="inline-flex items-center text-primary hover:underline">
+                      {item.cta}
+                      <ChevronRight className="ml-1 h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* News Section */}
         <section className="bg-gray-50 py-16">
