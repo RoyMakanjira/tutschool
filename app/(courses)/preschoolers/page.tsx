@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { motion } from "framer-motion"
 import {
 ArrowRight,Check,
   Clock,Calendar, Phone, Mail, ChevronDown, X, Menu, Globe
@@ -74,9 +75,9 @@ export default function PreschoolersPage() {
           courses: "КУРСЫ АНГЛИЙСКОГО",
           coursesDropdown: [
             { title: "ДОШКОЛЬНИКИ", href: "/preschoolers" },
-            { title: "ДЕТИ 7-9 ЛЕТ", href: "/courses/english-adults" },
-            { title: "ДЕТИ 10-12 ЛЕТ", href: "/courses/english-kids" },
-            { title: "ПОДРОСТКИ", href: "/courses/english-adults" },
+            { title: "ДЕТИ 7-9 ЛЕТ", href: "/aged-7-9" },
+            { title: "ДЕТИ 10-12 ЛЕТ", href: "/aged-10-12" },
+            { title: "ПОДРОСТКИ", href: "/teenagers" },
             { title: "ВЗРОСЛЫЕ", href: "/adults" },
           ],
           chinese: "КУРСЫ КИТАЙСКОГО",
@@ -92,15 +93,31 @@ export default function PreschoolersPage() {
             { title: "ПОДРОСТКИ", href: "//conversation-club/teenagers" },
             { title: "ВЗРОСЛЫЕ", href: "/conversation-club/adults" },
           ],
+          masterclass: "МАСТЕР-КЛАССЫ",
+          masterclassDropdown: [
+            { title: "КИТАЙСКАЯ КАЛЛИГРАФИЯ ", href: "/chinese-calligraphy" },
+            { title: "ТВОРЧЕСКИЕ МАСТЕР-КЛАССЫ", href: "/creative-workshops" },
+          ],
           news: "НОВОСТИ",
-          masterclasses: "МАСТЕР-КЛАССЫ",
           contacts: "КОНТАКТЫ",
         },
         hero: {
-          title: "ШКОЛА ИНОСТРАННЫХ ЯЗЫКОВ И ИСКУССТВ",
-          subtitle: "Мы помогаем детям и взрослым освоить английский и китайский языки в дружеской атмосфере",
+          title: "Английский для дошкольников",
+          subtitle: "Увлекательные занятия для детей 4-6 лет в игровой форме. Первое знакомство с английским языком через песни, игры и творческие задания.",
           cta: "Записаться на пробный урок",
         },
+      parents: {
+        title: "Почему родители выбирают нас",
+      },
+      services: {
+        title: "Чем мы занимаемся",
+        schedule: "Расписание занятий",
+      },
+      footnote: {
+        title: "Запишитесь на бесплатное пробное занятие",
+        subtitle: "Познакомьтесь с преподавателем и нашей методикой обучения. Первое занятие бесплатно!",
+        cta: "Записаться"
+      },
       benefits: [
         {
           title: "Игровой формат",
@@ -172,9 +189,9 @@ export default function PreschoolersPage() {
           courses: "COURSES",
           coursesDropdown: [
             { title: "PRESCHOOLERS", href: "/preschoolers" },
-            { title: "CHILDREN AGED 7-9", href: "/courses/english-adults" },
-              { title: "CHILDREN AGED 10-12", href: "/courses/english-kids" },
-            { title: "TEENAGERS", href: "/courses/english-adults" },
+            { title: "CHILDREN AGED 7-9", href: "/aged-7-9" },
+              { title: "CHILDREN AGED 10-12", href: "/aged-10-12" },
+            { title: "TEENAGERS", href: "/teenagers" },
               { title: "ADULTS", href: "/adults" },
           ],
           chinese: "CHINESE LANGUAGE COURSES",
@@ -190,14 +207,30 @@ export default function PreschoolersPage() {
             { title: "TEENAGERS", href: "//conversation-club/teenagers" },
             { title: "ADULTS", href: "/conversation-club/adults" },
           ],
+          masterclass: "MASTERCLASS",
+          masterclassDropdown: [
+            { title: "CHINESE CALLIGRAPHY", href: "/chinese-calligraphy" },
+            { title: "CREATIVE WORKSHOP", href: "/creative-workshop" },
+          ],
           news: "NEWS",
-          masterclasses: "MASTERCLASS",
           contacts: "CONTACTS",
         },
         hero: {
-          title: "SCHOOL OF FOREIGN LANGUAGES AND ARTS",
-          subtitle: "We help children and adults learn English and Chinese in a friendly atmosphere",
+          title: "English for Preschoolers",
+          subtitle: "Engaging lessons for children aged 4–6 in a playful format. A first introduction to the English language through songs, games, and creative activities.",
           cta: "Book a lesson",
+        },
+        parents: {
+          title: "Why Parents Choose Us!"
+        },
+        services: {
+          title: "What We Do",
+          schedule: "Class Schedule"
+        },
+        footnote: {
+          title: "Sign up for a free trial lesson.",
+          subtitle: "Meet the teacher and learn about our teaching methodology.",
+          cta: "Register"
         },
       benefits: [
         {
@@ -357,360 +390,356 @@ export default function PreschoolersPage() {
         <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
       </div>
     </div>
-
-    {/* Desktop Navigation */}
-    
-    <nav className="hidden md:block" ref={dropdownRef}>
- <ul className="flex gap-6">
-   <li className="relative">
-     <button
-       onClick={() => toggleDropdown("about")}
-       className={`flex items-center text-sm font-medium ${activeDropdown === "about" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-     >
-       {t.nav.about}
-       <ChevronDown
-         className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
-       />
-     </button>
-     {activeDropdown === "about" && (
-       <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-         {t.nav.aboutDropdown.map((item, index) => (
-           <Link
-             key={index}
-             href={item.href}
-             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-           >
-             {item.title}
-           </Link>
-         ))}
-       </div>
-     )}
-   </li>
-   <li className="relative">
-     <button
-       onClick={() => toggleDropdown("courses")}
-       className={`flex items-center text-sm font-medium ${activeDropdown === "courses" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-     >
-       {t.nav.courses}
-       <ChevronDown
-         className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "courses" ? "rotate-180" : ""}`}
-       />
-     </button>
-     {activeDropdown === "courses" && (
-       <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-         {t.nav.coursesDropdown.map((item, index) => (
-           <Link
-             key={index}
-             href={item.href}
-             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-           >
-             {item.title}
-           </Link>
-         ))}
-       </div>
-     )}
-   </li>
-   <li className="relative">
-     <button
-       onClick={() => toggleDropdown("chinese")}
-       className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-     >
-       {t.nav.chinese}
-       <ChevronDown
-         className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
-       />
-     </button>
-     {activeDropdown === "chinese" && (
-       <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-         {t.nav.chineseDropdown.map((item, index) => (
-           <Link
-             key={index}
-             href={item.href}
-             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-           >
-             {item.title}
-           </Link>
-         ))}
-       </div>
-     )}
-   </li>
-   <li className="relative">
-     <button
-       onClick={() => toggleDropdown("club")}
-       className={`flex items-center text-sm font-medium ${activeDropdown === "club" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-     >
-       {t.nav.club}
-       <ChevronDown
-         className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "club" ? "rotate-180" : ""}`}
-       />
-     </button>
-     {activeDropdown === "club" && (
-       <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-         {t.nav.clubDropdown.map((item, index) => (
-           <Link
-             key={index}
-             href={item.href}
-             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-           >
-             {item.title}
-           </Link>
-         ))}
-       </div>
-     )}
-   </li>
-   <li>
-     <Link href="/masterclasses" className="text-sm font-medium text-gray-700 hover:text-primary">
-       {t.nav.masterclasses}
-     </Link>
-   </li>
-   <li>
-     <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
-       {t.nav.news}
-     </Link>
-   </li>
-   <li>
-     <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
-       {t.nav.contacts}
-     </Link>
-   </li>
- </ul>
-</nav>
-
-<div className="flex items-center gap-4">
-<Link
-href="/contact"
-className="px-2.5 py-1 text-xs ml-1.5 rounded bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] transition-all shadow-sm hover:shadow"
->
-Contact Us
-</Link>
- <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
-   {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
- </button>
-</div>
-</div>
-</header>
-
- {/* Mobile Menu */}
- <div
-className={`fixed inset-x-0 top-[${isScrolled ? "60px" : "auto"}] z-40 border-b bg-white shadow-sm md:hidden overflow-auto transition-all duration-300 ease-in-out ${
-mobileMenuOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
-}`}
-style={{ top: isScrolled ? "60px" : "auto" }}
->
-<div className="container mx-auto px-4 py-4">
-<nav className="space-y-4">
- <div className="space-y-1">
-   <button
-     onClick={() => toggleDropdown("about-mobile")}
-     className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
-     aria-expanded={activeDropdown === "about-mobile"}
-   >
-     <span>{t.nav.about}</span>
-     <ChevronDown
-       className={`h-5 w-5 transition-transform ${activeDropdown === "about-mobile" ? "rotate-180" : ""}`}
-     />
-   </button>
-   <div
-     className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
-       activeDropdown === "about-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-     }`}
-   >
-     {t.nav.aboutDropdown.map((item, index) => (
-       <Link
-         key={index}
-         href={item.href}
-         onClick={() => {
-           setMobileMenuOpen(false)
-           setActiveDropdown(null)
-         }}
-         className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
-       >
-         {item.title}
-       </Link>
-     ))}
-   </div>
- </div>
-
- <div className="space-y-1">
-   <button
-     onClick={() => toggleDropdown("courses-mobile")}
-     className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
-     aria-expanded={activeDropdown === "courses-mobile"}
-   >
-     <span>{t.nav.courses}</span>
-     <ChevronDown
-       className={`h-5 w-5 transition-transform ${activeDropdown === "courses-mobile" ? "rotate-180" : ""}`}
-     />
-   </button>
-   <div
-     className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
-       activeDropdown === "courses-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-     }`}
-   >
-     {t.nav.coursesDropdown.map((item, index) => (
-       <Link
-         key={index}
-         href={item.href}
-         onClick={() => {
-           setMobileMenuOpen(false)
-           setActiveDropdown(null)
-         }}
-         className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
-       >
-         {item.title}
-       </Link>
-     ))}
-   </div>
- </div>
-
- <div className="space-y-1">
-   <button
-     onClick={() => toggleDropdown("chinese-mobile")}
-     className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
-     aria-expanded={activeDropdown === "chinese-mobile"}
-   >
-     <span>{t.nav.chinese}</span>
-     <ChevronDown
-       className={`h-5 w-5 transition-transform ${activeDropdown === "chinese-mobile" ? "rotate-180" : ""}`}
-     />
-   </button>
-   <div
-     className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
-       activeDropdown === "chinese-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-     }`}
-   >
-     {t.nav.chineseDropdown.map((item, index) => (
-       <Link
-         key={index}
-         href={item.href}
-         onClick={() => {
-           setMobileMenuOpen(false)
-           setActiveDropdown(null)
-         }}
-         className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
-       >
-         {item.title}
-       </Link>
-     ))}
-   </div>
- </div>
-
- <div className="space-y-1">
-   <button
-     onClick={() => toggleDropdown("club-mobile")}
-     className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
-     aria-expanded={activeDropdown === "club-mobile"}
-   >
-     <span>{t.nav.club}</span>
-     <ChevronDown
-       className={`h-5 w-5 transition-transform ${activeDropdown === "club-mobile" ? "rotate-180" : ""}`}
-     />
-   </button>
-   <div
-     className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
-       activeDropdown === "club-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-     }`}
-   >
-     {t.nav.clubDropdown.map((item, index) => (
-       <Link
-         key={index}
-         href={item.href}
-         onClick={() => {
-           setMobileMenuOpen(false)
-           setActiveDropdown(null)
-         }}
-         className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
-       >
-         {item.title}
-       </Link>
-     ))}
-   </div>
- </div>
- <Link
-   href="/masterclasses"
-   onClick={() => setMobileMenuOpen(false)}
-   className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
- >
-   {t.nav.masterclasses}
- </Link>
- <Link
-   href="/news"
-   onClick={() => setMobileMenuOpen(false)}
-   className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
- >
-   {t.nav.news}
- </Link>
-
- <Link
-   href="/contact"
-   onClick={() => setMobileMenuOpen(false)}
-   className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
- >
-   {t.nav.contacts}
- </Link>
-
- <Link
-   href="/contact"
-   onClick={() => setMobileMenuOpen(false)}
-   className="block w-full text-center px-4 py-3 mt-4 text-sm rounded-md bg-gradient-to-r from-[#5C162E] to-[#7A1F3D] text-white font-medium hover:from-[#451225] hover:to-[#5C162E] active:scale-98 transition-all shadow-sm touch-manipulation"
- >
-   Contact Us
- </Link>
-</nav>
-</div>
-</div>
-      <main>
-    {/* Hero Section */}
-    <section className="relative overflow-hidden bg-primary py-20 text-white">
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="https://images.pexels.com/photos/8535239/pexels-photo-8535239.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          alt="Preschoolers learning"
-          fill
-          className="object-cover opacity-20"
-        />
-      </div>
-      <div className="container relative z-10 mx-auto px-4">
-        <div className="grid gap-12 md:grid-cols-2">
-          <FadeIn>
-            <div>
-              <h1 className="mb-6 text-4xl font-bold md:text-5xl">
-                Английский для дошкольников
-              </h1>
-              <p className="mb-8 text-lg opacity-90">
-                Увлекательные занятия для детей 4-6 лет в игровой форме. Первое знакомство с английским языком через песни, игры и творческие задания.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/bookings"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-medium text-primary transition-all hover:bg-gray-100"
+                   {/* Desktop Navigation */}
+          <nav className="hidden md:block" ref={dropdownRef}>
+            <ul className="flex gap-6">
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("about")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "about" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
                 >
-                  Записаться на пробное занятие
-                  <ArrowRight className="h-4 w-4" />
+                  {t.nav.about}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "about" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.aboutDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("courses")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "courses" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.courses}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "courses" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "courses" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.coursesDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("chinese")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.chinese}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "chinese" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.chineseDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("club")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "club" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.club}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "club" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "club" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.clubDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("masterclass")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "masterclass" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.masterclass}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "masterclass" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "masterclass" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.masterclassDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li>
+                <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.news}
                 </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.contacts}
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100 md:hidden" onClick={toggleMobileMenu}>
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+            {/* Mobile Menu */}
+            <div
+        className={`fixed inset-x-0 top-[${isScrolled ? "60px" : "auto"}] z-40 border-b bg-white shadow-sm md:hidden overflow-auto transition-all duration-300 ease-in-out ${
+          mobileMenuOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
+        }`}
+        style={{ top: isScrolled ? "60px" : "auto" }}
+      >
+        <div className="container mx-auto px-4 py-4">
+          <nav className="space-y-4">
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("about-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "about-mobile"}
+              >
+                <span>{t.nav.about}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "about-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "about-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.aboutDropdown.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
               </div>
             </div>
-          </FadeIn>
-          <FadeIn delay={200}>
-            <div className="relative h-[300px] overflow-hidden rounded-lg shadow-xl md:h-[400px]">
-              <Image
-                src="https://images.pexels.com/photos/8535239/pexels-photo-8535239.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt="Happy children learning"
-                fill
-                className="object-cover"
-              />
+
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("courses-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "courses-mobile"}
+              >
+                <span>{t.nav.courses}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "courses-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "courses-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.coursesDropdown.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </FadeIn>
+
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("chinese-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "chinese-mobile"}
+              >
+                <span>{t.nav.chinese}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "chinese-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "chinese-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.chineseDropdown.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("club-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "club-mobile"}
+              >
+                <span>{t.nav.club}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "club-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "club-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.clubDropdown.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("masterclass-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "masterclass-mobile"}
+              >
+                <span>{t.nav.masterclass}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "masterclass-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "masterclass-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.masterclassDropdown.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <Link
+              href="/news"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+            >
+              {t.nav.news}
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+            >
+              {t.nav.contacts}
+            </Link>
+          </nav>
         </div>
       </div>
-    </section>
-
+      <main>
+    {/* Hero Section */}
+    <section className="relative bg-primary py-20 text-white">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={fadeIn}
+              className="text-center"
+            >
+              <h1 className="mb-4 text-4xl font-bold md:text-5xl">{t.hero.title}</h1>
+              <p className="mx-auto max-w-2xl text-lg text-white/80">{t.hero.subtitle}</p>
+            </motion.div>
+          </div>
+          <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
+        </section>
     {/* Benefits Section */}
     <section className="py-16">
       <div className="container mx-auto px-4">
         <FadeIn>
           <h2 className="mb-12 text-center text-3xl font-bold text-primary">
-            Почему родители выбирают нас
+            {t.parents.title}
           </h2>
         </FadeIn>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
@@ -734,7 +763,7 @@ style={{ top: isScrolled ? "60px" : "auto" }}
       <div className="container mx-auto px-4">
         <FadeIn>
           <h2 className="mb-12 text-center text-3xl font-bold text-primary">
-            Чем мы занимаемся
+            {t.services.title}
           </h2>
         </FadeIn>
         <div className="grid gap-8 md:grid-cols-3">
@@ -765,7 +794,7 @@ style={{ top: isScrolled ? "60px" : "auto" }}
       <div className="container mx-auto px-4">
         <FadeIn>
           <h2 className="mb-12 text-center text-3xl font-bold text-primary">
-            Расписание занятий
+           {t.services.schedule}
           </h2>
         </FadeIn>
         <div className="mx-auto max-w-2xl rounded-lg bg-white p-8 shadow-lg">
@@ -797,16 +826,16 @@ style={{ top: isScrolled ? "60px" : "auto" }}
         <div className="mx-auto max-w-3xl text-center">
           <FadeIn>
             <h2 className="mb-6 text-3xl font-bold">
-              Запишитесь на бесплатное пробное занятие
+              {t.footnote.title}
             </h2>
             <p className="mb-8 text-lg opacity-90">
-              Познакомьтесь с преподавателем и нашей методикой обучения. Первое занятие бесплатно!
+              {t.footnote.subtitle}
             </p>
             <Link
               href="/bookings"
               className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary transition-all hover:bg-gray-100"
             >
-              Записаться
+              {t.footnote.cta}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </FadeIn>

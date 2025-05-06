@@ -28,7 +28,7 @@ import {
   Landmark,
 } from "lucide-react"
 import PromotionalBanner from "@/components/PromotionalBanner"
-import Masterclasses from "./masterclasses/page"
+import Masterclasses from "./(masterclass)/masterclasses/page"
 
 export default function Home() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
@@ -197,8 +197,12 @@ export default function Home() {
           { title: "ПОДРОСТКИ", href: "/conversation-club/adults" },
           { title: "ВЗРОСЛЫЕ", href: "/conversation-club/teenagers" },
         ],
+        masterclass: "МАСТЕР-КЛАССЫ",
+        masterclassDropdown: [
+          { title: "КИТАЙСКАЯ КАЛЛИГРАФИЯ ", href: "/chinese-calligraphy" },
+          { title: "ТВОРЧЕСКИЕ МАСТЕР-КЛАССЫ", href: "/creative-workshops" },
+        ],
         news: "НОВОСТИ",
-        masterclasses: "МАСТЕР-КЛАССЫ",
         contacts: "КОНТАКТЫ",
       },
       hero: {
@@ -348,7 +352,12 @@ export default function Home() {
         club: "CONVERSATION CLUB",
         clubDropdown: [
           { title: "TEENAGERS", href: "/conversation-club/adults" },
-          { title: "ADULTS", href: "//conversation-club/adults" },
+          { title: "ADULTS", href: "/conversation-club/adults" },
+        ],
+        masterclass: "MASTERCLASS",
+        masterclassDropdown: [
+          { title: "CHINESE CALLIGRAPHY", href: "/chinese-calligraphy" },
+          { title: "CREATIVE WORKSHOP", href: "/creative-workshop" },
         ],
         news: "NEWS",
         masterclasses: "MASTERCLASS",
@@ -685,10 +694,29 @@ export default function Home() {
                   </div>
                 )}
               </li>
-              <li>
-                <Link href="/masterclasses" className="text-sm font-medium text-gray-700 hover:text-primary">
-                  {t.nav.masterclasses}
-                </Link>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("masterclass")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "masterclass" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.masterclass}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "masterclass" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "masterclass" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.masterclassDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </li>
               <li>
                 <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
@@ -847,13 +875,37 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <Link
-              href="/masterclasses"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
-            >
-              {t.nav.masterclasses}
-            </Link>
+            <div className="space-y-1">
+              <button
+                onClick={() => toggleDropdown("masterclass-mobile")}
+                className="flex w-full items-center justify-between py-3 px-4 text-sm font-medium text-gray-700 touch-manipulation rounded-md hover:bg-gray-50 active:bg-gray-100"
+                aria-expanded={activeDropdown === "masterclass-mobile"}
+              >
+                <span>{t.nav.masterclass}</span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${activeDropdown === "masterclass-mobile" ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`ml-4 border-l border-gray-200 pl-4 space-y-1 overflow-hidden transition-all duration-200 ${
+                  activeDropdown === "masterclass-mobile" ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                {t.nav.masterclassDropdown.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setActiveDropdown(null)
+                    }}
+                    className="block py-3 px-4 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
             <Link
               href="/news"
               onClick={() => setMobileMenuOpen(false)}
