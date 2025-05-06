@@ -84,6 +84,7 @@ export default function TeenagersPage() {
           { title: "ВЗРОСЛЫЕ", href: "/conversation-club/adults" },
         ],
         news: "НОВОСТИ",
+        masterclasses: "МАСТЕР-КЛАССЫ",
         contacts: "КОНТАКТЫ",
       },
       hero: {
@@ -178,6 +179,7 @@ export default function TeenagersPage() {
           { title: "ADULTS", href: "/conversation-club/adults" },
         ],
         news: "NEWS",
+        masterclasses: "MASTERCLASS",
         contacts: "CONTACTS",
       },
       hero: {

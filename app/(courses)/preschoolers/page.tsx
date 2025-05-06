@@ -93,6 +93,7 @@ export default function PreschoolersPage() {
             { title: "ВЗРОСЛЫЕ", href: "/conversation-club/adults" },
           ],
           news: "НОВОСТИ",
+          masterclasses: "МАСТЕР-КЛАССЫ",
           contacts: "КОНТАКТЫ",
         },
         hero: {
@@ -190,6 +191,7 @@ export default function PreschoolersPage() {
             { title: "ADULTS", href: "/conversation-club/adults" },
           ],
           news: "NEWS",
+          masterclasses: "MASTERCLASS",
           contacts: "CONTACTS",
         },
         hero: {
@@ -457,6 +459,11 @@ export default function PreschoolersPage() {
      )}
    </li>
    <li>
+     <Link href="/masterclasses" className="text-sm font-medium text-gray-700 hover:text-primary">
+       {t.nav.masterclasses}
+     </Link>
+   </li>
+   <li>
      <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
        {t.nav.news}
      </Link>
@@ -619,7 +626,13 @@ style={{ top: isScrolled ? "60px" : "auto" }}
      ))}
    </div>
  </div>
-
+ <Link
+   href="/masterclasses"
+   onClick={() => setMobileMenuOpen(false)}
+   className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+ >
+   {t.nav.masterclasses}
+ </Link>
  <Link
    href="/news"
    onClick={() => setMobileMenuOpen(false)}

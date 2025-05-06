@@ -1,11 +1,15 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { X, ChevronRight, Sun, Cloud } from "lucide-react"
+import { X, ChevronRight, Sun, Cloud } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
-export const PromotionalBanner = () => {
+interface PromotionalBannerProps {
+  language?: "ru" | "en"
+}
+
+export const PromotionalBanner = ({ language = "ru" }: PromotionalBannerProps) => {
   const [isVisible, setIsVisible] = useState(true)
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -25,6 +29,29 @@ export const PromotionalBanner = () => {
       setIsVisible(false)
     }, 300)
   }
+
+  const translations = {
+    ru: {
+      badge: "ВЕСЕННЯЯ АКЦИЯ",
+      shortTitle: "40% СКИДКА на все языковые курсы!",
+      fullTitle: "Экономия до 40% на курсах английского и китайского языков",
+      untilDate: "До 31 мая",
+      location: "Онлайн или очно",
+      detailsButton: "Подробнее",
+      dismiss: "Закрыть",
+    },
+    en: {
+      badge: "SPRING SPECIAL",
+      shortTitle: "40% OFF all language courses!",
+      fullTitle: "Save up to 40% OFF on English & Chinese courses",
+      untilDate: "Until May 31",
+      location: "Online or In-person",
+      detailsButton: "Details",
+      dismiss: "Dismiss",
+    },
+  }
+
+  const t = translations[language]
 
   if (!isVisible) return null
 
@@ -48,21 +75,29 @@ export const PromotionalBanner = () => {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <div className="hidden sm:block">
           <div className="rounded-full border border-burgundy-800 bg-white/80 px-4 py-1 text-sm font-medium text-burgundy-900 backdrop-blur-sm">
-            SPRING SPECIAL
+            {t.badge}
           </div>
         </div>
 
         <div className="flex flex-1 items-center justify-center sm:justify-start sm:pl-8">
           <p className="text-center font-medium text-burgundy-900 sm:text-left">
-            <span className="md:hidden">40% OFF all language courses!</span>
+            <span className="md:hidden">{t.shortTitle}</span>
             <span className="hidden md:inline">
-              Save up to <span className="font-bold">40% OFF</span> on English & Chinese courses
+              {language === "ru" ? (
+                <>
+                  Экономия до <span className="font-bold">40%</span> на курсах английского и китайского языков
+                </>
+              ) : (
+                <>
+                  Save up to <span className="font-bold">40% OFF</span> on English & Chinese courses
+                </>
+              )}
             </span>
           </p>
           <div className="ml-3 hidden items-center md:flex">
-            <span className="mx-2 text-sm text-burgundy-800">Until May 31</span>
+            <span className="mx-2 text-sm text-burgundy-800">{t.untilDate}</span>
             <div className="h-4 w-px bg-burgundy-700/30"></div>
-            <span className="mx-2 text-sm text-burgundy-800">Online or In-person</span>
+            <span className="mx-2 text-sm text-burgundy-800">{t.location}</span>
           </div>
         </div>
 
@@ -73,7 +108,7 @@ export const PromotionalBanner = () => {
               className="border-burgundy-800 bg-white text-burgundy-900 hover:bg-burgundy-50"
               size="sm"
             >
-              Details
+              {t.detailsButton}
               <ChevronRight className="ml-1 h-3 w-3" />
             </Button>
           </Link>
@@ -82,7 +117,7 @@ export const PromotionalBanner = () => {
             className="-mr-1 flex h-6 w-6 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-burgundy-500"
             onClick={handleClose}
           >
-            <span className="sr-only">Dismiss</span>
+            <span className="sr-only">{t.dismiss}</span>
             <X className="h-4 w-4 text-burgundy-900" aria-hidden="true" />
           </button>
         </div>

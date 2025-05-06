@@ -356,6 +356,11 @@ export default function Aged7to9Page() {
                 )}
               </li>
               <li>
+                <Link href="/masterclasses" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.masterclasses}
+                </Link>
+              </li>
+              <li>
                 <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.news}
                 </Link>
@@ -512,7 +517,13 @@ export default function Aged7to9Page() {
                 ))}
               </div>
             </div>
-
+            <Link
+              href="/masterclasses"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+            >
+              {t.nav.masterclasses}
+            </Link>
             <Link
               href="/news"
               onClick={() => setMobileMenuOpen(false)}

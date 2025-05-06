@@ -7,6 +7,7 @@ import {
   ArrowRight, Landmark, Clock, Calendar, Phone, Mail, ChevronDown, X, Menu, Globe
 } from "lucide-react"
 import { FadeIn } from "@/components/animations/scroll-animations"
+import Masterclasses from "@/app/masterclasses/page"
 
 export default function Aged10to12Page() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
@@ -81,6 +82,7 @@ export default function Aged10to12Page() {
           { title: "ВЗРОСЛЫЕ", href: "/conversation-club/adults" },
         ],
         news: "НОВОСТИ",
+        masterclasses: "МАСТЕР-КЛАССЫ",
         contacts: "КОНТАКТЫ",
       },
       hero: {
@@ -145,6 +147,7 @@ export default function Aged10to12Page() {
           { title: "ADULTS", href: "/conversation-club/adults" },
         ],
         news: "NEWS",
+        masterclasses: "MASTERCLASS",
         contacts: "CONTACTS",
       },
       hero: {
@@ -357,6 +360,11 @@ export default function Aged10to12Page() {
                 )}
               </li>
               <li>
+                <Link href="/masterclasses" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.masterclasses}
+                </Link>
+              </li>          
+              <li>
                 <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
                   {t.nav.news}
                 </Link>
@@ -513,7 +521,13 @@ export default function Aged10to12Page() {
                 ))}
               </div>
             </div>
-
+            <Link
+              href="/masterclasses"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3 px-4 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 active:bg-gray-100 rounded-md touch-manipulation"
+            >
+              {t.nav.masterclasses}
+            </Link>
             <Link
               href="/news"
               onClick={() => setMobileMenuOpen(false)}
