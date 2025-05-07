@@ -514,7 +514,7 @@ export default function CreativeWorkshops() {
             <div className="relative h-14 w-14">
               <Link href="/">
                 <Image
-                  src="/placeholder.svg?height=56&width=56"
+                  src="/logo.png?height=56&width=56"
                   alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                   fill
                   className="object-contain"
