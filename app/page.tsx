@@ -555,6 +555,10 @@ export default function HomePage() {
           {t.email}
         </a>
       </div>
+      <div className="flex items-center gap-2">
+        <Landmark className="h-4 w-4 text-primary" />
+        <span className="text-gray-600">{t.address}</span>
+      </div>
     </div>
     <div className="flex items-center gap-3">
       
