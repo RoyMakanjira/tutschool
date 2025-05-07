@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion"
 import { ChevronRight, Check, ArrowRight, Clock, Phone, Landmark, Mail, Globe, ChevronDown, X, Menu } from "lucide-react";
 import { FadeIn } from "@/components/animations/scroll-animations";
 
@@ -11,6 +12,7 @@ export default function ChinesePreschoolers() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
     const [isScrolled, setIsScrolled] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(false)
   
    
     const dropdownRef = useRef<HTMLDivElement>(null)
@@ -245,6 +247,10 @@ export default function ChinesePreschoolers() {
       setActiveDropdown(dropdown)
     }
   }
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -307,7 +313,7 @@ export default function ChinesePreschoolers() {
         }`}>
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-14 w-14">
+            <div className="relative h-14 w-14 sticky top-0 bg-white z-50 p-4 shadow-md">
               <Link href='/'>
               <Image
                 src="/logo.png?height=56&width=56"
@@ -654,35 +660,21 @@ export default function ChinesePreschoolers() {
 
 
       {/* Hero Section */}
-      <section className="relative h-[500px] overflow-hidden">
-        <Image
-          src="https://images.pexels.com/photos/8500690/pexels-photo-8500690.jpeg"
-          alt="Chinese class for kids"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-[#5C162E]/80"></div>
-        <div className="absolute inset-0 flex items-center">
-          <div className="container mx-auto px-4">
-            <FadeIn>
-              <h1 className="mb-4 max-w-2xl text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-                {t.title}
-              </h1>
-              <p className="mb-8 max-w-xl text-lg text-white/90 md:text-xl">
-                {t.subtitle}
-              </p>
-              <Link
-                href="#contact"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-[#5C162E] transition-all hover:bg-white/90"
-              >
-                {t.cta.button}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
+
+          <section className="relative bg-primary py-20 text-white">
+                <div className="container mx-auto px-4">
+                  <motion.div
+                    initial="hidden"
+                    animate={isLoaded ? "visible" : "hidden"}
+                    variants={fadeIn}
+                    className="text-center"
+                  >
+                    <h1 className="mb-4 text-4xl font-bold md:text-5xl">{t.title}</h1>
+                    <p className="mx-auto max-w-2xl text-lg text-white/80">{t.subtitle}</p>
+                  </motion.div>
+                </div>
+                <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
+              </section>
 
       {/* Description Section */}
       <section className="py-16">

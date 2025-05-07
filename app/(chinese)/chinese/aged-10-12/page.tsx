@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { BookOpen, Clock, Trophy, Star, CheckCircle, ArrowRight, X, Menu, ChevronDown, Phone, Mail, Landmark, Globe } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from "framer-motion"
 
 
 export default function Aged10to12Page()  {
@@ -12,6 +13,7 @@ export default function Aged10to12Page()  {
         const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
         const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
         const [isScrolled, setIsScrolled] = useState(false)
+        const [isLoaded, setIsLoaded] = useState(false)
       
        
         const dropdownRef = useRef<HTMLDivElement>(null)
@@ -261,6 +263,10 @@ export default function Aged10to12Page()  {
     } else {
       setActiveDropdown(dropdown)
     }
+  }
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   }
 
   return (
@@ -669,31 +675,20 @@ export default function Aged10to12Page()  {
                                         </nav>
                                       </div>
                                     </div>
-      <section className="relative h-[500px] overflow-hidden">
-        <img
-          src="https://images.pexels.com/photos/8500340/pexels-photo-8500340.jpeg"
-          alt="Children learning Chinese"
-          className="h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-burgundy-900/70"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="container mx-auto px-4 text-center text-white">
-            <h1 className="mb-4 text-4xl font-bold md:text-5xl lg:text-6xl">
-              {t.chineseAged1012.hero.title}
-            </h1>
-            <p className="mx-auto mb-8 max-w-2xl text-lg md:text-xl">
-              {t.chineseAged1012.hero.subtitle}
-            </p>
-            <a
-              href="#enroll"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-burgundy-900 transition-all hover:bg-gray-100"
+                                    <section className="relative bg-primary py-20 text-white">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={fadeIn}
+              className="text-center"
             >
-              {t.chineseAged1012.hero.cta}
-              <ArrowRight className="h-5 w-5" />
-            </a>
+              <h1 className="mb-4 text-4xl font-bold md:text-5xl">{t.chineseAged1012.hero.title}</h1>
+              <p className="mx-auto max-w-2xl text-lg text-white/80">{t.chineseAged1012.hero.subtitle}</p>
+            </motion.div>
           </div>
-        </div>
-      </section>
+          <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
+        </section>
 
       {/* Course Overview */}
       <section className="py-16">

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion"
 import { ArrowRight, Check, Clock, Calendar, Users, Phone, Landmark, Globe, Mail, ChevronDown, X, Menu } from "lucide-react";
 
 
@@ -11,6 +12,7 @@ export default function ChineseAged79Page() {
       const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
       const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
       const [isScrolled, setIsScrolled] = useState(false)
+      const [isLoaded, setIsLoaded] = useState(false)
     
      
       const dropdownRef = useRef<HTMLDivElement>(null)
@@ -234,6 +236,11 @@ export default function ChineseAged79Page() {
     } else {
       setActiveDropdown(dropdown)
     }
+  }
+
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   }
 
   return (
@@ -643,22 +650,20 @@ export default function ChineseAged79Page() {
                                     </div>
 
       {/* Hero Section */}
-      <section className="relative h-[400px] overflow-hidden">
-        <Image
-          src="https://images.pexels.com/photos/8500340/pexels-photo-8500340.jpeg"
-          alt="Chinese class for children"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-[#5C162E]/80"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="container px-4 text-center text-white">
-            <h1 className="mb-4 text-4xl font-bold md:text-5xl">{t.title}</h1>
-            <p className="text-xl">{t.subtitle}</p>
+    <section className="relative bg-primary py-20 text-white">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={fadeIn}
+              className="text-center"
+            >
+              <h1 className="mb-4 text-4xl font-bold md:text-5xl">{t.title}</h1>
+              <p className="mx-auto max-w-2xl text-lg text-white/80">{t.subtitle}</p>
+            </motion.div>
           </div>
-        </div>
-      </section>
+          <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
+        </section>
 
       {/* Main Content */}
       <main className="py-16">

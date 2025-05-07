@@ -570,14 +570,13 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       {/* Header */}
       <header    className={`border-b bg-white py-4 shadow-sm transition-all duration-300 ${
           isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : "relative z-50"
         }`}>
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-14 w-14">
+            <div className="relative h-14 w-14 sticky top-0 bg-white z-50 p-4 shadow-md">
               <Link href='/'>
               <Image
                 src="/logo.png?height=56&width=56"
@@ -594,8 +593,6 @@ export default function Home() {
           </div>
 
           {/* Desktop Navigation */}
-          
-
           <nav className="hidden md:block" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion"
 import { Phone, Check, ArrowRight, Landmark, BookOpen, Users, Clock, Trophy, ChevronDown, Mail, X, Menu, Globe } from "lucide-react";
 import { FadeIn } from "@/components/animations/scroll-animations";
 
@@ -12,6 +13,7 @@ export default function ChineseAdults() {
       const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
       const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
       const [isScrolled, setIsScrolled] = useState(false)
+      const [isLoaded, setIsLoaded] = useState(false)
     
      
       const dropdownRef = useRef<HTMLDivElement>(null)
@@ -366,6 +368,12 @@ export default function ChineseAdults() {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
   }
+
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  }
+
 
   const toggleDropdown = (dropdown: string) => {
     if (activeDropdown === dropdown) {
@@ -784,36 +792,20 @@ export default function ChineseAdults() {
                     
 
 
-      <section className="relative h-[500px] overflow-hidden">
-        <Image
-          src="https://images.pexels.com/photos/5676744/pexels-photo-5676744.jpeg"
-          alt="Chinese language learning"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-[#5C162E]/80"></div>
-        <div className="absolute inset-0 flex items-center">
+   <section className="relative bg-primary py-20 text-white">
           <div className="container mx-auto px-4">
-            <FadeIn>
-              <h1 className="mb-4 max-w-2xl text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-                {t.title}
-              </h1>
-              <p className="mb-8 max-w-xl text-lg text-white/90 md:text-xl">
-                {t.subtitle}
-              </p>
-              <Link
-                href="#contact"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-[#5C162E] transition-all hover:bg-white/90"
-              >
-                {t.cta.button}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </FadeIn>
+            <motion.div
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={fadeIn}
+              className="text-center"
+            >
+              <h1 className="mb-4 text-4xl font-bold md:text-5xl">{t.title}</h1>
+              <p className="mx-auto max-w-2xl text-lg text-white/80">{t.subtitle}</p>
+            </motion.div>
           </div>
-        </div>
-      </section>
-
+          <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
+        </section>
       {/* Levels Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
