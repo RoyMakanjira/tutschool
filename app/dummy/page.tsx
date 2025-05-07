@@ -14,7 +14,6 @@ import {
   Mail,
   Heart,
   Users,
-  BookOpen,
   Lightbulb,
   Sparkles,
   Landmark,
@@ -693,202 +692,161 @@ export default function ValuesPage() {
         {/* Values Section */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-                      {/* Community Value */}
-                      <motion.div
-                        initial="hidden"
-                        animate={isLoaded ? "visible" : "hidden"}
-                        variants={staggerContainer}
-                        className="mb-20"
-                      >
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                            <div className="relative w-full h-[400px] md:h-[500px]">
-                              <Image
-                                src="/assets/gallery/Community.jpg"
-                                alt={language === "ru" ? "Наше сообщество" : "Our community"}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                          </motion.div>
-                          <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                            <div className="relative w-full h-[400px] md:h-[500px]">
-                              <Image
-                                src="/assets/gallery/Community-2.jpg"
-                                alt={language === "ru" ? "Наше сообщество" : "Our community"}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                          </motion.div>
-                        </div>
-                        <div className="flex flex-col justify-center mb-8">
-                          <div className="mb-4 flex items-center">
-                            <Users className="mr-3 h-6 w-6 text-primary" />
-                            <h2 className="text-2xl font-bold text-gray-900">{t.values.community.title}</h2>
-                          </div>
-                          <p className="mb-6 text-gray-700">{t.values.community.description}</p>
-                        </div>
-                      </motion.div>
-
-            {/* Education Value */}
+            {/* Community Value */}
             <motion.div
               initial="hidden"
               animate={isLoaded ? "visible" : "hidden"}
               variants={staggerContainer}
               className="mb-20"
             >
-              <div className="grid gap-8 md:grid-cols-2">
-                <motion.div variants={fadeIn} className="order-last md:order-first">
-                  <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden rounded-lg shadow-lg">
+              <div className="flex flex-col justify-center mb-8">
+                <div className="mb-4 flex items-center">
+                  <Users className="mr-3 h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold text-gray-900">{t.values.community.title}</h2>
+                </div>
+                <p className="mb-6 text-gray-700">{t.values.community.description}</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
+                  <div className="relative w-full h-[400px] md:h-[500px]">
                     <Image
-                      src="/assets/gallery/Community-2.jpg"
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Community.jpg-BpyMqy6XVe8HdYQea33kfMztl6WICH.jpeg"
                       alt={language === "ru" ? "Наше сообщество" : "Our community"}
                       fill
                       className="object-cover"
                     />
                   </div>
                 </motion.div>
-                <motion.div variants={fadeIn} className="flex flex-col justify-center">
-                  <div className="mb-4 flex items-center">
-                    <BookOpen className="mr-3 h-6 w-6 text-primary" />
-                    <h2 className="text-2xl font-bold text-gray-900">{t.values.quality.title}</h2>
+                <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
+                  <div className="relative w-full h-[400px] md:h-[500px]">
+                    <Image
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Community-2.jpg-rpG6KV8r2Zlw8ZTUYNgJaz6fZtlx3s.jpeg"
+                      alt={language === "ru" ? "Наше сообщество" : "Our community"}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
-                  <p className="mb-6 text-gray-700">{t.values.quality.description}</p>
-                  <ul className="space-y-2">
-                    {t.values.quality.points.map((point, index) => (
-                      <li key={index} className="flex items-start">
-                        <svg
-                          className="mr-2 h-5 w-5 flex-shrink-0 text-primary"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="text-gray-600">{point}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </motion.div>
               </div>
             </motion.div>
 
-            {/* Cultural Understanding Value */}
-             {/* Regional Geography Value */}
-                        <motion.div
-                          initial="hidden"
-                          animate={isLoaded ? "visible" : "hidden"}
-                          variants={staggerContainer}
-                          className="mb-20"
-                        >
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                              <div className="relative w-full h-[400px] md:h-[500px]">
-                                <Image
-                                  src="/assets/gallery/Cultural-Studies-2.jpg"
-                                  alt={language === "ru" ? "Культурное понимание" : "Cultural understanding"}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </motion.div>
-                            <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                              <div className="relative w-full h-[400px] md:h-[500px]">
-                                <Image
-                                  src="/assets/gallery/Cultural-Studies-1.jpg"
-                                  alt={language === "ru" ? "Культурное понимание" : "Cultural understanding"}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </motion.div>
-                          </div>
-                          <div className="flex flex-col justify-center mb-8">
-                            <div className="mb-4 flex items-center">
-                              <Heart className="mr-3 h-6 w-6 text-primary" />
-                              <h2 className="text-2xl font-bold text-gray-900">{t.values.geography.title}</h2>
-                            </div>
-                            <p className="mb-6 text-gray-700">{t.values.geography.description}</p>
-                          </div>
-                        </motion.div>
+            {/* Regional Geography Value */}
+            <motion.div
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={staggerContainer}
+              className="mb-20"
+            >
+              <div className="flex flex-col justify-center mb-8">
+                <div className="mb-4 flex items-center">
+                  <Heart className="mr-3 h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold text-gray-900">{t.values.geography.title}</h2>
+                </div>
+                <p className="mb-6 text-gray-700">{t.values.geography.description}</p>
+              </div>
 
-            {/* Assessment Value */}
-                        <motion.div
-                          initial="hidden"
-                          animate={isLoaded ? "visible" : "hidden"}
-                          variants={staggerContainer}
-                          className="mb-20"
-                        >
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                              <div className="relative w-full h-[400px] md:h-[500px]">
-                                <Image
-                                  src="/assets/gallery/assesment.jpg"
-                                  alt={language === "ru" ? "Измерение результата" : "Measuring results"}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </motion.div>
-                            <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                              <div className="relative w-full h-[400px] md:h-[500px]">
-                                <Image
-                                  src="/assets/gallery/assesment-1.jpg"
-                                  alt={language === "ru" ? "Измерение результата" : "Measuring results"}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </motion.div>
-                          </div>
-                          <div className="flex flex-col justify-center mb-8">
-                            <div className="mb-4 flex items-center">
-                              <Lightbulb className="mr-3 h-6 w-6 text-primary" />
-                              <h2 className="text-2xl font-bold text-gray-900">{t.values.result.title}</h2>
-                            </div>
-                            <p className="mb-6 text-gray-700">{t.values.result.description}</p>
-                          </div>
-                        </motion.div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
+                  <div className="relative w-full h-[400px] md:h-[500px]">
+                    <Image
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Cultural-Studies-1.jpg-gxrtKpxlNq6YsekELKxYvACLGuPAL6.jpeg"
+                      alt={language === "ru" ? "Культурное понимание" : "Cultural understanding"}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </motion.div>
+                <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
+                  <div className="relative w-full h-[400px] md:h-[500px]">
+                    <Image
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Cultural-Studies-1.jpg-gxrtKpxlNq6YsekELKxYvACLGuPAL6.jpeg"
+                      alt={language === "ru" ? "Культурное понимание" : "Cultural understanding"}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
 
             {/* Arts Value */}
-                        <motion.div
-                          initial="hidden"
-                          animate={isLoaded ? "visible" : "hidden"}
-                          variants={staggerContainer}
-                          className="mb-20"
-                        >
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                              <div className="relative w-full h-[400px] md:h-[500px]">
-                                <Image
-                                  src="/assets/gallery/Arts-3.jpg"
-                                  alt={language === "ru" ? "Творчество" : "Creativity"}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </motion.div>
-                            <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                              <div className="relative w-full h-[400px] md:h-[500px]">
-                                <Image
-                                  src="/assets/gallery/Arts.jpg"
-                                  alt={language === "ru" ? "Творчество" : "Creativity"}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </motion.div>
-                          </div>
-                          <div className="flex flex-col justify-center mb-8">
-                            <div className="mb-4 flex items-center">
-                              <Sparkles className="mr-3 h-6 w-6 text-primary" />
-                              <h2 className="text-2xl font-bold text-gray-900">{t.values.creative.title}</h2>
-                            </div>
-                            <p className="mb-6 text-gray-700">{t.values.creative.description}</p>
-                          </div>
-                        </motion.div>
+            <motion.div
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={staggerContainer}
+              className="mb-20"
+            >
+              <div className="flex flex-col justify-center mb-8">
+                <div className="mb-4 flex items-center">
+                  <Sparkles className="mr-3 h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold text-gray-900">{t.values.creative.title}</h2>
+                </div>
+                <p className="mb-6 text-gray-700">{t.values.creative.description}</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
+                  <div className="relative w-full h-[400px] md:h-[500px]">
+                    <Image
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Arts-3.jpg-NgPAgp7TOwINO0OPgyoW15GiCKxsGX.jpeg"
+                      alt={language === "ru" ? "Творчество" : "Creativity"}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </motion.div>
+                <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
+                  <div className="relative w-full h-[400px] md:h-[500px]">
+                    <Image
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Arts.jpg-gjc3BxEjCN5uEbGSFKEU4G4I4075IH.jpeg"
+                      alt={language === "ru" ? "Творчество" : "Creativity"}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            {/* Assessment Value */}
+            <motion.div
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={staggerContainer}
+              className="mb-20"
+            >
+              <div className="flex flex-col justify-center mb-8">
+                <div className="mb-4 flex items-center">
+                  <Lightbulb className="mr-3 h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold text-gray-900">{t.values.result.title}</h2>
+                </div>
+                <p className="mb-6 text-gray-700">{t.values.result.description}</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
+                  <div className="relative w-full h-[400px] md:h-[500px]">
+                    <Image
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/assesment.jpg-X5J5ZCnVgSPZoTW4SsNJyBakuFiZCg.jpeg"
+                      alt={language === "ru" ? "Измерение результата" : "Measuring results"}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </motion.div>
+                <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
+                  <div className="relative w-full h-[400px] md:h-[500px]">
+                    <Image
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/assesment-1.jpg-mJmML3zE1rgKWEHswShLfUJKQPVcXL.jpeg"
+                      alt={language === "ru" ? "Измерение результата" : "Measuring results"}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
