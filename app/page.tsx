@@ -28,7 +28,7 @@ import {
   Landmark,
 } from "lucide-react"
 import PromotionalBanner from "@/components/PromotionalBanner"
-import Masterclasses from "./(masterclass)/masterclasses/page"
+
 
 export default function Home() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")

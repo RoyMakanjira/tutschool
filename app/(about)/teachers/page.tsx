@@ -16,7 +16,7 @@ import {
   Clock,
   Landmark,
 } from "lucide-react"
-import Masterclasses from "@/app/(masterclass)/masterclasses/page"
+
 
 
 export default function Teachers() {
@@ -289,7 +289,7 @@ export default function Teachers() {
         masterclass: "MASTERCLASS",
         masterclassDropdown: [
           { title: "CHINESE CALLIGRAPHY", href: "/chinese-calligraphy" },
-          { title: "CREATIVE WORKSHOP", href: "/creative-workshop" },
+          { title: "CREATIVE WORKSHOP", href: "/creative-workshops" },
         ],
         news: "NEWS",
         contacts: "CONTACTS",

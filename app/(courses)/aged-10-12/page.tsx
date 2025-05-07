@@ -154,7 +154,7 @@ export default function Aged10to12Page() {
         masterclass: "MASTERCLASS",
         masterclassDropdown: [
           { title: "CHINESE CALLIGRAPHY", href: "/chinese-calligraphy" },
-          { title: "CREATIVE WORKSHOP", href: "/creative-workshop" },
+          { title: "CREATIVE WORKSHOP", href: "/creative-workshops" },
         ],
         news: "NEWS",
         contacts: "CONTACTS",
