@@ -606,7 +606,7 @@ export default function HomePage() {
       </div>
     </div>
                    {/* Desktop Navigation */}
-          <nav className="hidden md:block" ref={dropdownRef}>
+          <nav className="hidden md:block relative z-50" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">
                 <button
