@@ -6,17 +6,7 @@ import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import {
-  Calendar,
-  Phone,
-  Mail,
-  Globe,
-  Menu,
-  X,
-  Clock,
-  Info,
-  ChevronDown,
-} from "lucide-react"
+import { Calendar, Phone, Mail, Globe, Menu, X, Clock, Info, ChevronDown, BookOpen, MessageCircle, Award, FileText } from 'lucide-react'
 
 
 export default function SchedulePage() {
@@ -574,7 +564,7 @@ export default function SchedulePage() {
                            </ul>
                          </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu */}
           <div className="flex items-center gap-4 md:hidden">
             <button 
               className="rounded-md p-1 text-gray-700 hover:bg-gray-100"
@@ -597,10 +587,15 @@ export default function SchedulePage() {
                 onClick={() => toggleDropdown("about-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <span>{t.nav.about}</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${activeDropdown === "about-mobile" ? "rotate-180" : ""}`}
-                />
+                <div className="flex items-center">
+                  <Info className="mr-2 h-5 w-5 text-primary" />
+                  <span>{t.nav.about}</span>
+                </div>
+                {activeDropdown === "about-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
                 className={`overflow-hidden transition-all duration-200 ${
@@ -628,10 +623,15 @@ export default function SchedulePage() {
                 onClick={() => toggleDropdown("courses-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <span>{t.nav.courses}</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${activeDropdown === "courses-mobile" ? "rotate-180" : ""}`}
-                />
+                <div className="flex items-center">
+                  <BookOpen className="mr-2 h-5 w-5 text-primary" />
+                  <span>{t.nav.courses}</span>
+                </div>
+                {activeDropdown === "courses-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
                 className={`overflow-hidden transition-all duration-200 ${
@@ -659,10 +659,15 @@ export default function SchedulePage() {
                 onClick={() => toggleDropdown("chinese-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <span>{t.nav.chinese}</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${activeDropdown === "chinese-mobile" ? "rotate-180" : ""}`}
-                />
+                <div className="flex items-center">
+                  <Globe className="mr-2 h-5 w-5 text-primary" />
+                  <span>{t.nav.chinese}</span>
+                </div>
+                {activeDropdown === "chinese-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
                 className={`overflow-hidden transition-all duration-200 ${
@@ -690,10 +695,15 @@ export default function SchedulePage() {
                 onClick={() => toggleDropdown("club-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <span>{t.nav.club}</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${activeDropdown === "club-mobile" ? "rotate-180" : ""}`}
-                />
+                <div className="flex items-center">
+                  <MessageCircle className="mr-2 h-5 w-5 text-primary" />
+                  <span>{t.nav.club}</span>
+                </div>
+                {activeDropdown === "club-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
                 className={`overflow-hidden transition-all duration-200 ${
@@ -721,12 +731,15 @@ export default function SchedulePage() {
                 onClick={() => toggleDropdown("masterclass-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <span>{t.nav.masterclass}</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${
-                    activeDropdown === "masterclass-mobile" ? "rotate-180" : ""
-                  }`}
-                />
+                <div className="flex items-center">
+                  <Award className="mr-2 h-5 w-5 text-primary" />
+                  <span>{t.nav.masterclass}</span>
+                </div>
+                {activeDropdown === "masterclass-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
                 className={`overflow-hidden transition-all duration-200 ${
@@ -752,8 +765,9 @@ export default function SchedulePage() {
             <Link
               href="/news"
               onClick={() => setMobileMenuOpen(false)}
-              className="block rounded-lg border border-gray-200 p-4 font-medium text-gray-700 hover:bg-gray-50"
+              className="flex items-center rounded-lg border border-gray-200 p-4 font-medium text-gray-700 hover:bg-gray-50"
             >
+              <FileText className="mr-2 h-5 w-5 text-primary" />
               {t.nav.news}
             </Link>
 
@@ -761,8 +775,9 @@ export default function SchedulePage() {
             <Link
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="block rounded-lg border border-gray-200 p-4 font-medium text-gray-700 hover:bg-gray-50"
+              className="flex items-center rounded-lg border border-gray-200 p-4 font-medium text-gray-700 hover:bg-gray-50"
             >
+              <Phone className="mr-2 h-5 w-5 text-primary" />
               {t.nav.contacts}
             </Link>
           </div>
@@ -1101,4 +1116,3 @@ export default function SchedulePage() {
     </div>
   )
 }
-
