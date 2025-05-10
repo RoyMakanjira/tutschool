@@ -17,9 +17,10 @@ import {
   HelpCircle,
   ChevronDown,
   BookOpen,
+  MessageCircle,
+  Award,
   FileText,
-  Users2,
-  Palette,
+  Info,
 } from "lucide-react"
 import YandexMap from "@/components/YandexMap"
 
@@ -30,9 +31,7 @@ export default function Contact() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
 
   const [isScrolled, setIsScrolled] = useState(false)
-
   const dropdownRef = useRef<HTMLDivElement>(null)
-
   const [scrollY, setScrollY] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -83,6 +82,7 @@ export default function Contact() {
       window.removeEventListener("scroll", handleScroll)
     }
   }, [])
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -95,6 +95,7 @@ export default function Contact() {
       document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [])
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -388,9 +389,9 @@ export default function Contact() {
 
   const toggleDropdown = (dropdown: string) => {
     if (activeDropdown === dropdown) {
-      setActiveDropdown(null) // Close the dropdown if it's already open
+      setActiveDropdown(null)
     } else {
-      setActiveDropdown(dropdown) // Open the dropdown if it's closed
+      setActiveDropdown(dropdown)
     }
   }
 
@@ -646,16 +647,18 @@ export default function Contact() {
                 onClick={() => toggleDropdown("about-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <div className="flex items-center gap-2">
-                  <HelpCircle className="h-5 w-5 text-primary" />
-                  <span>{t.nav.about}</span>
-                </div>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${activeDropdown === "about-mobile" ? "rotate-180" : ""}`}
-                />
+                <span className="flex items-center gap-2">
+                  <Info className="h-5 w-5 text-primary" />
+                  {t.nav.about}
+                </span>
+                {activeDropdown === "about-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-200 ${
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
                   activeDropdown === "about-mobile" ? "max-h-96" : "max-h-0"
                 }`}
               >
@@ -664,10 +667,7 @@ export default function Contact() {
                     <Link
                       key={index}
                       href={item.href}
-                      onClick={() => {
-                        setMobileMenuOpen(false)
-                        setActiveDropdown(null)
-                      }}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block rounded-md p-3 text-gray-600 hover:bg-gray-50"
                     >
                       {item.title}
@@ -683,16 +683,18 @@ export default function Contact() {
                 onClick={() => toggleDropdown("courses-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <div className="flex items-center gap-2">
+                <span className="flex items-center gap-2">
                   <BookOpen className="h-5 w-5 text-primary" />
-                  <span>{t.nav.courses}</span>
-                </div>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${activeDropdown === "courses-mobile" ? "rotate-180" : ""}`}
-                />
+                  {t.nav.courses}
+                </span>
+                {activeDropdown === "courses-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-200 ${
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
                   activeDropdown === "courses-mobile" ? "max-h-96" : "max-h-0"
                 }`}
               >
@@ -701,10 +703,7 @@ export default function Contact() {
                     <Link
                       key={index}
                       href={item.href}
-                      onClick={() => {
-                        setMobileMenuOpen(false)
-                        setActiveDropdown(null)
-                      }}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block rounded-md p-3 text-gray-600 hover:bg-gray-50"
                     >
                       {item.title}
@@ -720,16 +719,18 @@ export default function Contact() {
                 onClick={() => toggleDropdown("chinese-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <div className="flex items-center gap-2">
+                <span className="flex items-center gap-2">
                   <Globe className="h-5 w-5 text-primary" />
-                  <span>{t.nav.chinese}</span>
-                </div>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${activeDropdown === "chinese-mobile" ? "rotate-180" : ""}`}
-                />
+                  {t.nav.chinese}
+                </span>
+                {activeDropdown === "chinese-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-200 ${
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
                   activeDropdown === "chinese-mobile" ? "max-h-96" : "max-h-0"
                 }`}
               >
@@ -738,10 +739,7 @@ export default function Contact() {
                     <Link
                       key={index}
                       href={item.href}
-                      onClick={() => {
-                        setMobileMenuOpen(false)
-                        setActiveDropdown(null)
-                      }}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block rounded-md p-3 text-gray-600 hover:bg-gray-50"
                     >
                       {item.title}
@@ -757,16 +755,18 @@ export default function Contact() {
                 onClick={() => toggleDropdown("club-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <div className="flex items-center gap-2">
-                  <Users2 className="h-5 w-5 text-primary" />
-                  <span>{t.nav.club}</span>
-                </div>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${activeDropdown === "club-mobile" ? "rotate-180" : ""}`}
-                />
+                <span className="flex items-center gap-2">
+                  <MessageCircle className="h-5 w-5 text-primary" />
+                  {t.nav.club}
+                </span>
+                {activeDropdown === "club-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-200 ${
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
                   activeDropdown === "club-mobile" ? "max-h-96" : "max-h-0"
                 }`}
               >
@@ -775,10 +775,7 @@ export default function Contact() {
                     <Link
                       key={index}
                       href={item.href}
-                      onClick={() => {
-                        setMobileMenuOpen(false)
-                        setActiveDropdown(null)
-                      }}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block rounded-md p-3 text-gray-600 hover:bg-gray-50"
                     >
                       {item.title}
@@ -794,18 +791,18 @@ export default function Contact() {
                 onClick={() => toggleDropdown("masterclass-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <div className="flex items-center gap-2">
-                  <Palette className="h-5 w-5 text-primary" />
-                  <span>{t.nav.masterclass}</span>
-                </div>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${
-                    activeDropdown === "masterclass-mobile" ? "rotate-180" : ""
-                  }`}
-                />
+                <span className="flex items-center gap-2">
+                  <Award className="h-5 w-5 text-primary" />
+                  {t.nav.masterclass}
+                </span>
+                {activeDropdown === "masterclass-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-200 ${
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
                   activeDropdown === "masterclass-mobile" ? "max-h-96" : "max-h-0"
                 }`}
               >
@@ -814,10 +811,7 @@ export default function Contact() {
                     <Link
                       key={index}
                       href={item.href}
-                      onClick={() => {
-                        setMobileMenuOpen(false)
-                        setActiveDropdown(null)
-                      }}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block rounded-md p-3 text-gray-600 hover:bg-gray-50"
                     >
                       {item.title}
@@ -851,7 +845,6 @@ export default function Contact() {
       </header>
 
       <main>
-        {/* Contact Content */}
         <div className="container mx-auto px-4 py-12">
           <div className="grid gap-12 lg:grid-cols-2">
             {/* Contact Information */}
@@ -1021,7 +1014,6 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* FAQ Section */}
         <section className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
             <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.faq.title}</h2>
@@ -1056,7 +1048,6 @@ export default function Contact() {
           </div>
         </section>
 
-        {/* Visit Section */}
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-4xl rounded-lg bg-primary p-8 text-white md:p-12">
