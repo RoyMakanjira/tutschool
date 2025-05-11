@@ -20,7 +20,10 @@ import {
   ArrowRight,
   Award,
   Brain,
-  Target
+  Target,
+  Info,
+  FileText,
+  MessageCircle
 } from "lucide-react"
 
 
@@ -271,13 +274,15 @@ export default function ChineseTeenagersPage() {
         </div>
       </div>
 
- {/* Combined Header and Mobile Menu */}
-      <header className={`border-b bg-white shadow-sm transition-all duration-300 sticky top-0 z-50 ${isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""}`}>
+     {/* Combined Header and Mobile Menu */}
+      <header
+        className={`border-b bg-white shadow-sm transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""}`}
+      >
         {/* Main Header Content */}
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
             <div className="relative h-14 w-14">
-              <Link href='/'>
+              <Link href="/">
                 <Image
                   src="/logo.png?height=56&width=56"
                   alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
@@ -294,146 +299,143 @@ export default function ChineseTeenagersPage() {
 
           {/* Desktop Navigation - keep exactly the same */}
           <nav className="hidden md:block relative z-50" ref={dropdownRef}>
-              <ul className="flex gap-6">
-                    <li className="relative">
-                               <button
-                                 onClick={() => toggleDropdown("about")}
-                                 className={`flex items-center text-sm font-medium ${activeDropdown === "about" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-                               >
-                                 {t.nav.about}
-                                 <ChevronDown
-                                   className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
-                                 />
-                               </button>
-                               {activeDropdown === "about" && (
-                                 <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                                   {t.nav.aboutDropdown.map((item, index) => (
-                                     <Link
-                                       key={index}
-                                       href={item.href}
-                                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                     >
-                                       {item.title}
-                                     </Link>
-                                   ))}
-                                 </div>
-                               )}
-                             </li>
-                             <li className="relative">
-                               <button
-                                 onClick={() => toggleDropdown("courses")}
-                                 className={`flex items-center text-sm font-medium ${activeDropdown === "courses" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-                               >
-                                 {t.nav.courses}
-                                 <ChevronDown
-                                   className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "courses" ? "rotate-180" : ""}`}
-                                 />
-                               </button>
-                               {activeDropdown === "courses" && (
-                                 <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                                   {t.nav.coursesDropdown.map((item, index) => (
-                                     <Link
-                                       key={index}
-                                       href={item.href}
-                                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                     >
-                                       {item.title}
-                                     </Link>
-                                   ))}
-                                 </div>
-                               )}
-                             </li>
-                             <li className="relative">
-                               <button
-                                 onClick={() => toggleDropdown("chinese")}
-                                 className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-                               >
-                                 {t.nav.chinese}
-                                 <ChevronDown
-                                   className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
-                                 />
-                               </button>
-                               {activeDropdown === "chinese" && (
-                                 <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                                   {t.nav.chineseDropdown.map((item, index) => (
-                                     <Link
-                                       key={index}
-                                       href={item.href}
-                                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                     >
-                                       {item.title}
-                                     </Link>
-                                   ))}
-                                 </div>
-                               )}
-                             </li>
-                             <li className="relative">
-                               <button
-                                 onClick={() => toggleDropdown("club")}
-                                 className={`flex items-center text-sm font-medium ${activeDropdown === "club" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-                               >
-                                 {t.nav.club}
-                                 <ChevronDown
-                                   className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "club" ? "rotate-180" : ""}`}
-                                 />
-                               </button>
-                               {activeDropdown === "club" && (
-                                 <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                                   {t.nav.clubDropdown.map((item, index) => (
-                                     <Link
-                                       key={index}
-                                       href={item.href}
-                                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                     >
-                                       {item.title}
-                                     </Link>
-                                   ))}
-                                 </div>
-                               )}
-                             </li>
-                             <li className="relative">
-                               <button
-                                 onClick={() => toggleDropdown("masterclass")}
-                                 className={`flex items-center text-sm font-medium ${activeDropdown === "masterclass" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-                               >
-                                 {t.nav.masterclass}
-                                 <ChevronDown
-                                   className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "masterclass" ? "rotate-180" : ""}`}
-                                 />
-                               </button>
-                               {activeDropdown === "masterclass" && (
-                                 <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                                   {t.nav.masterclassDropdown.map((item, index) => (
-                                     <Link
-                                       key={index}
-                                       href={item.href}
-                                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                     >
-                                       {item.title}
-                                     </Link>
-                                   ))}
-                                 </div>
-                               )}
-                             </li>
-                             <li>
-                               <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
-                                 {t.nav.news}
-                               </Link>
-                             </li>
-                             <li>
-                               <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
-                                 {t.nav.contacts}
-                               </Link>
-                             </li>
-                           </ul>
-                         </nav>
+            <ul className="flex gap-6">
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("about")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "about" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.about}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "about" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.aboutDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("courses")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "courses" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.courses}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "courses" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "courses" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.coursesDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("chinese")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.chinese}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "chinese" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.chineseDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("club")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "club" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.club}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "club" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "club" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.clubDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("masterclass")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "masterclass" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.masterclass}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "masterclass" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "masterclass" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.masterclassDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li>
+                <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.news}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.contacts}
+                </Link>
+              </li>
+            </ul>
+          </nav>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-4 md:hidden">
-            <button 
-              className="rounded-md p-1 text-gray-700 hover:bg-gray-100"
-              onClick={toggleMobileMenu}
-            >
+            <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
@@ -451,13 +453,18 @@ export default function ChineseTeenagersPage() {
                 onClick={() => toggleDropdown("about-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <span>{t.nav.about}</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${activeDropdown === "about-mobile" ? "rotate-180" : ""}`}
-                />
+                <span className="flex items-center gap-2">
+                  <Info className="h-5 w-5 text-primary" />
+                  {t.nav.about}
+                </span>
+                {activeDropdown === "about-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-200 ${
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
                   activeDropdown === "about-mobile" ? "max-h-96" : "max-h-0"
                 }`}
               >
@@ -482,13 +489,18 @@ export default function ChineseTeenagersPage() {
                 onClick={() => toggleDropdown("courses-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <span>{t.nav.courses}</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${activeDropdown === "courses-mobile" ? "rotate-180" : ""}`}
-                />
+                <span className="flex items-center gap-2">
+                  <BookOpen className="h-5 w-5 text-primary" />
+                  {t.nav.courses}
+                </span>
+                {activeDropdown === "courses-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-200 ${
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
                   activeDropdown === "courses-mobile" ? "max-h-96" : "max-h-0"
                 }`}
               >
@@ -513,13 +525,18 @@ export default function ChineseTeenagersPage() {
                 onClick={() => toggleDropdown("chinese-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <span>{t.nav.chinese}</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${activeDropdown === "chinese-mobile" ? "rotate-180" : ""}`}
-                />
+                <span className="flex items-center gap-2">
+                  <Globe className="h-5 w-5 text-primary" />
+                  {t.nav.chinese}
+                </span>
+                {activeDropdown === "chinese-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-200 ${
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
                   activeDropdown === "chinese-mobile" ? "max-h-96" : "max-h-0"
                 }`}
               >
@@ -544,13 +561,18 @@ export default function ChineseTeenagersPage() {
                 onClick={() => toggleDropdown("club-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <span>{t.nav.club}</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${activeDropdown === "club-mobile" ? "rotate-180" : ""}`}
-                />
+                <span className="flex items-center gap-2">
+                  <MessageCircle className="h-5 w-5 text-primary" />
+                  {t.nav.club}
+                </span>
+                {activeDropdown === "club-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-200 ${
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
                   activeDropdown === "club-mobile" ? "max-h-96" : "max-h-0"
                 }`}
               >
@@ -575,15 +597,18 @@ export default function ChineseTeenagersPage() {
                 onClick={() => toggleDropdown("masterclass-mobile")}
                 className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
               >
-                <span>{t.nav.masterclass}</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${
-                    activeDropdown === "masterclass-mobile" ? "rotate-180" : ""
-                  }`}
-                />
+                <span className="flex items-center gap-2">
+                  <Award className="h-5 w-5 text-primary" />
+                  {t.nav.masterclass}
+                </span>
+                {activeDropdown === "masterclass-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-200 ${
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
                   activeDropdown === "masterclass-mobile" ? "max-h-96" : "max-h-0"
                 }`}
               >
@@ -606,8 +631,9 @@ export default function ChineseTeenagersPage() {
             <Link
               href="/news"
               onClick={() => setMobileMenuOpen(false)}
-              className="block rounded-lg border border-gray-200 p-4 font-medium text-gray-700 hover:bg-gray-50"
+              className="flex items-center gap-2 rounded-lg border border-gray-200 p-4 font-medium text-gray-700 hover:bg-gray-50"
             >
+              <FileText className="h-5 w-5 text-primary" />
               {t.nav.news}
             </Link>
 
@@ -615,8 +641,9 @@ export default function ChineseTeenagersPage() {
             <Link
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="block rounded-lg border border-gray-200 p-4 font-medium text-gray-700 hover:bg-gray-50"
+              className="flex items-center gap-2 rounded-lg border border-gray-200 p-4 font-medium text-gray-700 hover:bg-gray-50"
             >
+              <Phone className="h-5 w-5 text-primary" />
               {t.nav.contacts}
             </Link>
           </div>
