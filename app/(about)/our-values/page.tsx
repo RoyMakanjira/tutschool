@@ -4,7 +4,34 @@ import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { Globe, Menu, X, ChevronDown, Clock, Phone, Mail, Heart, Users, BookOpen, Lightbulb, Sparkles, Landmark, Info, MessageCircle, Award, FileText } from 'lucide-react'
+import {
+  Globe,
+  Menu,
+  X,
+  ChevronDown,
+  Clock,
+  Phone,
+  Mail,
+  Heart,
+  Users,
+  BookOpen,
+  Lightbulb,
+  Sparkles,
+  Landmark,
+  Info,
+  MessageCircle,
+  Award,
+  FileText,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation, Pagination, A11y, Autoplay } from "swiper/modules"
+
+// Import Swiper styles
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
 
 export default function ValuesPage() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
@@ -15,6 +42,30 @@ export default function ValuesPage() {
   const [scrollY, setScrollY] = useState(0)
 
   const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // Image data for each value section
+  const valueImages = {
+    community: [
+      { src: "/assets/gallery/Community.jpg", alt: "Community 1" },
+      { src: "/assets/gallery/Community-2.jpg", alt: "Community 2" },
+    ],
+    quality: [
+      { src: "/assets/gallery/Community-2.jpg", alt: "Quality 1" },
+    ],
+    geography: [
+      { src: "/assets/gallery/Cultural-Studies-2.jpg", alt: "Cultural Studies 1" },
+      { src: "/assets/gallery/Cultural-Studies-1.jpg", alt: "Cultural Studies 2" },
+    ],
+    result: [
+      { src: "/assets/gallery/assesment.jpg", alt: "Assessment 1" },
+      { src: "/assets/gallery/assesment-1.jpg", alt: "Assessment 2" },
+    ],
+    creative: [
+      { src: "/assets/gallery/Arts-3.jpg", alt: "Arts 1" },
+      { src: "/assets/gallery/Arts.jpg", alt: "Arts 2" },
+      { src: "/assets/gallery/Arts-2.jpg", alt: "Arts 3" },
+    ],
+  }
 
   useEffect(() => {
     // Set loaded state after a small delay to trigger initial animations
@@ -131,6 +182,10 @@ export default function ValuesPage() {
       },
       cta: "Записаться на пробное занятие",
       languageToggle: "English",
+      swiperNavigation: {
+        prev: "Предыдущий",
+        next: "Следующий",
+      },
     },
     en: {
       schoolName: "Tut School",
@@ -214,6 +269,10 @@ export default function ValuesPage() {
       },
       cta: "Book a trial lesson",
       languageToggle: "Русский",
+      swiperNavigation: {
+        prev: "Previous",
+        next: "Next",
+      },
     },
   }
 
@@ -249,6 +308,24 @@ export default function ValuesPage() {
       },
     },
   }
+
+  // Custom swiper navigation component
+  const SwiperNavigation = ({ id }: { id: string }) => (
+    <div className="flex justify-end gap-2 mt-4">
+      <button
+        className={`swiper-button-prev-${id} flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md text-primary hover:bg-gray-100 transition-colors`}
+        aria-label={t.swiperNavigation.prev}
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <button
+        className={`swiper-button-next-${id} flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md text-primary hover:bg-gray-100 transition-colors`}
+        aria-label={t.swiperNavigation.next}
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+    </div>
+  )
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -306,12 +383,14 @@ export default function ValuesPage() {
         </div>
       </div>
 
-      <header className={`border-b bg-white shadow-sm transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""}`}>
+      <header
+        className={`border-b bg-white shadow-sm transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""}`}
+      >
         {/* Main Header Content */}
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
             <div className="relative h-14 w-14">
-              <Link href='/'>
+              <Link href="/">
                 <Image
                   src="/logo.png?height=56&width=56"
                   alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
@@ -328,146 +407,143 @@ export default function ValuesPage() {
 
           {/* Desktop Navigation - keep exactly the same */}
           <nav className="hidden md:block" ref={dropdownRef}>
-                           <ul className="flex gap-6">
-                             <li className="relative">
-                               <button
-                                 onClick={() => toggleDropdown("about")}
-                                 className={`flex items-center text-sm font-medium ${activeDropdown === "about" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-                               >
-                                 {t.nav.about}
-                                 <ChevronDown
-                                   className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
-                                 />
-                               </button>
-                               {activeDropdown === "about" && (
-                                 <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                                   {t.nav.aboutDropdown.map((item, index) => (
-                                     <Link
-                                       key={index}
-                                       href={item.href}
-                                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                     >
-                                       {item.title}
-                                     </Link>
-                                   ))}
-                                 </div>
-                               )}
-                             </li>
-                             <li className="relative">
-                               <button
-                                 onClick={() => toggleDropdown("courses")}
-                                 className={`flex items-center text-sm font-medium ${activeDropdown === "courses" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-                               >
-                                 {t.nav.courses}
-                                 <ChevronDown
-                                   className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "courses" ? "rotate-180" : ""}`}
-                                 />
-                               </button>
-                               {activeDropdown === "courses" && (
-                                 <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                                   {t.nav.coursesDropdown.map((item, index) => (
-                                     <Link
-                                       key={index}
-                                       href={item.href}
-                                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                     >
-                                       {item.title}
-                                     </Link>
-                                   ))}
-                                 </div>
-                               )}
-                             </li>
-                             <li className="relative">
-                               <button
-                                 onClick={() => toggleDropdown("chinese")}
-                                 className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-                               >
-                                 {t.nav.chinese}
-                                 <ChevronDown
-                                   className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
-                                 />
-                               </button>
-                               {activeDropdown === "chinese" && (
-                                 <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                                   {t.nav.chineseDropdown.map((item, index) => (
-                                     <Link
-                                       key={index}
-                                       href={item.href}
-                                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                     >
-                                       {item.title}
-                                     </Link>
-                                   ))}
-                                 </div>
-                               )}
-                             </li>
-                             <li className="relative">
-                               <button
-                                 onClick={() => toggleDropdown("club")}
-                                 className={`flex items-center text-sm font-medium ${activeDropdown === "club" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-                               >
-                                 {t.nav.club}
-                                 <ChevronDown
-                                   className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "club" ? "rotate-180" : ""}`}
-                                 />
-                               </button>
-                               {activeDropdown === "club" && (
-                                 <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                                   {t.nav.clubDropdown.map((item, index) => (
-                                     <Link
-                                       key={index}
-                                       href={item.href}
-                                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                     >
-                                       {item.title}
-                                     </Link>
-                                   ))}
-                                 </div>
-                               )}
-                             </li>
-                             <li className="relative">
-                               <button
-                                 onClick={() => toggleDropdown("masterclass")}
-                                 className={`flex items-center text-sm font-medium ${activeDropdown === "masterclass" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
-                               >
-                                 {t.nav.masterclass}
-                                 <ChevronDown
-                                   className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "masterclass" ? "rotate-180" : ""}`}
-                                 />
-                               </button>
-                               {activeDropdown === "masterclass" && (
-                                 <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
-                                   {t.nav.masterclassDropdown.map((item, index) => (
-                                     <Link
-                                       key={index}
-                                       href={item.href}
-                                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                     >
-                                       {item.title}
-                                     </Link>
-                                   ))}
-                                 </div>
-                               )}
-                             </li>
-                             <li>
-                               <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
-                                 {t.nav.news}
-                               </Link>
-                             </li>
-                             <li>
-                               <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
-                                 {t.nav.contacts}
-                               </Link>
-                             </li>
-                           </ul>
-                         </nav>
+            <ul className="flex gap-6">
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("about")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "about" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.about}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "about" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.aboutDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("courses")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "courses" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.courses}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "courses" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "courses" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.coursesDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("chinese")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.chinese}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "chinese" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.chineseDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("club")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "club" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.club}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "club" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "club" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.clubDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("masterclass")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "masterclass" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.masterclass}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "masterclass" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "masterclass" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.masterclassDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li>
+                <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.news}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.contacts}
+                </Link>
+              </li>
+            </ul>
+          </nav>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-4 md:hidden">
-            <button 
-              className="rounded-md p-1 text-gray-700 hover:bg-gray-100"
-              onClick={toggleMobileMenu}
-            >
+            <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100" onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
@@ -701,63 +777,89 @@ export default function ValuesPage() {
         {/* Values Section */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-                      {/* Community Value */}
-                      <motion.div
-                        initial="hidden"
-                        animate={isLoaded ? "visible" : "hidden"}
-                        variants={staggerContainer}
-                        className="mb-20"
-                      >
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                            <div className="relative w-full h-[400px] md:h-[500px]">
-                              <Image
-                                src="/assets/gallery/Community.jpg"
-                                alt={language === "ru" ? "Наше сообщество" : "Our community"}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                          </motion.div>
-                          <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                            <div className="relative w-full h-[400px] md:h-[500px]">
-                              <Image
-                                src="/assets/gallery/Community-2.jpg"
-                                alt={language === "ru" ? "Наше сообщество" : "Our community"}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                          </motion.div>
-                        </div>
-                        <div className="flex flex-col justify-center mb-8">
-                          <div className="mb-4 flex items-center">
-                            <Users className="mr-3 h-6 w-6 text-primary" />
-                            <h2 className="text-2xl font-bold text-gray-900">{t.values.community.title}</h2>
-                          </div>
-                          <p className="mb-6 text-gray-700">{t.values.community.description}</p>
-                        </div>
-                      </motion.div>
-
-            {/* Education Value */}
+            {/* Community Value */}
             <motion.div
               initial="hidden"
               animate={isLoaded ? "visible" : "hidden"}
               variants={staggerContainer}
               className="mb-20"
             >
-              <div className="grid gap-8 md:grid-cols-2">
-                <motion.div variants={fadeIn} className="order-last md:order-first">
-                  <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden rounded-lg shadow-lg">
-                    <Image
-                      src="/assets/gallery/Community-2.jpg"
-                      alt={language === "ru" ? "Наше сообщество" : "Our community"}
-                      fill
-                      className="object-cover"
-                    />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="overflow-hidden rounded-lg shadow-lg">
+                  <Swiper
+                    modules={[Navigation, Pagination, A11y, Autoplay]}
+                    spaceBetween={0}
+                    slidesPerView={1}
+                    navigation={{
+                      prevEl: ".swiper-button-prev-community",
+                      nextEl: ".swiper-button-next-community",
+                    }}
+                    pagination={{ clickable: true }}
+                    autoplay={{ delay: 5000, disableOnInteraction: false }}
+                    className="h-[300px] md:h-[400px]"
+                  >
+                    {valueImages.community.map((image, index) => (
+                      <SwiperSlide key={index}>
+                        <div className="relative h-full w-full">
+                          <Image
+                            src={image.src || "/placeholder.svg"}
+                            alt={`${image.alt} - ${language === "ru" ? "Наше сообщество" : "Our community"}`}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                  <SwiperNavigation id="community" />
+                </div>
+                <div className="flex flex-col justify-center">
+                  <div className="mb-4 flex items-center">
+                    <Users className="mr-3 h-6 w-6 text-primary" />
+                    <h2 className="text-2xl font-bold text-gray-900">{t.values.community.title}</h2>
                   </div>
-                </motion.div>
-                <motion.div variants={fadeIn} className="flex flex-col justify-center">
+                  <p className="mb-6 text-gray-700">{t.values.community.description}</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Quality Value */}
+            <motion.div
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={staggerContainer}
+              className="mb-20"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="order-1 md:order-2 overflow-hidden rounded-lg shadow-lg">
+                  <Swiper
+                    modules={[Navigation, Pagination, A11y, Autoplay]}
+                    spaceBetween={0}
+                    slidesPerView={1}
+                    navigation={{
+                      prevEl: ".swiper-button-prev-quality",
+                      nextEl: ".swiper-button-next-quality",
+                    }}
+                    pagination={{ clickable: true }}
+                    autoplay={{ delay: 5000, disableOnInteraction: false }}
+                    className="h-[300px] md:h-[400px]"
+                  >
+                    {valueImages.quality.map((image, index) => (
+                      <SwiperSlide key={index}>
+                        <div className="relative h-full w-full">
+                          <Image
+                            src={image.src || "/placeholder.svg"}
+                            alt={`${image.alt} - ${language === "ru" ? "Качество" : "Quality"}`}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                  <SwiperNavigation id="quality" />
+                </div>
+                <div className="order-2 md:order-1 flex flex-col justify-center">
                   <div className="mb-4 flex items-center">
                     <BookOpen className="mr-3 h-6 w-6 text-primary" />
                     <h2 className="text-2xl font-bold text-gray-900">{t.values.quality.title}</h2>
@@ -779,124 +881,147 @@ export default function ValuesPage() {
                       </li>
                     ))}
                   </ul>
-                </motion.div>
+                </div>
               </div>
             </motion.div>
 
-            {/* Cultural Understanding Value */}
-             {/* Regional Geography Value */}
-                        <motion.div
-                          initial="hidden"
-                          animate={isLoaded ? "visible" : "hidden"}
-                          variants={staggerContainer}
-                          className="mb-20"
-                        >
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                              <div className="relative w-full h-[400px] md:h-[500px]">
-                                <Image
-                                  src="/assets/gallery/Cultural-Studies-2.jpg"
-                                  alt={language === "ru" ? "Культурное понимание" : "Cultural understanding"}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </motion.div>
-                            <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                              <div className="relative w-full h-[400px] md:h-[500px]">
-                                <Image
-                                  src="/assets/gallery/Cultural-Studies-1.jpg"
-                                  alt={language === "ru" ? "Культурное понимание" : "Cultural understanding"}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </motion.div>
-                          </div>
-                          <div className="flex flex-col justify-center mb-8">
-                            <div className="mb-4 flex items-center">
-                              <Heart className="mr-3 h-6 w-6 text-primary" />
-                              <h2 className="text-2xl font-bold text-gray-900">{t.values.geography.title}</h2>
-                            </div>
-                            <p className="mb-6 text-gray-700">{t.values.geography.description}</p>
-                          </div>
-                        </motion.div>
+            {/* Regional Geography Value */}
+            <motion.div
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={staggerContainer}
+              className="mb-20"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="overflow-hidden rounded-lg shadow-lg">
+                  <Swiper
+                    modules={[Navigation, Pagination, A11y, Autoplay]}
+                    spaceBetween={0}
+                    slidesPerView={1}
+                    navigation={{
+                      prevEl: ".swiper-button-prev-geography",
+                      nextEl: ".swiper-button-next-geography",
+                    }}
+                    pagination={{ clickable: true }}
+                    autoplay={{ delay: 5000, disableOnInteraction: false }}
+                    className="h-[300px] md:h-[400px]"
+                  >
+                    {valueImages.geography.map((image, index) => (
+                      <SwiperSlide key={index}>
+                        <div className="relative h-full w-full">
+                          <Image
+                            src={image.src || "/placeholder.svg"}
+                            alt={`${image.alt} - ${language === "ru" ? "Страноведение" : "Regional Geography"}`}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                  <SwiperNavigation id="geography" />
+                </div>
+                <div className="flex flex-col justify-center">
+                  <div className="mb-4 flex items-center">
+                    <Heart className="mr-3 h-6 w-6 text-primary" />
+                    <h2 className="text-2xl font-bold text-gray-900">{t.values.geography.title}</h2>
+                  </div>
+                  <p className="mb-6 text-gray-700">{t.values.geography.description}</p>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Assessment Value */}
-                        <motion.div
-                          initial="hidden"
-                          animate={isLoaded ? "visible" : "hidden"}
-                          variants={staggerContainer}
-                          className="mb-20"
-                        >
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                              <div className="relative w-full h-[400px] md:h-[500px]">
-                                <Image
-                                  src="/assets/gallery/assesment.jpg"
-                                  alt={language === "ru" ? "Измерение результата" : "Measuring results"}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </motion.div>
-                            <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                              <div className="relative w-full h-[400px] md:h-[500px]">
-                                <Image
-                                  src="/assets/gallery/assesment-1.jpg"
-                                  alt={language === "ru" ? "Измерение результата" : "Measuring results"}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </motion.div>
-                          </div>
-                          <div className="flex flex-col justify-center mb-8">
-                            <div className="mb-4 flex items-center">
-                              <Lightbulb className="mr-3 h-6 w-6 text-primary" />
-                              <h2 className="text-2xl font-bold text-gray-900">{t.values.result.title}</h2>
-                            </div>
-                            <p className="mb-6 text-gray-700">{t.values.result.description}</p>
-                          </div>
-                        </motion.div>
+            <motion.div
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={staggerContainer}
+              className="mb-20"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="order-1 md:order-2 overflow-hidden rounded-lg shadow-lg">
+                  <Swiper
+                    modules={[Navigation, Pagination, A11y, Autoplay]}
+                    spaceBetween={0}
+                    slidesPerView={1}
+                    navigation={{
+                      prevEl: ".swiper-button-prev-result",
+                      nextEl: ".swiper-button-next-result",
+                    }}
+                    pagination={{ clickable: true }}
+                    autoplay={{ delay: 5000, disableOnInteraction: false }}
+                    className="h-[300px] md:h-[400px]"
+                  >
+                    {valueImages.result.map((image, index) => (
+                      <SwiperSlide key={index}>
+                        <div className="relative h-full w-full">
+                          <Image
+                            src={image.src || "/placeholder.svg"}
+                            alt={`${image.alt} - ${language === "ru" ? "Измерение результата" : "Measuring results"}`}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                  <SwiperNavigation id="result" />
+                </div>
+                <div className="order-2 md:order-1 flex flex-col justify-center">
+                  <div className="mb-4 flex items-center">
+                    <Lightbulb className="mr-3 h-6 w-6 text-primary" />
+                    <h2 className="text-2xl font-bold text-gray-900">{t.values.result.title}</h2>
+                  </div>
+                  <p className="mb-6 text-gray-700">{t.values.result.description}</p>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Arts Value */}
-                        <motion.div
-                          initial="hidden"
-                          animate={isLoaded ? "visible" : "hidden"}
-                          variants={staggerContainer}
-                          className="mb-20"
-                        >
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                              <div className="relative w-full h-[400px] md:h-[500px]">
-                                <Image
-                                  src="/assets/gallery/Arts-3.jpg"
-                                  alt={language === "ru" ? "Творчество" : "Creativity"}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </motion.div>
-                            <motion.div variants={fadeIn} className="overflow-hidden rounded-lg shadow-lg">
-                              <div className="relative w-full h-[400px] md:h-[500px]">
-                                <Image
-                                  src="/assets/gallery/Arts.jpg"
-                                  alt={language === "ru" ? "Творчество" : "Creativity"}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </motion.div>
-                          </div>
-                          <div className="flex flex-col justify-center mb-8">
-                            <div className="mb-4 flex items-center">
-                              <Sparkles className="mr-3 h-6 w-6 text-primary" />
-                              <h2 className="text-2xl font-bold text-gray-900">{t.values.creative.title}</h2>
-                            </div>
-                            <p className="mb-6 text-gray-700">{t.values.creative.description}</p>
-                          </div>
-                        </motion.div>
+            <motion.div
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={staggerContainer}
+              className="mb-20"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="overflow-hidden rounded-lg shadow-lg">
+                  <Swiper
+                    modules={[Navigation, Pagination, A11y, Autoplay]}
+                    spaceBetween={0}
+                    slidesPerView={1}
+                    navigation={{
+                      prevEl: ".swiper-button-prev-creative",
+                      nextEl: ".swiper-button-next-creative",
+                    }}
+                    pagination={{ clickable: true }}
+                    autoplay={{ delay: 5000, disableOnInteraction: false }}
+                    className="h-[300px] md:h-[400px]"
+                  >
+                    {valueImages.creative.map((image, index) => (
+                      <SwiperSlide key={index}>
+                        <div className="relative h-full w-full">
+                          <Image
+                            src={image.src || "/placeholder.svg"}
+                            alt={`${image.alt} - ${language === "ru" ? "Творчество" : "Creativity"}`}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                  <SwiperNavigation id="creative" />
+                </div>
+                <div className="flex flex-col justify-center">
+                  <div className="mb-4 flex items-center">
+                    <Sparkles className="mr-3 h-6 w-6 text-primary" />
+                    <h2 className="text-2xl font-bold text-gray-900">{t.values.creative.title}</h2>
+                  </div>
+                  <p className="mb-6 text-gray-700">{t.values.creative.description}</p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
