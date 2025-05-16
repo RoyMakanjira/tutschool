@@ -3,6 +3,8 @@ import Image from "next/image"
 import { client } from "@/lib/sanity"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import Navbar from "@/components/navbar"
+
 
 async function getArticles() {
   const query = `*[_type == "post"] | order(publishedAt desc) {
@@ -24,6 +26,7 @@ export default async function NewsPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <Navbar />
       <main className="flex-1 bg-gray-50 py-12">
         <div className="container mx-auto px-4">
           {/* Page Header */}
