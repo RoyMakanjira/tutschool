@@ -700,8 +700,6 @@ export default function Aged10to12Page()  {
 <section className="relative bg-primary py-20 text-white">
           <div className="container mx-auto px-4">
             <motion.div
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
               variants={fadeIn}
               className="text-center"
             >

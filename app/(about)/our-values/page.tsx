@@ -47,7 +47,7 @@ export default function ValuesPage() {
   const valueImages = {
     community: [
       { src: "/assets/gallery/Community.jpg", alt: "Community 1" },
-      { src: "/assets/gallery/Community-2.jpg", alt: "Community 2" },
+      { src: "/Community-2.jpg", alt: "Community 2" },
     ],
     quality: [
       { src: "/assets/gallery/Community-2.jpg", alt: "Quality 1" },
