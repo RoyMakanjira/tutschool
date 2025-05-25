@@ -1,17 +1,55 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { X, ChevronRight, Sun, Cloud } from 'lucide-react'
+import { X, ChevronRight, Sun, Cloud } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { getPromotionalBanner } from "@/sanity/lib/promo"
 
 interface PromotionalBannerProps {
   language?: "ru" | "en"
 }
 
+interface BannerContent {
+  badge: string
+  shortTitle: string
+  fullTitle: string
+  untilDate: string
+  location: string
+  detailsButton: string
+  dismiss: string
+}
+
+interface BannerData {
+  translations: {
+    ru: BannerContent
+    en: BannerContent
+  }
+  active: boolean
+  linkUrl: string
+}
+
 export const PromotionalBanner = ({ language = "ru" }: PromotionalBannerProps) => {
   const [isVisible, setIsVisible] = useState(true)
   const [isAnimating, setIsAnimating] = useState(false)
+  const [bannerData, setBannerData] = useState<BannerData | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchBannerData = async () => {
+      setIsLoading(true)
+      try {
+        const data = await getPromotionalBanner(language)
+        setBannerData(data)
+      } catch (error) {
+        console.error("Error fetching banner data:", error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchBannerData()
+  }, [language])
 
   useEffect(() => {
     // Add entrance animation when component mounts
@@ -30,7 +68,8 @@ export const PromotionalBanner = ({ language = "ru" }: PromotionalBannerProps) =
     }, 300)
   }
 
-  const translations = {
+  // Default fallback content in case Sanity data isn't available
+  const fallbackContent = {
     ru: {
       badge: "ВЕСЕННЯЯ АКЦИЯ",
       shortTitle: "40% СКИДКА на все языковые курсы!",
@@ -51,9 +90,25 @@ export const PromotionalBanner = ({ language = "ru" }: PromotionalBannerProps) =
     },
   }
 
-  const t = translations[language]
+  // If banner is not active in Sanity or not visible locally, don't render
+  if ((!bannerData?.active && !isLoading) || !isVisible) return null
 
-  if (!isVisible) return null
+  // Use Sanity data if available, otherwise use fallback
+  const t = bannerData?.translations?.[language] || fallbackContent[language]
+  const linkUrl = bannerData?.linkUrl || "/contact"
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="relative overflow-hidden bg-gradient-to-r from-red-200 to-red-100 py-3">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <div className="h-4 w-24 animate-pulse rounded-full bg-gray-300"></div>
+          <div className="h-4 w-48 animate-pulse rounded-full bg-gray-300"></div>
+          <div className="h-8 w-20 animate-pulse rounded-md bg-gray-300"></div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div
@@ -102,7 +157,7 @@ export const PromotionalBanner = ({ language = "ru" }: PromotionalBannerProps) =
         </div>
 
         <div className="flex items-center space-x-3">
-          <Link href="/contact">
+          <Link href={linkUrl}>
             <Button
               variant="outline"
               className="border-burgundy-800 bg-white text-burgundy-900 hover:bg-burgundy-50"

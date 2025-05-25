@@ -312,10 +312,6 @@ export default function CreativeWorkshops() {
         performingArts: [
           { title: "Acting Workshop", duration: "8 weeks", price: "$420" },
           { title: "Dance Improvisation", duration: "6 weeks", price: "$350" },
-          { title: "Voice & Speech", duration: "4 weeks", price: "$290" },
-          { title: "Storytelling", duration: "Weekend", price: "$180" },
-          { title: "Physical Theater", duration: "5 weeks", price: "$320" },
-          { title: "Performance Art", duration: "6 weeks", price: "$380" },
         ],
       },
       testimonials: {
@@ -1139,51 +1135,6 @@ export default function CreativeWorkshops() {
               </div>
             </TabsContent>
           </Tabs>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <FadeIn>
-            <h2 className="text-3xl font-bold mb-10 text-[#5C162E] text-center">{t.testimonials.title}</h2>
-          </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {t.testimonials.items.map((testimonial, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div className="p-6 border border-gray-200 rounded-lg h-full flex flex-col">
-                  <div className="mb-4">
-                    <svg className="h-8 w-8 text-[#5C162E]" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                    </svg>
-                  </div>
-                  <p className="text-gray-700 mb-6 flex-grow">{testimonial.quote}</p>
-                  <div>
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-[#5C162E]">{testimonial.workshop}</p>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-[#5C162E]">
-        <div className="container mx-auto text-center px-4">
-          <FadeIn>
-            <h2 className="text-3xl font-bold mb-4 text-white">{t.cta.title}</h2>
-            <p className="text-white/90 max-w-2xl mx-auto mb-8">{t.cta.description}</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-[#5C162E] hover:bg-gray-100 px-6 py-3 rounded-md font-medium">
-                {t.cta.button1}
-              </button>
-              <button className="border border-white text-white hover:bg-white/10 px-6 py-3 rounded-md font-medium">
-                {t.cta.button2}
-              </button>
-            </div>
-          </FadeIn>
         </div>
       </section>
     </div>
