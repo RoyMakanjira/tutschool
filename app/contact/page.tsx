@@ -140,8 +140,8 @@ export default function Contact() {
         ],
         club: "РАЗГОВОРНЫЙ КЛУБ",
         clubDropdown: [
-          { title: "ПОДРОСТКИ", href: "/courses/english-kids" },
-          { title: "ВЗРОСЛЫЕ", href: "/courses/english-adults" },
+          { title: "ПОДРОСТКИ", href: "/conversation-club/teenagers" },
+          { title: "ВЗРОСЛЫЕ", href: "/conversation-club/adults" },
         ],
         masterclass: "МАСТЕР-КЛАССЫ",
         masterclassDropdown: [
@@ -273,8 +273,8 @@ export default function Contact() {
         ],
         club: "CONVERSATION CLUB",
         clubDropdown: [
-          { title: "TEENAGERS", href: "/courses/english-kids" },
-          { title: "ADULTS", href: "/courses/english-adults" },
+          { title: "TEENAGERS", href: "/conversation-club/teenagers" },
+          { title: "ADULTS", href: "/conversation-club/adults" },
         ],
         masterclass: "MASTERCLASS",
         masterclassDropdown: [

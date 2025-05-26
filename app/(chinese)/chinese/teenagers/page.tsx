@@ -86,8 +86,8 @@ export default function ChineseTeenagersPage() {
         ],
         club: "РАЗГОВОРНЫЙ КЛУБ",
         clubDropdown: [
-          { title: "ПОДРОСТКИ", href: "/conversation-club/adults" },
-          { title: "ВЗРОСЛЫЕ", href: "/conversation-club/teenagers" },
+          { title: "ПОДРОСТКИ", href: "/conversation-club/teenagers" },
+          { title: "ВЗРОСЛЫЕ", href: "/conversation-club/adults" },
         ],
         masterclass: "МАСТЕР-КЛАССЫ",
         masterclassDropdown: [
@@ -157,8 +157,8 @@ export default function ChineseTeenagersPage() {
         ],
         club: "CONVERSATION CLUB",
         clubDropdown: [
-          { title: "TEENAGERS", href: "/conversation-club/adults" },
-          { title: "ADULTS", href: "//conversation-club/adults" },
+          { title: "TEENAGERS", href: "/conversation-club/teenagers" },
+          { title: "ADULTS", href: "/conversation-club/adults" },
         ],
         masterclass: "MASTERCLASS",
         masterclassDropdown: [

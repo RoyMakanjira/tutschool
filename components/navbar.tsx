@@ -109,8 +109,8 @@ export default function Navbar() {
         ],
         club: "CONVERSATION CLUB",
         clubDropdown: [
-          { title: "TEENAGERS", href: "/courses/english-kids" },
-          { title: "ADULTS", href: "/courses/english-adults" },
+          { title: "TEENAGERS", href: "/conversation-club/teenagers" },
+          { title: "ADULTS", href: "/conversation-club/adults" },
         ],
         masterclass: "MASTERCLASS",
         masterclassDropdown: [

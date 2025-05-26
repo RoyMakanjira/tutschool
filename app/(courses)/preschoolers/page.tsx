@@ -90,7 +90,7 @@ export default function PreschoolersPage() {
           ],
           club: "РАЗГОВОРНЫЙ КЛУБ",
           clubDropdown: [
-            { title: "ПОДРОСТКИ", href: "//conversation-club/teenagers" },
+            { title: "ПОДРОСТКИ", href: "/conversation-club/teenagers" },
             { title: "ВЗРОСЛЫЕ", href: "/conversation-club/adults" },
           ],
           masterclass: "МАСТЕР-КЛАССЫ",
@@ -204,7 +204,7 @@ export default function PreschoolersPage() {
           ],
           club: "CONVERSATION CLUB",
           clubDropdown: [
-            { title: "TEENAGERS", href: "//conversation-club/teenagers" },
+            { title: "TEENAGERS", href: "/conversation-club/teenagers" },
             { title: "ADULTS", href: "/conversation-club/adults" },
           ],
           masterclass: "MASTERCLASS",

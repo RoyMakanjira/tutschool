@@ -220,7 +220,7 @@ export default function AdultsPage() {
         ]
 
       },
-      languageToggle: "Русский",
+      languageToggle: "English",
     },
     en: {
       schoolName: "Tut School",

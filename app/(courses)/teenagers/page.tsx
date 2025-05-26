@@ -8,7 +8,7 @@ import {
   MessageCircle, Check, Clock, Landmark, Phone, Mail, ChevronDown, X, Menu, Globe,
   BookOpen, Users, Award, Briefcase, Info, MessageSquare, FileText
 } from "lucide-react"
-import { FadeIn } from "@/components/animations/scroll-animations"
+
 
 export default function TeenagersPage() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")

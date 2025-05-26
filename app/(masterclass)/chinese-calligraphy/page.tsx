@@ -84,8 +84,8 @@ export default function ChineseCalligraphy() {
         ],
         club: "РАЗГОВОРНЫЙ КЛУБ",
         clubDropdown: [
-          { title: "ПОДРОСТКИ", href: "/conversation-club/adults" },
-          { title: "ВЗРОСЛЫЕ", href: "/conversation-club/teenagers" },
+          { title: "ПОДРОСТКИ", href: "/conversation-club/teenagers" },
+          { title: "ВЗРОСЛЫЕ", href: "/conversation-club/adults" },
         ],
         masterclass: "МАСТЕР-КЛАССЫ",
         masterclassDropdown: [
@@ -177,7 +177,7 @@ export default function ChineseCalligraphy() {
         ],
         club: "CONVERSATION CLUB",
         clubDropdown: [
-          { title: "TEENAGERS", href: "/conversation-club/adults" },
+          { title: "TEENAGERS", href: "/conversation-club/teenagers" },
           { title: "ADULTS", href: "/conversation-club/adults" },
         ],
         masterclass: "MASTERCLASS",
@@ -761,41 +761,6 @@ export default function ChineseCalligraphy() {
                 </div>
               </FadeIn>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Instructor Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <FadeIn>
-            <h2 className="text-3xl font-bold mb-10 text-[#5C162E]">{t.instructor.title}</h2>
-          </FadeIn>
-          <div className="flex flex-col md:flex-row gap-8 items-center">
-            <FadeIn delay={0.1}>
-              <div className="w-full md:w-1/3">
-                <div className="relative aspect-square overflow-hidden rounded-lg">
-                  <Image
-                    src="/placeholder.svg?height=400&width=400"
-                    alt={t.instructor.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.2}>
-              <div className="w-full md:w-2/3">
-                <h3 className="text-2xl font-semibold mb-2">{t.instructor.name}</h3>
-                <p className="text-[#5C162E] font-medium mb-4">{t.instructor.position}</p>
-                <p className="text-gray-700 mb-4">
-                  {t.instructor.bio1}
-                </p>
-                <p className="text-gray-700">
-                  {t.instructor.bio2}
-                </p>
-              </div>
-            </FadeIn>
           </div>
         </div>
       </section>
