@@ -145,17 +145,17 @@ export default function TeenagersPage() {
         {
           title: "Игровые вечера",
           description: "Увлекательные игры и конкурсы на английском языке",
-          image: "https://images.pexels.com/photos/3768894/pexels-photo-3768894.jpeg"
+          image: "https://images.pexels.com/photos/7887043/pexels-photo-7887043.jpeg"
         },
         {
           title: "Киноклуб",
           description: "Просмотр и обсуждение фильмов и сериалов на английском",
-          image: "https://images.pexels.com/photos/3768894/pexels-photo-3768894.jpeg"
+          image: "https://images.pexels.com/photos/8263327/pexels-photo-8263327.jpeg"
         },
         {
           title: "Творческие проекты",
           description: "Создание презентаций, видео и других проектов на английском",
-          image: "https://images.pexels.com/photos/3768894/pexels-photo-3768894.jpeg"
+          image: "https://images.pexels.com/photos/6623388/pexels-photo-6623388.jpeg"
         }
       ],
       levels: [
@@ -270,17 +270,17 @@ export default function TeenagersPage() {
         {
           title: "Game Nights",
           description: "Fun games and competitions in English",
-          image: "https://images.pexels.com/photos/3768894/pexels-photo-3768894.jpeg"
+          image: "https://images.pexels.com/photos/7887043/pexels-photo-7887043.jpeg"
         },
         {
           title: "Movie Club",
           description: "Watching and discussing movies and TV shows in English",
-          image: "https://images.pexels.com/photos/3768894/pexels-photo-3768894.jpeg"
+          image: "https://images.pexels.com/photos/8263327/pexels-photo-8263327.jpeg"
         },
         {
           title: "Creative Projects",
           description: "Creating presentations, videos and other projects in English",
-          image: "https://images.pexels.com/photos/3768894/pexels-photo-3768894.jpeg"
+          image: "https://images.pexels.com/photos/6623388/pexels-photo-6623388.jpeg"
         }
       ],
       levels: [

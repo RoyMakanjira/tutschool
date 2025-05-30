@@ -177,11 +177,6 @@ export default function AdultsPage() {
           title: "Культурные вечера",
           description: "Знакомство с традициями и обычаями англоязычных стран",
           image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg"
-        },
-        {
-          title: "Киноклуб",
-          description: "Просмотр и обсуждение фильмов на английском языке",
-          image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg"
         }
       ],
       levels: [
@@ -303,11 +298,6 @@ export default function AdultsPage() {
           title: "Cultural Evenings",
           description: "Introduction to traditions and customs of English-speaking countries",
           image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg"
-        },
-        {
-          title: "Movie Club",
-          description: "Watching and discussing movies in English",
-          image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg"
         }
       ],
       levels: [
