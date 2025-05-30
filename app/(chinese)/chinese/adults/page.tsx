@@ -365,7 +365,30 @@ export default function ChineseAdults() {
     setLanguage(language === "ru" ? "en" : "ru")
   }
 
-
+  // Study images data
+  const studyImages = [
+    {
+      src: "https://images.pexels.com/photos/6147369/pexels-photo-6147369.jpeg",
+      alt: "Adults learning Chinese in a classroom",
+      description: language === "ru" 
+        ? "Групповое занятие китайским языком с преподавателем" 
+        : "Group Chinese lesson with a teacher"
+    },
+    {
+      src: "https://images.pexels.com/photos/8386437/pexels-photo-8386437.jpeg",
+      alt: "Woman studying Chinese characters",
+      description: language === "ru"
+        ? "Индивидуальное изучение китайских иероглифов"
+        : "Individual study of Chinese characters"
+    },
+    {
+      src: "https://images.pexels.com/photos/4145153/pexels-photo-4145153.jpeg",
+      alt: "Online Chinese lesson",
+      description: language === "ru"
+        ? "Онлайн-урок китайского языка"
+        : "Online Chinese language lesson"
+    }
+  ];
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -816,9 +839,9 @@ export default function ChineseAdults() {
         </div>
       </header>
 
-<main className="flex-1 bg-gray-50">
-
-   <section className="relative bg-primary py-20 text-white">
+     <main className="flex-1 bg-gray-50">
+        {/* Hero Section with first study image */}
+        <section className="relative bg-primary py-20 text-white">
           <div className="container mx-auto px-4">
             <motion.div
               variants={fadeIn}
@@ -829,152 +852,187 @@ export default function ChineseAdults() {
             </motion.div>
           </div>
           <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
+          {/* Background image */}
+          <div className="absolute inset-0 overflow-hidden opacity-20">
+            <Image
+              src={studyImages[0].src}
+              alt={studyImages[0].alt}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </section>
-      {/* Levels Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <FadeIn>
-            <h2 className="mb-12 text-center text-3xl font-bold text-[#5C162E]">
-              {t.levels.title}
-            </h2>
-          </FadeIn>
-          <div className="grid gap-8 md:grid-cols-3">
-            {t.levels.items.map((level, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div className="rounded-lg bg-white p-6 shadow-lg transition-all hover:shadow-xl">
-                  <h3 className="mb-4 text-xl font-bold text-[#5C162E]">{level.title}</h3>
-                  <p className="text-gray-600">{level.description}</p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Features Section */}
-      <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
-          <FadeIn>
-            <h2 className="mb-12 text-center text-3xl font-bold text-[#5C162E]">
-              {t.features.title}
-            </h2>
-          </FadeIn>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {t.features.items.map((feature, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:shadow-xl">
-                  {feature.icon === "BookOpen" && <BookOpen className="mx-auto mb-4 h-8 w-8 text-[#5C162E]" />}
-                  {feature.icon === "Users" && <Users className="mx-auto mb-4 h-8 w-8 text-[#5C162E]" />}
-                  {feature.icon === "Clock" && <Clock className="mx-auto mb-4 h-8 w-8 text-[#5C162E]" />}
-                  {feature.icon === "Trophy" && <Trophy className="mx-auto mb-4 h-8 w-8 text-[#5C162E]" />}
-                  <h3 className="mb-2 text-lg font-bold text-[#5C162E]">{feature.title}</h3>
-                  <p className="text-sm text-gray-600">{feature.description}</p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-12 md:grid-cols-2">
+        {/* Levels Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
             <FadeIn>
-              <div>
-                <h2 className="mb-6 text-3xl font-bold text-[#5C162E]">{t.benefits.title}</h2>
-                <ul className="space-y-4">
-                  {t.benefits.items.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <Check className="mt-1 h-5 w-5 flex-shrink-0 text-[#5C162E]" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <h2 className="mb-12 text-center text-3xl font-bold text-[#5C162E]">
+                {t.levels.title}
+              </h2>
             </FadeIn>
-            <FadeIn delay={0.2}>
-              <div className="relative h-[300px] overflow-hidden rounded-lg">
-                <Image
-                  src="https://images.pexels.com/photos/6147369/pexels-photo-6147369.jpeg"
-                  alt="Chinese class"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+            <div className="grid gap-8 md:grid-cols-3">
+              {t.levels.items.map((level, index) => (
+                <FadeIn key={index} delay={index * 0.1}>
+                  <div className="rounded-lg bg-white p-6 shadow-lg transition-all hover:shadow-xl">
+                    <div className="relative mb-4 h-48 overflow-hidden rounded-md">
+                      <Image
+                        src={studyImages[index % studyImages.length].src}
+                        alt={studyImages[index % studyImages.length].alt}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <h3 className="mb-2 text-xl font-bold text-[#5C162E]">{level.title}</h3>
+                    <p className="text-gray-600">{level.description}</p>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="bg-gray-50 py-16">
+          <div className="container mx-auto px-4">
+            <FadeIn>
+              <h2 className="mb-12 text-center text-3xl font-bold text-[#5C162E]">
+                {t.features.title}
+              </h2>
             </FadeIn>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+              {t.features.items.map((feature, index) => (
+                <FadeIn key={index} delay={index * 0.1}>
+                  <div className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:shadow-xl">
+                    {feature.icon === "BookOpen" && <BookOpen className="mx-auto mb-4 h-8 w-8 text-[#5C162E]" />}
+                    {feature.icon === "Users" && <Users className="mx-auto mb-4 h-8 w-8 text-[#5C162E]" />}
+                    {feature.icon === "Clock" && <Clock className="mx-auto mb-4 h-8 w-8 text-[#5C162E]" />}
+                    {feature.icon === "Trophy" && <Trophy className="mx-auto mb-4 h-8 w-8 text-[#5C162E]" />}
+                    <h3 className="mb-2 text-lg font-bold text-[#5C162E]">{feature.title}</h3>
+                    <p className="text-sm text-gray-600">{feature.description}</p>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Schedule Section */}
-      <section className="bg-[#5C162E] py-16 text-white">
-        <div className="container mx-auto px-4">
-          <FadeIn>
-            <h2 className="mb-8 text-center text-3xl font-bold">{t.schedule.title}</h2>
-            <p className="mb-12 text-center text-lg text-white/90">{t.schedule.description}</p>
-          </FadeIn>
-          <div className="grid gap-8 md:grid-cols-3">
-            {t.schedule.formats.map((format, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div className="rounded-lg bg-white/10 p-6 backdrop-blur-sm">
-                  <h3 className="mb-4 text-xl font-bold">{format.title}</h3>
-                  <p className="text-white/90">{format.time}</p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <FadeIn>
-            <h2 className="mb-12 text-center text-3xl font-bold text-[#5C162E]">
-              {t.pricing.title}
-            </h2>
-          </FadeIn>
-          <div className="grid gap-8 md:grid-cols-3">
-            {t.pricing.options.map((option, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div className="rounded-lg bg-white p-6 shadow-lg transition-all hover:shadow-xl">
-                  <h3 className="mb-2 text-xl font-bold text-[#5C162E]">{option.title}</h3>
-                  <p className="mb-6 text-2xl font-bold text-[#5C162E]">{option.price}</p>
-                  <ul className="space-y-3">
-                    {option.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center gap-2">
-                        <Check className="h-4 w-4 text-[#5C162E]" />
-                        <span className="text-gray-600">{feature}</span>
+        {/* Benefits Section with second study image */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="grid gap-12 md:grid-cols-2">
+              <FadeIn>
+                <div>
+                  <h2 className="mb-6 text-3xl font-bold text-[#5C162E]">{t.benefits.title}</h2>
+                  <ul className="space-y-4">
+                    {t.benefits.items.map((item, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <Check className="mt-1 h-5 w-5 flex-shrink-0 text-[#5C162E]" />
+                        <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </FadeIn>
-            ))}
+              <FadeIn delay={0.2}>
+                <div className="relative h-[300px] overflow-hidden rounded-lg">
+                  <Image
+                    src={studyImages[1].src}
+                    alt={studyImages[1].alt}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-4 text-white">
+                    {studyImages[1].description}
+                  </div>
+                </div>
+              </FadeIn>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
+        {/* Schedule Section */}
+        <section className="bg-[#5C162E] py-16 text-white">
+          <div className="container mx-auto px-4">
             <FadeIn>
-              <h2 className="mb-4 text-3xl font-bold text-[#5C162E]">{t.cta.title}</h2>
-              <p className="mb-8 text-lg text-gray-600">{t.cta.description}</p>
-              <Link
-                href="#contact"
-                className="inline-flex items-center gap-2 rounded-full bg-[#5C162E] px-8 py-3 font-medium text-white transition-all hover:bg-[#5C162E]/90"
-              >
-                {t.cta.button}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <h2 className="mb-8 text-center text-3xl font-bold">{t.schedule.title}</h2>
+              <p className="mb-12 text-center text-lg text-white/90">{t.schedule.description}</p>
             </FadeIn>
+            <div className="grid gap-8 md:grid-cols-3">
+              {t.schedule.formats.map((format, index) => (
+                <FadeIn key={index} delay={index * 0.1}>
+                  <div className="rounded-lg bg-white/10 p-6 backdrop-blur-sm">
+                    <h3 className="mb-4 text-xl font-bold">{format.title}</h3>
+                    <p className="text-white/90">{format.time}</p>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+
+        {/* Pricing Section with third study image */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <FadeIn>
+              <h2 className="mb-12 text-center text-3xl font-bold text-[#5C162E]">
+                {t.pricing.title}
+              </h2>
+            </FadeIn>
+            <div className="grid gap-8 md:grid-cols-3">
+              {t.pricing.options.map((option, index) => (
+                <FadeIn key={index} delay={index * 0.1}>
+                  <div className="relative overflow-hidden rounded-lg bg-white shadow-lg transition-all hover:shadow-xl">
+                    <div className="relative h-40">
+                      <Image
+                        src={studyImages[2].src}
+                        alt={studyImages[2].alt}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-2 text-center text-sm text-white">
+                        {studyImages[2].description}
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="mb-2 text-xl font-bold text-[#5C162E]">{option.title}</h3>
+                      <p className="mb-4 text-2xl font-bold text-[#5C162E]">{option.price}</p>
+                      <ul className="space-y-3">
+                        {option.features.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-center gap-2">
+                            <Check className="h-4 w-4 text-[#5C162E]" />
+                            <span className="text-gray-600">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="bg-gray-50 py-16">
+          <div className="container mx-auto px-4">
+            <div className="text-center">
+              <FadeIn>
+                <h2 className="mb-4 text-3xl font-bold text-[#5C162E]">{t.cta.title}</h2>
+                <p className="mb-8 text-lg text-gray-600">{t.cta.description}</p>
+                <Link
+                  href="#contact"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#5C162E] px-8 py-3 font-medium text-white transition-all hover:bg-[#5C162E]/90"
+                >
+                  {t.cta.button}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </FadeIn>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

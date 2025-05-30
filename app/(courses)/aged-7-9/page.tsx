@@ -183,6 +183,30 @@ export default function Aged7to9Page() {
     },
   }
 
+    const activities = [
+    { 
+      title: language === 'ru' ? 'Чтение и рассказы' : 'Reading & Storytelling',
+      description: language === 'ru' 
+        ? 'Работа с адаптированными текстами и устные рассказы' 
+        : 'Working with adapted texts and oral storytelling',
+      image: "https://images.pexels.com/photos/5905932/pexels-photo-5905932.jpeg" // Kids reading together
+    },
+    { 
+      title: language === 'ru' ? 'Игровая грамматика' : 'Grammar Games',
+      description: language === 'ru' 
+        ? 'Освоение грамматики через интерактивные упражнения' 
+        : 'Learning grammar through interactive exercises',
+      image: "https://images.pexels.com/photos/5211437/pexels-photo-5211437.jpeg" // Kids playing educational game
+    },
+    { 
+      title: language === 'ru' ? 'Творческие проекты' : 'Creative Projects',
+      description: language === 'ru' 
+        ? 'Рисование, поделки и театральные постановки на английском' 
+        : 'Drawing, crafts and drama in English',
+      image: "https://images.pexels.com/photos/5905706/pexels-photo-5905706.jpeg" // Kids doing arts and crafts
+    }
+  ]
+
   const t = translations[language]
 
   const toggleLanguage = () => setLanguage(language === "ru" ? "en" : "ru")
@@ -657,33 +681,45 @@ export default function Aged7to9Page() {
           </div>
         </section>
 
-        {/* Activities Section */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">
-              {language === 'ru' ? 'Наши занятия' : 'Our Activities'}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {t.activities.map((activity, index) => (
-                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
-                  <div className="relative h-48 overflow-hidden">
-                    <Image
-                      src={activity.image}
-                      alt={activity.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#5C162E]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-3 text-[#5C162E]">{activity.title}</h3>
-                    <p className="text-gray-600">{activity.description}</p>
-                  </div>
-                </div>
-              ))}
+       {/* Activities Section */}
+  <section className="py-16 bg-gray-50">
+    <div className="container mx-auto px-4">
+      <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">
+        {language === 'ru' ? 'Наши занятия' : 'Our Activities'}
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {activities.map((activity, index) => (
+          <motion.div 
+            key={index}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: index * 0.1 } }
+            }}
+            className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow group"
+          >
+            <div className="relative h-48 overflow-hidden">
+              <Image
+                src={activity.image}
+                alt={activity.title}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority={index === 0} // Only prioritize first image
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#5C162E]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
-          </div>
-        </section>
+            <div className="p-6">
+              <h3 className="text-xl font-semibold mb-3 text-[#5C162E]">{activity.title}</h3>
+              <p className="text-gray-600">{activity.description}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
 
         {/* Schedule Section */}
         <section className="py-16 bg-white">
