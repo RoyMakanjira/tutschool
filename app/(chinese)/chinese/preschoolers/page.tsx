@@ -37,7 +37,7 @@ export default function ChinesePreschoolers() {
   const translations = {
     ru: {
       title: "Китайский язык для дошкольников",
-      subtitle: "Увлекательное погружение в китайский язык и культуру для детей 3-6 лет",
+      subtitle: "Увлекательное погружение в китайский язык и культуру для детей 4-6 лет",
       schoolName: "Tut School",
       schoolSubtitle: "Курсы иностранных языков, Школа искусств",
       phone: "+7 (983) 600-00-00",
@@ -86,11 +86,10 @@ export default function ChinesePreschoolers() {
       benefits: {
         title: "Почему выбирают нашу программу",
         items: [
-          "Игровой формат обучения с использованием песен и стихов",
+          "Игровой формат обучения ",
           "Знакомство с китайской культурой через творческие занятия",
-          "Развитие навыков произношения с носителями языка",
+          "Развитие навыков произношения",
           "Маленькие группы до 6 человек",
-          "Регулярные открытые уроки для родителей",
           "Подготовка к международным детским экзаменам",
         ]
       },
@@ -133,7 +132,7 @@ export default function ChinesePreschoolers() {
     },
     en: {
       title: "Chinese for Preschoolers",
-      subtitle: "An engaging immersion into Chinese language and culture for children aged 3-6",
+      subtitle: "An engaging immersion into Chinese language and culture for children aged 4-6",
       schoolName: "Tut School",
       schoolSubtitle: "Foreign Language Courses, School of Arts",
       phone: "+7 (983) 600-00-00",
@@ -182,12 +181,11 @@ export default function ChinesePreschoolers() {
       benefits: {
         title: "Why Choose Our Program",
         items: [
-          "Playful learning format using songs and rhymes",
-          "Introduction to Chinese culture through creative activities",
-          "Pronunciation skills development with native speakers",
-          "Small groups up to 6 students",
-          "Regular open lessons for parents",
-          "Preparation for international children's exams",
+          "Playful based learning",
+          "	Introduction to Chinese culture through creative activities",
+          "Developing pronunciation skills",
+          "Small groups up to 6 children",
+          "Preparation for international children’s exams",
         ]
       },
       curriculum: {

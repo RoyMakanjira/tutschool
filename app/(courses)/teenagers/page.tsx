@@ -6,9 +6,9 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   MessageCircle, Check, Clock, Landmark, Phone, Mail, ChevronDown, X, Menu, Globe,
-  BookOpen, Users, Award, Briefcase, Info, MessageSquare, FileText
+  BookOpen, Users, Award, Briefcase, Info, MessageSquare, FileText, Calendar
 } from "lucide-react"
-
+import { FadeIn } from "@/components/animations/scroll-animations"
 
 export default function TeenagersPage() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
@@ -97,15 +97,15 @@ export default function TeenagersPage() {
         cta: "Записаться на пробный урок",
       },
       benefits: [
-        { title: "Подготовка к ОГЭ/ЕГЭ", description: "Системная подготовка к государственным экзаменам с опытными преподавателями", icon: BookOpen },
-        { title: "Разговорный клуб", description: "Обсуждение актуальных тем с носителями языка", icon: MessageSquare },
-        { title: "Международные экзамены", description: "Подготовка к IELTS, TOEFL, Cambridge exams", icon: Award },
-        { title: "Профориентация", description: "Английский для будущей профессии и учебы за рубежом", icon: Briefcase },
+        { title: "Углубленная программа", description: "Подготовка к международным экзаменам, интегрированная в курс", icon: BookOpen },
+        { title: "Актуальные темы", description: "Современный язык на примере диалогов из реальной жизни", icon: MessageSquare },
+        { title: "Квалифицированные преподаватели", description: "Специалисты с опытом преподавания по коммуникативной методике", icon: Award },
+        { title: "Современные технологии ", description: "Использование цифровых ресурсов и интерактивных платформ", icon: Briefcase },
       ],
       activities: [
-        { title: "Дебаты", description: "Развитие критического мышления и навыков аргументации", image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Проектная работа", description: "Создание презентаций и исследовательских проектов", image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Киноклуб", description: "Просмотр и обсуждение фильмов на английском", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { title: "Работа в парах и группах", description: "Развитие диалогической речи, навыков аргументации и критического мышления", image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { title: "Проектная работа", description: "Создание презентаций и исследовательских проектов на английском", image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { title: "Расширение кругозора", description: "Контент, расширяющий как общие знания о мире, так и о культуре англоязычных стран", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
       ],
       exams: {
         title: "Подготовка к экзаменам",
@@ -138,9 +138,8 @@ export default function TeenagersPage() {
         ],
       },
       schedule: [
-        { day: "Понедельник", times: ["17:00 - 18:30"] },
-        { day: "Среда", times: ["17:00 - 18:30"] },
-        { day: "Суббота", times: ["13:00 - 14:30"] },
+        { day: "Вторник", times: ["9:00 - 10:00"] },
+        { day: "Четверг", times: ["9:00 - 10:00"] },
       ],
       languageToggle: "English",
     },
@@ -192,19 +191,19 @@ export default function TeenagersPage() {
       },
       hero: {
         title: "English for Teenagers",
-        subtitle: "Modern programs for confident communication, exam preparation and future careers",
+        subtitle: "Modern programs for confident communication, exam preparation, and future career success.",
         cta: "Book a trial lesson",
       },
       benefits: [
-        { title: "National Exam Preparation", description: "Systematic preparation for national exams with experienced teachers", icon: BookOpen },
-        { title: "Conversation Club", description: "Discussion of current topics with native speakers", icon: MessageSquare },
-        { title: "International Exams", description: "Preparation for IELTS, TOEFL, Cambridge exams", icon: Award },
-        { title: "Career Guidance", description: "English for future careers and studying abroad", icon: Briefcase },
+        { title: "Advanced Programs ", description: "Integrated preparation for international exams", icon: BookOpen },
+        { title: "Relevant Topics ", description: "Modern language through real-life dialogues", icon: MessageSquare },
+        { title: "Qualified Teachers", description: " Specialists experienced in the communicative method", icon: Award },
+        { title: "Modern Technologies", description: "Use of digital resources and interactive platforms", icon: Briefcase },
       ],
       activities: [
-        { title: "Debates", description: "Developing critical thinking and argumentation skills", image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { title: "Pair and Group Work", description: "Learning to communicate, debate, and think critically", image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
         { title: "Project Work", description: "Creating presentations and research projects", image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Movie Club", description: "Watching and discussing movies in English", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { title: "Broadening Horizons", description: "Watching and discussing movies in English", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
       ],
       exams: {
         title: "Exam Preparation",
@@ -237,9 +236,9 @@ export default function TeenagersPage() {
         ],
       },
       schedule: [
-        { day: "Monday", times: ["17:00 - 18:30"] },
-        { day: "Wednesday", times: ["17:00 - 18:30"] },
-        { day: "Saturday", times: ["13:00 - 14:30"] },
+        
+        { day: "Tuesday", times: ["9:00 - 10:00"] },
+        { day: "Thursday", times: ["9:00 - 10:00"] },
       ],
       languageToggle: "Русский",
     },
@@ -255,6 +254,7 @@ export default function TeenagersPage() {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   }
+
 
 
   return (
@@ -796,6 +796,37 @@ export default function TeenagersPage() {
             </AnimatePresence>
           </div>
         </section>
+
+        {/* Schedule Section */}
+            <section className="py-16">
+              <div className="container mx-auto px-4">
+                <FadeIn>
+                  <h2 className="mb-12 text-center text-3xl font-bold text-primary">
+                   {language === 'ru' ? 'Расписание занятий' : 'Class Schedule'}
+                  </h2>
+                </FadeIn>
+                <div className="mx-auto max-w-2xl rounded-lg bg-white p-8 shadow-lg">
+                  {t.schedule.map((item, index) => (
+                    <FadeIn key={index} delay={index * 100}>
+                      <div className="mb-6 last:mb-0">
+                        <div className="mb-2 flex items-center gap-2">
+                          <Calendar className="h-5 w-5 text-primary" />
+                          <h3 className="text-lg font-semibold">{item.day}</h3>
+                        </div>
+                        <div className="ml-7 space-y-2">
+                          {item.times.map((time, timeIndex) => (
+                            <div key={timeIndex} className="flex items-center gap-2">
+                              <Clock className="h-4 w-4 text-gray-400" />
+                              <span className="text-gray-600">{time}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </FadeIn>
+                  ))}
+                </div>
+              </div>
+            </section>
 
         {/* Pricing Section - Stable */}
         <section className="py-20 bg-gray-50">

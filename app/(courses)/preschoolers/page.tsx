@@ -103,7 +103,7 @@ export default function PreschoolersPage() {
         },
         hero: {
           title: "Английский для дошкольников",
-          subtitle: "Увлекательные занятия для детей 4-6 лет в игровой форме. Первое знакомство с английским языком через песни, игры и творческие задания.",
+          subtitle: "Вовлекающие занятия для детей 4–6 лет в игровом формате. Первое знакомство с английским языком через песни, игры и творческие активности.",
           cta: "Записаться на пробный урок",
         },
       parents: {
@@ -120,8 +120,8 @@ export default function PreschoolersPage() {
       },
       benefits: [
         {
-          title: "Игровой формат",
-          description: "Обучение через игры, песни и творческие задания",
+          title: "Игровой формат ",
+          description: "Обучение через игру — это основная деятельность в дошкольном возрасте.",
         },
         {
           title: "Маленькие группы",
@@ -132,28 +132,24 @@ export default function PreschoolersPage() {
           description: "Специалисты по работе с дошкольниками",
         },
         {
-          title: "Современные методики",
+          title: "Эффективные методики",
           description: "Проверенные подходы к обучению детей",
         },
       ],
       schedule: [
         {
-          day: "Понедельник",
-          times: ["10:00 - 11:00", "16:00 - 17:00"],
+          day: "Вторник",
+          times: ["9:00 - 10:00"],
         },
         {
-          day: "Среда",
-          times: ["10:00 - 11:00", "16:00 - 17:00"],
-        },
-        {
-          day: "Пятница",
-          times: ["10:00 - 11:00", "16:00 - 17:00"],
+          day: "Четверг",
+          times: ["9:00 - 10:00"],
         },
       ],
       activities: [
         {
           title: "Изучение алфавита",
-          description: "Знакомство с буквами через песни и игры",
+          description: "и звуками с применением метода phonics (звуковой метод обучения чтению)",
           image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         },
         {
@@ -217,7 +213,7 @@ export default function PreschoolersPage() {
         },
         hero: {
           title: "English for Preschoolers",
-          subtitle: "Engaging lessons for children aged 4–6 in a playful format. A first introduction to the English language through songs, games, and creative activities.",
+          subtitle: "Engaging lessons for children aged 4–6 in a playful format. First introduction to English through songs, games, and creative activities",
           cta: "Book a lesson",
         },
         parents: {
@@ -234,8 +230,8 @@ export default function PreschoolersPage() {
         },
       benefits: [
         {
-          title: "Game-based learning",
-          description: "Learning through games, songs, and creative activities",
+          title: "Play-based learning",
+          description: " Learning through play is the main activity at preschool age.",
         },
         {
           title: "Small groups",
@@ -246,28 +242,24 @@ export default function PreschoolersPage() {
           description: "Specialists in preschool education",
         },
         {
-          title: "Modern methodologies",
-          description: "Proven approaches to children's education",
+          title: "Proven Methods",
+          description: "Effective approaches to teaching children.",
         },
       ],
       schedule: [
         {
-          day: "Monday",
-          times: ["10:00 - 11:00", "16:00 - 17:00"],
+          day: "Tuesday",
+          times: ["9:00 - 10:00"],
         },
         {
-          day: "Wednesday",
-          times: ["10:00 - 11:00", "16:00 - 17:00"],
-        },
-        {
-          day: "Friday",
-          times: ["10:00 - 11:00", "16:00 - 17:00"],
+          day: "Thursday",
+          times: ["9:00 - 10:00"],
         },
       ],
       activities: [
         {
-          title: "Alphabet learning",
-          description: "Introduction to letters through songs and games",
+          title: "Learning the alphabet",
+          description: "Introduction to letters and sounds using the phonics method.",
           image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         },
         {

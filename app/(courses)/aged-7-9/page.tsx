@@ -90,25 +90,25 @@ export default function Aged7to9Page() {
         contacts: "КОНТАКТЫ",
       },
       hero: {
-        title: "Английский для детей 7-9 лет",
-        subtitle: "Интерактивные занятия для младших школьников. Развитие всех языковых навыков через игры, чтение и творчество.",
+        title: "Английский для младших школьников",
+        subtitle: "Интерактивные занятия с использованием мультимедиа.",
         cta: "Записаться на пробный урок",
       },
       benefits: [
-        { title: "Интерактивные уроки", description: "Обучение через игры, проекты и командную работу" },
-        { title: "Маленькие группы", description: "4-8 детей для индивидуального подхода" },
+        { title: "Интерактивные уроки", description: "Уроки, адаптированные под потребности детей этого возраста, с использованием мультимедиа контента (курс Go Getter)" },
+        { title: "Маленькие группы", description: "4-6 детей для индивидуального подхода" },
         { title: "Опытные педагоги", description: "Специалисты по работе с младшими школьниками" },
-        { title: "Современные методики", description: "Коммуникативный подход и творческие задания" },
+        { title: "Измерение результата ", description: "Тестирование после каждого раздела курса для отслеживания прогресса каждого ученика" },
       ],
       activities: [
-        { title: "Чтение и рассказы", description: "Работа с адаптированными текстами и устные рассказы", image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Игровая грамматика", description: "Освоение грамматики через интерактивные упражнения", image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Творческие проекты", description: "Рисование, поделки и театральные постановки на английском", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { title: "Твердая лексическая и грамматическая база", description: "Структурированный курс с презентацией лексики и грамматики  и их последующей отработкой", image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { title: "Развитие языковых навыков", description: "Уроки по развитию навыков чтения, письма, говорения, понимания речи на слух", image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { title: "Знакомство с традициями и культурой англоязычных стран", description: "Страноведение на уроках и внеклассных мероприятиях", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
       ],
       schedule: [
-        { day: "Вторник", times: ["16:00 - 17:00"] },
-        { day: "Четверг", times: ["16:00 - 17:00"] },
-        { day: "Суббота", times: ["11:00 - 12:00"] },
+        { day: "Вторник", times: ["9:00 - 10:00"] },
+        { day: "Четверг", times: ["9:00 - 10:00"] },
+        
       ],
       languageToggle: "English",
     },
@@ -159,25 +159,24 @@ export default function Aged7to9Page() {
         contacts: "CONTACTS",
       },
       hero: {
-        title: "English for children aged 7-9",
-        subtitle: "Interactive lessons for young schoolchildren. All language skills developed through games, reading, and creativity.",
+        title: "English for Primary School Students",
+        subtitle: " Interactive lessons using multimedia",
         cta: "Book a trial lesson",
       },
       benefits: [
-        { title: "Interactive lessons", description: "Learning through games, projects, and teamwork" },
-        { title: "Small groups", description: "4-8 children for individual attention" },
-        { title: "Experienced teachers", description: "Specialists in working with young schoolchildren" },
-        { title: "Modern methods", description: "Communicative approach and creative tasks" },
+        { title: "Interactive lessons", description: " Lessons tailored to this age group with multimedia content (Go Getter course)." },
+        { title: "Small groups", description: "4–6 children for an individual approach" },
+        { title: "Experienced teachers", description: "Specialists in working with young school children" },
+        { title: "Progress Tracking", description: "Tests after each course unit to monitor each student’s progress" },
       ],
       activities: [
-        { title: "Reading & storytelling", description: "Working with adapted texts and oral storytelling", image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Grammar games", description: "Learning grammar through interactive exercises", image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Creative projects", description: "Drawing, crafts, and drama in English", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { title: "Solid vocabulary and grammar base", description: "Structured course with vocabulary and grammar presentation and practice", image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { title: "Developing language skills", description: "Lessons for reading, writing, speaking, and listening skills", image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { title: "Learning about traditions and culture of English-speaking countries", description: "	Country studies during lessons and extracurricular events", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
       ],
       schedule: [
-        { day: "Tuesday", times: ["16:00 - 17:00"] },
-        { day: "Thursday", times: ["16:00 - 17:00"] },
-        { day: "Saturday", times: ["11:00 - 12:00"] },
+        { day: "Tuesday", times: ["9:00 - 10:00"] },
+        { day: "Thursday", times: ["9:00 - 10:00"] },
       ],
       languageToggle: "Русский",
     },
@@ -725,7 +724,7 @@ export default function Aged7to9Page() {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">
-              {language === 'ru' ? 'Расписание' : 'Schedule'}
+              {language === 'ru' ? 'Расписание занятий' : 'Class Schedule'}
             </h2>
             <div className="max-w-md mx-auto">
               {t.schedule.map((item, index) => (

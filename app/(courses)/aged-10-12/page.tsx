@@ -121,20 +121,20 @@ export default function Aged10to12Page() {
         cta: "Записаться на пробный урок",
       },
       benefits: [
-        { title: "Углубленная программа", description: "Расширенное изучение грамматики и лексики, подготовка к международным экзаменам" },
-        { title: "Проектная работа", description: "Развитие навыков презентации и работы в команде на английском языке" },
-        { title: "Квалифицированные преподаватели", description: "Специалисты с опытом подготовки к международным экзаменам" },
+        { title: "Углубленная программа", description: "Подготовка к международным экзаменам, интегрированная в курс" },
+        { title: "Актуальные темы", description: "Современный язык на примере диалогов из реальной жизни" },
+        { title: "Квалифицированные преподаватели", description: "Специалисты с опытом преподавания по коммуникативной методике" },
         { title: "Современные технологии", description: "Использование цифровых ресурсов и интерактивных платформ" },
       ],
       activities: [
-        { title: "Дебаты и дискуссии", description: "Развитие навыков аргументации и критического мышления на английском", image: "https://images.pexels.com/photos/8457438/pexels-photo-8457438.jpeg" },
+        { title: "Работа в парах и группах", description: "Развитие диалогической речи, навыков аргументации и критического мышления", image: "https://images.pexels.com/photos/8457438/pexels-photo-8457438.jpeg" },
         { title: "Проектная работа", description: "Создание презентаций и исследовательских проектов на английском", image: "https://images.pexels.com/photos/7869800/pexels-photo-7869800.jpeg" },
-        { title: "Подготовка к экзаменам", description: "Систематическая подготовка к международным экзаменам", image: "https://images.pexels.com/photos/8612989/pexels-photo-8612989.jpeg?" },
+        { title: "Расширение кругозора", description: "Контент, расширяющий как общие знания о мире, так и о культуре англоязычных стран", image: "https://images.pexels.com/photos/8612989/pexels-photo-8612989.jpeg?" },
       ],
       schedule: [
-        { day: "Понедельник", times: ["17:00 - 18:30"] },
-        { day: "Среда", times: ["17:00 - 18:30"] },
-        { day: "Суббота", times: ["13:00 - 14:30"] },
+        { day: "Вторник", times: ["9:00 - 10:00"] },
+        { day: "Четверг", times: ["9:00 - 10:00"] },
+        
       ],
       languageToggle: "English",
     },
@@ -190,20 +190,19 @@ export default function Aged10to12Page() {
         cta: "Book a trial lesson",
       },
       benefits: [
-        { title: "Advanced curriculum", description: "In-depth grammar and vocabulary study, preparation for international exams" },
-        { title: "Project work", description: "Development of presentation skills and teamwork in English" },
-        { title: "Qualified teachers", description: "Specialists with experience in international exam preparation" },
+        { title: "Advanced Programs", description: " Includes preparation for international exams." },
+        { title: "Relevant Topics", description: " Modern language through real-life dialogues." },
+        { title: "Qualified teachers", description: "Specialists experienced in the communicative method." },
         { title: "Modern technology", description: "Use of digital resources and interactive platforms" },
       ],
       activities: [
-        { title: "Debates & discussions", description: "Development of argumentation and critical thinking skills in English", image: "/debates.jpg" },
+        { title: "Pair and group work", description: "Developing dialogic speech, argumentation, and critical thinking", image: "/debates.jpg" },
         { title: "Project work", description: "Creating presentations and research projects in English", image: "/projects.jpg" },
-        { title: "Exam preparation", description: "Systematic preparation for international exams", image: "/exams.jpg" },
+        { title: "Broadening horizons", description: " content expanding general knowledge and culture of English-speaking countries", image: "/exams.jpg" },
       ],
       schedule: [
-        { day: "Monday", times: ["17:00 - 18:30"] },
-        { day: "Wednesday", times: ["17:00 - 18:30"] },
-        { day: "Saturday", times: ["13:00 - 14:30"] },
+        { day: "Tuesday", times: ["9:00 - 10:00"] },
+        { day: "Thursday", times: ["9:00 - 10:00"] },
       ],
       languageToggle: "Русский",
     },
@@ -551,7 +550,7 @@ export default function Aged10to12Page() {
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12 text-primary">
-          {language === 'ru' ? 'Расписание' : 'Schedule'}
+          {language === 'ru' ? 'Расписание занятий' : 'Class Schedule'}
         </h2>
         <div className="max-w-md mx-auto">
           {t.schedule.map((item: ScheduleItem, index) => (

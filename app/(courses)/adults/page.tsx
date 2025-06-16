@@ -147,24 +147,20 @@ export default function AdultsPage() {
         title: "УРОВНИ ОБУЧЕНИЯ",
         items: [
           {
-            name: "Beginner (A1)",
-            description: "Базовая коммуникация, простые фразы и выражения"
+            name: "Elementary (A2)",
+            description: "Базовая коммуникация"
           },
           {
-            name: "Elementary (A2)",
-            description: "Повседневное общение, простые тексты"
+            name: "Pre-Intermediate (A2+)",
+            description: "Общение на основные темы для решения повседневных задач"
           },
           {
             name: "Intermediate (B1)",
-            description: "Свободное общение на знакомые темы"
+            description: "Свободное общение на повседневные темы"
           },
           {
             name: "Upper-Intermediate (B2)",
-            description: "Уверенное владение языком в работе и учебе"
-          },
-          {
-            name: "Advanced (C1)",
-            description: "Профессиональное владение языком"
+            description: "Уверенное владение языком в учебе и в работе"
           }
         ]
       },
@@ -172,38 +168,35 @@ export default function AdultsPage() {
         title: "ОСОБЕННОСТИ КУРСА",
         items: [
           {
-            title: "Индивидуальный подход",
-            description: "Программа обучения адаптируется под ваши цели и темп"
+            title: "Мини-группы",
+            description: "Максимальное внимание каждому студенту курса"
           },
           {
             title: "Современные методики",
             description: "Коммуникативный подход и интерактивные материалы"
           },
           {
-            title: "Практика общения",
+            title: "Практика общения ",
             description: "Регулярные разговорные клубы и дискуссии"
           },
           {
-            title: "Бизнес-английский",
-            description: "Специальные модули для профессионального развития"
+            title: "Английский для профессиональных целей",
+            description: "Специализированные модули по запросу"
           }
         ]
       },
       schedule: {
-        title: "РАСПИСАНИЕ И ФОРМАТ",
+        title: "Расписание занятий",
         items: [
           {
-            title: "Утренние группы",
-            time: "9:00 - 10:30"
+            title: "Вторник ",
+            time: "9:00 - 10:00"
           },
           {
-            title: "Дневные группы",
-            time: "14:00 - 15:30"
+            title: "Четверг ",
+            time: "9:00 - 10:00"
           },
-          {
-            title: "Вечерние группы",
-            time: "19:00 - 20:30"
-          }
+          
         ],
         formats: [
           "Индивидуальные занятия",
@@ -300,29 +293,25 @@ export default function AdultsPage() {
       },
       title: "ENGLISH FOR ADULTS",
       subtitle: "Effective courses for work and life",
-      description: "Our English courses for adults are designed with modern requirements and needs in mind. We will help you achieve your language goals, whether it's career advancement, travel, or self-development.",
+      description: "Our English courses for adults are designed to meet modern requirements and needs. We will help you reach your language goals, whether for career advancement, travel, or self-development.",
       levels: {
         title: "LEARNING LEVELS",
         items: [
           {
-            name: "Beginner (A1)",
-            description: "Basic communication, simple phrases and expressions"
+            name: "Elementary (A2)",
+            description: "Basic communication"
           },
           {
-            name: "Elementary (A2)",
-            description: "Everyday communication, simple texts"
+            name: "Pre-Intermediate (A2+)",
+            description: "Communicating on everyday topics and solving daily tasks"
           },
           {
             name: "Intermediate (B1)",
-            description: "Fluent communication on familiar topics"
+            description: "Fluent communication on everyday topics"
           },
           {
             name: "Upper-Intermediate (B2)",
-            description: "Confident language use in work and study"
-          },
-          {
-            name: "Advanced (C1)",
-            description: "Professional language proficiency"
+            description: "Confident language use for studies and work"
           }
         ]
       },
@@ -330,8 +319,8 @@ export default function AdultsPage() {
         title: "COURSE FEATURES",
         items: [
           {
-            title: "Individual Approach",
-            description: "Training program adapted to your goals and pace"
+            title: "Mini-Groups",
+            description: "Maximum attention for each student"
           },
           {
             title: "Modern Methods",
@@ -339,11 +328,11 @@ export default function AdultsPage() {
           },
           {
             title: "Speaking Practice",
-            description: "Regular conversation clubs and discussions"
+            description: " Regular conversation clubs and discussions"
           },
           {
-            title: "Business English",
-            description: "Special modules for professional development"
+            title: "	English for professional purposes ",
+            description: "Specialized modules on request"
           }
         ]
       },

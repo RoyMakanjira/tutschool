@@ -42,7 +42,7 @@ export default function ChineseAged79Page() {
   const content = {
     ru: {
       title: "Китайский язык для детей 7-9 лет",
-      subtitle: "Погружение в китайский язык через игру и творчество",
+      subtitle: "Обучение по современным программам",
       schoolName: "Tut School",
       schoolSubtitle: "Курсы иностранных языков, Школа искусств",
       phone: "+7 (983) 600-00-00",
@@ -87,11 +87,11 @@ export default function ChineseAged79Page() {
         news: "НОВОСТИ",
         contacts: "КОНТАКТЫ",
       },
-      description: "Наш курс китайского языка специально разработан для детей 7-9 лет. Мы используем игровой подход к обучению, который делает процесс изучения языка увлекательным и эффективным.",
+      description: "Наш курс китайского языка специально разработан для детей 7-9 лет. Мы используем коммуникативный подход к обучению, который делает процесс изучения языка увлекательным и эффективным.",
       benefits: [
-        "Изучение базовых иероглифов через творческие задания",
+        "Изучение базовых иероглифов",
         "Развитие навыков произношения и тонов",
-        "Погружение в китайскую культуру через игры и песни",
+        "Погружение в китайскую культуру на внеклассных мероприятиях",
         "Небольшие группы до 6 человек",
         "Регулярная обратная связь с родителями",
         "Подготовка к международным детским экзаменам",
@@ -101,13 +101,13 @@ export default function ChineseAged79Page() {
         groups: [
           {
             name: "Группа 1",
-            schedule: "Понедельник и Среда, 15:00 - 16:30",
-            level: "Начинающие",
+            schedule: "Вторник и Четверг, 9:00 - 10:00",
+            level: "",
           },
           {
             name: "Группа 2",
-            schedule: "Вторник и Четверг, 16:00 - 17:30",
-            level: "Продолжающие",
+            schedule: "Вторник и Четверг, 9:00 - 10:00",
+            level: "",
           },
         ],
       },
@@ -131,7 +131,7 @@ export default function ChineseAged79Page() {
     },
     en: {
       title: "Chinese Language for Children 7-9 Years",
-      subtitle: "Immersion in Chinese through play and creativity",
+      subtitle: " Learning with modern programs",
       schoolName: "Tut School",
       schoolSubtitle: "Foreign Language Courses, School of Arts",
       phone: "+7 (983) 600-00-00",
@@ -176,11 +176,11 @@ export default function ChineseAged79Page() {
         news: "NEWS",
         contacts: "CONTACTS",
       },
-      description: "Our Chinese language course is specially designed for children aged 7-9. We use a playful approach to learning that makes the language learning process engaging and effective.",
+      description: "Our Chinese course is specifically designed for children 7–9 years old. We use a communicative approach to make the learning process engaging and effective.",
       benefits: [
-        "Learning basic characters through creative assignments",
-        "Development of pronunciation and tone skills",
-        "Immersion in Chinese culture through games and songs",
+        "Learning basic characters",
+        "	Developing pronunciation and tone skills",
+        "Immersion in Chinese culture through extracurricular activities",
         "Small groups up to 6 people",
         "Regular feedback to parents",
         "Preparation for international children's exams",
@@ -190,13 +190,13 @@ export default function ChineseAged79Page() {
         groups: [
           {
             name: "Group 1",
-            schedule: "Monday and Wednesday, 3:00 PM - 4:30 PM",
-            level: "Beginners",
+            schedule: "Tuesday and Thursday, 9:00  - 10:00",
+            level: "",
           },
           {
             name: "Group 2",
-            schedule: "Tuesday and Thursday, 4:00 PM - 5:30 PM",
-            level: "Intermediate",
+            schedule: "Tuesday and Thursday, 9:00  - 10:00",
+            level: "",
           },
         ],
       },
