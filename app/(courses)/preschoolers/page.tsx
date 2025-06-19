@@ -103,7 +103,7 @@ export default function PreschoolersPage() {
         },
         hero: {
           title: "Английский для дошкольников",
-          subtitle: "Вовлекающие занятия для детей 4–6 лет в игровом формате. Первое знакомство с английским языком через песни, игры и творческие активности.",
+          subtitle: "Увлекательные занятия для детей 4-6 лет в игровой форме",
           cta: "Записаться на пробный урок",
         },
       parents: {
@@ -121,7 +121,7 @@ export default function PreschoolersPage() {
       benefits: [
         {
           title: "Игровой формат ",
-          description: "Обучение через игру — это основная деятельность в дошкольном возрасте.",
+          description: "Обучение через игры – ведущий вид деятельности в дошкольном возрасте",
         },
         {
           title: "Маленькие группы",
@@ -132,7 +132,7 @@ export default function PreschoolersPage() {
           description: "Специалисты по работе с дошкольниками",
         },
         {
-          title: "Эффективные методики",
+          title: "Эффективные",
           description: "Проверенные подходы к обучению детей",
         },
       ],
@@ -149,7 +149,7 @@ export default function PreschoolersPage() {
       activities: [
         {
           title: "Изучение алфавита",
-          description: "и звуками с применением метода phonics (звуковой метод обучения чтению)",
+          description: "Знакомство с буквами и звуками с применением метода phonics (звуковой метод обучения чтению)",
           image: "/assets/preschoolers/alphabet-learning.jpg",
         },
         {
