@@ -150,17 +150,17 @@ export default function PreschoolersPage() {
         {
           title: "Изучение алфавита",
           description: "и звуками с применением метода phonics (звуковой метод обучения чтению)",
-          image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          image: "/assets/preschoolers/alphabet-learning.jpg",
         },
         {
           title: "Базовая лексика",
           description: "Изучение основных слов и фраз",
-          image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          image: "/assets/preschoolers/basic-vocabulary.jpg",
         },
         {
           title: "Творческие занятия",
           description: "Рисование, лепка, аппликации на английском",
-          image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          image: "/assets/preschoolers/creative.jpg",
         },
       ],
       languageToggle: "English",
@@ -260,17 +260,17 @@ export default function PreschoolersPage() {
         {
           title: "Learning the alphabet",
           description: "Introduction to letters and sounds using the phonics method.",
-          image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          image: "/assets/preschoolers/alphabet-learning.jpg",
         },
         {
           title: "Basic vocabulary",
           description: "Learning essential words and phrases",
-          image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          image: "/assets/preschoolers/basic-vocabulary.jpg",
         },
         {
           title: "Creative activities",
           description: "Drawing, modeling, and crafts in English",
-          image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          image: "/assets/preschoolers/creative.jpg",
         },
       ],
       languageToggle: "Русский",
@@ -788,13 +788,14 @@ export default function PreschoolersPage() {
         <div className="grid gap-8 md:grid-cols-3">
           {t.activities.map((activity, index) => (
             <FadeIn key={index} delay={index * 100}>
-              <div className="overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg">
-                <div className="relative h-48">
+              <div className="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg">
+                <div className="relative h-[280px] w-full">
                   <Image
                     src={activity.image}
                     alt={activity.title}
                     fill
-                    className="object-cover transition-transform duration-500 hover:scale-105"
+                    className="object-cover object-center"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
                 <div className="p-6">
