@@ -23,6 +23,11 @@ import {
   Info,
 } from "lucide-react"
 import YandexMap from "@/components/YandexMap"
+import { useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { toast } from "sonner"
 
 export default function Contact() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
@@ -34,6 +39,9 @@ export default function Contact() {
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [scrollY, setScrollY] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
+
+  const router = useRouter()
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     // Set loaded state after a small delay to trigger initial animations
@@ -107,7 +115,7 @@ export default function Contact() {
   const translations = {
     ru: {
       schoolName: "Tut School",
-      schoolSubtitle: "Курсы иностранных языков, Школа искусств",
+      schoolSubtitle: "Курсы иностранных языков",
       phone: "+7 (983) 600-00-00",
       email: "info@tut-school.ru",
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
@@ -240,7 +248,7 @@ export default function Contact() {
     },
     en: {
       schoolName: "Tut School",
-      schoolSubtitle: "Foreign Language Courses, School of Arts",
+      schoolSubtitle: "Foreign Language Courses",
       phone: "+7 (983) 600-00-00",
       email: "info@tut-school.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
@@ -400,20 +408,30 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Here you would typically send the form data to your backend
-    console.log("Form submitted:", formData)
-    // Reset form after submission
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-    })
-    // Show success message
-    alert(t.contactForm.success)
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setIsSubmitting(true)
+
+    const formData = new FormData(event.currentTarget)
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      message: formData.get("message"),
+    }
+
+    try {
+      // In a real application, you would send this data to your backend
+      // For now, we'll just simulate a successful submission
+      await new Promise(resolve => setTimeout(resolve, 1000))
+
+      toast.success("Сообщение успешно отправлено!")
+      router.push("/")
+    } catch (error) {
+      toast.error("Произошла ошибка при отправке сообщения")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -475,13 +493,14 @@ export default function Contact() {
         {/* Main Header Content */}
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-14 w-14">
+            <div className="relative">
               <Link href="/">
                 <Image
-                  src="/logo.png?height=56&width=56"
+                  src="/logo.png"
                   alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
-                  fill
-                  className="object-contain"
+                  width={120}
+                  height={120}
+                  className="object-contain "
                 />
               </Link>
             </div>
@@ -636,9 +655,8 @@ export default function Contact() {
         </div>
 
         <div
-          className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
-            mobileMenuOpen ? "max-h-[calc(100vh-60px)]" : "max-h-0"
-          }`}
+          className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${mobileMenuOpen ? "max-h-[calc(100vh-60px)]" : "max-h-0"
+            }`}
         >
           <div className="container mx-auto space-y-2 px-4 pb-4">
             {/* About Dropdown */}
@@ -658,9 +676,8 @@ export default function Contact() {
                 )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  activeDropdown === "about-mobile" ? "max-h-96" : "max-h-0"
-                }`}
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${activeDropdown === "about-mobile" ? "max-h-96" : "max-h-0"
+                  }`}
               >
                 <div className="space-y-2 px-4 pb-4">
                   {t.nav.aboutDropdown.map((item, index) => (
@@ -694,9 +711,8 @@ export default function Contact() {
                 )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  activeDropdown === "courses-mobile" ? "max-h-96" : "max-h-0"
-                }`}
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${activeDropdown === "courses-mobile" ? "max-h-96" : "max-h-0"
+                  }`}
               >
                 <div className="space-y-2 px-4 pb-4">
                   {t.nav.coursesDropdown.map((item, index) => (
@@ -730,9 +746,8 @@ export default function Contact() {
                 )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  activeDropdown === "chinese-mobile" ? "max-h-96" : "max-h-0"
-                }`}
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${activeDropdown === "chinese-mobile" ? "max-h-96" : "max-h-0"
+                  }`}
               >
                 <div className="space-y-2 px-4 pb-4">
                   {t.nav.chineseDropdown.map((item, index) => (
@@ -766,9 +781,8 @@ export default function Contact() {
                 )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  activeDropdown === "club-mobile" ? "max-h-96" : "max-h-0"
-                }`}
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${activeDropdown === "club-mobile" ? "max-h-96" : "max-h-0"
+                  }`}
               >
                 <div className="space-y-2 px-4 pb-4">
                   {t.nav.clubDropdown.map((item, index) => (
@@ -802,9 +816,8 @@ export default function Contact() {
                 )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  activeDropdown === "masterclass-mobile" ? "max-h-96" : "max-h-0"
-                }`}
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${activeDropdown === "masterclass-mobile" ? "max-h-96" : "max-h-0"
+                  }`}
               >
                 <div className="space-y-2 px-4 pb-4">
                   {t.nav.masterclassDropdown.map((item, index) => (
@@ -937,7 +950,7 @@ export default function Contact() {
                     <label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-700">
                       {t.contactForm.name} <span className="text-red-500">*</span>
                     </label>
-                    <input
+                    <Input
                       type="text"
                       id="name"
                       name="name"
@@ -951,7 +964,7 @@ export default function Contact() {
                     <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">
                       {t.contactForm.email} <span className="text-red-500">*</span>
                     </label>
-                    <input
+                    <Input
                       type="email"
                       id="email"
                       name="email"
@@ -965,7 +978,7 @@ export default function Contact() {
                     <label htmlFor="phone" className="mb-1 block text-sm font-medium text-gray-700">
                       {t.contactForm.phone}
                     </label>
-                    <input
+                    <Input
                       type="tel"
                       id="phone"
                       name="phone"
@@ -978,7 +991,7 @@ export default function Contact() {
                     <label htmlFor="subject" className="mb-1 block text-sm font-medium text-gray-700">
                       {t.contactForm.subject} <span className="text-red-500">*</span>
                     </label>
-                    <input
+                    <Input
                       type="text"
                       id="subject"
                       name="subject"
@@ -992,22 +1005,18 @@ export default function Contact() {
                     <label htmlFor="message" className="mb-1 block text-sm font-medium text-gray-700">
                       {t.contactForm.message} <span className="text-red-500">*</span>
                     </label>
-                    <textarea
+                    <Textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
                       required
-                      rows={5}
                       className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                    ></textarea>
+                    />
                   </div>
-                  <button
-                    type="submit"
-                    className="w-full rounded-md bg-primary px-6 py-3 font-medium text-white transition-colors hover:bg-primary/90"
-                  >
-                    {t.contactForm.submit}
-                  </button>
+                  <Button type="submit" className="w-full rounded-md bg-primary px-6 py-3 font-medium text-white transition-colors hover:bg-primary/90" disabled={isSubmitting}>
+                    {isSubmitting ? "Отправка..." : t.contactForm.submit}
+                  </Button>
                 </form>
               </div>
             </div>
@@ -1030,15 +1039,13 @@ export default function Contact() {
                       <span>{faq.question}</span>
                     </div>
                     <ChevronDown
-                      className={`h-5 w-5 text-gray-500 transition-transform ${
-                        activeAccordion === index ? "rotate-180" : ""
-                      }`}
+                      className={`h-5 w-5 text-gray-500 transition-transform ${activeAccordion === index ? "rotate-180" : ""
+                        }`}
                     />
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-300 ${
-                      activeAccordion === index ? "max-h-96 px-4 pb-4" : "max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-300 ${activeAccordion === index ? "max-h-96 px-4 pb-4" : "max-h-0"
+                      }`}
                   >
                     <p className="pl-8 text-gray-600">{faq.answer}</p>
                   </div>

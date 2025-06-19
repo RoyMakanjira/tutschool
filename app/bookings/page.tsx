@@ -3,13 +3,13 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Calendar, Clock, Users, MessageSquare, Phone, Mail, User, Check, AlertCircle, Loader2 } from "lucide-react"
-import { BookingResponse } from "../api/bookings/route"
+
 
 
 export default function BookingPage() {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [response, setResponse] = useState<BookingResponse | null>(null)
+ 
 
   // Available service types in Russian
   const serviceTypes = [
@@ -104,16 +104,6 @@ export default function BookingPage() {
               <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
                 <h2 className="text-2xl font-bold text-primary mb-6">Забронировать занятие</h2>
 
-                {response && (
-                  <div
-                    className={`mb-6 p-4 rounded-lg ${response.success ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"}`}
-                  >
-                    <div className="flex items-center">
-                      {response.success ? <Check className="w-5 h-5 mr-2" /> : <AlertCircle className="w-5 h-5 mr-2" />}
-                      <p>{response.message}</p>
-                    </div>
-                  </div>
-                )}
 
                 <form id="booking-form">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

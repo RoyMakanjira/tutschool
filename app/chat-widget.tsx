@@ -10,12 +10,21 @@ type Message = {
   content: string
 }
 
+const staticResponses: { [key: string]: string } = {
+  "hello": "Hello! How can I help you with your learning journey today?",
+  "courses": "We offer various courses including English and Chinese language courses for different age groups. Would you like to know more about a specific course?",
+  "prices": "Our course prices vary depending on the program and age group. Please visit our website or contact us directly for detailed pricing information.",
+  "schedule": "We have flexible scheduling options. Classes are available on weekdays and weekends. Would you like to know more about a specific course schedule?",
+  "contact": "You can reach us at:\nPhone: +7 (983) 600-00-00\nEmail: info@tut-school.ru\nAddress: Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
+  "default": "I'm here to help! Please ask me about our courses, schedules, or contact information. For more detailed information, you can visit our website or contact us directly."
+}
+
 export default function TutSchoolChat() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
-    { 
-      role: "assistant", 
-      content: "Hello! I'm TutSchool AI 🎓\nHow can I help you with your learning today?" 
+    {
+      role: "assistant",
+      content: "Hello! I'm TutSchool AI 🎓\nHow can I help you with your learning today?"
     }
   ])
   const [input, setInput] = useState("")
@@ -26,62 +35,31 @@ export default function TutSchoolChat() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
 
+  const getResponse = (message: string): string => {
+    const lowerMessage = message.toLowerCase()
+    for (const [key, response] of Object.entries(staticResponses)) {
+      if (lowerMessage.includes(key)) {
+        return response
+      }
+    }
+    return staticResponses.default
+  }
+
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!input.trim() || isLoading) return
 
     const userMessage: Message = { role: "user", content: input }
-    const updatedMessages = [...messages, userMessage]
-    setMessages(updatedMessages)
+    setMessages(prev => [...prev, userMessage])
     setInput("")
     setIsLoading(true)
 
-    try {
-      setMessages(prev => [...prev, { role: "assistant", content: "Thinking..." }])
-
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: updatedMessages.map(m => ({ 
-            role: m.role, 
-            content: m.content 
-          }))
-        })
-      })
-
-      if (!response.ok) throw new Error('Failed to get response')
-
-      const reader = response.body?.getReader()
-      if (!reader) throw new Error("No response reader")
-
-      const decoder = new TextDecoder()
-      let assistantResponse = ""
-
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-
-        const chunk = decoder.decode(value, { stream: true })
-        assistantResponse += chunk
-
-        setMessages(prev => {
-          const newMessages = [...prev]
-          newMessages[newMessages.length - 1] = {
-            role: "assistant",
-            content: assistantResponse
-          }
-          return newMessages
-        })
-      }
-    } catch (error) {
-      setMessages(prev => [...prev.slice(0, -1), {
-        role: "assistant",
-        content: "Sorry, I'm having trouble. Please try again later or contact TutSchool support."
-      }])
-    } finally {
+    // Simulate a small delay for better UX
+    setTimeout(() => {
+      const response = getResponse(input)
+      setMessages(prev => [...prev, { role: "assistant", content: response }])
       setIsLoading(false)
-    }
+    }, 1000)
   }
 
   return (
@@ -109,11 +87,10 @@ export default function TutSchoolChat() {
           <div className="flex-1 overflow-y-auto p-4 h-96 space-y-3">
             {messages.map((message, i) => (
               <div key={i} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-                <div className={`max-w-[80%] rounded-lg p-3 ${
-                  message.role === "user" 
-                    ? "bg-[#4f46e5] text-white" 
-                    : "bg-gray-50 text-gray-800 border border-gray-200"
-                }`}>
+                <div className={`max-w-[80%] rounded-lg p-3 ${message.role === "user"
+                  ? "bg-[#4f46e5] text-white"
+                  : "bg-gray-50 text-gray-800 border border-gray-200"
+                  }`}>
                   {message.role === "assistant" && message.content === "Thinking..." ? (
                     <div className="flex items-center gap-2">
                       <Loader2 className="animate-spin h-4 w-4" />
@@ -139,8 +116,8 @@ export default function TutSchoolChat() {
                 disabled={isLoading}
                 className="flex-1"
               />
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 disabled={isLoading || !input.trim()}
                 className="bg-[#4f46e5] hover:bg-[#4338ca]"
               >

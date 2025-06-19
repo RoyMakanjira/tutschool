@@ -45,7 +45,7 @@ export default function Aged7to9Page() {
   const translations = {
     ru: {
       schoolName: "Tut School",
-      schoolSubtitle: "Курсы иностранных языков, Школа искусств",
+      schoolSubtitle: "Курсы иностранных языков",
       phone: "+7 (983) 600-00-00",
       email: "info@tut-school.ru",
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
@@ -114,7 +114,7 @@ export default function Aged7to9Page() {
     },
     en: {
       schoolName: "Tut School",
-      schoolSubtitle: "Foreign Language Courses, School of Arts",
+      schoolSubtitle: "Foreign Language Courses",
       phone: "+7 (983) 600-00-00",
       email: "info@tut-school.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
@@ -277,13 +277,14 @@ export default function Aged7to9Page() {
         {/* Main Header Content */}
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-14 w-14">
+            <div className="relative">
               <Link href="/">
                 <Image
-                  src="/logo.png?height=56&width=56"
+                  src="/logo.png"
                   alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
-                  fill
-                  className="object-contain"
+                  width={120}
+                  height={120}
+                  className="object-contain "
                 />
               </Link>
             </div>

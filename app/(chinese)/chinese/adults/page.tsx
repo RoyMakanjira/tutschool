@@ -40,7 +40,7 @@ export default function ChineseAdults() {
           title: "Китайский язык для взрослых",
           subtitle: "Эффективное обучение китайскому языку для работы, путешествий и саморазвития",
           schoolName: "Tut School",
-          schoolSubtitle: "Курсы иностранных языков, Школа искусств",
+          schoolSubtitle: "Курсы иностранных языков",
           phone: "+7 (983) 600-00-00",
           email: "info@tut-school.ru",
           address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
@@ -201,7 +201,7 @@ export default function ChineseAdults() {
           title: "Chinese for Adults",
           subtitle: "Effective Chinese language learning for work, travel, and personal development",
           schoolName: "Tut School",
-          schoolSubtitle: "Foreign Language Courses, School of Arts",
+          schoolSubtitle: "Foreign Language Courses",
           phone: "+7 (983) 600-00-00",
           email: "info@tut-school.ru",
           address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
@@ -470,16 +470,17 @@ export default function ChineseAdults() {
         {/* Main Header Content */}
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-14 w-14">
-              <Link href="/">
-                <Image
-                  src="/logo.png?height=56&width=56"
-                  alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
-                  fill
-                  className="object-contain"
-                />
-              </Link>
-            </div>
+                <div className="relative">
+                      <Link href="/">
+                        <Image
+                              src="/logo.png"
+                              alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
+                              width={120}
+                              height={120}
+                              className="object-contain "
+                            />
+                        </Link>
+                </div>
             <div>
               <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
               <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>

@@ -85,14 +85,17 @@ export default function Footer() {
           {/* School info */}
           <div className="space-y-6">
             <div className="flex items-center gap-4">
-              <div className="relative h-14 w-14 overflow-hidden rounded-full bg-white p-2 shadow-md">
+              <div className="relative">
+              <Link href="/">
                 <Image
-                  src="/logo.png?height=48&width=48"
+                  src="/logo.png"
                   alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
-                  fill
-                  className="object-contain"
+                  width={120}
+                  height={120}
+                  className="object-contain "
                 />
-              </div>
+              </Link>
+            </div>
               <div>
                 <h3 className="text-xl font-bold tracking-tight">{t.schoolName}</h3>
                 <p className="text-sm text-gray-400">{t.schoolSubtitle}</p>
@@ -209,7 +212,7 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row">
           <p className="text-sm text-gray-400">{t.footer.copyright}</p>
           <p className="text-sm text-gray-500">
-            <a href="https://floatycodepins.com" className="hover:text-gray-400 transition-colors">
+            <a href="https://noirsfera.com" className="hover:text-gray-400 transition-colors">
               Designed by Noir Sfera
             </a>
           </p>
