@@ -896,11 +896,12 @@ export default function AdultsPage() {
                 <p className="text-lg text-gray-700">{t.description}</p>
               </motion.div>
               <motion.div variants={fadeIn}>
-                <div className="relative h-64 overflow-hidden rounded-lg md:h-full">
+                <div className="relative overflow-hidden rounded-lg md:h-full">
                   <Image
-                    src="https://images.pexels.com/photos/4778621/pexels-photo-4778621.jpeg"
+                    src="/assets/gallery/adults.jpg"
                     alt="Adult students learning English"
-                    fill
+                    width={735}  
+                    height={490}
                     className="object-cover"
                   />
                 </div>

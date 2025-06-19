@@ -103,9 +103,9 @@ export default function TeenagersPage() {
         { title: "Современные технологии ", description: "Использование цифровых ресурсов и интерактивных платформ", icon: Briefcase },
       ],
       activities: [
-        { title: "Работа в парах и группах", description: "Развитие диалогической речи, навыков аргументации и критического мышления", image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Проектная работа", description: "Создание презентаций и исследовательских проектов на английском", image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Расширение кругозора", description: "Контент, расширяющий как общие знания о мире, так и о культуре англоязычных стран", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { title: "Работа в парах и группах", description: "Развитие диалогической речи, навыков аргументации и критического мышления", image: "/assets/teenage/pair-and-groupwork.jpg" },
+        { title: "Проектная работа", description: "Создание презентаций и исследовательских проектов на английском", image: "/assets/teenage/project.jpg" },
+        { title: "Расширение кругозора", description: "Контент, расширяющий как общие знания о мире, так и о культуре англоязычных стран", image: "/assets/teenage/Horizon.jpg" },
       ],
       exams: {
         title: "Подготовка к экзаменам",
@@ -201,9 +201,9 @@ export default function TeenagersPage() {
         { title: "Modern Technologies", description: "Use of digital resources and interactive platforms", icon: Briefcase },
       ],
       activities: [
-        { title: "Pair and Group Work", description: "Learning to communicate, debate, and think critically", image: "https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Project Work", description: "Creating presentations and research projects", image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-        { title: "Broadening Horizons", description: "Watching and discussing movies in English", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+        { title: "Pair and Group Work", description: "Learning to communicate, debate, and think critically", image: "/assets/teenage/pair-and-groupwork.jpg" },
+        { title: "Project Work", description: "Creating presentations and research projects", image: "/assets/teenage/project.jpg" },
+        { title: "Broadening Horizons", description: "Watching and discussing movies in English", image: "/assets/teenage/Horizon.jpg" },
       ],
       exams: {
         title: "Exam Preparation",
@@ -744,7 +744,7 @@ export default function TeenagersPage() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className="relative h-48">
+                  <div className="relative h-64">
                     <Image
                       src={activity.image}
                       alt={activity.title}
