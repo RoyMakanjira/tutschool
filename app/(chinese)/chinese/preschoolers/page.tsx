@@ -715,11 +715,12 @@ export default function ChinesePreschoolers() {
               </div>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <div className="relative h-[300px] overflow-hidden rounded-lg">
+              <div className="relative overflow-hidden rounded-lg">
                 <Image
-                  src="https://images.pexels.com/photos/9016474/pexels-photo-9016474.jpeg"
+                  src="/assets/gallery/Calligraphy.jpg"
                   alt="Chinese cultural activities"
-                  fill
+                  width={970}
+                  height={1280}
                   className="object-cover"
                 />
               </div>

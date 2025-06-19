@@ -707,8 +707,36 @@ export default function ChineseAged79Page() {
             </div>
             <div className="relative h-[300px] overflow-hidden rounded-lg">
               <Image
-                src="https://images.pexels.com/photos/8519084/pexels-photo-8519084.jpeg"
+                src="/assets/courses/Teaching.jpeg"
                 alt="Children learning Chinese"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Gallery */}
+          <div className="grid gap-4 md:grid-cols-3 mb-8">
+            <div className="relative h-[200px] overflow-hidden rounded-lg">
+              <Image
+                src="/assets/courses/Art-Poster.jpg"
+                alt="Chinese class activities"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="relative h-[200px] overflow-hidden rounded-lg">
+              <Image
+                src="/assets/courses/Painting.jpg"
+                alt="Children practicing characters"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="relative h-[200px] overflow-hidden rounded-lg">
+              <Image
+                src="/assets/courses/Chinese.jpg"
+                alt="Cultural activities"
                 fill
                 className="object-cover"
               />
@@ -765,33 +793,7 @@ export default function ChineseAged79Page() {
             </div>
           </div>
 
-          {/* Gallery */}
-          <div className="grid gap-4 md:grid-cols-3">
-            <div className="relative h-[200px] overflow-hidden rounded-lg">
-              <Image
-                src="https://images.pexels.com/photos/8500283/pexels-photo-8500283.jpeg"
-                alt="Chinese class activities"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="relative h-[200px] overflow-hidden rounded-lg">
-              <Image
-                src="https://images.pexels.com/photos/8500251/pexels-photo-8500251.jpeg"
-                alt="Children practicing characters"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="relative h-[200px] overflow-hidden rounded-lg">
-              <Image
-                src="https://images.pexels.com/photos/8500239/pexels-photo-8500239.jpeg"
-                alt="Cultural activities"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
+          
         </div>
       </main>
     </div>
