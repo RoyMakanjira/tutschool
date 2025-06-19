@@ -127,9 +127,9 @@ export default function Aged10to12Page() {
         { title: "Современные технологии", description: "Использование цифровых ресурсов и интерактивных платформ" },
       ],
       activities: [
-        { title: "Работа в парах и группах", description: "Развитие диалогической речи, навыков аргументации и критического мышления", image: "https://images.pexels.com/photos/8457438/pexels-photo-8457438.jpeg" },
-        { title: "Проектная работа", description: "Создание презентаций и исследовательских проектов на английском", image: "https://images.pexels.com/photos/7869800/pexels-photo-7869800.jpeg" },
-        { title: "Расширение кругозора", description: "Контент, расширяющий как общие знания о мире, так и о культуре англоязычных стран", image: "https://images.pexels.com/photos/8612989/pexels-photo-8612989.jpeg?" },
+        { title: "Работа в парах и группах", description: "Развитие диалогической речи, навыков аргументации и критического мышления", image: "/assets/children/group-work.jpg" },
+        { title: "Проектная работа", description: "Создание презентаций и исследовательских проектов на английском", image: "/assets/children/project-work.jpg" },
+        { title: "Расширение кругозора", description: "Контент, расширяющий как общие знания о мире, так и о культуре англоязычных стран", image: "/assets/children/TutSchool.jpg" },
       ],
       schedule: [
         { day: "Вторник", times: ["9:00 - 10:00"] },
@@ -196,9 +196,9 @@ export default function Aged10to12Page() {
         { title: "Modern technology", description: "Use of digital resources and interactive platforms" },
       ],
       activities: [
-        { title: "Pair and group work", description: "Developing dialogic speech, argumentation, and critical thinking", image: "/debates.jpg" },
-        { title: "Project work", description: "Creating presentations and research projects in English", image: "/projects.jpg" },
-        { title: "Broadening horizons", description: " content expanding general knowledge and culture of English-speaking countries", image: "/exams.jpg" },
+        { title: "Pair and group work", description: "Developing dialogic speech, argumentation, and critical thinking", image: "/assets/children/group-work.jpg" },
+        { title: "Project work", description: "Creating presentations and research projects in English", image: "assets/children/project-work.jpg" },
+        { title: "Broadening horizons", description: " content expanding general knowledge and culture of English-speaking countries", image: "assets/children/TutSchool.jpg" },
       ],
       schedule: [
         { day: "Tuesday", times: ["9:00 - 10:00"] },
@@ -387,11 +387,7 @@ export default function Aged10to12Page() {
   }
 
   const Header = () => (
-    <header
-      className={`border-b bg-white shadow-sm transition-all duration-300 ${
-        isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""
-      }`}
-    >
+  <header className={`sticky top-0 z-50 border-b bg-white transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
       <TopBar />
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <div className="flex items-center gap-3">
@@ -470,15 +466,13 @@ export default function Aged10to12Page() {
   const HeroSection = () => (
     <section className="relative bg-primary py-20 text-white">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial="hidden"
-          animate={isLoaded ? "visible" : "hidden"}
-          variants={fadeIn}
+        <div
+          
           className="text-center"
         >
           <h1 className="mb-4 text-4xl font-bold md:text-5xl">{t.hero.title}</h1>
           <p className="mx-auto max-w-2xl text-lg text-white/80">{t.hero.subtitle}</p>
-        </motion.div>
+        </div>
       </div>
       <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
     </section>
@@ -517,15 +511,10 @@ export default function Aged10to12Page() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {t.activities.map((activity: Activity, index) => (
-            <motion.div
-              key={index}
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
-              variants={fadeIn}
-              transition={{ delay: index * 0.1 }}
+            <div
               className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow group"
             >
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-72 overflow-hidden">
                 <Image
                   src={activity.image}
                   alt={activity.title}
@@ -539,7 +528,7 @@ export default function Aged10to12Page() {
                 <h3 className="text-xl font-semibold mb-3 text-primary">{activity.title}</h3>
                 <p className="text-gray-600">{activity.description}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -554,12 +543,7 @@ export default function Aged10to12Page() {
         </h2>
         <div className="max-w-md mx-auto">
           {t.schedule.map((item: ScheduleItem, index) => (
-            <motion.div
-              key={index}
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
-              variants={fadeIn}
-              transition={{ delay: index * 0.1 }}
+            <div
               className="flex justify-between items-center py-4 border-b last:border-b-0"
             >
               <div className="flex items-center">
@@ -570,7 +554,7 @@ export default function Aged10to12Page() {
                 <Clock className="w-5 h-5 text-primary mr-2" />
                 <span>{item.times[0]}</span>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -595,16 +579,16 @@ export default function Aged10to12Page() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <FadeIn>
+  
         <Header />
-        <main>
+        <main className="flex-1">
           <HeroSection />
           <BenefitsSection />
           <ActivitiesSection />
           <ScheduleSection />
           <CTASection />
         </main>
-      </FadeIn>
+
     </div>
   )
 }

@@ -159,7 +159,7 @@ export default function PreschoolersPage() {
         },
         {
           title: "Творческие занятия",
-          description: "Рисование, лепка, аппликации на английском",
+          description: "Рисование, аппликации на английском",
           image: "/assets/preschoolers/creative.jpg",
         },
       ],

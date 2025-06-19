@@ -184,25 +184,25 @@ export default function Aged7to9Page() {
 
     const activities = [
     { 
-      title: language === 'ru' ? 'Чтение и рассказы' : 'Reading & Storytelling',
+      title: language === 'ru' ? 'Твердая лексическая и грамматическая база ' : 'Reading & Storytelling',
       description: language === 'ru' 
-        ? 'Работа с адаптированными текстами и устные рассказы' 
+        ? 'Структурированный курс с презентацией лексики и грамматики и их последующей отработкой' 
         : 'Working with adapted texts and oral storytelling',
-      image: "https://images.pexels.com/photos/5905932/pexels-photo-5905932.jpeg" // Kids reading together
+      image: "/assets/children/reading.jpg" // Kids reading together
     },
     { 
-      title: language === 'ru' ? 'Игровая грамматика' : 'Grammar Games',
+      title: language === 'ru' ? 'Развитие языковых навыков' : 'Grammar Games',
       description: language === 'ru' 
-        ? 'Освоение грамматики через интерактивные упражнения' 
+        ? 'Уроки по развитию навыков чтения, письма, говорения, понимания речи на слух' 
         : 'Learning grammar through interactive exercises',
-      image: "https://images.pexels.com/photos/5211437/pexels-photo-5211437.jpeg" // Kids playing educational game
+      image: "/assets/children/grammar-games.jpg" // Kids playing educational game
     },
     { 
-      title: language === 'ru' ? 'Творческие проекты' : 'Creative Projects',
+      title: language === 'ru' ? 'Знакомство с традициями и культурой англоязычных стран' : 'Creative Projects',
       description: language === 'ru' 
-        ? 'Рисование, поделки и театральные постановки на английском' 
+        ? 'Страноведение на уроках и внеклассных мероприятиях' 
         : 'Drawing, crafts and drama in English',
-      image: "https://images.pexels.com/photos/5905706/pexels-photo-5905706.jpeg" // Kids doing arts and crafts
+      image: "/assets/children/creative-projects.jpg" // Kids doing arts and crafts
     }
   ]
 
@@ -698,9 +698,9 @@ export default function Aged7to9Page() {
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: index * 0.1 } }
             }}
-            className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow group"
+            className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full"
           >
-            <div className="relative h-48 overflow-hidden">
+            <div className="relative h-64 w-full overflow-hidden">
               <Image
                 src={activity.image}
                 alt={activity.title}
@@ -711,10 +711,10 @@ export default function Aged7to9Page() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#5C162E]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
-            <div className="p-6">
-              <h3 className="text-xl font-semibold mb-3 text-[#5C162E]">{activity.title}</h3>
-              <p className="text-gray-600">{activity.description}</p>
-            </div>
+            <div className="p-6 flex-grow flex flex-col">
+            <h3 className="text-xl font-semibold mb-3 text-[#5C162E]">{activity.title}</h3>
+            <p className="text-gray-600 flex-grow">{activity.description}</p>
+          </div>
           </motion.div>
         ))}
       </div>
