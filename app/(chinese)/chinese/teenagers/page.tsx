@@ -687,13 +687,14 @@ export default function ChineseTeenagersPage() {
                 ))}
               </ul>
             </div>
-            <div className="relative h-[300px] overflow-hidden rounded-lg md:h-[400px]">
+            <div className="relative overflow-hidden rounded-lg max-h-[1280px]">
               <Image
-                src="https://images.pexels.com/photos/8500251/pexels-photo-8500251.jpeg"
+                src="/assets/gallery/Chinese-Practice.jpg"
                 alt="Teenage students in class"
-                fill
+                height={1280}
+                width={960}
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                
               />
             </div>
           </div>
@@ -740,13 +741,13 @@ export default function ChineseTeenagersPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="relative h-[300px] overflow-hidden rounded-lg md:h-[400px] order-2 md:order-1">
+            <div className="relative  overflow-hidden rounded-lg md:h-[400px] order-2 md:order-1">
               <Image
-                src="https://images.pexels.com/photos/8500291/pexels-photo-8500291.jpeg"
+                src="/assets/gallery/Art-Piece.jpeg"
                 alt="Students practicing Chinese"
-                fill
+                height={960}
+                width={540}
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
             <div className="space-y-6 order-1 md:order-2">

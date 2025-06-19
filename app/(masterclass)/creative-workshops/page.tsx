@@ -47,11 +47,26 @@ export default function CreativeWorkshops() {
     }
   }, [])
 
+  // Workshop images mapping using consistent IDs
+  const workshopImages: Record<string, string> = {
+    "oil-painting": "/assets/courses/MasterClass-1.jpg",
+    "watercolor-techniques": "/assets/courses/MasterClass-2.jpg",
+    "life-drawing": "/assets/courses/MasterClass-3.jpg",
+    "portrait-painting": "/assets/courses/MasterClass-4.jpg",
+  }
+
+  // Category images for tabs
+  const categoryImages = {
+    "visual-arts": "/assets/courses/MasterClass-1.jpg",
+    "digital-media": "/assets/courses/MasterClass-2.jpg",
+    "crafts": "/assets/courses/MasterClass-3.jpg",
+    "performing-arts": "/assets/courses/MasterClass-4.jpg",
+  }
+
   const translations = {
     ru: {
       title: "Творческие мастер-классы",
-      subtitle:
-        "Исследуйте свой творческий потенциал через разнообразные мастер-классы под руководством профессионалов",
+      subtitle: "Исследуйте свой творческий потенциал через разнообразные мастер-классы под руководством профессионалов",
       schoolName: "Tut School",
       schoolSubtitle: "Курсы иностранных языков",
       phone: "+7 (983) 600-00-00",
@@ -60,8 +75,7 @@ export default function CreativeWorkshops() {
       rating: "4.8 на Яндексе",
       search: "Поиск",
       workingHours: "Пн-Пт: 9:00-21:00, Сб: 10:00-18:00",
-      description:
-        "Наша программа творческих мастер-классов предлагает разнообразные художественные опыты, разработанные для вдохновения и развития практических навыков.",
+      description: "Наша программа творческих мастер-классов предлагает разнообразные художественные опыты, разработанные для вдохновения и развития практических навыков.",
       nav: {
         about: "О ШКОЛЕ",
         aboutDropdown: [
@@ -92,7 +106,7 @@ export default function CreativeWorkshops() {
         ],
         masterclass: "МАСТЕР-КЛАССЫ",
         masterclassDropdown: [
-          { title: "КИТАЙСКАЯ КАЛЛИГРАФИЯ ", href: "/chinese-calligraphy" },
+          { title: "КИТАЙСКАЯ КАЛЛИГРАФИЯ", href: "/chinese-calligraphy" },
           { title: "ТВОРЧЕСКИЕ МАСТЕР-КЛАССЫ", href: "/creative-workshops" },
         ],
         news: "НОВОСТИ",
@@ -100,10 +114,8 @@ export default function CreativeWorkshops() {
       },
       overview: {
         title: "Обзор мастер-классов",
-        description:
-          "Наша программа творческих мастер-классов предлагает разнообразные художественные опыты, разработанные для вдохновения и развития практических навыков. Каждый мастер-класс проводится опытными художниками и преподавателями, которые привносят свой уникальный опыт и страсть в класс.",
-        additionalInfo:
-          "Независимо от того, интересуетесь ли вы изучением нового медиума, совершенствованием своей техники или просто ищете творческий выход, наши мастер-классы обеспечивают поддерживающую среду для художественного роста и экспериментов.",
+        description: "Наша программа творческих мастер-классов предлагает разнообразные художественные опыты, разработанные для вдохновения и развития практических навыков. Каждый мастер-класс проводится опытными художниками и преподавателями, которые привносят свой уникальный опыт и страсть в класс.",
+        additionalInfo: "Независимо от того, интересуетесь ли вы изучением нового медиума, совершенствованием своей техники или просто ищете творческий выход, наши мастер-классы обеспечивают поддерживающую среду для художественного роста и экспериментов.",
       },
       benefits: {
         title: "Преимущества мастер-классов",
@@ -129,42 +141,13 @@ export default function CreativeWorkshops() {
       categories: {
         title: "Категории мастер-классов",
         visualArts: "Изобразительное искусство",
-        digitalMedia: "Цифровые медиа",
-        crafts: "Ремесла и текстиль",
-        performingArts: "Исполнительское искусство",
       },
       workshops: {
         visualArts: [
-          { title: "Основы масляной живописи", duration: "6 недель", price: "25 000 ₽" },
-          { title: "Техники акварели", duration: "4 недели", price: "18 000 ₽" },
-          { title: "Интенсив по рисунку с натуры", duration: "Выходные", price: "12 000 ₽" },
-          { title: "Портретная живопись", duration: "8 недель", price: "28 000 ₽" },
-          { title: "Абстрактный экспрессионизм", duration: "6 недель", price: "22 000 ₽" },
-          { title: "Пейзажная живопись", duration: "5 недель", price: "20 000 ₽" },
-        ],
-        digitalMedia: [
-          { title: "Цифровая иллюстрация", duration: "6 недель", price: "26 000 ₽" },
-          { title: "Введение в анимацию", duration: "8 недель", price: "30 000 ₽" },
-          { title: "Мастер-класс по фотографии", duration: "4 недели", price: "22 000 ₽" },
-          { title: "Видеопроизводство", duration: "Выходные", price: "15 000 ₽" },
-          { title: "Основы графического дизайна", duration: "6 недель", price: "24 000 ₽" },
-          { title: "Веб-дизайн для художников", duration: "5 недель", price: "22 000 ₽" },
-        ],
-        crafts: [
-          { title: "Керамика и гончарное дело", duration: "8 недель", price: "28 000 ₽" },
-          { title: "Текстильный дизайн", duration: "6 недель", price: "22 000 ₽" },
-          { title: "Изготовление ювелирных изделий", duration: "4 недели", price: "18 000 ₽" },
-          { title: "Переплетное дело", duration: "Выходные", price: "12 000 ₽" },
-          { title: "Основы ткачества", duration: "5 недель", price: "20 000 ₽" },
-          { title: "Печатная графика", duration: "6 недель", price: "24 000 ₽" },
-        ],
-        performingArts: [
-          { title: "Актерский мастер-класс", duration: "8 недель", price: "28 000 ₽" },
-          { title: "Танцевальная импровизация", duration: "6 недель", price: "22 000 ₽" },
-          { title: "Голос и речь", duration: "4 недели", price: "18 000 ₽" },
-          { title: "Искусство рассказа", duration: "Выходные", price: "12 000 ₽" },
-          { title: "Физический театр", duration: "5 недель", price: "20 000 ₽" },
-          { title: "Перформанс-арт", duration: "6 недель", price: "24 000 ₽" },
+          { id: "oil-painting", title: "Основы масляной живописи", duration: "6 недель", price: "25 000 ₽" },
+          { id: "watercolor-techniques", title: "Техники акварели", duration: "4 недели", price: "18 000 ₽" },
+          { id: "life-drawing", title: "Интенсив по рисунку с натуры", duration: "Выходные", price: "12 000 ₽" },
+          { id: "portrait-painting", title: "Портретная живопись", duration: "8 недель", price: "28 000 ₽" },
         ],
       },
       testimonials: {
@@ -173,27 +156,23 @@ export default function CreativeWorkshops() {
           {
             name: "Мария Иванова",
             workshop: "Основы масляной живописи",
-            quote:
-              "Мастер-класс превзошел мои ожидания. Преподаватель был невероятно знающим и поддерживающим, и я ушла с навыками, которые, как я думала, не смогу развить всего за шесть недель.",
+            quote: "Мастер-класс превзошел мои ожидания. Преподаватель был невероятно знающим и поддерживающим, и я ушла с навыками, которые, как я думала, не смогу развить всего за шесть недель.",
           },
           {
             name: "Михаил Чен",
             workshop: "Цифровая иллюстрация",
-            quote:
-              "Как человек без предыдущего опыта в цифровом искусстве, я был поражен тем, как быстро я прогрессировал. Пошаговый подход и персонализированная обратная связь сделали всю разницу.",
+            quote: "Как человек без предыдущего опыта в цифровом искусстве, я был поражен тем, как быстро я прогрессировал. Пошаговый подход и персонализированная обратная связь сделали всю разницу.",
           },
           {
             name: "Елена Родригес",
             workshop: "Керамика и гончарное дело",
-            quote:
-              "Этот мастер-класс возродил мою страсть к созданию руками. Студийные помещения отличные, а небольшой размер класса означал, что я получила много индивидуального руководства.",
+            quote: "Этот мастер-класс возродил мою страсть к созданию руками. Студийные помещения отличные, а небольшой размер класса означал, что я получила много индивидуального руководства.",
           },
         ],
       },
       cta: {
         title: "Готовы раскрыть свой творческий потенциал?",
-        description:
-          "Исследуйте наш разнообразный спектр творческих мастер-классов и найдите идеальную возможность развить свои художественные навыки в поддерживающей среде.",
+        description: "Исследуйте наш разнообразный спектр творческих мастер-классов и найдите идеальную возможность развить свои художественные навыки в поддерживающей среде.",
         button1: "Посмотреть календарь мастер-классов",
         button2: "Запросить каталог мастер-классов",
       },
@@ -201,8 +180,7 @@ export default function CreativeWorkshops() {
     },
     en: {
       title: "Creative Workshops",
-      subtitle:
-        "Explore your artistic potential through our diverse range of creative workshops led by industry professionals",
+      subtitle: "Explore your artistic potential through our diverse range of creative workshops led by industry professionals",
       schoolName: "Tut School",
       schoolSubtitle: "Foreign Language Courses",
       phone: "+7 (983) 600-00-00",
@@ -211,8 +189,7 @@ export default function CreativeWorkshops() {
       rating: "4.8 on Yandex",
       search: "Search",
       workingHours: "Mon-Fri: 9:00-21:00, Sat: 10:00-18:00",
-      description:
-        "Our Creative Workshops program offers a diverse range of artistic experiences designed to inspire creativity and develop practical skills.",
+      description: "Our Creative Workshops program offers a diverse range of artistic experiences designed to inspire creativity and develop practical skills.",
       nav: {
         about: "ABOUT THE SCHOOL",
         aboutDropdown: [
@@ -251,10 +228,8 @@ export default function CreativeWorkshops() {
       },
       overview: {
         title: "Workshop Overview",
-        description:
-          "Our Creative Workshops program offers a diverse range of artistic experiences designed to inspire creativity and develop practical skills. Each workshop is led by accomplished artists and educators who bring their unique expertise and passion to the classroom.",
-        additionalInfo:
-          "Whether you're interested in exploring a new medium, refining your technique, or simply seeking a creative outlet, our workshops provide a supportive environment for artistic growth and experimentation.",
+        description: "Our Creative Workshops program offers a diverse range of artistic experiences designed to inspire creativity and develop practical skills. Each workshop is led by accomplished artists and educators who bring their unique expertise and passion to the classroom.",
+        additionalInfo: "Whether you're interested in exploring a new medium, refining your technique, or simply seeking a creative outlet, our workshops provide a supportive environment for artistic growth and experimentation.",
       },
       benefits: {
         title: "Workshop Benefits",
@@ -286,33 +261,14 @@ export default function CreativeWorkshops() {
       },
       workshops: {
         visualArts: [
-          { title: "Oil Painting Fundamentals", duration: "6 weeks", price: "$380" },
-          { title: "Watercolor Techniques", duration: "4 weeks", price: "$290" },
-          { title: "Life Drawing Intensive", duration: "Weekend", price: "$180" },
-          { title: "Portrait Painting", duration: "8 weeks", price: "$420" },
-          { title: "Abstract Expressionism", duration: "6 weeks", price: "$350" },
-          { title: "Landscape Painting", duration: "5 weeks", price: "$320" },
+          { id: "oil-painting", title: "Oil Painting Fundamentals", duration: "6 weeks", price: "$380" },
+          { id: "watercolor-techniques", title: "Watercolor Techniques", duration: "4 weeks", price: "$290" },
+          { id: "life-drawing", title: "Life Drawing Intensive", duration: "Weekend", price: "$180" },
+          { id: "portrait-painting", title: "Portrait Painting", duration: "8 weeks", price: "$420" },
         ],
-        digitalMedia: [
-          { title: "Digital Illustration", duration: "6 weeks", price: "$390" },
-          { title: "Intro to Animation", duration: "8 weeks", price: "$450" },
-          { title: "Photography Masterclass", duration: "4 weeks", price: "$320" },
-          { title: "Video Production", duration: "Weekend", price: "$220" },
-          { title: "Graphic Design Basics", duration: "6 weeks", price: "$380" },
-          { title: "Web Design for Artists", duration: "5 weeks", price: "$350" },
-        ],
-        crafts: [
-          { title: "Ceramics & Pottery", duration: "8 weeks", price: "$420" },
-          { title: "Textile Design", duration: "6 weeks", price: "$350" },
-          { title: "Jewelry Making", duration: "4 weeks", price: "$290" },
-          { title: "Bookbinding", duration: "Weekend", price: "$180" },
-          { title: "Weaving Fundamentals", duration: "5 weeks", price: "$320" },
-          { title: "Printmaking", duration: "6 weeks", price: "$380" },
-        ],
-        performingArts: [
-          { title: "Acting Workshop", duration: "8 weeks", price: "$420" },
-          { title: "Dance Improvisation", duration: "6 weeks", price: "$350" },
-        ],
+        digitalMedia: [],
+        crafts: [],
+        performingArts: [],
       },
       testimonials: {
         title: "Student Testimonials",
@@ -320,103 +276,28 @@ export default function CreativeWorkshops() {
           {
             name: "Sarah Johnson",
             workshop: "Oil Painting Fundamentals",
-            quote:
-              "The workshop exceeded my expectations. The instructor was incredibly knowledgeable and supportive, and I left with skills I never thought I could develop in just six weeks.",
+            quote: "The workshop exceeded my expectations. The instructor was incredibly knowledgeable and supportive, and I left with skills I never thought I could develop in just six weeks.",
           },
           {
             name: "Michael Chen",
             workshop: "Digital Illustration",
-            quote:
-              "As someone with no prior experience in digital art, I was amazed at how quickly I progressed. The step-by-step approach and personalized feedback made all the difference.",
+            quote: "As someone with no prior experience in digital art, I was amazed at how quickly I progressed. The step-by-step approach and personalized feedback made all the difference.",
           },
           {
             name: "Emma Rodriguez",
             workshop: "Ceramics & Pottery",
-            quote:
-              "This workshop reignited my passion for creating with my hands. The studio facilities are excellent, and the small class size meant I received plenty of individual guidance.",
+            quote: "This workshop reignited my passion for creating with my hands. The studio facilities are excellent, and the small class size meant I received plenty of individual guidance.",
           },
         ],
       },
       cta: {
         title: "Ready to Unleash Your Creativity?",
-        description:
-          "Explore our diverse range of creative workshops and find the perfect opportunity to develop your artistic skills in a supportive environment.",
+        description: "Explore our diverse range of creative workshops and find the perfect opportunity to develop your artistic skills in a supportive environment.",
         button1: "View Workshop Calendar",
         button2: "Request Workshop Catalog",
       },
       languageToggle: "Русский",
     },
-  }
-
-  // Workshop images mapping
-  const workshopImages: any = {
-    // Visual Arts
-    "Oil Painting Fundamentals": "https://images.pexels.com/photos/102127/pexels-photo-102127.jpeg",
-    "Watercolor Techniques": "https://images.pexels.com/photos/1646953/pexels-photo-1646953.jpeg",
-    "Life Drawing Intensive": "https://images.pexels.com/photos/3094218/pexels-photo-3094218.jpeg",
-    "Portrait Painting": "https://images.pexels.com/photos/1427541/pexels-photo-1427541.jpeg",
-    "Abstract Expressionism": "https://images.pexels.com/photos/1193743/pexels-photo-1193743.jpeg",
-    "Landscape Painting": "https://images.pexels.com/photos/1266808/pexels-photo-1266808.jpeg",
-
-    "Основы масляной живописи": "https://images.pexels.com/photos/102127/pexels-photo-102127.jpeg",
-    "Техники акварели": "https://images.pexels.com/photos/1646953/pexels-photo-1646953.jpeg",
-    "Интенсив по рисунку с натуры": "https://images.pexels.com/photos/3094218/pexels-photo-3094218.jpeg",
-    "Портретная живопись": "https://images.pexels.com/photos/1427541/pexels-photo-1427541.jpeg",
-    "Абстрактный экспрессионизм": "https://images.pexels.com/photos/1193743/pexels-photo-1193743.jpeg",
-    "Пейзажная живопись": "https://images.pexels.com/photos/1266808/pexels-photo-1266808.jpeg",
-
-    // Digital Media
-    "Digital Illustration": "https://images.pexels.com/photos/3153198/pexels-photo-3153198.jpeg",
-    "Intro to Animation": "https://images.pexels.com/photos/7241628/pexels-photo-7241628.jpeg",
-    "Photography Masterclass": "https://images.pexels.com/photos/1983037/pexels-photo-1983037.jpeg",
-    "Video Production": "https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg",
-    "Graphic Design Basics": "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg",
-    "Web Design for Artists": "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg",
-
-    "Цифровая иллюстрация": "https://images.pexels.com/photos/3153198/pexels-photo-3153198.jpeg",
-    "Введение в анимацию": "https://images.pexels.com/photos/7241628/pexels-photo-7241628.jpeg",
-    "Мастер-класс по фотографии": "https://images.pexels.com/photos/1983037/pexels-photo-1983037.jpeg",
-    Видеопроизводство: "https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg",
-    "Основы графического дизайна": "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg",
-    "Веб-дизайн для художников": "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg",
-
-    // Crafts
-    "Ceramics & Pottery": "https://images.pexels.com/photos/2162938/pexels-photo-2162938.jpeg",
-    "Textile Design": "https://images.pexels.com/photos/4622424/pexels-photo-4622424.jpeg",
-    "Jewelry Making": "https://images.pexels.com/photos/5442447/pexels-photo-5442447.jpeg",
-    Bookbinding: "https://images.pexels.com/photos/1130980/pexels-photo-1130980.jpeg",
-    "Weaving Fundamentals": "https://images.pexels.com/photos/6044266/pexels-photo-6044266.jpeg",
-    Printmaking: "https://images.pexels.com/photos/6615076/pexels-photo-6615076.jpeg",
-
-    "Керамика и гончарное дело": "https://images.pexels.com/photos/2162938/pexels-photo-2162938.jpeg",
-    "Текстильный дизайн": "https://images.pexels.com/photos/4622424/pexels-photo-4622424.jpeg",
-    "Изготовление ювелирных изделий": "https://images.pexels.com/photos/5442447/pexels-photo-5442447.jpeg",
-    "Переплетное дело": "https://images.pexels.com/photos/1130980/pexels-photo-1130980.jpeg",
-    "Основы ткачества": "https://images.pexels.com/photos/6044266/pexels-photo-6044266.jpeg",
-    "Печатная графика": "https://images.pexels.com/photos/6615076/pexels-photo-6615076.jpeg",
-
-    // Performing Arts
-    "Acting Workshop": "https://images.pexels.com/photos/11038549/pexels-photo-11038549.jpeg",
-    "Dance Improvisation": "https://images.pexels.com/photos/2188012/pexels-photo-2188012.jpeg",
-    "Voice & Speech": "https://images.pexels.com/photos/7504837/pexels-photo-7504837.jpeg",
-    Storytelling: "https://images.pexels.com/photos/6146929/pexels-photo-6146929.jpeg",
-    "Physical Theater": "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg",
-    "Performance Art": "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg",
-
-    "Актерский мастер-класс": "https://images.pexels.com/photos/11038549/pexels-photo-11038549.jpeg",
-    "Танцевальная импровизация": "https://images.pexels.com/photos/2188012/pexels-photo-2188012.jpeg",
-    "Голос и речь": "https://images.pexels.com/photos/7504837/pexels-photo-7504837.jpeg",
-    "Искусство рассказа": "https://images.pexels.com/photos/6146929/pexels-photo-6146929.jpeg",
-    "Физический театр": "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg",
-    "Перформанс-арт": "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg",
-  }
-
-  // Category images for tabs
-  const categoryImages = {
-    "visual-arts": "https://images.pexels.com/photos/374054/pexels-photo-374054.jpeg",
-    "digital-media": "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg",
-    crafts: "https://images.pexels.com/photos/3094218/pexels-photo-3094218.jpeg",
-    "performing-arts": "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg",
   }
 
   const t = translations[language]
@@ -499,7 +380,7 @@ export default function CreativeWorkshops() {
         </div>
       </div>
 
-     {/* Combined Header and Mobile Menu */}
+      {/* Combined Header and Mobile Menu */}
       <header
         className={`border-b bg-white shadow-sm transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""}`}
       >
@@ -513,7 +394,7 @@ export default function CreativeWorkshops() {
                   alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                   width={120}
                   height={120}
-                  className="object-contain "
+                  className="object-contain"
                 />
               </Link>
             </div>
@@ -523,7 +404,7 @@ export default function CreativeWorkshops() {
             </div>
           </div>
 
-          {/* Desktop Navigation - keep exactly the same */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:block relative z-50" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">
@@ -667,6 +548,7 @@ export default function CreativeWorkshops() {
           </div>
         </div>
 
+        {/* Mobile Menu Content */}
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
             mobileMenuOpen ? "max-h-[calc(100vh-60px)]" : "max-h-0"
@@ -973,39 +855,6 @@ export default function CreativeWorkshops() {
                 </div>
                 <span className="relative z-10">{t.categories.visualArts}</span>
               </TabsTrigger>
-              <TabsTrigger value="digital-media" className="relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10">
-                  <Image
-                    src={categoryImages["digital-media"] || "/placeholder.svg"}
-                    alt={t.categories.digitalMedia}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <span className="relative z-10">{t.categories.digitalMedia}</span>
-              </TabsTrigger>
-              <TabsTrigger value="crafts" className="relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10">
-                  <Image
-                    src={categoryImages["crafts"] || "/placeholder.svg"}
-                    alt={t.categories.crafts}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <span className="relative z-10">{t.categories.crafts}</span>
-              </TabsTrigger>
-              <TabsTrigger value="performing-arts" className="relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10">
-                  <Image
-                    src={categoryImages["performing-arts"] || "/placeholder.svg"}
-                    alt={t.categories.performingArts}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <span className="relative z-10">{t.categories.performingArts}</span>
-              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="visual-arts" className="pt-4">
@@ -1015,10 +864,7 @@ export default function CreativeWorkshops() {
                     <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
                       <div className="relative h-48">
                         <Image
-                          src={
-                            workshopImages[workshop.title] ||
-                            `/placeholder.svg?height=300&width=500&text=${workshop.title}`
-                          }
+                          src={workshopImages[workshop.id] || "/placeholder.svg"}
                           alt={workshop.title}
                           fill
                           className="object-cover"
@@ -1028,103 +874,7 @@ export default function CreativeWorkshops() {
                         <h3 className="text-lg font-semibold mb-2">{workshop.title}</h3>
                         <div className="flex justify-between items-center mb-4">
                           <span className="text-gray-600">{workshop.duration}</span>
-                          <span className="font-bold text-[#5C162E]">{workshop.price}</span>
-                        </div>
-                        <button className="w-full border border-[#5C162E] text-[#5C162E] hover:bg-[#5C162E] hover:text-white px-4 py-2 rounded-md transition-colors">
-                          {language === "ru" ? "Подробнее" : "Learn More"}
-                        </button>
-                      </div>
-                    </div>
-                  </FadeIn>
-                ))}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="digital-media" className="pt-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {t.workshops.digitalMedia.map((workshop, index) => (
-                  <FadeIn key={index} delay={index * 0.05}>
-                    <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
-                      <div className="relative h-48">
-                        <Image
-                          src={
-                            workshopImages[workshop.title] ||
-                            `/placeholder.svg?height=300&width=500&text=${workshop.title}`
-                          }
-                          alt={workshop.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div className="p-6">
-                        <h3 className="text-lg font-semibold mb-2">{workshop.title}</h3>
-                        <div className="flex justify-between items-center mb-4">
-                          <span className="text-gray-600">{workshop.duration}</span>
-                          <span className="font-bold text-[#5C162E]">{workshop.price}</span>
-                        </div>
-                        <button className="w-full border border-[#5C162E] text-[#5C162E] hover:bg-[#5C162E] hover:text-white px-4 py-2 rounded-md transition-colors">
-                          {language === "ru" ? "Подробнее" : "Learn More"}
-                        </button>
-                      </div>
-                    </div>
-                  </FadeIn>
-                ))}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="crafts" className="pt-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {t.workshops.crafts.map((workshop, index) => (
-                  <FadeIn key={index} delay={index * 0.05}>
-                    <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
-                      <div className="relative h-48">
-                        <Image
-                          src={
-                            workshopImages[workshop.title] ||
-                            `/placeholder.svg?height=300&width=500&text=${workshop.title}`
-                          }
-                          alt={workshop.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div className="p-6">
-                        <h3 className="text-lg font-semibold mb-2">{workshop.title}</h3>
-                        <div className="flex justify-between items-center mb-4">
-                          <span className="text-gray-600">{workshop.duration}</span>
-                          <span className="font-bold text-[#5C162E]">{workshop.price}</span>
-                        </div>
-                        <button className="w-full border border-[#5C162E] text-[#5C162E] hover:bg-[#5C162E] hover:text-white px-4 py-2 rounded-md transition-colors">
-                          {language === "ru" ? "Подробнее" : "Learn More"}
-                        </button>
-                      </div>
-                    </div>
-                  </FadeIn>
-                ))}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="performing-arts" className="pt-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {t.workshops.performingArts.map((workshop, index) => (
-                  <FadeIn key={index} delay={index * 0.05}>
-                    <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
-                      <div className="relative h-48">
-                        <Image
-                          src={
-                            workshopImages[workshop.title]||
-                            `/placeholder.svg?height=300&width=500&text=${workshop.title}`
-                          }
-                          alt={workshop.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div className="p-6">
-                        <h3 className="text-lg font-semibold mb-2">{workshop.title}</h3>
-                        <div className="flex justify-between items-center mb-4">
-                          <span className="text-gray-600">{workshop.duration}</span>
-                          <span className="font-bold text-[#5C162E]">{workshop.price}</span>
+                          
                         </div>
                         <button className="w-full border border-[#5C162E] text-[#5C162E] hover:bg-[#5C162E] hover:text-white px-4 py-2 rounded-md transition-colors">
                           {language === "ru" ? "Подробнее" : "Learn More"}

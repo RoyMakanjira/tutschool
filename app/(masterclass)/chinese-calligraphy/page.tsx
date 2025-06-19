@@ -777,7 +777,7 @@ export default function ChineseCalligraphy() {
               <FadeIn key={item} delay={item * 0.05}>
                 <div className="relative aspect-square overflow-hidden rounded-lg">
                   <Image
-                    src={`https://images.pexels.com/photos/7333599/pexels-photo-7333599.jpeg?height=400&width=400&text=Student Work ${item}`}
+                    src="/assets/courses/TutSchool-Learning.jpg"
                     alt={`Student Calligraphy Work ${item}`}
                     fill
                     className="object-cover hover:scale-105 transition-transform duration-300"

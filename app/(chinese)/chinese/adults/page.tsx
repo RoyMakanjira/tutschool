@@ -368,21 +368,21 @@ export default function ChineseAdults() {
   // Study images data
   const studyImages = [
     {
-      src: "https://images.pexels.com/photos/6147369/pexels-photo-6147369.jpeg",
+      src: "/assets/gallery/Adult.jpg",
       alt: "Adults learning Chinese in a classroom",
       description: language === "ru" 
         ? "Групповое занятие китайским языком с преподавателем" 
         : "Group Chinese lesson with a teacher"
     },
     {
-      src: "https://images.pexels.com/photos/8386437/pexels-photo-8386437.jpeg",
+      src: "/assets/gallery/Culture.jpg",
       alt: "Woman studying Chinese characters",
       description: language === "ru"
         ? "Индивидуальное изучение китайских иероглифов"
         : "Individual study of Chinese characters"
     },
     {
-      src: "https://images.pexels.com/photos/4145153/pexels-photo-4145153.jpeg",
+      src: "/assets/gallery/Worshop.jpg",
       alt: "Online Chinese lesson",
       description: language === "ru"
         ? "Онлайн-урок китайского языка"
@@ -937,12 +937,13 @@ export default function ChineseAdults() {
                 </div>
               </FadeIn>
               <FadeIn delay={0.2}>
-                <div className="relative h-[300px] overflow-hidden rounded-lg">
+                <div className="relative w-full h-auto aspect-[4/3] overflow-hidden rounded-lg">
                   <Image
                     src={studyImages[1].src}
                     alt={studyImages[1].alt}
                     fill
-                    className="object-cover"
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-4 text-white">
                     {studyImages[1].description}

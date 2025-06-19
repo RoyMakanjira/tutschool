@@ -773,11 +773,11 @@ export default function Aged10to12Page()  {
                 ))}
               </div>
             </div>
-            <div className="relative h-[400px] overflow-hidden rounded-lg">
+            <div className="relative overflow-hidden rounded-lg">
               <img
-                src="https://images.pexels.com/photos/9016462/pexels-photo-9016462.jpeg"
+                src="/assets/gallery/Learning-Chinese.jpg"
                 alt="Chinese learning materials"
-                className="h-full w-full object-cover"
+                className=" object-cover"
               />
             </div>
           </div>
