@@ -750,9 +750,9 @@ export default function Aged7to9Page() {
             <h2 className="text-3xl font-bold mb-6">
               {language === 'ru' ? 'Запишитесь на пробный урок' : 'Book a trial lesson'}
             </h2>
-            <p className="text-xl mb-8 opacity-90">
-              {t.promo}
-            </p>
+            <a href="/bookings" className="bg-white text-[#5C162E] px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+              {t.hero.cta}
+            </a>
           </div>
         </section>
       </FadeIn>
