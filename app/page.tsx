@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
 import ValuesSectionCard from "@/components/ValuesSectionCard"
@@ -273,6 +274,7 @@ export default function HomePage() {
       },
       testimonials: {
         title: "ОТЗЫВЫ НАШИХ УЧЕНИКОВ",
+        reviews: "Посмотреть все отзывы",
         items: [
           {
             name: "Анна К.",
@@ -430,6 +432,7 @@ export default function HomePage() {
       },
       testimonials: {
         title: "TESTIMONIALS FROM OUR STUDENTS",
+        reviews: "Read More Reviews",
         items: [
           {
             name: "Anna K.",
@@ -524,6 +527,52 @@ export default function HomePage() {
 
   return (
     <div className="flex min-h-screen flex-col">
+
+      <Head>
+  <title>{t.schoolName} | {t.schoolSubtitle} - {language === "ru" ? "Курсы английского и китайского" : "English & Chinese Courses"}</title>
+  <meta name="description" content={language === "ru" 
+    ? "Языковая школа Tut School предлагает курсы английского и китайского для детей и взрослых в Новогорске. Пробные уроки, квалифицированные преподаватели, современные методики."
+    : "Tut School offers English and Chinese language courses for children and adults in Novogorsk. Trial lessons, qualified teachers, modern teaching methods."} />
+  
+  <meta name="keywords" content={language === "ru"
+    ? "курсы английского Химки, китайский язык Новогорск, обучение языкам, английский для детей, репетитор китайского"
+    : "English courses Khimki, Chinese language Novogorsk, language school, English for kids, Chinese tutor"} />
+  
+  <meta property="og:title" content={`${t.schoolName} | ${t.schoolSubtitle}`} />
+  <meta property="og:description" content={t.hero.subtitle} />
+  <meta property="og:image" content="/logo.png" />
+  <meta property="og:url" content="https://tut-school.ru" />
+  <meta property="og:type" content="website" />
+  
+  <link rel="alternate" hrefLang="ru" href="https://tut-school.ru/ru" />
+  <link rel="alternate" hrefLang="en" href="https://tut-school.ru/en" />
+  
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LanguageSchool",
+      "name": t.schoolName,
+      "description": t.hero.subtitle,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Заречная улица, 5, корп. 2",
+        "addressLocality": "Химки",
+        "addressRegion": "Московская область",
+        "postalCode": "141435",
+        "addressCountry": "RU"
+      },
+      "telephone": t.phone,
+      "openingHours": t.workingHours,
+      "image": "/logo.png",
+      "priceRange": "₽₽",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "27"
+      }
+    })}
+  </script>
+</Head>
       {/* Top Bar */}
       <ScrollProgress />
 
@@ -1070,110 +1119,43 @@ export default function HomePage() {
         {/* Values Section */}
 
         <ValuesSectionCard language={language} />
-
-        {/* Courses Sections */}
-
-        <section className="bg-gray-50 py-16">
-          <div className="container mx-auto px-4">
-            <div className="mb-8 flex items-center justify-between">
-              <Link href="#" className="flex items-center text-sm font-medium text-primary hover:underline">
-                {t.courses.viewAll}
-                <ChevronRight className="ml-1 h-4 w-4" />
-              </Link>
-            </div>
-            <div className="grid gap-6 md:grid-cols-3">
-              {t.courses.items.map((item, index) => (
-                <div
-                  key={index}
-                  className="overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg"
-                >
-                  <div className="relative h-48">
-                    <Image
-                      src={`/assets/coursesOne.svg?height=200&width=400&text=News ${index + 1}`}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="mb-3 text-xl font-bold">{item.title}</h3>
-                    <Link href="#" className="inline-flex items-center text-primary hover:underline">
-                      {item.cta}
-                      <ChevronRight className="ml-1 h-4 w-4" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-        {/* News Section */}
-        <section className="bg-gray-50 py-16">
-          <div className="container mx-auto px-4">
-            <div className="mb-8 flex items-center justify-between">
-              <Link href="#" className="flex items-center text-sm font-medium text-primary hover:underline">
-                {t.news.viewAll}
-                <ChevronRight className="ml-1 h-4 w-4" />
-              </Link>
-            </div>
-            <div className="grid gap-6 md:grid-cols-3">
-              {t.news.items.map((item, index) => (
-                <div
-                  key={index}
-                  className="overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg"
-                >
-                  <div className="relative h-48">
-                    <Image
-                      src={`/assets/coursesTwo.svg?height=200&width=400&text=News ${index + 1}`}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <div className="mb-2 flex items-center gap-2 text-sm text-gray-500">
-                      <Calendar className="h-4 w-4" />
-                      <span>{item.date}</span>
-                    </div>
-                    <h3 className="mb-3 text-xl font-bold">{item.title}</h3>
-                    <p className="mb-4 text-sm text-gray-600">{item.description}</p>
-                    <Link href="#" className="inline-flex items-center text-primary hover:underline">
-                      {item.cta}
-                      <ChevronRight className="ml-1 h-4 w-4" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
         {/* Testimonials Section */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.testimonials.title}</h2>
-            <div className="mx-auto mb-12 h-1 w-20 bg-primary"></div>
-            <div className="grid gap-6 md:grid-cols-3">
-              {t.testimonials.items.map((item, index) => (
-                <div key={index} className="rounded-lg bg-white p-6 shadow-md">
-                  <div className="mb-4 text-yellow-400">
-                    <Star className="inline-block h-5 w-5 fill-current" />
-                    <Star className="inline-block h-5 w-5 fill-current" />
-                    <Star className="inline-block h-5 w-5 fill-current" />
-                    <Star className="inline-block h-5 w-5 fill-current" />
-                    <Star className="inline-block h-5 w-5 fill-current" />
-                  </div>
-                  <p className="mb-4 italic text-gray-600">"{item.text}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-                      <User className="h-5 w-5" />
-                    </div>
-                    <span className="font-medium">{item.name}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+<section className="py-16">
+  <div className="container mx-auto px-4">
+    <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.testimonials.title}</h2>
+    <div className="mx-auto mb-12 h-1 w-20 bg-primary"></div>
+    <div className="grid gap-6 md:grid-cols-3">
+      {t.testimonials.items.map((item, index) => (
+        <div key={index} className="rounded-lg bg-white p-6 shadow-md">
+          <div className="mb-4 text-yellow-400">
+            <Star className="inline-block h-5 w-5 fill-current" />
+            <Star className="inline-block h-5 w-5 fill-current" />
+            <Star className="inline-block h-5 w-5 fill-current" />
+            <Star className="inline-block h-5 w-5 fill-current" />
+            <Star className="inline-block h-5 w-5 fill-current" />
           </div>
-        </section>
+          <p className="mb-4 italic text-gray-600">"{item.text}"</p>
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <User className="h-5 w-5" />
+            </div>
+            <span className="font-medium">{item.name}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div className="mt-8 text-center">
+      <a 
+        href="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=routes&rtext=~55.894611%2C37.374147&rtt=auto&ruri=~&z=17" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="inline-block rounded-md bg-primary px-6 py-2 text-white transition hover:bg-primary-dark"
+      >
+        {t.testimonials.reviews}
+      </a>
+    </div>
+  </div>
+</section>
 
         {/* Contact Section */}
         <section className="bg-gray-50 py-16">

@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import Head from "next/head"
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -436,6 +436,68 @@ export default function Contact() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      import Head from "next/head";
+
+// Add this inside the Contact component, right after the opening div:
+<Head>
+  <title>Контакты Tut School | Курсы английского и китайского в Химках</title>
+  <meta 
+    name="description" 
+    content="Контактная информация языковой школы Tut School в Новогорске. Адрес, телефоны, email, форма обратной связи. Запишитесь на пробный урок английского или китайского языка." 
+  />
+  <meta
+    name="keywords"
+    content="контакты Tut School, курсы английского Химки, школа китайского Новогорск, запись на занятия, пробный урок, языковые курсы Москва, адрес языковой школы"
+  />
+  
+  {/* Open Graph / Social Media Meta Tags */}
+  <meta property="og:title" content="Контакты Tut School | Языковые курсы в Новогорске" />
+  <meta 
+    property="og:description" 
+    content="Свяжитесь с нами для записи на курсы английского и китайского языка. Адрес: Московская область, Химки, микрорайон Новогорск." 
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tutschool.ru/contact" />
+  <meta property="og:image" content="https://tutschool.ru/images/contact-og-image.jpg" />
+  <meta property="og:site_name" content="Tut School" />
+  <meta property="og:locale" content="ru_RU" />
+  
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Контакты Tut School | Языковые курсы" />
+  <meta 
+    name="twitter:description" 
+    content="Адрес и контакты языковой школы Tut School в Новогорске. Запишитесь на пробный урок английского или китайского." 
+  />
+  <meta name="twitter:image" content="https://tutschool.ru/images/contact-twitter-card.jpg" />
+  
+  {/* Canonical URL */}
+  <link rel="canonical" href="https://tutschool.ru/contact" />
+  
+  {/* Alternate Languages */}
+  <link rel="alternate" hrefLang="ru" href="https://tutschool.ru/ru/contact" />
+  <link rel="alternate" hrefLang="en" href="https://tutschool.ru/en/contact" />
+  
+  {/* Geo and Business Metadata */}
+  <meta name="geo.region" content="RU-MOS" />
+  <meta name="geo.placename" content="Химки" />
+  <meta name="ICBM" content="55.894611, 37.374147" />
+  
+  {/* Business Contact */}
+  <meta name="business:contact_data:street_address" content="Заречная улица, 5, корп. 2" />
+  <meta name="business:contact_data:locality" content="Химки" />
+  <meta name="business:contact_data:region" content="Московская область" />
+  <meta name="business:contact_data:postal_code" content="141400" />
+  <meta name="business:contact_data:country_name" content="Россия" />
+  <meta name="business:contact_data:email" content="info@tut-school.ru" />
+  <meta name="business:contact_data:phone_number" content="+79836000000" />
+  
+  {/* Favicon */}
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+</Head>
       <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
           <div className="flex flex-wrap items-center gap-4">

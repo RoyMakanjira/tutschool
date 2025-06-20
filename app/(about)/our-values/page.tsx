@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -329,6 +330,42 @@ export default function ValuesPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      import Head from "next/head";
+
+// Add this inside the ValuesPage component, right after the opening div:
+<Head>
+  <title>Tut School - Основные ценности | Курсы английского и китайского языка в Москве</title>
+  <meta 
+    name="description" 
+    content="Ключевые ценности Tut School: качественное обучение, культурное погружение и творческое развитие. Профессиональные курсы английского и китайского языка для всех возрастов в Москве." 
+  />
+  <meta
+    name="keywords"
+    content="курсы английского Москва, школа китайского языка, обучение языкам, ценности образования, Tut School, английский для детей, подготовка к HSK, разговорный клуб"
+  />
+  
+  {/* Open Graph / Social Media Meta Tags */}
+  <meta property="og:title" content="Tut School - Наши ценности в обучении языкам" />
+  <meta 
+    property="og:description" 
+    content="Откройте для себя подход Tut School к преподаванию языков через качество, творчество и культурное погружение." 
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tutschool.ru/our-values" />
+  <meta property="og:image" content="https://tutschool.ru/images/values-og-image.jpg" />
+  <meta property="og:site_name" content="Tut School" />
+  <meta property="og:locale" content="ru_RU" />
+  
+ 
+  {/* Canonical URL */}
+  <link rel="canonical" href="https://tutschool.ru/our-values" />
+  
+  {/* Favicon */}
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+</Head>
       <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
           <div className="flex flex-wrap items-center gap-4">
