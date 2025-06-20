@@ -91,20 +91,6 @@ const translations = {
       image: "https://images.pexels.com/photos/8500291/pexels-photo-8500291.jpeg",
       category: "Курсы"
     },
-    {
-      title: "Истории успеха наших учеников",
-      date: "5 мая 2024",
-      description: "Поздравляем наших учеников, успешно сдавших экзамены Cambridge English! Читайте об их пути и достижениях.",
-      image: "https://images.pexels.com/photos/8500251/pexels-photo-8500251.jpeg",
-      category: "Достижения"
-    },
-    {
-      title: "Новые методики преподавания",
-      date: "28 апреля 2024",
-      description: "Мы внедрили новые интерактивные методики преподавания, чтобы сделать изучение языка более увлекательным и эффективным для наших учеников.",
-      image: "https://images.pexels.com/photos/8500291/pexels-photo-8500291.jpeg",
-      category: "Обновления"
-    }
   ],
   ctaTitle: "Будьте на связи",
   ctaSubtitle: "Подпишитесь на нашу рассылку, чтобы получать последние новости и обновления",

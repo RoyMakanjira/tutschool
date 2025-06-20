@@ -159,36 +159,6 @@ export default function Teachers() {
           certifications: ["HSK 6", "TCFL"],
           languages: ["Китайский (C2)", "Английский (C1)"],
         },
-        {
-          name: "Михаил Козлов",
-          position: "Преподаватель английского и испанского языков",
-          education: "Мадридский университет Комплутенсе, Испания",
-          experience: "Опыт преподавания: 10 лет",
-          description:
-            "Михаил ведет курсы делового английского и общего испанского языка. Специализируется на интенсивных программах для взрослых.",
-          certifications: ["CELTA", "DELE C2"],
-          languages: ["Английский (C2)", "Испанский (C2)", "Итальянский (B1)"],
-        },
-        {
-          name: "Ольга Николаева",
-          position: "Преподаватель английского языка для дошкольников",
-          education: "Московский педагогический государственный университет",
-          experience: "Опыт преподавания: 7 лет",
-          description:
-            "Ольга специализируется на раннем языковом развитии детей от 3 до 6 лет. Использует методику полного физического реагирования (TPR) и музыкальные элементы в обучении.",
-          certifications: ["TKT: Young Learners"],
-          languages: ["Английский (C1)", "Французский (A2)"],
-        },
-        {
-          name: "Сергей Васильев",
-          position: "Преподаватель китайского языка и каллиграфии",
-          education: "Шанхайский университет иностранных языков, Китай",
-          experience: "Опыт преподавания: 9 лет",
-          description:
-            "Сергей преподает не только китайский язык, но и традиционную китайскую каллиграфию. Проводит мастер-классы по культуре и искусству Китая.",
-          certifications: ["HSK 6", "HSKK Advanced"],
-          languages: ["Китайский (C2)", "Английский (B2)"],
-        },
       ],
       qualifications: {
         title: "КВАЛИФИКАЦИИ И СЕРТИФИКАТЫ",
@@ -335,36 +305,6 @@ export default function Teachers() {
             "Elena teaches Chinese for all age groups. She has developed her own methodology for teaching Chinese characters to Russian-speaking students.",
           certifications: ["HSK 6", "TCFL"],
           languages: ["Chinese (C2)", "English (C1)"],
-        },
-        {
-          name: "Mikhail Kozlov",
-          position: "English and Spanish Language Teacher",
-          education: "Complutense University of Madrid, Spain",
-          experience: "Teaching experience: 10 years",
-          description:
-            "Mikhail teaches business English and general Spanish courses. He specializes in intensive programs for adults.",
-          certifications: ["CELTA", "DELE C2"],
-          languages: ["English (C2)", "Spanish (C2)", "Italian (B1)"],
-        },
-        {
-          name: "Olga Nikolaeva",
-          position: "English Teacher for Preschoolers",
-          education: "Moscow Pedagogical State University",
-          experience: "Teaching experience: 7 years",
-          description:
-            "Olga specializes in early language development for children aged 3 to 6. She uses Total Physical Response (TPR) methodology and musical elements in her teaching.",
-          certifications: ["TKT: Young Learners"],
-          languages: ["English (C1)", "French (A2)"],
-        },
-        {
-          name: "Sergey Vasiliev",
-          position: "Chinese Language and Calligraphy Teacher",
-          education: "Shanghai International Studies University, China",
-          experience: "Teaching experience: 9 years",
-          description:
-            "Sergey teaches not only Chinese language but also traditional Chinese calligraphy. He conducts workshops on Chinese culture and art.",
-          certifications: ["HSK 6", "HSKK Advanced"],
-          languages: ["Chinese (C2)", "English (B2)"],
         },
       ],
       qualifications: {
