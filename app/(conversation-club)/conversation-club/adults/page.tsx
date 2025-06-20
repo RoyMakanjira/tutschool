@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect, useRef } from "react"
@@ -18,7 +19,7 @@ export default function AdultsPage() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState(0)
   const [isScrolled, setIsScrolled] = useState(false)
-
+  const [activeCategory, setActiveCategory] = useState<string>("ALL")
 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -26,12 +27,10 @@ export default function AdultsPage() {
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    // Set loaded state after a small delay to trigger initial animations
     const timer = setTimeout(() => {
       setIsLoaded(true)
     }, 100)
 
-    // Handle scroll events for scroll-triggered animations
     const handleScroll = () => {
       setScrollY(window.scrollY)
     }
@@ -53,26 +52,6 @@ export default function AdultsPage() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
-
-  useEffect(() => {
-    // Set loaded state after a small delay to trigger initial animations
-    const timer = setTimeout(() => {
-      setIsLoaded(true)
-    }, 100)
-
-    // Handle scroll events for scroll-triggered animations
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
-
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -85,15 +64,6 @@ export default function AdultsPage() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [])
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-      setIsScrolled(window.scrollY > 100)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   const translations = {
@@ -177,7 +147,7 @@ export default function AdultsPage() {
         {
           title: "Культурные вечера",
           description: "Знакомство с традициями и обычаями англоязычных стран",
-          image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg"
+          image: "/assets/gallery/Learning-Adults.png"
         }
       ],
       levels: [
@@ -196,25 +166,66 @@ export default function AdultsPage() {
       ],
       pricing: {
         title: "Стоимость занятий",
+        categories: {
+          ALL: "Все курсы",
+          CHILDREN: "Для детей",
+          TEENAGERS: "Для подростков",
+          ADULTS: "Для взрослых",
+          EXAMS: "Подготовка к экзаменам",
+          INDIVIDUAL: "Индивидуальные занятия"
+        },
         plans: [
           {
-            name: "Разовое посещение",
-            price: "1,500 ₽",
-            features: ["1 занятие", "2 часа", "Группа до 6 человек"]
-          },
-          {
-            name: "Абонемент на месяц",
-            price: "5,000 ₽",
+            name: "английский для детей 9-11 лет",
+            price: "1,200 ₽",
             features: ["4 занятия", "2 часа каждое", "Группа до 6 человек"],
-            popular: true
+            popular: true,
+            category: "CHILDREN"
           },
           {
-            name: "Индивидуальное занятие",
+            name: "английский для подростков 12-14 лет",
+            price: "1,200 ₽",
+            features: ["4 занятия", "2 часа каждое", "Группа до 6 человек"],
+            category: "TEENAGERS"
+          },
+          {
+            name: "подготовка к ОГЭ по английскому языку",
+            price: "1,500 ₽",
+            features: ["4 занятия", "2 часа каждое", "Группа до 6 человек"],
+            popular: true,
+            category: "EXAMS"
+          },
+          {
+            name: "подготовка к ЕГЭ по английскому языку",
+            price: "1,500 ₽",
+            features: ["4 занятия", "2 часа каждое", "Группа до 6 человек"],
+            category: "EXAMS"
+          },
+          {
+            name: "разговорный английский для взрослых",
+            price: "1,500 ₽",
+            features: ["4 занятия", "2 часа каждое", "Группа до 6 человек"],
+            category: "ADULTS"
+          },
+          {
+            name: "английский для путешествий",
+            price: "1,500 ₽",
+            features: ["4 занятия", "2 часа каждое", "Группа до 6 человек"],
+            category: "ADULTS"
+          },
+          {
+            name: "Индивидуальное занятие (дети)",
+            price: "2,000 ₽",
+            features: ["1 занятие", "1 час", "Персональная программа"],
+            category: "INDIVIDUAL"
+          },
+          {
+            name: "Индивидуальное занятие (взрослые)",
             price: "2,500 ₽",
-            features: ["1 занятие", "1 час", "Индивидуальный подход"]
+            features: ["1 занятие", "1 час", "Персональная программа"],
+            category: "INDIVIDUAL"
           }
         ]
-
       },
       languageToggle: "English",
     },
@@ -298,7 +309,7 @@ export default function AdultsPage() {
         {
           title: "Cultural Evenings",
           description: "Introduction to traditions and customs of English-speaking countries",
-          image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg"
+          image: "/assets/gallery/Learning-Adults.png"
         }
       ],
       levels: [
@@ -317,22 +328,64 @@ export default function AdultsPage() {
       ],
       pricing: {
         title: "Pricing",
+        categories: {
+          ALL: "All Courses",
+          CHILDREN: "For Children",
+          TEENAGERS: "For Teenagers",
+          ADULTS: "For Adults",
+          EXAMS: "Exam Preparation",
+          INDIVIDUAL: "Individual Lessons"
+        },
         plans: [
           {
-            name: "Single Visit",
-            price: "1,500 RUB",
-            features: ["1 class", "2 hours", "Group up to 6 people"]
-          },
-          {
-            name: "Monthly Pass",
-            price: "5,000 RUB",
+            name: "English for children 9-11 years",
+            price: "1,200 RUB",
             features: ["4 classes", "2 hours each", "Group up to 6 people"],
-            popular: true
+            popular: true,
+            category: "CHILDREN"
           },
           {
-            name: "Private Lesson",
+            name: "English for teenagers 12-14 years",
+            price: "1,200 RUB",
+            features: ["4 classes", "2 hours each", "Group up to 6 people"],
+            category: "TEENAGERS"
+          },
+          {
+            name: "Preparation for OGE in English",
+            price: "1,500 RUB",
+            features: ["4 classes", "2 hours each", "Group up to 6 people"],
+            popular: true,
+            category: "EXAMS"
+          },
+          {
+            name: "Preparation for EGE in English",
+            price: "1,500 RUB",
+            features: ["4 classes", "2 hours each", "Group up to 6 people"],
+            category: "EXAMS"
+          },
+          {
+            name: "Conversational English for adults",
+            price: "1,500 RUB",
+            features: ["4 classes", "2 hours each", "Group up to 6 people"],
+            category: "ADULTS"
+          },
+          {
+            name: "English for travel",
+            price: "1,500 RUB",
+            features: ["4 classes", "2 hours each", "Group up to 6 people"],
+            category: "ADULTS"
+          },
+          {
+            name: "Individual lesson (children)",
+            price: "2,000 RUB",
+            features: ["1 class", "1 hour", "Personalized program"],
+            category: "INDIVIDUAL"
+          },
+          {
+            name: "Individual lesson (adults)",
             price: "2,500 RUB",
-            features: ["1 class", "1 hour", "Individual approach"]
+            features: ["1 class", "1 hour", "Personalized program"],
+            category: "INDIVIDUAL"
           }
         ]
       },
@@ -358,11 +411,13 @@ export default function AdultsPage() {
     }
   }
 
+  const filteredPlans = t.pricing.plans.filter(plan => 
+    activeCategory === "ALL" || plan.category === activeCategory
+  )
+
   return (
     <div className="flex min-h-screen flex-col">
-      import Head from "next/head";
-
-// Add this inside the AdultsPage component, right after the opening div:
+ 
 <Head>
   <title>Разговорный клуб английского для взрослых | Tut School Новогорск</title>
   <meta 
@@ -1069,48 +1124,83 @@ export default function AdultsPage() {
         </section>
 
         {/* Pricing Section */}
-        <section className="py-20 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">
-              {t.pricing.title}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {t.pricing.plans.map((plan, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow ${plan.popular ? 'border-2 border-[#5C162E]' : ''
-                    }`}
-                >
-                  {plan.popular && (
-                    <div className="absolute top-0 right-0 bg-[#5C162E] text-white px-4 py-1 rounded-bl-xl">
-                      {language === 'ru' ? 'Популярный' : 'Popular'}
-                    </div>
-                  )}
-                  <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
-                  <p className="text-3xl font-bold mb-6">{plan.price}</p>
-                  <ul className="space-y-3 mb-8">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-gray-600">
-                        <Check className="w-5 h-5 text-[#5C162E] mr-2" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full bg-[#5C162E] text-white py-4 rounded-lg hover:bg-[#7A1F3D] transition-colors font-medium"
-                  >
-                    {language === 'ru' ? 'Выбрать' : 'Select'}
-                  </motion.button>
-                </motion.div>
-              ))}
-            </div>
+              <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">
+            {t.pricing.title}
+          </h2>
+          
+          {/* Category Filter */}
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            {Object.entries(t.pricing.categories).map(([key, name]) => (
+              <button
+                key={key}
+                onClick={() => setActiveCategory(key)}
+                className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  activeCategory === key
+                    ? 'bg-[#5C162E] text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                {name}
+              </button>
+            ))}
           </div>
-        </section>
+
+          {/* Grouped Courses */}
+          {Object.entries(
+            filteredPlans.reduce((acc, plan) => {
+              if (!acc[plan.category]) {
+                acc[plan.category] = [];
+              }
+              acc[plan.category].push(plan);
+              return acc;
+            }, {} as Record<string, typeof filteredPlans>)
+          ).map(([category, plans]) => (
+            <div key={category} className="mb-12">
+              <h3 className="text-2xl font-semibold mb-6 text-[#5C162E]">
+                {t.pricing.categories[category as keyof typeof t.pricing.categories]}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {plans.map((plan, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className={`bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow relative ${
+                      plan.popular ? 'border-2 border-[#5C162E]' : ''
+                    }`}
+                  >
+                    {plan.popular && (
+                      <div className="absolute top-0 right-0 bg-[#5C162E] text-white px-3 py-1 rounded-bl-xl text-sm">
+                        {language === 'ru' ? 'Популярный' : 'Popular'}
+                      </div>
+                    )}
+                    <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
+                    <p className="text-3xl font-bold mb-6">{plan.price}</p>
+                    <ul className="space-y-3 mb-8">
+                      {plan.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center text-gray-600">
+                          <Check className="w-5 h-5 text-[#5C162E] mr-2" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full bg-[#5C162E] text-white py-3 rounded-lg hover:bg-[#7A1F3D] transition-colors font-medium"
+                    >
+                      {language === 'ru' ? 'Выбрать' : 'Select'}
+                    </motion.button>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
         {/* CTA Section */}
         <section className="py-20 bg-[#5C162E] text-white">

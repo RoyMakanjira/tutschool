@@ -145,17 +145,17 @@ export default function TeenagersPage() {
         {
           title: "Игровые вечера",
           description: "Увлекательные игры и конкурсы на английском языке",
-          image: "https://images.pexels.com/photos/7887043/pexels-photo-7887043.jpeg"
+          image: "/assets/gallery/Game-Nights.jpg"
         },
         {
           title: "Киноклуб",
           description: "Просмотр и обсуждение фильмов и сериалов на английском",
-          image: "https://images.pexels.com/photos/8263327/pexels-photo-8263327.jpeg"
+          image: "/assets/gallery/Club.jpg"
         },
         {
           title: "Творческие проекты",
           description: "Создание презентаций, видео и других проектов на английском",
-          image: "https://images.pexels.com/photos/6623388/pexels-photo-6623388.jpeg"
+          image: "/assets/gallery/Creatives.jpg"
         }
       ],
       levels: [
@@ -270,17 +270,17 @@ export default function TeenagersPage() {
         {
           title: "Game Nights",
           description: "Fun games and competitions in English",
-          image: "https://images.pexels.com/photos/7887043/pexels-photo-7887043.jpeg"
+          image: "/assets/gallery/Game-Nights.jpg"
         },
         {
           title: "Movie Club",
           description: "Watching and discussing movies and TV shows in English",
-          image: "https://images.pexels.com/photos/8263327/pexels-photo-8263327.jpeg"
+          image: "/assets/gallery/Club.jpg"
         },
         {
           title: "Creative Projects",
           description: "Creating presentations, videos and other projects in English",
-          image: "https://images.pexels.com/photos/6623388/pexels-photo-6623388.jpeg"
+          image: "/assets/gallery/Creatives.jpg"
         }
       ],
       levels: [
