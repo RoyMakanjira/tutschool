@@ -13,7 +13,7 @@ export default function Footer() {
   const translations = {
     ru: {
       schoolName: "Tut School",
-      schoolSubtitle: "Курсы иностранных языко",
+      schoolSubtitle: "Курсы иностранных языков",
       phone: "+7 (983) 600-00-00",
       email: "info@tut-school.ru",
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
@@ -21,7 +21,7 @@ export default function Footer() {
       search: "Поиск",
       footer: {
         quickLinks: "Быстрые ссылки",
-        links: ["О школе", "Наши курсы", "Расписание", "Преподаватели", "Цены", "Блог", "Контакты"],
+        links: ["О школе", "Наши курсы", "Расписание", "Преподаватели", "Блог", "Контакты"],
         contacts: "Контакты",
         workingHours: {
           title: "Режим работы",
@@ -36,7 +36,7 @@ export default function Footer() {
     },
     en: {
       schoolName: "Tut School",
-      schoolSubtitle: "Foreign Language Courses, School of Arts",
+      schoolSubtitle: "Foreign Language Courses",
       phone: "+7 (983) 662 97 30",
       email: "info@tut-school.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
@@ -44,7 +44,7 @@ export default function Footer() {
       search: "Search",
       footer: {
         quickLinks: "Quick Links",
-        links: ["About the school", "Our courses", "Schedule", "Teachers", "Prices", "Blog", "Contacts"],
+        links: ["About the school", "Our courses", "Schedule", "Teachers", "Blog", "Contacts"],
         contacts: "Contacts",
         workingHours: {
           title: "Working Hours",
