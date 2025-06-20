@@ -1099,7 +1099,7 @@ export default function HomePage() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/about" className="inline-flex items-center text-primary hover:underline">
+                <Link href="/our-values" className="inline-flex items-center text-primary hover:underline">
                   {t.welcome.cta}
                   <ChevronRight className="ml-1 h-4 w-4" />
                 </Link>

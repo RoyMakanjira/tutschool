@@ -9,7 +9,7 @@ const YandexMap = () => {
     // Load Yandex Maps API script
     const loadYandexMapsScript = () => {
       const script = document.createElement("script")
-      script.src = "https://api-maps.yandex.ru/2.1/?apikey=your-api-key&lang=en_US"
+      script.src = "https://api-maps.yandex.ru/2.1/"
       script.async = true
       script.onload = initMap
       document.body.appendChild(script)

@@ -47,7 +47,7 @@ export default function TeenagersPage() {
   const translations = {
     ru: {
       schoolName: "Tut School",
-      schoolSubtitle: "Курсы иностранных языков, Школа искусств",
+      schoolSubtitle: "Курсы иностранных языков",
       phone: "+7 (983) 600-00-00",
       email: "info@tut-school.ru",
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
@@ -145,7 +145,7 @@ export default function TeenagersPage() {
     },
     en: {
       schoolName: "Tut School",
-      schoolSubtitle: "Foreign Language Courses, School of Arts",
+      schoolSubtitle: "Foreign Language Courses",
       phone: "+7 (983) 600-00-00",
       email: "info@tut-school.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
