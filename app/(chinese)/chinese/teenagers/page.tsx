@@ -223,9 +223,6 @@ export default function ChineseTeenagersPage() {
   
   return (
     <div className="min-h-screen bg-white">
-      import Head from "next/head";
-
-// Add this inside the ChineseTeenagersPage component, right after the opening div:
 <Head>
   <title>Китайский для подростков | Подготовка к HSK в Tut School, Химки</title>
   <meta 

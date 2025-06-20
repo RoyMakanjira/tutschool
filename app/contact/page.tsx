@@ -436,9 +436,6 @@ export default function Contact() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      import Head from "next/head";
-
-// Add this inside the Contact component, right after the opening div:
 <Head>
   <title>Контакты Tut School | Курсы английского и китайского в Химках</title>
   <meta 

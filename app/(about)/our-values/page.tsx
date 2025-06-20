@@ -330,9 +330,6 @@ export default function ValuesPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      import Head from "next/head";
-
-// Add this inside the ValuesPage component, right after the opening div:
 <Head>
   <title>Tut School - Основные ценности | Курсы английского и китайского языка в Москве</title>
   <meta 
@@ -426,13 +423,14 @@ export default function ValuesPage() {
         {/* Main Header Content */}
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-14 w-14">
+            <div className="relative">
               <Link href="/">
                 <Image
-                  src="/logo.png?height=56&width=56"
+                  src="/logo.png"
                   alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
-                  fill
-                  className="object-contain"
+                  width={120}
+                  height={120}
+                  className="object-contain "
                 />
               </Link>
             </div>

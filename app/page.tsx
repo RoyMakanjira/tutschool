@@ -165,7 +165,7 @@ export default function HomePage() {
       schoolName: "Tut School",
       schoolSubtitle: "Курсы иностранных языков",
       phone: "+7 (983) 600-00-00",
-      email: "info@tut-school.ru",
+      email: "info@tutschool.ru",
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
       rating: "4.8 на Яндексе",
       search: "Поиск",
@@ -322,7 +322,7 @@ export default function HomePage() {
       schoolName: "Tut School",
       schoolSubtitle: "Foreign Language Courses, School of Arts",
       phone: "+7 (983) 600-00-00",
-      email: "info@tut-school.ru",
+      email: "info@tutschool.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
       rating: "4.8 on Yandex",
       search: "Search",
@@ -541,11 +541,11 @@ export default function HomePage() {
   <meta property="og:title" content={`${t.schoolName} | ${t.schoolSubtitle}`} />
   <meta property="og:description" content={t.hero.subtitle} />
   <meta property="og:image" content="/logo.png" />
-  <meta property="og:url" content="https://tut-school.ru" />
+  <meta property="og:url" content="https://tutschool.ru" />
   <meta property="og:type" content="website" />
   
-  <link rel="alternate" hrefLang="ru" href="https://tut-school.ru/ru" />
-  <link rel="alternate" hrefLang="en" href="https://tut-school.ru/en" />
+  <link rel="alternate" hrefLang="ru" href="https://tutschool.ru/ru" />
+  <link rel="alternate" hrefLang="en" href="https://tutschool.ru/en" />
   
   <script type="application/ld+json">
     {JSON.stringify({
@@ -1146,7 +1146,7 @@ export default function HomePage() {
     </div>
     <div className="mt-8 text-center">
       <a 
-        href="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=routes&rtext=~55.894611%2C37.374147&rtt=auto&ruri=~&z=17" 
+        href="https://tut-school.clients.site/#rating" 
         target="_blank" 
         rel="noopener noreferrer"
         className="inline-block rounded-md bg-primary px-6 py-2 text-white transition hover:bg-primary-dark"
@@ -1164,34 +1164,44 @@ export default function HomePage() {
             <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-4">
               <Link
                 href={`tel:${t.phone.replace(/\s+/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-white transition-all hover:bg-primary/90"
               >
                 <Phone className="h-5 w-5" />
                 {t.contact.phone}
               </Link>
               <Link
-                href="#"
+                href="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=routes&rtext=~55.894611%2C37.374147&rtt=auto&ruri=~&z=17"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-white transition-all hover:bg-blue-600"
               >
                 <Navigation className="h-5 w-5" />
                 {t.contact.directions}
               </Link>
               <Link
-                href="#"
+                href="mailto:info@tutschool.ru"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 rounded-md bg-gray-700 px-4 py-2 text-white transition-all hover:bg-gray-800"
               >
                 <MessageSquare className="h-5 w-5" />
                 {t.contact.write}
               </Link>
               <Link
-                href="#"
+                href="https://t.me/TUTschoolNovogorsk"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 rounded-md bg-blue-400 px-4 py-2 text-white transition-all hover:bg-blue-500"
               >
                 <Send className="h-5 w-5" />
                 {t.contact.telegram}
               </Link>
               <Link
-                href="#"
+                href="https://wa.me/+79167349246"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 rounded-md bg-green-500 px-4 py-2 text-white transition-all hover:bg-green-600"
               >
                 <MessageSquare className="h-5 w-5" />
