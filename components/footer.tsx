@@ -108,7 +108,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-2 text-sm text-amber-400">
               <a
-               href="https://yandex.com/maps/10758/himki/?ll=37.374147%2C55.894611&mode=routes&rtext=~55.894611%2C37.374147&rtt=auto&ruri=~&z=17" 
+               href="https://tut-school.clients.site/?#rating" 
                target="_blank" 
                rel="noopener noreferrer"
                className="inline-block rounded-md bg-primary px-6 py-2 text-white transition hover:bg-primary-dark"
