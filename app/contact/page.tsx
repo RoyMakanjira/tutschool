@@ -1122,7 +1122,7 @@ export default function Contact() {
                   <h2 className="mb-4 text-2xl font-bold">{t.visit.title}</h2>
                   <p className="mb-6">{t.visit.description}</p>
                   <Link
-                    href="/"
+                    href="/bookings"
                     className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-medium text-primary transition-all hover:bg-gray-100 hover:gap-3"
                   >
                     {t.visit.cta}

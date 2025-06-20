@@ -798,12 +798,12 @@ export default function ChineseCalligraphy() {
               {t.cta.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-[#5C162E] hover:bg-gray-100 px-6 py-3 rounded-md font-medium">
+              <a href="/bookings" className="bg-white text-[#5C162E] hover:bg-gray-100 px-6 py-3 rounded-md font-medium">
                 {t.cta.button1}
-              </button>
-              <button className="border border-white text-white hover:bg-white/10 px-6 py-3 rounded-md font-medium">
+              </a>
+              <a href="/contact" className="border border-white text-white hover:bg-white/10 px-6 py-3 rounded-md font-medium">
                 {t.cta.button2}
-              </button>
+              </a>
             </div>
           </FadeIn>
         </div>

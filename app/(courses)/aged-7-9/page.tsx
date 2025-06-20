@@ -753,9 +753,6 @@ export default function Aged7to9Page() {
             <p className="text-xl mb-8 opacity-90">
               {t.promo}
             </p>
-            <button className="bg-white text-[#5C162E] px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">
-              {t.hero.cta}
-            </button>
           </div>
         </section>
       </FadeIn>

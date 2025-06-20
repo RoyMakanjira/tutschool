@@ -24,18 +24,18 @@ const bannerData = {
     translations: {
         ru: {
             badge: "ВЕСЕННЯЯ АКЦИЯ",
-            shortTitle: "40% СКИДКА на все языковые курсы!",
-            fullTitle: "Экономия до 40% на курсах английского и китайского языков",
-            untilDate: "До 31 мая",
+            shortTitle: "",
+            fullTitle: " курсах английского и китайского языков",
+            untilDate: "",
             location: "Онлайн или очно",
             detailsButton: "Подробнее",
             dismiss: "Закрыть",
         },
         en: {
             badge: "SPRING SPECIAL",
-            shortTitle: "40% OFF all language courses!",
-            fullTitle: "Save up to 40% OFF on English & Chinese courses",
-            untilDate: "Until May 31",
+            shortTitle: "",
+            fullTitle: " English & Chinese courses",
+            untilDate: "",
             location: "Online or In-person",
             detailsButton: "Details",
             dismiss: "Dismiss",
@@ -101,11 +101,11 @@ export const PromotionalBanner = ({ language = "ru" }: PromotionalBannerProps) =
                         <span className="hidden md:inline">
                             {language === "ru" ? (
                                 <>
-                                    Экономия до <span className="font-bold">40%</span> на курсах английского и китайского языков
+                                     на курсах английского и китайского языков
                                 </>
                             ) : (
                                 <>
-                                    Save up to <span className="font-bold">40% OFF</span> on English & Chinese courses
+                                     on English & Chinese courses
                                 </>
                             )}
                         </span>

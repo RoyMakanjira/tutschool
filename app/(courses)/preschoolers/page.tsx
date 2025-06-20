@@ -786,26 +786,34 @@ export default function PreschoolersPage() {
           </h2>
         </FadeIn>
         <div className="grid gap-8 md:grid-cols-3">
-          {t.activities.map((activity, index) => (
-            <FadeIn key={index} delay={index * 100}>
-              <div className="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg">
-                <div className="relative h-[280px] w-full">
-                  <Image
-                    src={activity.image}
-                    alt={activity.title}
-                    fill
-                    className="object-cover object-center"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="mb-2 text-xl font-semibold">{activity.title}</h3>
-                  <p className="text-gray-600">{activity.description}</p>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
+  {t.activities.map((activity, index) => (
+    <FadeIn key={index} delay={index * 100}>
+      <div className="flex flex-col h-full overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg hover:scale-[1.02]">
+        {/* Larger image container with fixed aspect ratio */}
+        <div className="relative aspect-[4/3] w-full"> {/* 4:3 aspect ratio - you can adjust this */}
+          <Image
+            src={activity.image}
+            alt={activity.title}
+            fill
+            className="object-cover object-center"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={index < 3} // Optional: prioritize loading first few images
+          />
         </div>
+        
+        {/* Text content with balanced spacing */}
+        <div className="flex flex-col p-6 flex-grow space-y-3">
+          <h3 className="text-xl font-semibold line-clamp-2">{activity.title}</h3>
+          <p className="text-gray-600 line-clamp-3 flex-grow">{activity.description}</p>
+          {/* Optional button to maintain consistent bottom spacing */}
+          <button className="mt-4 self-start text-primary hover:underline">
+            Learn more →
+          </button>
+        </div>
+      </div>
+    </FadeIn>
+  ))}
+</div>
       </div>
     </section>
 

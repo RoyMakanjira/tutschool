@@ -858,9 +858,6 @@ export default function TeenagersPage() {
                       </li>
                     ))}
                   </ul>
-                  <button className="w-full bg-[#5C162E] text-white py-3 rounded-lg hover:bg-[#7A1F3D] transition-colors">
-                    {language === 'ru' ? 'Выбрать' : 'Select'}
-                  </button>
                 </motion.div>
               ))}
             </div>

@@ -486,17 +486,13 @@ export default function Aged10to12Page() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {t.benefits.map((benefit: Benefit, index) => (
-            <motion.div
-              key={index}
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
-              variants={fadeIn}
-              transition={{ delay: index * 0.1 }}
+            <div
+              
               className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow border-l-4 border-primary"
             >
               <h3 className="text-xl font-semibold mb-3 text-primary">{benefit.title}</h3>
               <p className="text-gray-600">{benefit.description}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -570,9 +566,9 @@ export default function Aged10to12Page() {
         <p className="text-xl mb-8 opacity-90">
           {t.promo}
         </p>
-        <button className="bg-white text-primary px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors font-medium">
+        <a href="/bookings" className="bg-white text-primary px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors font-medium">
           {t.hero.cta}
-        </button>
+        </a>
       </div>
     </section>
   )

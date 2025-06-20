@@ -904,7 +904,7 @@ export default function ChineseTeenagersPage() {
             {t.ctaSubtitle}
           </p>
           <Link
-            href="/contact"
+            href="/bookings"
             className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-[#5C162E] transition-all hover:bg-gray-100 hover:shadow-lg"
           >
             {t.startLearning}

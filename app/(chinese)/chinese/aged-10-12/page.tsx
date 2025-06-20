@@ -794,7 +794,7 @@ export default function Aged10to12Page()  {
             {t.chineseAged1012.cta.description}
           </p>
           <a
-            href="#contact"
+            href="/bookings"
             className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-burgundy-900 transition-all hover:bg-gray-100"
           >
             {t.chineseAged1012.cta.button}

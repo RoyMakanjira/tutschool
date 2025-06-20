@@ -853,16 +853,7 @@ export default function ChineseAdults() {
             </motion.div>
           </div>
           <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
-          {/* Background image */}
-          <div className="absolute inset-0 overflow-hidden opacity-20">
-            <Image
-              src={studyImages[0].src}
-              alt={studyImages[0].alt}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+
         </section>
 
         {/* Levels Section */}
@@ -1024,7 +1015,7 @@ export default function ChineseAdults() {
                 <h2 className="mb-4 text-3xl font-bold text-[#5C162E]">{t.cta.title}</h2>
                 <p className="mb-8 text-lg text-gray-600">{t.cta.description}</p>
                 <Link
-                  href="#contact"
+                  href="/bookings"
                   className="inline-flex items-center gap-2 rounded-full bg-[#5C162E] px-8 py-3 font-medium text-white transition-all hover:bg-[#5C162E]/90"
                 >
                   {t.cta.button}

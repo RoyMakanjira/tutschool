@@ -789,9 +789,7 @@ export default function CreativeWorkshops() {
                     <li key={index}>{item}</li>
                   ))}
                 </ul>
-                <button className="bg-[#5C162E] hover:bg-[#4a1125] text-white px-6 py-2 rounded-md">
-                  {t.cta.button1}
-                </button>
+                
               </FadeIn>
             </div>
             <div>
@@ -876,9 +874,9 @@ export default function CreativeWorkshops() {
                           <span className="text-gray-600">{workshop.duration}</span>
                           
                         </div>
-                        <button className="w-full border border-[#5C162E] text-[#5C162E] hover:bg-[#5C162E] hover:text-white px-4 py-2 rounded-md transition-colors">
+                        <a href="/bookings" className="w-full border border-[#5C162E] text-[#5C162E] hover:bg-[#5C162E] hover:text-white px-4 py-2 rounded-md transition-colors">
                           {language === "ru" ? "Подробнее" : "Learn More"}
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </FadeIn>

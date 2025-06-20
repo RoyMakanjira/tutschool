@@ -198,7 +198,7 @@ export default function Teachers() {
           "Владение современными методиками преподавания",
           "Любовь к своему делу и желание развиваться",
         ],
-        cta: "Отправить резюме",
+        cta: "Связаться с нами",
       },
       trial: {
         title: "ЗАПИШИТЕСЬ НА БЕСПЛАТНЫЙ ПРОБНЫЙ УРОК",
@@ -345,7 +345,7 @@ export default function Teachers() {
           "Knowledge of modern teaching methods",
           "Passion for teaching and desire to develop",
         ],
-        cta: "Send Resume",
+        cta: "Contact Us",
       },
       trial: {
         title: "SIGN UP FOR A FREE TRIAL LESSON",
@@ -956,7 +956,7 @@ export default function Teachers() {
               </div>
               <div className="text-center">
                 <Link
-                  href="/careers"
+                  href="/contact"
                   className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 font-medium text-white transition-all hover:bg-primary/90"
                 >
                   {t.joinTeam.cta}

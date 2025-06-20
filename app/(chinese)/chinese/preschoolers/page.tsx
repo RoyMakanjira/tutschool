@@ -778,7 +778,7 @@ export default function ChinesePreschoolers() {
               <h2 className="mb-4 text-3xl font-bold text-[#5C162E]">{t.cta.title}</h2>
               <p className="mb-8 text-lg text-gray-600">{t.cta.description}</p>
               <Link
-                href="#contact"
+                href="/bookings"
                 className="inline-flex items-center gap-2 rounded-full bg-[#5C162E] px-8 py-3 font-medium text-white transition-all hover:bg-[#5C162E]/90"
               >
                 {t.cta.button}

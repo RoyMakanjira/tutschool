@@ -1178,7 +1178,6 @@ export default function AdultsPage() {
                       </div>
                     )}
                     <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
-                    <p className="text-3xl font-bold mb-6">{plan.price}</p>
                     <ul className="space-y-3 mb-8">
                       {plan.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-center text-gray-600">
@@ -1211,13 +1210,11 @@ export default function AdultsPage() {
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
               {t.promo}
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <a href="/bookings"
               className="bg-white text-[#5C162E] px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-medium text-lg"
             >
               {t.hero.cta}
-            </motion.button>
+            </a>
           </div>
         </section>
       </FadeIn>
