@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Head from "next/head";
 import Link from "next/link"
 import Image from "next/image"
 import {
@@ -166,6 +167,15 @@ export default function NewsPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <Head>
+        <title>{t.h1}</title>
+        <meta name="description" content={t.heroSubtitle} />
+        <meta name="keywords" content="курсы английского Химки, китайский язык Новогорск, обучение английскому, языковая школа, Tut School, английский для детей" />
+        <meta property="og:title" content={t.h1} />
+        <meta property="og:description" content={t.heroSubtitle} />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://tutschool.ru/news" />
+      </Head>
       <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
           <div className="flex flex-wrap items-center gap-4">
