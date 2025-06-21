@@ -32,7 +32,7 @@ const translations = {
   languageToggle: "English",
   schoolSubtitle: "Курсы иностранных языков",
   phone: "+7 (983) 600-00-00",
-  email: "info@tut-school.ru",
+  email: "info@tutschool.ru",
   address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
   rating: "4.8 на Яндексе",
   search: "Поиск",
