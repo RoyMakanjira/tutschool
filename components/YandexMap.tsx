@@ -39,7 +39,6 @@ interface YMap {
   geoObjects: {
     add: (object: YPlacemark) => void
   }
-  // Add other map methods you use
 }
 
 interface YPlacemark {
@@ -49,6 +48,7 @@ interface YPlacemark {
 const YandexMap = () => {
   const mapRef = useRef<HTMLDivElement>(null)
   const [mapError, setMapError] = useState<string | null>(null)
+  const YANDEX_MAPS_API_KEY = "d082042e-7a81-435d-b874-a229b4c04466" // API key inserted directly
 
   useEffect(() => {
     const scriptId = 'yandex-maps-script'
@@ -99,7 +99,7 @@ const YandexMap = () => {
     if (!script) {
       script = document.createElement('script')
       script.id = scriptId
-      script.src = `https://api-maps.yandex.ru/2.1/?apikey=${process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY}&lang=en_US`
+      script.src = `https://api-maps.yandex.ru/2.1/?apikey=${YANDEX_MAPS_API_KEY}&lang=en_US`
       script.async = true
       script.onload = initMap
       script.onerror = () => {
