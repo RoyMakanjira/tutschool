@@ -1,59 +1,119 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
+
+// Enhanced Type definitions for Yandex Maps
+declare global {
+  interface Window {
+    ymaps: {
+      ready: (callback: () => void) => void
+      Map: new (element: HTMLElement | null, options: MapOptions) => YMap
+      Placemark: new (
+        coordinates: [number, number],
+        properties?: PlacemarkProperties,
+        options?: PlacemarkOptions
+      ) => YPlacemark
+      geoObjects: {
+        add: (object: YPlacemark) => void
+      }
+    }
+  }
+}
+
+interface MapOptions {
+  center: [number, number]
+  zoom: number
+  controls: string[]
+}
+
+interface PlacemarkProperties {
+  hintContent?: string
+  balloonContent?: string
+}
+
+interface PlacemarkOptions {
+  preset?: string
+}
+
+interface YMap {
+  geoObjects: {
+    add: (object: YPlacemark) => void
+  }
+  // Add other map methods you use
+}
+
+interface YPlacemark {
+  // Add placemark methods you use
+}
 
 const YandexMap = () => {
   const mapRef = useRef<HTMLDivElement>(null)
+  const [mapError, setMapError] = useState<string | null>(null)
 
   useEffect(() => {
-    // Load Yandex Maps API script
-    const loadYandexMapsScript = () => {
-      const script = document.createElement("script")
-      script.src = `https://api-maps.yandex.ru/2.1/?apikey=${process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY}&lang=en_US`;
-      script.async = true
-      script.onload = initMap
-      document.body.appendChild(script)
-    }
+    const scriptId = 'yandex-maps-script'
+    let script = document.getElementById(scriptId) as HTMLScriptElement | null
+    let mounted = true
 
-    // Initialize map after script loads
     const initMap = () => {
-      if (typeof window.ymaps !== "undefined" && mapRef.current) {
+      if (!mounted || !mapRef.current) return
+
+      try {
         window.ymaps.ready(() => {
-          // Create map with the specified coordinates and zoom level
+          if (!mounted || !mapRef.current) return
+
+          // Create map instance
           const map = new window.ymaps.Map(mapRef.current, {
-            center: [55.89461099999354, 37.37414699999998], // [latitude, longitude]
+            center: [55.894611, 37.374147],
             zoom: 15,
-            controls: ["zoomControl", "fullscreenControl", "geolocationControl"],
+            controls: [
+              'zoomControl',
+              'fullscreenControl',
+              'geolocationControl'
+            ],
           })
 
-          // Add a placemark at the specified location
+          // Create placemark instance
           const placemark = new window.ymaps.Placemark(
-            [55.89461099999354, 37.37414699999998],
+            [55.894611, 37.374147],
             {
-              hintContent: "Tut School",
-              balloonContent: "Tut School - Foreign Language Courses",
+              hintContent: 'Tut School',
+              balloonContent: 'Tut School - Foreign Language Courses',
             },
             {
-              preset: "islands#redDotIcon",
-            },
+              preset: 'islands#redDotIcon',
+            }
           )
 
+          // Add placemark to map
           map.geoObjects.add(placemark)
         })
+      } catch (error) {
+        if (mounted) {
+          setMapError('Failed to initialize map')
+          console.error('Map initialization error:', error)
+        }
       }
     }
 
-    // Check if Yandex Maps API is already loaded
-    if (typeof window.ymaps === "undefined") {
-      loadYandexMapsScript()
-    } else {
+    if (!script) {
+      script = document.createElement('script')
+      script.id = scriptId
+      script.src = `https://api-maps.yandex.ru/2.1/?apikey=${process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY}&lang=en_US`
+      script.async = true
+      script.onload = initMap
+      script.onerror = () => {
+        if (mounted) setMapError('Failed to load Yandex Maps')
+      }
+      document.body.appendChild(script)
+    } else if (window.ymaps) {
       initMap()
     }
 
-    // Cleanup function
     return () => {
-      const script = document.querySelector('script[src*="api-maps.yandex.ru"]')
-      if (script) {
+      mounted = false
+      script = document.getElementById(scriptId) as HTMLScriptElement | null
+      if (script && document.body.contains(script)) {
         document.body.removeChild(script)
       }
     }
@@ -61,9 +121,21 @@ const YandexMap = () => {
 
   return (
     <div className="relative w-full">
-      <div ref={mapRef} className="w-full h-[400px] rounded-lg overflow-hidden shadow-md"></div>
+      <div 
+        ref={mapRef} 
+        className="w-full h-[400px] rounded-lg overflow-hidden shadow-md"
+        aria-label="Interactive map showing Tut School location"
+        role="application"
+      />
+      
+      {mapError && (
+        <div className="absolute inset-0 bg-red-50 flex items-center justify-center p-4">
+          <p className="text-red-600">{mapError}</p>
+        </div>
+      )}
+
       <a
-        href="https://yandex.ru/maps/?z=15&ll=37.37414699999998,55.89461099999354&l=map&rtext=~55.89461099999999760257196613,37.37414700000000067348082666&origin=jsapi_2_1_79&from=api-maps"
+        href="https://yandex.ru/maps/?z=15&ll=37.374147,55.894611&l=map&rtext=~55.894611,37.374147"
         target="_blank"
         rel="noopener noreferrer"
         className="absolute bottom-3 left-3 bg-white py-1 px-3 rounded-md text-sm shadow-sm hover:bg-gray-100 transition-colors flex items-center gap-1"
@@ -79,13 +151,6 @@ const YandexMap = () => {
       </a>
     </div>
   )
-}
-
-// Add TypeScript interface for the global window object
-declare global {
-  interface Window {
-    ymaps: any
-  }
 }
 
 export default YandexMap
