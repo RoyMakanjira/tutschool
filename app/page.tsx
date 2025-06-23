@@ -1146,24 +1146,34 @@ export default function HomePage() {
           href: '/adults'
         },
         {
-          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ДЕТЕЙ 4-6 ЛЕТ' : 'ENGLISH FOR CHILDREN 4-6',
+          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ДЕТЕЙ 7-9 ЛЕТ' : 'ENGLISH FOR CHILDREN 7-9',
           description: language === 'ru' 
             ? 'Игровое обучение через песни, игры и творческие занятия' 
             : 'Play-based learning through songs and creative activities',
           level: language === 'ru' ? 'Все уровни' : 'All Levels',
           students: language === 'ru' ? '80+ студентов' : '80+ students',
           image: '/assets/gallery/kids.jpeg',
-          href: '/preschoolers'
+          href: '/aged-7-9'
         },
         {
-          title: language === 'ru' ? 'Английский для дошкольников' : 'ENGLISH FOR SCHOOLCHILDREN',
+          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ДЕТЕЙ 10-12 ЛЕТ' : 'ENGLISH FOR CHILDREN 10-12',
+          description: language === 'ru' 
+            ? 'Игровое обучение через песни, игры и творческие занятия' 
+            : 'Play-based learning through songs and creative activities',
+          level: language === 'ru' ? 'Все уровни' : 'All Levels',
+          students: language === 'ru' ? '80+ студентов' : '80+ students',
+          image: '/assets/children/group-work.jpg',
+          href: '/aged-10-12'
+        },
+        {
+          title: language === 'ru' ? 'Английский для дошкольников' : 'ENGLISH FOR PRESCHOOLERS',
           description: language === 'ru' 
             ? 'Развитие языковых навыков через увлекательные проекты' 
             : 'Developing language skills through engaging projects',
           level: language === 'ru' ? 'Все уровни' : 'All Levels',
           students: language === 'ru' ? '150+ студентов' : '150+ students',
           image: '/assets/preschoolers/basic-vocabulary.jpg',
-          href: '/aged-7-9'
+          href: '/preschoolers'
         },
         {
           title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ПОДРОСТКОВ' : 'ENGLISH FOR TEENS',
@@ -1183,7 +1193,7 @@ export default function HomePage() {
           level: language === 'ru' ? 'Все уровни' : 'All Levels',
           students: language === 'ru' ? '60+ студентов' : '60+ students',
           image: '/MasterClass-Course.jpg',
-          href: '/masterclass/adults'
+          href: '/chinese-calligraphy'
         },
         {
           title: language === 'ru' ? 'РАЗГОВОРНЫЙ КЛУБ' : 'CONVERSATION CLUB',
@@ -1196,14 +1206,24 @@ export default function HomePage() {
           href: '/conversation-club/teenagers'
         },
         {
-  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ДЕТЕЙ 4-6 ЛЕТ' : 'CHINESE FOR CHILDREN 4-6',
+  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ДЕТЕЙ 7-9 ЛЕТ' : 'CHINESE FOR CHILDREN 7-9',
   description: language === 'ru' 
     ? 'Веселые занятия с основами китайского через игры и песни' 
     : 'Fun introduction to Chinese through games and songs',
   level: language === 'ru' ? 'Все уровни' : 'All Levels',
   students: language === 'ru' ? '50+ студентов' : '50+ students',
   image: '/assets/gallery/Calligraphy.jpg',
-  href: '/chinese/preschoolers'
+  href: '/chinese/aged-7-9'
+},
+        {
+  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ДЕТЕЙ 10-12 ЛЕТ' : 'CHINESE FOR CHILDREN 10-12',
+  description: language === 'ru' 
+    ? 'Веселые занятия с основами китайского через игры и песни' 
+    : 'Fun introduction to Chinese through games and songs',
+  level: language === 'ru' ? 'Все уровни' : 'All Levels',
+  students: language === 'ru' ? '50+ студентов' : '50+ students',
+  image: '/assets/gallery/Learning-Chinese.jpg',
+  href: '/chinese/aged-10-12'
 },
 {
   title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ВЗРОСЛЫХ' : 'CHINESE FOR ADULTS',
@@ -1223,7 +1243,7 @@ export default function HomePage() {
   level: language === 'ru' ? 'Все уровни' : 'All Levels',
   students: language === 'ru' ? '60+ студентов' : '60+ students',
   image: '/assets/gallery/Calligraphy.jpg', 
-  href: '/chinese/aged-7-9'
+  href: '/chinese/preschoolers'
 },
 {
   title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ПОДРОСТКОВ' : 'CHINESE FOR TEENS',
