@@ -865,7 +865,7 @@ export default function ChineseTeenagersPage() {
           <div className="grid gap-8 md:grid-cols-2">
             <div className="relative  overflow-hidden rounded-lg md:h-[400px] order-2 md:order-1">
               <Image
-                src="/assets/gallery/Art-Piece.jpeg"
+                src="/MasterClass-Course.jpg"
                 alt="Students practicing Chinese"
                 height={960}
                 width={540}

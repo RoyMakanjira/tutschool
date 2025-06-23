@@ -1183,7 +1183,7 @@ export default function HomePage() {
           level: language === 'ru' ? 'Все уровни' : 'All Levels',
           students: language === 'ru' ? '60+ студентов' : '60+ students',
           image: '/MasterClass-Course.jpg',
-          href: '/assets/courses/Children-7-9.jpg'
+          href: '/masterclass/adults'
         },
         {
           title: language === 'ru' ? 'РАЗГОВОРНЫЙ КЛУБ' : 'CONVERSATION CLUB',
@@ -1216,13 +1216,13 @@ export default function HomePage() {
   href: '/chinese/adults'
 },
 {
-  title: language === 'ru' ? 'Китайский язык для дошкольников”' : 'CHINESE FOR SCHOOLCHILDREN',
+  title: language === 'ru' ? 'Китайский язык для дошкольников' : 'CHINESE FOR PRESCHOOLERS',
   description: language === 'ru' 
     ? 'Системное изучение китайского с элементами культуры' 
     : 'Structured learning with cultural elements',
   level: language === 'ru' ? 'Все уровни' : 'All Levels',
   students: language === 'ru' ? '60+ студентов' : '60+ students',
-  image: '/chinese-for-children.jpeg', 
+  image: '/assets/gallery/Calligraphy.jpg', 
   href: '/chinese/aged-7-9'
 },
 {
