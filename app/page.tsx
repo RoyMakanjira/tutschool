@@ -1142,7 +1142,7 @@ export default function HomePage() {
             : 'Build confidence in English for work and daily communication',
           level: language === 'ru' ? 'Все уровни' : 'All levels',
           students: language === 'ru' ? '120+ студентов' : '120+ students',
-          image: '/C-Adults.jpg',
+          image: '/assets/gallery/adults.jpg',
           href: '/adults'
         },
         {
@@ -1150,19 +1150,19 @@ export default function HomePage() {
           description: language === 'ru' 
             ? 'Игровое обучение через песни, игры и творческие занятия' 
             : 'Play-based learning through songs and creative activities',
-          level: language === 'ru' ? 'Начинающий' : 'Beginner',
+          level: language === 'ru' ? 'Все уровни' : 'All Levels',
           students: language === 'ru' ? '80+ студентов' : '80+ students',
           image: '/assets/gallery/kids.jpeg',
           href: '/preschoolers'
         },
         {
-          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ШКОЛЬНИКОВ' : 'ENGLISH FOR SCHOOLCHILDREN',
+          title: language === 'ru' ? 'Английский для дошкольников' : 'ENGLISH FOR SCHOOLCHILDREN',
           description: language === 'ru' 
             ? 'Развитие языковых навыков через увлекательные проекты' 
             : 'Developing language skills through engaging projects',
-          level: language === 'ru' ? 'Средний' : 'Intermediate',
+          level: language === 'ru' ? 'Все уровни' : 'All Levels',
           students: language === 'ru' ? '150+ студентов' : '150+ students',
-          image: '/assets/courses/Children-7-9.jpg',
+          image: '/assets/preschoolers/basic-vocabulary.jpg',
           href: '/aged-7-9'
         },
         {
@@ -1170,9 +1170,9 @@ export default function HomePage() {
           description: language === 'ru' 
             ? 'Современные темы и актуальные материалы для подростков' 
             : 'Modern topics tailored for teenagers',
-          level: language === 'ru' ? 'Средний-Продвинутый' : 'Intermediate-Advanced',
+          level: language === 'ru' ? 'Все уровни' : 'All Levels',
           students: language === 'ru' ? '90+ студентов' : '90+ students',
-          image: '/assets/courses/Teenagers.jpg',
+          image: '/assets/teenage/pair-and-groupwork.jpg',
           href: '/teenagers'
         },
         {
@@ -1180,10 +1180,10 @@ export default function HomePage() {
           description: language === 'ru' 
             ? 'Интенсивные занятия с носителями языка' 
             : 'Intensive workshops with native speakers',
-          level: language === 'ru' ? 'Продвинутый' : 'Advanced',
+          level: language === 'ru' ? 'Все уровни' : 'All Levels',
           students: language === 'ru' ? '60+ студентов' : '60+ students',
           image: '/MasterClass-Course.jpg',
-          href: '/creative-workshops'
+          href: '/assets/courses/Children-7-9.jpg'
         },
         {
           title: language === 'ru' ? 'РАЗГОВОРНЫЙ КЛУБ' : 'CONVERSATION CLUB',
@@ -1200,9 +1200,9 @@ export default function HomePage() {
   description: language === 'ru' 
     ? 'Веселые занятия с основами китайского через игры и песни' 
     : 'Fun introduction to Chinese through games and songs',
-  level: language === 'ru' ? 'Начинающий' : 'Beginner',
+  level: language === 'ru' ? 'Все уровни' : 'All Levels',
   students: language === 'ru' ? '50+ студентов' : '50+ students',
-  image: '/chinese-4-6.jpeg',
+  image: '/assets/gallery/Calligraphy.jpg',
   href: '/chinese/preschoolers'
 },
 {
@@ -1216,11 +1216,11 @@ export default function HomePage() {
   href: '/chinese/adults'
 },
 {
-  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ШКОЛЬНИКОВ' : 'CHINESE FOR SCHOOLCHILDREN',
+  title: language === 'ru' ? 'Китайский язык для дошкольников”' : 'CHINESE FOR SCHOOLCHILDREN',
   description: language === 'ru' 
     ? 'Системное изучение китайского с элементами культуры' 
     : 'Structured learning with cultural elements',
-  level: language === 'ru' ? 'Средний' : 'Intermediate',
+  level: language === 'ru' ? 'Все уровни' : 'All Levels',
   students: language === 'ru' ? '60+ студентов' : '60+ students',
   image: '/chinese-for-children.jpeg', 
   href: '/chinese/aged-7-9'
@@ -1230,9 +1230,9 @@ export default function HomePage() {
   description: language === 'ru' 
     ? 'Современный китайский язык с актуальной лексикой' 
     : 'Modern Chinese with relevant vocabulary',
-  level: language === 'ru' ? 'Средний-Продвинутый' : 'Intermediate-Advanced',
+  level: language === 'ru' ? 'Все уровни' : 'All Levels',
   students: language === 'ru' ? '40+ студентов' : '40+ students',
-  image: 'https://images.pexels.com/photos/7775639/pexels-photo-7775639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Teenagers learning together
+  image: '/assets/gallery/Chinese-Practice.jpg',
   href: '/chinese/teenagers'
 }
 
