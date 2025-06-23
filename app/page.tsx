@@ -1142,7 +1142,7 @@ export default function HomePage() {
             : 'Build confidence in English for work and daily communication',
           level: language === 'ru' ? 'Все уровни' : 'All levels',
           students: language === 'ru' ? '120+ студентов' : '120+ students',
-          image: '/assets/courses/Children-10-12',
+          image: '/C-Adults.jpg',
           href: '/adults'
         },
         {
@@ -1233,7 +1233,7 @@ export default function HomePage() {
   level: language === 'ru' ? 'Средний-Продвинутый' : 'Intermediate-Advanced',
   students: language === 'ru' ? '40+ студентов' : '40+ students',
   image: 'https://images.pexels.com/photos/7775639/pexels-photo-7775639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Teenagers learning together
-  href: '/chinese-teens'
+  href: '/chinese/teenagers'
 }
 
       ].map((course) => (
