@@ -1142,7 +1142,7 @@ export default function HomePage() {
             : 'Build confidence in English for work and daily communication',
           level: language === 'ru' ? 'Все уровни' : 'All levels',
           students: language === 'ru' ? '120+ студентов' : '120+ students',
-          image: 'https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=600',
+          image: '/assets/courses/Children-10-12',
           href: '/adults'
         },
         {
@@ -1152,8 +1152,8 @@ export default function HomePage() {
             : 'Play-based learning through songs and creative activities',
           level: language === 'ru' ? 'Начинающий' : 'Beginner',
           students: language === 'ru' ? '80+ студентов' : '80+ students',
-          image: 'https://images.pexels.com/photos/159823/kids-girl-pencil-drawing-159823.jpeg?auto=compress&cs=tinysrgb&w=600',
-          href: '/preschool'
+          image: '/assets/gallery/kids.jpeg',
+          href: '/preschoolers'
         },
         {
           title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ШКОЛЬНИКОВ' : 'ENGLISH FOR SCHOOLCHILDREN',
@@ -1162,8 +1162,8 @@ export default function HomePage() {
             : 'Developing language skills through engaging projects',
           level: language === 'ru' ? 'Средний' : 'Intermediate',
           students: language === 'ru' ? '150+ студентов' : '150+ students',
-          image: 'https://images.pexels.com/photos/7162768/pexels-photo-7162768.jpeg?auto=compress&cs=tinysrgb&w=600',
-          href: '/school'
+          image: '/assets/courses/Children-7-9.jpg',
+          href: '/aged-7-9'
         },
         {
           title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ПОДРОСТКОВ' : 'ENGLISH FOR TEENS',
@@ -1172,8 +1172,8 @@ export default function HomePage() {
             : 'Modern topics tailored for teenagers',
           level: language === 'ru' ? 'Средний-Продвинутый' : 'Intermediate-Advanced',
           students: language === 'ru' ? '90+ студентов' : '90+ students',
-          image: 'https://images.pexels.com/photos/4144101/pexels-photo-4144101.jpeg?auto=compress&cs=tinysrgb&w=600',
-          href: '/teens'
+          image: '/assets/courses/Teenagers.jpg',
+          href: '/teenagers'
         },
         {
           title: language === 'ru' ? 'МАСТЕР-КЛАССЫ' : 'MASTERCLASSES',
@@ -1182,8 +1182,8 @@ export default function HomePage() {
             : 'Intensive workshops with native speakers',
           level: language === 'ru' ? 'Продвинутый' : 'Advanced',
           students: language === 'ru' ? '60+ студентов' : '60+ students',
-          image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=600',
-          href: '/masterclasses'
+          image: '/MasterClass-Course.jpg',
+          href: '/creative-workshops'
         },
         {
           title: language === 'ru' ? 'РАЗГОВОРНЫЙ КЛУБ' : 'CONVERSATION CLUB',
@@ -1192,9 +1192,50 @@ export default function HomePage() {
             : 'Practice English in a friendly atmosphere',
           level: language === 'ru' ? 'Все уровни' : 'All levels',
           students: language === 'ru' ? '200+ студентов' : '200+ students',
-          image: 'https://images.pexels.com/photos/1181622/pexels-photo-1181622.jpeg?auto=compress&cs=tinysrgb&w=600',
-          href: '/club'
-        }
+          image: '/C-Club.jpg',
+          href: '/conversation-club/teenagers'
+        },
+        {
+  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ДЕТЕЙ 4-6 ЛЕТ' : 'CHINESE FOR CHILDREN 4-6',
+  description: language === 'ru' 
+    ? 'Веселые занятия с основами китайского через игры и песни' 
+    : 'Fun introduction to Chinese through games and songs',
+  level: language === 'ru' ? 'Начинающий' : 'Beginner',
+  students: language === 'ru' ? '50+ студентов' : '50+ students',
+  image: '/chinese-4-6.jpeg',
+  href: '/chinese/preschoolers'
+},
+{
+  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ВЗРОСЛЫХ' : 'CHINESE FOR ADULTS',
+  description: language === 'ru' 
+    ? 'Практический китайский для работы и путешествий' 
+    : 'Practical Chinese for work and travel',
+  level: language === 'ru' ? 'Все уровни' : 'All levels',
+  students: language === 'ru' ? '70+ студентов' : '70+ students',
+  image: '/C-Adults.jpg',
+  href: '/chinese/adults'
+},
+{
+  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ШКОЛЬНИКОВ' : 'CHINESE FOR SCHOOLCHILDREN',
+  description: language === 'ru' 
+    ? 'Системное изучение китайского с элементами культуры' 
+    : 'Structured learning with cultural elements',
+  level: language === 'ru' ? 'Средний' : 'Intermediate',
+  students: language === 'ru' ? '60+ студентов' : '60+ students',
+  image: '/chinese-for-children.jpeg', 
+  href: '/chinese/aged-7-9'
+},
+{
+  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ПОДРОСТКОВ' : 'CHINESE FOR TEENS',
+  description: language === 'ru' 
+    ? 'Современный китайский язык с актуальной лексикой' 
+    : 'Modern Chinese with relevant vocabulary',
+  level: language === 'ru' ? 'Средний-Продвинутый' : 'Intermediate-Advanced',
+  students: language === 'ru' ? '40+ студентов' : '40+ students',
+  image: 'https://images.pexels.com/photos/7775639/pexels-photo-7775639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Teenagers learning together
+  href: '/chinese-teens'
+}
+
       ].map((course) => (
         <div 
           key={course.title} 
