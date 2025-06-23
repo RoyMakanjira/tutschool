@@ -1119,6 +1119,122 @@ export default function HomePage() {
         {/* Values Section */}
 
         <ValuesSectionCard language={language} />
+
+        <section id="courses" className="py-20 bg-gray-50">
+  <div className="container mx-auto px-4 sm:px-6">
+    <div className="text-center mb-16">
+      <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+        {language === 'ru' ? 'Популярные курсы' : 'Popular Courses'}
+      </h2>
+      <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        {language === 'ru' 
+          ? 'Выбирайте из нашего широкого спектра программ, преподаваемых опытными педагогами' 
+          : 'Choose from our comprehensive programs taught by experienced educators'}
+      </p>
+    </div>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {[
+        {
+          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ВЗРОСЛЫХ' : 'ENGLISH FOR ADULTS',
+          description: language === 'ru' 
+            ? 'Развивайте уверенность в общении на английском для работы и повседневной жизни' 
+            : 'Build confidence in English for work and daily communication',
+          level: language === 'ru' ? 'Все уровни' : 'All levels',
+          students: language === 'ru' ? '120+ студентов' : '120+ students',
+          image: 'https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=600',
+          href: '/adults'
+        },
+        {
+          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ДЕТЕЙ 4-6 ЛЕТ' : 'ENGLISH FOR CHILDREN 4-6',
+          description: language === 'ru' 
+            ? 'Игровое обучение через песни, игры и творческие занятия' 
+            : 'Play-based learning through songs and creative activities',
+          level: language === 'ru' ? 'Начинающий' : 'Beginner',
+          students: language === 'ru' ? '80+ студентов' : '80+ students',
+          image: 'https://images.pexels.com/photos/159823/kids-girl-pencil-drawing-159823.jpeg?auto=compress&cs=tinysrgb&w=600',
+          href: '/preschool'
+        },
+        {
+          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ШКОЛЬНИКОВ' : 'ENGLISH FOR SCHOOLCHILDREN',
+          description: language === 'ru' 
+            ? 'Развитие языковых навыков через увлекательные проекты' 
+            : 'Developing language skills through engaging projects',
+          level: language === 'ru' ? 'Средний' : 'Intermediate',
+          students: language === 'ru' ? '150+ студентов' : '150+ students',
+          image: 'https://images.pexels.com/photos/7162768/pexels-photo-7162768.jpeg?auto=compress&cs=tinysrgb&w=600',
+          href: '/school'
+        },
+        {
+          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ПОДРОСТКОВ' : 'ENGLISH FOR TEENS',
+          description: language === 'ru' 
+            ? 'Современные темы и актуальные материалы для подростков' 
+            : 'Modern topics tailored for teenagers',
+          level: language === 'ru' ? 'Средний-Продвинутый' : 'Intermediate-Advanced',
+          students: language === 'ru' ? '90+ студентов' : '90+ students',
+          image: 'https://images.pexels.com/photos/4144101/pexels-photo-4144101.jpeg?auto=compress&cs=tinysrgb&w=600',
+          href: '/teens'
+        },
+        {
+          title: language === 'ru' ? 'МАСТЕР-КЛАССЫ' : 'MASTERCLASSES',
+          description: language === 'ru' 
+            ? 'Интенсивные занятия с носителями языка' 
+            : 'Intensive workshops with native speakers',
+          level: language === 'ru' ? 'Продвинутый' : 'Advanced',
+          students: language === 'ru' ? '60+ студентов' : '60+ students',
+          image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=600',
+          href: '/masterclasses'
+        },
+        {
+          title: language === 'ru' ? 'РАЗГОВОРНЫЙ КЛУБ' : 'CONVERSATION CLUB',
+          description: language === 'ru' 
+            ? 'Практика разговорного английского в дружеской атмосфере' 
+            : 'Practice English in a friendly atmosphere',
+          level: language === 'ru' ? 'Все уровни' : 'All levels',
+          students: language === 'ru' ? '200+ студентов' : '200+ students',
+          image: 'https://images.pexels.com/photos/1181622/pexels-photo-1181622.jpeg?auto=compress&cs=tinysrgb&w=600',
+          href: '/club'
+        }
+      ].map((course) => (
+        <div 
+          key={course.title} 
+          className="group relative overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-gray-100"
+        >
+          <div className="relative h-48 overflow-hidden">
+            <Image
+              src={course.image}
+              alt={course.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+          </div>
+          
+          <div className="p-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              {course.title}
+            </h3>
+            
+            <div className="flex flex-wrap justify-between items-center mb-4 gap-2">
+              <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">
+                {course.level}
+              </span>
+            </div>
+            
+            <Link 
+              href={course.href}
+              className="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/90 transition-colors duration-300"
+            >
+              {language === 'ru' ? 'Подробнее' : 'Read More'}
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
         {/* Testimonials Section */}
 <section className="py-16">
   <div className="container mx-auto px-4">
