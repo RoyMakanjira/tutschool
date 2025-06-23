@@ -277,16 +277,16 @@ export default function HomePage() {
         reviews: "Посмотреть все отзывы",
         items: [
           {
-            name: "Анна К.",
-            text: "Мой ребенок с удовольствием ходит на занятия английским. За полгода виден значительный прогресс, особенно в разговорной речи.",
+            name: "Юлия Б.",
+            text: "Дочь занималась в мини-группе у Юлии. Это был наш первый опыт изучения английского. Тогда ей было 4 года, и это был мощный старт. Занимались 2 года и за это время ребенок набрал приличную базу, начала говорить на языке. Затем мы переехали, но сейчас с удовольствием оставляем отзыв. Дочь учится в школе с углубленным изучением английского и с самого начала не испытывает никаких проблем. Спасибо!",
           },
           {
-            name: "Дмитрий С.",
-            text: "Отличная школа с профессиональными преподавателями. Занимаюсь китайским уже год, и результаты превзошли мои ожидания.",
+            name: "Мария Стрельбицкая.",
+            text: "Занималась в TUT School в этом году, чтобы подготовиться к ЕГЭ по английскому. Было много практики с преподавателем и разбора лексики и грамматики. Я занималась онлайн, но иногда приходила на занятие вживую. Очень уютный кабинет для занятий, можно было даже чай себе сделать) В итоге, я сдала английский на 96 баллов! Это отличный результат, спасибо Юлии Викторовне, преподавателю TUT School. Было очень продуктивно и комфортно заниматься у вас!",
           },
           {
-            name: "Елена В.",
-            text: "Очень нравится дружелюбная атмосфера и индивидуальный подход. Преподаватели всегда готовы помочь и ответить на все вопросы.",
+            name: "Manizha F.",
+            text: "Замечательная школа по изучению английского языка! Сын занимается с Юлией с сентября месяца. Начинали с нуля. За это время ребенок уже читает, пишет, постоянно пополняет свой словарныц запас. Может составлять простейшие предложения и вопросы. А главное, на занятия ходит с большим удовольствием. До этого посещали разные курсы в Куркино (только песни пляски под англ детские песни). Никакого результата не было. А с Юлей все четко, структурировано, по делу. Оченб рекомендую данного педагога!",
           },
         ],
       },
@@ -435,16 +435,16 @@ export default function HomePage() {
         reviews: "Read More Reviews",
         items: [
           {
-            name: "Anna K.",
-            text: "My child enjoys attending English classes. There has been significant progress over six months, especially in speaking skills.",
+            name: "Julia B.",
+            text: "My daughter studied in a mini-group with Yulia. It was our first experience of learning English. She was 4 years old then, and it was a powerful start. We studied for 2 years and during this time the child gained a decent base, began to speak the language. Then we moved, but now we are happy to leave a review. My daughter studies at a school with in-depth study of English and has not experienced any problems from the very beginning. Thank you!",
           },
           {
-            name: "Dmitry S.",
-            text: "Excellent school with professional teachers. I've been studying Chinese for a year, and the results have exceeded my expectations.",
+            name: "Maria Strelbitskaya.",
+            text: "I studied at TUT School this year to prepare for the Unified State Exam in English. There was a lot of practice with the teacher and analysis of vocabulary and grammar. I studied online, but sometimes I came to class in person. A very cozy study room, you could even make yourself some tea) In the end, I passed the English exam with 96 points! This is an excellent result, thanks to Yulia Viktorovna, a teacher at TUT School. It was very productive and comfortable to study with you!",
           },
           {
-            name: "Elena V.",
-            text: "I really like the friendly atmosphere and individual approach. The teachers are always ready to help and answer all questions.",
+            name: "Manizha F.",
+            text: "A wonderful school for learning English! My son has been studying with Yulia since September. We started from scratch. During this time, the child already reads, writes, and constantly expands his vocabulary. He can make simple sentences and questions. And most importantly, he goes to classes with great pleasure. Before that, we attended different courses in Kurkino (only songs and dances to English children's songs). There was no result. But with Yulia, everything is clear, structured, and to the point. I highly recommend this teacher!",
           },
         ],
       },
