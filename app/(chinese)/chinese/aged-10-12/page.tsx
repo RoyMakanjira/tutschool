@@ -132,13 +132,28 @@ export default function Aged10to12Page()  {
                   "Культурные мероприятия и праздники",
                 ],
               },
+              
               cta: {
                 title: "Начните изучение китайского языка сегодня",
                 description: "Запишитесь на бесплатный пробный урок и откройте для своего ребенка мир новых возможностей",
                 button: "Записаться на пробный урок",
               },
+              
               languageToggle: "English",
             },
+             pricing: {
+        title: "СТОИМОСТЬ ОБУЧЕНИЯ",
+        items: [
+          {
+            type: "Мини-группы",
+            price: "от 1400 ₽/занятия"
+          },
+          {
+            type: "Индивидуальные занятия",
+            price: "от 3000 ₽/занятия"
+          }
+        ]
+      },
           },
           en: {
             schoolName: "Tut School",
@@ -237,6 +252,19 @@ export default function Aged10to12Page()  {
                   "Cultural events and celebrations",
                 ],
               },
+                pricing: {
+        title: "COURSE PRICING",
+        items: [
+          {
+            type: "Mini-groups",
+            price: "from 1500₽/lesson"
+          },
+          {
+            type: "Individual lessons",
+            price: "from 3000₽/lesson"
+          }
+        ]
+      },
               cta: {
                 title: "Start Learning Chinese Today",
                 description: "Sign up for a free trial lesson and open a world of new opportunities for your child",
@@ -244,6 +272,19 @@ export default function Aged10to12Page()  {
               },
               languageToggle: "Русский",
             },
+                pricing: {
+        title: "COURSE PRICING",
+        items: [
+          {
+            type: "Mini-groups",
+            price: "from 1400₽/lesson"
+          },
+          {
+            type: "Individual lessons",
+            price: "from 3000₽/lesson"
+          }
+        ]
+      },
           },
         };
     
@@ -268,6 +309,17 @@ export default function Aged10to12Page()  {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   }
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  }
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -756,6 +808,28 @@ export default function Aged10to12Page()  {
         </div>
       </section>
 
+       {/* Course Overview */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-8 md:grid-cols-3">
+            {t.chineseAged1012.overview.map((item, index) => (
+              <div
+                key={index}
+                className="rounded-lg bg-white p-6 shadow-lg transition-all hover:shadow-xl"
+              >
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-burgundy-100 text-burgundy-900">
+                  {index === 0 && <Clock className="h-6 w-6" />}
+                  {index === 1 && <BookOpen className="h-6 w-6" />}
+                  {index === 2 && <Trophy className="h-6 w-6" />}
+                </div>
+                <h3 className="mb-2 text-xl font-bold text-burgundy-900">{item.title}</h3>
+                <p className="text-gray-600">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Teaching Method */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -782,6 +856,37 @@ export default function Aged10to12Page()  {
             </div>
           </div>
         </div>
+      </section>
+
+       {/* Course Overview */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+            <motion.h2
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={fadeIn}
+              className="mb-12 text-center text-3xl font-bold"
+            >
+              {t.pricing.title}
+            </motion.h2>
+            <motion.div
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={staggerContainer}
+              className="grid gap-8 md:grid-cols-3"
+            >
+              {t.pricing.items.map((item, index) => (
+                <motion.div
+                  key={index}
+                  variants={fadeIn}
+                  className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
+                  <p className="text-3xl font-bold text-primary">{item.price}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
       </section>
 
       {/* CTA Section */}

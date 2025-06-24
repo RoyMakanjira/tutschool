@@ -1020,83 +1020,132 @@ export default function SchedulePage() {
           </div>
         </section>
 
-        {/* Pricing Section */}
-        <section className="bg-white py-16">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
-              variants={fadeIn}
-              className="mb-12 text-center"
-            >
-              <h2 className="mb-2 text-3xl font-bold text-primary">{t.pricesTitle}</h2>
-              <p className="mx-auto max-w-2xl text-lg text-gray-600">{t.pricesSubtitle}</p>
-            </motion.div>
+      // Replace the existing pricing section with this:
 
-            <motion.div
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
-              variants={staggerContainer}
-              className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-            >
-              {t.priceCards.map((card, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeIn}
-                  className={`relative overflow-hidden rounded-lg border ${
-                    card.featured
-                      ? "border-primary bg-primary/5 shadow-lg"
-                      : "border-gray-200 bg-white shadow-sm hover:shadow-md"
-                  } transition-all duration-300`}
-                >
-                  {card.featured && (
-                    <div className="absolute right-0 top-0 bg-primary px-3 py-1 text-xs font-medium text-white">
-                      {language === "ru" ? "Популярный" : "Popular"}
-                    </div>
-                  )}
-                  <div className="p-6">
-                    <h3 className="mb-4 text-xl font-bold text-gray-900">{card.title}</h3>
-                    <div className="mb-6">
-                      <span className="text-3xl font-bold text-primary">{card.price}</span>
-                      <span className="text-gray-600"> / {card.period}</span>
-                    </div>
-                    <ul className="mb-6 space-y-3">
-                      {card.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start">
-                          <svg
-                            className="mr-2 h-5 w-5 flex-shrink-0 text-primary"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M5 13l4 4L19 7"
-                            ></path>
-                          </svg>
-                          <span className="text-gray-600">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      href="/bookings"
-                      className={`block w-full rounded-lg ${
-                        card.featured
-                          ? "bg-primary text-white hover:bg-primary/90"
-                          : "bg-gray-100 text-primary hover:bg-gray-200"
-                      } px-4 py-3 text-center font-medium transition-colors`}
-                    >
-                      {card.cta}
-                    </Link>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+{/* Pricing Section */}
+<section className="bg-white py-16">
+  <div className="container mx-auto px-4">
+    <motion.div
+      initial="hidden"
+      animate={isLoaded ? "visible" : "hidden"}
+      variants={fadeIn}
+      className="mb-12 text-center"
+    >
+      <h2 className="mb-2 text-3xl font-bold text-primary">{t.pricesTitle}</h2>
+      <p className="mx-auto max-w-2xl text-lg text-gray-600">{t.pricesSubtitle}</p>
+    </motion.div>
+
+    <motion.div
+      initial="hidden"
+      animate={isLoaded ? "visible" : "hidden"}
+      variants={staggerContainer}
+      className="grid gap-8 md:grid-cols-2"
+    >
+      {/* Mini Groups Card */}
+      <motion.div
+        variants={fadeIn}
+        className="relative overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm hover:shadow-md transition-all duration-300"
+      >
+        <div className="p-6">
+          <h3 className="mb-4 text-xl font-bold text-gray-900">
+            {language === "ru" ? "Мини-группы" : "Mini Groups"}
+          </h3>
+          <div className="mb-6 grid grid-cols-2 gap-4">
+            <div className="rounded-lg bg-gray-50 p-4">
+              <h4 className="mb-2 text-sm font-medium text-gray-600">
+                {t.englishLanguage}
+              </h4>
+              <div>
+                <span className="text-2xl font-bold text-primary">5,000 ₽</span>
+                <span className="text-gray-600"> / {language === "ru" ? "месяц" : "month"}</span>
+              </div>
+              <p className="mt-2 text-sm text-gray-600">
+                {language === "ru" ? "8 занятий в месяц" : "8 lessons per month"}
+              </p>
+              <p className="text-sm text-gray-600">
+                {language === "ru" ? "60 минут / занятие" : "60 minutes / lesson"}
+              </p>
+            </div>
+            <div className="rounded-lg bg-gray-50 p-4">
+              <h4 className="mb-2 text-sm font-medium text-gray-600">
+                {t.chineseLanguage}
+              </h4>
+              <div>
+                <span className="text-2xl font-bold text-primary">6,000 ₽</span>
+                <span className="text-gray-600"> / {language === "ru" ? "месяц" : "month"}</span>
+              </div>
+              <p className="mt-2 text-sm text-gray-600">
+                {language === "ru" ? "8 занятий в месяц" : "8 lessons per month"}
+              </p>
+              <p className="text-sm text-gray-600">
+                {language === "ru" ? "60 минут / занятие" : "60 minutes / lesson"}
+              </p>
+            </div>
           </div>
-        </section>
+          <Link
+            href="/bookings"
+            className="block w-full rounded-lg bg-primary px-4 py-3 text-center font-medium text-white hover:bg-primary/90 transition-colors"
+          >
+            {language === "ru" ? "Записаться" : "Sign Up"}
+          </Link>
+        </div>
+      </motion.div>
+
+      {/* Individual Lessons Card */}
+      <motion.div
+        variants={fadeIn}
+        className="relative overflow-hidden rounded-lg border border-primary bg-primary/5 shadow-lg transition-all duration-300"
+      >
+        <div className="absolute right-0 top-0 bg-primary px-3 py-1 text-xs font-medium text-white">
+          {language === "ru" ? "Рекомендуем" : "Recommended"}
+        </div>
+        <div className="p-6">
+          <h3 className="mb-4 text-xl font-bold text-gray-900">
+            {language === "ru" ? "Индивидуальные занятия" : "Individual Lessons"}
+          </h3>
+          <div className="mb-6 grid grid-cols-2 gap-4">
+            <div className="rounded-lg bg-white p-4">
+              <h4 className="mb-2 text-sm font-medium text-gray-600">
+                {t.englishLanguage}
+              </h4>
+              <div>
+                <span className="text-2xl font-bold text-primary">12,000 ₽</span>
+                <span className="text-gray-600"> / {language === "ru" ? "месяц" : "month"}</span>
+              </div>
+              <p className="mt-2 text-sm text-gray-600">
+                {language === "ru" ? "8 занятий в месяц" : "8 lessons per month"}
+              </p>
+              <p className="text-sm text-gray-600">
+                {language === "ru" ? "60 минут / занятие" : "60 minutes / lesson"}
+              </p>
+            </div>
+            <div className="rounded-lg bg-white p-4">
+              <h4 className="mb-2 text-sm font-medium text-gray-600">
+                {t.chineseLanguage}
+              </h4>
+              <div>
+                <span className="text-2xl font-bold text-primary">14,000 ₽</span>
+                <span className="text-gray-600"> / {language === "ru" ? "месяц" : "month"}</span>
+              </div>
+              <p className="mt-2 text-sm text-gray-600">
+                {language === "ru" ? "8 занятий в месяц" : "8 lessons per month"}
+              </p>
+              <p className="text-sm text-gray-600">
+                {language === "ru" ? "60 минут / занятие" : "60 minutes / lesson"}
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/bookings"
+            className="block w-full rounded-lg bg-primary px-4 py-3 text-center font-medium text-white hover:bg-primary/90 transition-colors"
+          >
+            {language === "ru" ? "Записаться" : "Sign Up"}
+          </Link>
+        </div>
+      </motion.div>
+    </motion.div>
+  </div>
+</section>
 
         {/* CTA Section */}
         <section className="bg-primary py-16 text-white">

@@ -105,6 +105,19 @@ export default function Aged7to9Page() {
         { title: "Развитие языковых навыков", description: "Уроки по развитию навыков чтения, письма, говорения, понимания речи на слух", image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
         { title: "Знакомство с традициями и культурой англоязычных стран", description: "Страноведение на уроках и внеклассных мероприятиях", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
       ],
+      pricing: {
+        title: "СТОИМОСТЬ ОБУЧЕНИЯ",
+        items: [
+          {
+            type: "Мини-группы",
+            price: "от 1400 ₽/занятия"
+          },
+          {
+            type: "Индивидуальные занятия",
+            price: "от 3000 ₽/занятия"
+          }
+        ]
+      },
       schedule: [
         { day: "Вторник", times: ["9:00 - 10:00"] },
         { day: "Четверг", times: ["9:00 - 10:00"] },
@@ -174,6 +187,19 @@ export default function Aged7to9Page() {
         { title: "Developing language skills", description: "Lessons for reading, writing, speaking, and listening skills", image: "https://images.pexels.com/photos/8535227/pexels-photo-8535227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
         { title: "Learning about traditions and culture of English-speaking countries", description: "	Country studies during lessons and extracurricular events", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
       ],
+         pricing: {
+        title: "COURSE PRICING",
+        items: [
+          {
+            type: "Mini-groups",
+            price: "from 1400₽/month"
+          },
+          {
+            type: "Individual lessons",
+            price: "from 3000₽/hour"
+          }
+        ]
+      },
       schedule: [
         { day: "Tuesday", times: ["9:00 - 10:00"] },
         { day: "Thursday", times: ["9:00 - 10:00"] },
@@ -216,7 +242,15 @@ export default function Aged7to9Page() {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   }
-
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  }
   return (
     <div className="flex min-h-screen flex-col">
       <FadeIn>
@@ -743,6 +777,37 @@ export default function Aged7to9Page() {
             </div>
           </div>
         </section>
+
+        {/* Pricing */}
+                <section className="bg-gray-50 py-16">
+                  <div className="container mx-auto px-4">
+                    <motion.h2
+                      initial="hidden"
+                      animate={isLoaded ? "visible" : "hidden"}
+                      variants={fadeIn}
+                      className="mb-12 text-center text-3xl font-bold"
+                    >
+                      {t.pricing.title}
+                    </motion.h2>
+                    <motion.div
+                      initial="hidden"
+                      animate={isLoaded ? "visible" : "hidden"}
+                      variants={staggerContainer}
+                      className="grid gap-8 md:grid-cols-3"
+                    >
+                      {t.pricing.items.map((item, index) => (
+                        <motion.div
+                          key={index}
+                          variants={fadeIn}
+                          className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl"
+                        >
+                          <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
+                          <p className="text-3xl font-bold text-primary">{item.price}</p>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  </div>
+                </section>
 
         {/* CTA Section */}
         <section className="py-16 bg-[#5C162E] text-white">

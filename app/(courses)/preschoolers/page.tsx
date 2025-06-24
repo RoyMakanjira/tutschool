@@ -146,6 +146,19 @@ export default function PreschoolersPage() {
           times: ["9:00 - 10:00"],
         },
       ],
+                  pricing: {
+        title: "СТОИМОСТЬ ОБУЧЕНИЯ",
+        items: [
+          {
+            type: "Мини-группы",
+            price: "от 1400 ₽/занятия"
+          },
+          {
+            type: "Индивидуальные занятия",
+            price: "от 3000 ₽/занятия"
+          }
+        ]
+      },
       activities: [
         {
           title: "Изучение алфавита",
@@ -256,6 +269,19 @@ export default function PreschoolersPage() {
           times: ["9:00 - 10:00"],
         },
       ],
+             pricing: {
+        title: "COURSE PRICING",
+        items: [
+          {
+            type: "Mini-groups",
+            price: "from 1400₽/month"
+          },
+          {
+            type: "Individual lessons",
+            price: "from 3000₽/hour"
+          }
+        ]
+      },
       activities: [
         {
           title: "Learning the alphabet",
@@ -847,6 +873,37 @@ export default function PreschoolersPage() {
         </div>
       </div>
     </section>
+
+        {/* Pricing */}
+                <section className="bg-gray-50 py-16">
+                  <div className="container mx-auto px-4">
+                    <motion.h2
+                      initial="hidden"
+                      animate={isLoaded ? "visible" : "hidden"}
+                      variants={fadeIn}
+                      className="mb-12 text-center text-3xl font-bold"
+                    >
+                      {t.pricing.title}
+                    </motion.h2>
+                    <motion.div
+                      initial="hidden"
+                      animate={isLoaded ? "visible" : "hidden"}
+                      variants={staggerContainer}
+                      className="grid gap-8 md:grid-cols-3"
+                    >
+                      {t.pricing.items.map((item, index) => (
+                        <motion.div
+                          key={index}
+                          variants={fadeIn}
+                          className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl"
+                        >
+                          <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
+                          <p className="text-3xl font-bold text-primary">{item.price}</p>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  </div>
+                </section>
 
     {/* CTA Section */}
     <section className="bg-primary py-16 text-white">

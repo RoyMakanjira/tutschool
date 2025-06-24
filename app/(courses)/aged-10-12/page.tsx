@@ -131,6 +131,19 @@ export default function Aged10to12Page() {
         { title: "Проектная работа", description: "Создание презентаций и исследовательских проектов на английском", image: "/assets/children/project-work.jpg" },
         { title: "Расширение кругозора", description: "Контент, расширяющий как общие знания о мире, так и о культуре англоязычных стран", image: "/assets/children/TutSchool.jpg" },
       ],
+      pricing: {
+        title: "СТОИМОСТЬ ОБУЧЕНИЯ",
+        items: [
+          {
+            type: "Мини-группы",
+            price: "от 1400 ₽/занятия"
+          },
+          {
+            type: "Индивидуальные занятия",
+            price: "от 3000 ₽/занятия"
+          }
+        ]
+      },
       schedule: [
         { day: "Вторник", times: ["9:00 - 10:00"] },
         { day: "Четверг", times: ["9:00 - 10:00"] },
@@ -200,6 +213,19 @@ export default function Aged10to12Page() {
         { title: "Project work", description: "Creating presentations and research projects in English", image: "assets/children/project-work.jpg" },
         { title: "Broadening horizons", description: " content expanding general knowledge and culture of English-speaking countries", image: "assets/children/TutSchool.jpg" },
       ],
+        pricing: {
+        title: "COURSE PRICING",
+        items: [
+          {
+            type: "Mini-groups",
+            price: "from 1400₽/month"
+          },
+          {
+            type: "Individual lessons",
+            price: "from 3000₽/hour"
+          }
+        ]
+      },
       schedule: [
         { day: "Tuesday", times: ["9:00 - 10:00"] },
         { day: "Thursday", times: ["9:00 - 10:00"] },
@@ -238,6 +264,16 @@ export default function Aged10to12Page() {
   const toggleLanguage = () => setLanguage(language === "ru" ? "en" : "ru")
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen)
   const toggleDropdown = (dropdown: string) => setActiveDropdown(activeDropdown === dropdown ? null : dropdown)
+
+    const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  }
 
   // Components
   const TopBar = () => (
@@ -557,6 +593,41 @@ export default function Aged10to12Page() {
     </section>
   )
 
+  const PricingSection = () => (
+    <div>
+        {/* Pricing */}
+                <section className="bg-gray-50 py-16">
+                  <div className="container mx-auto px-4">
+                    <motion.h2
+                      initial="hidden"
+                      animate={isLoaded ? "visible" : "hidden"}
+                      variants={fadeIn}
+                      className="mb-12 text-center text-3xl font-bold"
+                    >
+                      {t.pricing.title}
+                    </motion.h2>
+                    <motion.div
+                      initial="hidden"
+                      animate={isLoaded ? "visible" : "hidden"}
+                      variants={staggerContainer}
+                      className="grid gap-8 md:grid-cols-3"
+                    >
+                      {t.pricing.items.map((item, index) => (
+                        <motion.div
+                          key={index}
+                          variants={fadeIn}
+                          className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl"
+                        >
+                          <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
+                          <p className="text-3xl font-bold text-primary">{item.price}</p>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  </div>
+                </section>
+    </div>
+  )
+
   const CTASection = () => (
     <section className="py-16 bg-primary text-white">
       <div className="container mx-auto px-4 text-center">
@@ -579,6 +650,7 @@ export default function Aged10to12Page() {
           <BenefitsSection />
           <ActivitiesSection />
           <ScheduleSection />
+          <PricingSection />
           <CTASection />
         </main>
 

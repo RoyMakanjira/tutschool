@@ -160,11 +160,11 @@ export default function ChineseAdults() {
             options: [
               {
                 title: "Мини-группы",
-                price: "1500 ₽/месяц",
+                price: "1500 ₽/занятия",
               },
               {
                 title: "Индивидуальные занятия",
-                price: "3000 ₽/месяц",
+                price: "3000 ₽/занятия",
               }
             ]
           },
@@ -299,12 +299,12 @@ export default function ChineseAdults() {
             options: [
               {
                 title: "Mini-groups",
-                price: "1500 ₽/month",
+                price: "1500 ₽/lesson",
               
               },
               {
                 title: "Individual lessons",
-                price: "3 000 ₽/month",
+                price: "3 000 ₽/lesson",
               }
             ]
           },
