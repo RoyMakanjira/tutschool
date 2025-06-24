@@ -117,7 +117,7 @@ const handleSubmit = async (e: React.FormEvent<BookingFormElement>) => {
       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
       formRef.current,
-      process.env.NEXT_PUBLIC_EMAILJS_USER_ID!
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
     );
 
     setFormSuccess(true);
