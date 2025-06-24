@@ -116,7 +116,7 @@ export default function ChineseAged79Page() {
         options: [
           {
             name: "Мини-группы",
-            price: "1400 ₽/месяц",
+            price: "1500 ₽/месяц",
           },
           {
             name: "Индивидуальные занятия",
@@ -204,7 +204,7 @@ export default function ChineseAged79Page() {
         options: [
           {
             name: "Mini-groups",
-            price: "1400 ₽/month",
+            price: "1500 ₽/month",
             
           },
           {
