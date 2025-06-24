@@ -607,15 +607,6 @@ export default function NewsPage() {
         <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
       </section>
 
-      <section className="relative bg-primary py-20 text-black">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <p className="mx-auto max-w-2xl text-lg text-white/80">{t.heroSubtitle}</p>
-          </div>
-        </div>
-        <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
-      </section>
-
       <section className="py-12 bg-white text-black">
   <div className="container mx-auto px-4">
     <p className="text-center text-lg mt-2">
@@ -624,25 +615,6 @@ export default function NewsPage() {
   </div>
 </section>
 
-
-      {/* CTA Section */}
-      <section className="bg-[#5C162E] py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-6 text-3xl font-bold text-white">
-            {t.ctaTitle}
-          </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-white/90">
-            {t.ctaSubtitle}
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-[#5C162E] transition-all hover:bg-gray-100 hover:shadow-lg"
-          >
-            {t.subscribe}
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
     </div>
   )
 }
