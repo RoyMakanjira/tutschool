@@ -801,6 +801,9 @@ export default function CreativeWorkshops() {
       {/* Workshop Categories */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
+           <FadeIn>
+            <h2 className="text-3xl font-bold mb-10 text-[#5C162E] text-center">{t.categories.title}</h2>
+          </FadeIn>
           <Tabs defaultValue="visual-arts" className="w-full">
             <TabsList className="grid w-full grid-cols-1 md:grid-cols-4 mb-8">
               <TabsTrigger value="visual-arts" className="relative overflow-hidden">

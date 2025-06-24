@@ -1,17 +1,29 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { Calendar, Clock, Users, MessageSquare, Phone, Mail, User, Check, AlertCircle, Loader2 } from "lucide-react"
+import emailjs from '@emailjs/browser'
 
-
+interface FormErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  serviceType?: string;
+  bookingDate?: string;
+  bookingTime?: string;
+  numberOfPeople?: string;
+  submit?: string;
+}
 
 export default function BookingPage() {
   const router = useRouter()
+  const formRef = useRef<HTMLFormElement>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
- 
+  const [formErrors, setFormErrors] = useState<FormErrors>({})
+  const [formSuccess, setFormSuccess] = useState(false)
 
-const serviceTypes = [
+  const serviceTypes = [
     // Английский язык
     "Английский для дошкольников",
     "Английский для детей 7-9 лет",
@@ -33,9 +45,96 @@ const serviceTypes = [
     // Общие программы
     "Мастер-класс",              
     "Разговорный клуб",          
-  
-];
+  ];
 
+  const validateForm = (formData: Record<string, string>) => {
+    const errors: FormErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+
+    if (!formData.name.trim()) errors.name = "Пожалуйста, введите ваше имя";
+    if (!formData.email.trim()) {
+      errors.email = "Пожалуйста, введите email";
+    } else if (!emailRegex.test(formData.email)) {
+      errors.email = "Пожалуйста, введите корректный email";
+    }
+    if (formData.phone && !phoneRegex.test(formData.phone)) {
+      errors.phone = "Пожалуйста, введите корректный номер телефона";
+    }
+    if (!formData.serviceType) errors.serviceType = "Пожалуйста, выберите услугу";
+    if (!formData.bookingDate) errors.bookingDate = "Пожалуйста, выберите дату";
+    if (!formData.bookingTime) errors.bookingTime = "Пожалуйста, выберите время";
+    if (!formData.numberOfPeople || Number(formData.numberOfPeople) < 1) {
+      errors.numberOfPeople = "Пожалуйста, укажите количество человек";
+    }
+
+    return errors;
+  };
+
+interface FormElements extends HTMLFormControlsCollection {
+  name: HTMLInputElement;
+  email: HTMLInputElement;
+  phone: HTMLInputElement;
+  serviceType: HTMLSelectElement;
+  bookingDate: HTMLInputElement;
+  bookingTime: HTMLInputElement;
+  numberOfPeople: HTMLInputElement;
+  specialRequests: HTMLTextAreaElement;
+}
+
+interface BookingFormElement extends HTMLFormElement {
+  readonly elements: FormElements;
+}
+
+const handleSubmit = async (e: React.FormEvent<BookingFormElement>) => {
+  e.preventDefault();
+  
+  const form = e.currentTarget;
+  const formData = {
+    name: form.elements.name.value,
+    email: form.elements.email.value,
+    phone: form.elements.phone.value,
+    serviceType: form.elements.serviceType.value,
+    bookingDate: form.elements.bookingDate.value,
+    bookingTime: form.elements.bookingTime.value,
+    numberOfPeople: form.elements.numberOfPeople.value,
+    specialRequests: form.elements.specialRequests.value,
+  };
+
+  const errors = validateForm(formData);
+  if (Object.keys(errors).length > 0) {
+    setFormErrors(errors);
+    return;
+  }
+
+  setFormErrors({});
+  setIsSubmitting(true);
+
+  try {
+    if (!formRef.current) return;
+    
+    await emailjs.sendForm(
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      formRef.current,
+      process.env.NEXT_PUBLIC_EMAILJS_USER_ID!
+    );
+
+    setFormSuccess(true);
+    form.reset();
+    
+    setTimeout(() => {
+      setFormSuccess(false);
+    }, 5000);
+  } catch (error) {
+    console.error('Error sending email:', error);
+    setFormErrors({ submit: "Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже или свяжитесь с нами по телефону." });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
+  const today = new Date().toISOString().split('T')[0];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
@@ -99,7 +198,7 @@ const serviceTypes = [
                     <Mail className="w-5 h-5 text-primary mt-1 mr-3" />
                     <div>
                       <h3 className="font-semibold">Электронная почта</h3>
-                      <p className="text-gray-600">info@tut-school.ru</p>
+                      <p className="text-gray-600">info@tutschool.ru</p>
                     </div>
                   </div>
                 </div>
@@ -119,8 +218,27 @@ const serviceTypes = [
               <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
                 <h2 className="text-2xl font-bold text-primary mb-6">Забронировать занятие</h2>
 
+                {formSuccess && (
+                  <div className="mb-6 p-4 bg-green-50 text-green-800 rounded-lg flex items-start">
+                    <Check className="w-5 h-5 mt-0.5 mr-2 text-green-600 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold">Запрос успешно отправлен!</h3>
+                      <p>Мы свяжемся с вами в ближайшее время для подтверждения бронирования.</p>
+                    </div>
+                  </div>
+                )}
 
-                <form id="booking-form">
+                {formErrors.submit && (
+                  <div className="mb-6 p-4 bg-red-50 text-red-800 rounded-lg flex items-start">
+                    <AlertCircle className="w-5 h-5 mt-0.5 mr-2 text-red-600 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold">Ошибка отправки</h3>
+                      <p>{formErrors.submit}</p>
+                    </div>
+                  </div>
+                )}
+
+                <form id="booking-form" ref={formRef} onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Name */}
                     <div className="col-span-2 md:col-span-1">
@@ -136,10 +254,11 @@ const serviceTypes = [
                           id="name"
                           name="name"
                           required
-                          className="pl-10 w-full rounded-md border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                          className={`pl-10 w-full rounded-md border ${formErrors.name ? 'border-red-500' : 'border-gray-300'} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
                           placeholder="Ваше полное имя"
                         />
                       </div>
+                      {formErrors.name && <p className="mt-1 text-sm text-red-600">{formErrors.name}</p>}
                     </div>
 
                     {/* Email */}
@@ -156,10 +275,11 @@ const serviceTypes = [
                           id="email"
                           name="email"
                           required
-                          className="pl-10 w-full rounded-md border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                          className={`pl-10 w-full rounded-md border ${formErrors.email ? 'border-red-500' : 'border-gray-300'} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
                           placeholder="Ваш адрес электронной почты"
                         />
                       </div>
+                      {formErrors.email && <p className="mt-1 text-sm text-red-600">{formErrors.email}</p>}
                     </div>
 
                     {/* Phone */}
@@ -175,10 +295,11 @@ const serviceTypes = [
                           type="tel"
                           id="phone"
                           name="phone"
-                          className="pl-10 w-full rounded-md border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                          className={`pl-10 w-full rounded-md border ${formErrors.phone ? 'border-red-500' : 'border-gray-300'} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
                           placeholder="Ваш номер телефона"
                         />
                       </div>
+                      {formErrors.phone && <p className="mt-1 text-sm text-red-600">{formErrors.phone}</p>}
                     </div>
 
                     {/* Service Type */}
@@ -190,7 +311,7 @@ const serviceTypes = [
                         id="serviceType"
                         name="serviceType"
                         required
-                        className="w-full rounded-md border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        className={`w-full rounded-md border ${formErrors.serviceType ? 'border-red-500' : 'border-gray-300'} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
                       >
                         <option value="">Выберите услугу</option>
                         {serviceTypes.map((service) => (
@@ -199,6 +320,7 @@ const serviceTypes = [
                           </option>
                         ))}
                       </select>
+                      {formErrors.serviceType && <p className="mt-1 text-sm text-red-600">{formErrors.serviceType}</p>}
                     </div>
 
                     {/* Date */}
@@ -215,10 +337,11 @@ const serviceTypes = [
                           id="bookingDate"
                           name="bookingDate"
                           required
-                          min={new Date().toISOString().split("T")[0]}
-                          className="pl-10 w-full rounded-md border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                          min={today}
+                          className={`pl-10 w-full rounded-md border ${formErrors.bookingDate ? 'border-red-500' : 'border-gray-300'} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
                         />
                       </div>
+                      {formErrors.bookingDate && <p className="mt-1 text-sm text-red-600">{formErrors.bookingDate}</p>}
                     </div>
 
                     {/* Time */}
@@ -237,9 +360,10 @@ const serviceTypes = [
                           required
                           min="09:00"
                           max="19:00"
-                          className="pl-10 w-full rounded-md border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                          className={`pl-10 w-full rounded-md border ${formErrors.bookingTime ? 'border-red-500' : 'border-gray-300'} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
                         />
                       </div>
+                      {formErrors.bookingTime && <p className="mt-1 text-sm text-red-600">{formErrors.bookingTime}</p>}
                     </div>
 
                     {/* Number of People */}
@@ -258,9 +382,10 @@ const serviceTypes = [
                           required
                           min="1"
                           defaultValue="1"
-                          className="pl-10 w-full rounded-md border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                          className={`pl-10 w-full rounded-md border ${formErrors.numberOfPeople ? 'border-red-500' : 'border-gray-300'} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
                         />
                       </div>
+                      {formErrors.numberOfPeople && <p className="mt-1 text-sm text-red-600">{formErrors.numberOfPeople}</p>}
                     </div>
 
                     {/* Special Requests */}
@@ -287,7 +412,7 @@ const serviceTypes = [
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 flex items-center justify-center"
+                        className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? (
                           <>
@@ -351,4 +476,3 @@ const serviceTypes = [
     </div>
   )
 }
-
