@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Calendar, Clock, Users, MessageSquare, Phone, Mail, User, Check, AlertCircle, Loader2 } from "lucide-react"
 import emailjs from '@emailjs/browser'
@@ -16,125 +16,200 @@ interface FormErrors {
   submit?: string;
 }
 
+interface BookingFormData {
+  name: string;
+  email: string;
+  phone: string;
+  serviceType: string;
+  bookingDate: string;
+  bookingTime: string;
+  numberOfPeople: number;
+  specialRequests: string;
+}
+
+interface ServiceGroup {
+  group: string;
+  services: string[];
+}
+
 export default function BookingPage() {
   const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formErrors, setFormErrors] = useState<FormErrors>({})
   const [formSuccess, setFormSuccess] = useState(false)
+  const [isHydrated, setIsHydrated] = useState(false)
+  const [today, setToday] = useState('')
 
-  const serviceTypes = [
-    // Английский язык
-    "Английский для дошкольников",
-    "Английский для детей 7-9 лет",
-    "Английский для детей 10-12 лет",
-    "Английский для подростков",
-    "Английский для взрослых",
-    "Мастер-класс по английскому",
-    "Разговорный клуб английского",
+  const [formData, setFormData] = useState<BookingFormData>({
+    name: '',
+    email: '',
+    phone: '',
+    serviceType: '',
+    bookingDate: '',
+    bookingTime: '',
+    numberOfPeople: 1,
+    specialRequests: ''
+  })
 
-    // Китайский язык
-    "Китайский для дошкольников",
-    "Китайский для детей 7-9 лет",
-    "Китайский для детей 10-12 лет",
-    "Китайский для подростков",
-    "Китайский для взрослых",
-    "Мастер-класс по китайскому",
-    "Разговорный клуб китайского",
-
-    // Общие программы
-    "Мастер-класс",              
-    "Разговорный клуб",          
-  ];
-
-  const validateForm = (formData: Record<string, string>) => {
-    const errors: FormErrors = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
-
-    if (!formData.name.trim()) errors.name = "Пожалуйста, введите ваше имя";
-    if (!formData.email.trim()) {
-      errors.email = "Пожалуйста, введите email";
-    } else if (!emailRegex.test(formData.email)) {
-      errors.email = "Пожалуйста, введите корректный email";
+  const serviceGroups: ServiceGroup[] = [
+    {
+      group: "Английский язык",
+      services: [
+        "Английский для дошкольников",
+        "Английский для детей 7-9 лет",
+        "Английский для детей 10-12 лет",
+        "Английский для подростков",
+        "Английский для взрослых",
+        "Мастер-класс по английскому",
+        "Разговорный клуб английского"
+      ]
+    },
+    {
+      group: "Китайский язык",
+      services: [
+        "Китайский для дошкольников",
+        "Китайский для детей 7-9 лет",
+        "Китайский для детей 10-12 лет",
+        "Китайский для подростков",
+        "Китайский для взрослых",
+        "Мастер-класс по китайскому",
+        "Разговорный клуб китайского"
+      ]
+    },
+    {
+      group: "Общие программы",
+      services: [
+        "Мастер-класс",
+        "Разговорный клуб"          
+      ]
     }
-    if (formData.phone && !phoneRegex.test(formData.phone)) {
-      errors.phone = "Пожалуйста, введите корректный номер телефона";
+  ]
+
+  useEffect(() => {
+    setIsHydrated(true)
+    setToday(new Date().toISOString().split('T')[0])
+    
+    try {
+      if (!process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 
+          !process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 
+          !process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID) {
+        throw new Error("EmailJS configuration is missing")
+      }
+      emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY)
+    } catch (error) {
+      console.error('EmailJS initialization error:', error)
+      setFormErrors({ 
+        submit: "Форма временно недоступна. Пожалуйста, свяжитесь с нами по телефону." 
+      })
     }
-    if (!formData.serviceType) errors.serviceType = "Пожалуйста, выберите услугу";
-    if (!formData.bookingDate) errors.bookingDate = "Пожалуйста, выберите дату";
-    if (!formData.bookingTime) errors.bookingTime = "Пожалуйста, выберите время";
-    if (!formData.numberOfPeople || Number(formData.numberOfPeople) < 1) {
-      errors.numberOfPeople = "Пожалуйста, укажите количество человек";
+  }, [])
+
+  const validateForm = (data: BookingFormData) => {
+    const errors: FormErrors = {}
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
+
+    if (!data.name.trim()) errors.name = "Пожалуйста, введите ваше имя"
+    if (!data.email.trim()) {
+      errors.email = "Пожалуйста, введите email"
+    } else if (!emailRegex.test(data.email)) {
+      errors.email = "Пожалуйста, введите корректный email"
+    }
+    if (data.phone && !phoneRegex.test(data.phone)) {
+      errors.phone = "Пожалуйста, введите корректный номер телефона"
+    }
+    if (!data.serviceType) errors.serviceType = "Пожалуйста, выберите услугу"
+    if (!data.bookingDate) errors.bookingDate = "Пожалуйста, выберите дату"
+    if (!data.bookingTime) errors.bookingTime = "Пожалуйста, выберите время"
+    if (!data.numberOfPeople || data.numberOfPeople < 1) {
+      errors.numberOfPeople = "Пожалуйста, укажите количество человек"
     }
 
-    return errors;
-  };
-
-interface FormElements extends HTMLFormControlsCollection {
-  name: HTMLInputElement;
-  email: HTMLInputElement;
-  phone: HTMLInputElement;
-  serviceType: HTMLSelectElement;
-  bookingDate: HTMLInputElement;
-  bookingTime: HTMLInputElement;
-  numberOfPeople: HTMLInputElement;
-  specialRequests: HTMLTextAreaElement;
-}
-
-interface BookingFormElement extends HTMLFormElement {
-  readonly elements: FormElements;
-}
-
-const handleSubmit = async (e: React.FormEvent<BookingFormElement>) => {
-  e.preventDefault();
-  
-  const form = e.currentTarget;
-  const formData = {
-    name: form.elements.name.value,
-    email: form.elements.email.value,
-    phone: form.elements.phone.value,
-    serviceType: form.elements.serviceType.value,
-    bookingDate: form.elements.bookingDate.value,
-    bookingTime: form.elements.bookingTime.value,
-    numberOfPeople: form.elements.numberOfPeople.value,
-    specialRequests: form.elements.specialRequests.value,
-  };
-
-  const errors = validateForm(formData);
-  if (Object.keys(errors).length > 0) {
-    setFormErrors(errors);
-    return;
+    return errors
   }
 
-  setFormErrors({});
-  setIsSubmitting(true);
-
-  try {
-    if (!formRef.current) return;
-    
-    await emailjs.sendForm(
-      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-      formRef.current,
-      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-    );
-
-    setFormSuccess(true);
-    form.reset();
-    
-    setTimeout(() => {
-      setFormSuccess(false);
-    }, 5000);
-  } catch (error) {
-    console.error('Error sending email:', error);
-    setFormErrors({ submit: "Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже или свяжитесь с нами по телефону." });
-  } finally {
-    setIsSubmitting(false);
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: name === 'numberOfPeople' ? parseInt(value) || 0 : value
+    }))
   }
-};
 
-  const today = new Date().toISOString().split('T')[0];
+  const getErrorMessage = (error: any): string => {
+    if (error?.status === 0) return "Нет соединения с интернетом"
+    if (error?.message?.includes("Invalid public key")) return "Ошибка конфигурации email сервиса"
+    if (error?.message?.includes("Service not found")) return "Ошибка конфигурации шаблона email"
+    if (error?.status === 429) return "Слишком много запросов. Пожалуйста, попробуйте позже"
+    if (error?.status === 400) return "Неверные данные формы"
+    if (error?.message) return error.message
+    
+    return "Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже или свяжитесь с нами по телефону."
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    const errors = validateForm(formData)
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors)
+      return
+    }
+
+    setFormErrors({})
+    setIsSubmitting(true)
+
+    try {
+      if (!formRef.current) {
+        throw new Error("Form reference is missing")
+      }
+      
+      const result = await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formRef.current,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      )
+
+      if (result.status !== 200) {
+        throw {
+          status: result.status,
+          text: result.text,
+          message: `EmailJS returned status ${result.status}`
+        }
+      }
+
+      setFormSuccess(true)
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        serviceType: '',
+        bookingDate: '',
+        bookingTime: '',
+        numberOfPeople: 1,
+        specialRequests: ''
+      })
+      
+      setTimeout(() => setFormSuccess(false), 5000)
+    } catch (error) {
+      console.error('Booking submission error:', error)
+      setFormErrors({ submit: getErrorMessage(error) })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  if (!isHydrated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="animate-spin h-8 w-8 text-primary" />
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
@@ -153,7 +228,7 @@ const handleSubmit = async (e: React.FormEvent<BookingFormElement>) => {
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
             className="relative block w-full h-12 text-white"
-            fill="currentColor"
+            aria-hidden="true"
           >
             <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C0,0,0,0,0,0Z"></path>
           </svg>
@@ -219,21 +294,38 @@ const handleSubmit = async (e: React.FormEvent<BookingFormElement>) => {
                 <h2 className="text-2xl font-bold text-primary mb-6">Забронировать занятие</h2>
 
                 {formSuccess && (
-                  <div className="mb-6 p-4 bg-green-50 text-green-800 rounded-lg flex items-start">
-                    <Check className="w-5 h-5 mt-0.5 mr-2 text-green-600 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-semibold">Запрос успешно отправлен!</h3>
-                      <p>Мы свяжемся с вами в ближайшее время для подтверждения бронирования.</p>
+                  <div className="mb-6 p-4 bg-green-50 text-green-800 rounded-lg border border-green-200">
+                    <div className="flex items-start">
+                      <Check className="w-5 h-5 mt-0.5 mr-2 text-green-600 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-semibold">Запрос успешно отправлен!</h3>
+                        <p>Мы свяжемся с вами в ближайшее время для подтверждения бронирования.</p>
+                        <p className="mt-2 text-sm text-green-700">
+                          Наш администратор может связаться с вами по указанному телефону для уточнения деталей.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 )}
 
                 {formErrors.submit && (
-                  <div className="mb-6 p-4 bg-red-50 text-red-800 rounded-lg flex items-start">
-                    <AlertCircle className="w-5 h-5 mt-0.5 mr-2 text-red-600 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-semibold">Ошибка отправки</h3>
-                      <p>{formErrors.submit}</p>
+                  <div className="mb-6 p-4 bg-red-50 text-red-800 rounded-lg border border-red-200">
+                    <div className="flex items-start">
+                      <AlertCircle className="w-5 h-5 mt-0.5 mr-2 text-red-600 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-semibold">Ошибка отправки</h3>
+                        <p>{formErrors.submit}</p>
+                        <div className="mt-3 pt-3 border-t border-red-200">
+                          <p className="text-sm text-red-700">
+                            Вы можете:
+                          </p>
+                          <ul className="list-disc list-inside text-sm text-red-700 mt-1 space-y-1">
+                            <li>Попробовать отправить форму еще раз</li>
+                            <li>Связаться с нами по телефону: +7 (983) 600-00-00</li>
+                            <li>Написать нам на email: info@tutschool.ru</li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -253,6 +345,8 @@ const handleSubmit = async (e: React.FormEvent<BookingFormElement>) => {
                           type="text"
                           id="name"
                           name="name"
+                          value={formData.name}
+                          onChange={handleChange}
                           required
                           className={`pl-10 w-full rounded-md border ${formErrors.name ? 'border-red-500' : 'border-gray-300'} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
                           placeholder="Ваше полное имя"
@@ -274,6 +368,8 @@ const handleSubmit = async (e: React.FormEvent<BookingFormElement>) => {
                           type="email"
                           id="email"
                           name="email"
+                          value={formData.email}
+                          onChange={handleChange}
                           required
                           className={`pl-10 w-full rounded-md border ${formErrors.email ? 'border-red-500' : 'border-gray-300'} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
                           placeholder="Ваш адрес электронной почты"
@@ -295,6 +391,8 @@ const handleSubmit = async (e: React.FormEvent<BookingFormElement>) => {
                           type="tel"
                           id="phone"
                           name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
                           className={`pl-10 w-full rounded-md border ${formErrors.phone ? 'border-red-500' : 'border-gray-300'} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
                           placeholder="Ваш номер телефона"
                         />
@@ -310,14 +408,20 @@ const handleSubmit = async (e: React.FormEvent<BookingFormElement>) => {
                       <select
                         id="serviceType"
                         name="serviceType"
+                        value={formData.serviceType}
+                        onChange={handleChange}
                         required
                         className={`w-full rounded-md border ${formErrors.serviceType ? 'border-red-500' : 'border-gray-300'} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
                       >
                         <option value="">Выберите услугу</option>
-                        {serviceTypes.map((service) => (
-                          <option key={service} value={service}>
-                            {service}
-                          </option>
+                        {serviceGroups.map((group) => (
+                          <optgroup key={group.group} label={group.group}>
+                            {group.services.map((service) => (
+                              <option key={service} value={service}>
+                                {service}
+                              </option>
+                            ))}
+                          </optgroup>
                         ))}
                       </select>
                       {formErrors.serviceType && <p className="mt-1 text-sm text-red-600">{formErrors.serviceType}</p>}
@@ -336,6 +440,8 @@ const handleSubmit = async (e: React.FormEvent<BookingFormElement>) => {
                           type="date"
                           id="bookingDate"
                           name="bookingDate"
+                          value={formData.bookingDate}
+                          onChange={handleChange}
                           required
                           min={today}
                           className={`pl-10 w-full rounded-md border ${formErrors.bookingDate ? 'border-red-500' : 'border-gray-300'} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
@@ -357,6 +463,8 @@ const handleSubmit = async (e: React.FormEvent<BookingFormElement>) => {
                           type="time"
                           id="bookingTime"
                           name="bookingTime"
+                          value={formData.bookingTime}
+                          onChange={handleChange}
                           required
                           min="09:00"
                           max="19:00"
@@ -379,9 +487,10 @@ const handleSubmit = async (e: React.FormEvent<BookingFormElement>) => {
                           type="number"
                           id="numberOfPeople"
                           name="numberOfPeople"
+                          value={formData.numberOfPeople}
+                          onChange={handleChange}
                           required
                           min="1"
-                          defaultValue="1"
                           className={`pl-10 w-full rounded-md border ${formErrors.numberOfPeople ? 'border-red-500' : 'border-gray-300'} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
                         />
                       </div>
@@ -400,6 +509,8 @@ const handleSubmit = async (e: React.FormEvent<BookingFormElement>) => {
                         <textarea
                           id="specialRequests"
                           name="specialRequests"
+                          value={formData.specialRequests}
+                          onChange={handleChange}
                           rows={4}
                           className="pl-10 w-full rounded-md border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                           placeholder="Любые особые требования или дополнительная информация"
