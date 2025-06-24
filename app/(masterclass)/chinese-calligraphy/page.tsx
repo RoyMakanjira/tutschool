@@ -722,45 +722,12 @@ export default function ChineseCalligraphy() {
                     <li key={index}>{item}</li>
                   ))}
                 </ul>
-                <button className="bg-[#5C162E] hover:bg-[#4a1125] text-white px-6 py-2 rounded-md">
+                <a href='/bookings' className="bg-[#5C162E] hover:bg-[#4a1125] text-white px-6 py-2 rounded-md">
                   {t.cta.button1}
-                </button>
+                </a>
               </FadeIn>
             </div>
             <div>
-              <FadeIn delay={0.2}>
-                <div className="border border-[#5C162E]/20 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold mb-4 text-[#5C162E]">{t.details.title}</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <Calendar className="h-5 w-5 text-[#5C162E] mt-0.5" />
-                      <div>
-                        <p className="font-medium">{t.details.dates}</p>
-                        <p className="text-gray-600">{t.details.datesValue}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Clock className="h-5 w-5 text-[#5C162E] mt-0.5" />
-                      <div>
-                        <p className="font-medium">{t.details.schedule}</p>
-                        <p className="text-gray-600">{t.details.scheduleValue}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <MapPin className="h-5 w-5 text-[#5C162E] mt-0.5" />
-                      <div>
-                        <p className="font-medium">{t.details.location}</p>
-                        <p className="text-gray-600">{t.details.locationValue}</p>
-                      </div>
-                    </div>
-                    <div className="pt-2">
-                      <p className="font-medium">{t.details.fee}</p>
-                      <p className="text-2xl font-bold text-[#5C162E]">{t.details.feeValue}</p>
-                      <p className="text-gray-600 text-sm">{t.details.materials}</p>
-                    </div>
-                  </div>
-                </div>
-              </FadeIn>
             </div>
           </div>
         </div>
@@ -769,9 +736,6 @@ export default function ChineseCalligraphy() {
       {/* Gallery Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <FadeIn>
-            <h2 className="text-3xl font-bold mb-10 text-[#5C162E]">{t.gallery.title}</h2>
-          </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[1, ].map((item) => (
               <FadeIn key={item} delay={item * 0.05}>

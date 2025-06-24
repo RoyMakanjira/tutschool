@@ -793,41 +793,6 @@ export default function CreativeWorkshops() {
               </FadeIn>
             </div>
             <div>
-              <FadeIn delay={0.2}>
-                <div className="border border-[#5C162E]/20 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold mb-4 text-[#5C162E]">{t.details.title}</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <Calendar className="h-5 w-5 text-[#5C162E] mt-0.5" />
-                      <div>
-                        <p className="font-medium">{t.details.schedule}</p>
-                        <p className="text-gray-600">{t.details.scheduleValue}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Clock className="h-5 w-5 text-[#5C162E] mt-0.5" />
-                      <div>
-                        <p className="font-medium">{t.details.duration}</p>
-                        <p className="text-gray-600">{t.details.durationValue}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Users className="h-5 w-5 text-[#5C162E] mt-0.5" />
-                      <div>
-                        <p className="font-medium">{t.details.classSize}</p>
-                        <p className="text-gray-600">{t.details.classSizeValue}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <MapPin className="h-5 w-5 text-[#5C162E] mt-0.5" />
-                      <div>
-                        <p className="font-medium">{t.details.location}</p>
-                        <p className="text-gray-600">{t.details.locationValue}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </FadeIn>
             </div>
           </div>
         </div>
@@ -836,10 +801,6 @@ export default function CreativeWorkshops() {
       {/* Workshop Categories */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <FadeIn>
-            <h2 className="text-3xl font-bold mb-10 text-[#5C162E] text-center">{t.categories.title}</h2>
-          </FadeIn>
-
           <Tabs defaultValue="visual-arts" className="w-full">
             <TabsList className="grid w-full grid-cols-1 md:grid-cols-4 mb-8">
               <TabsTrigger value="visual-arts" className="relative overflow-hidden">
@@ -871,12 +832,10 @@ export default function CreativeWorkshops() {
                       <div className="p-6">
                         <h3 className="text-lg font-semibold mb-2">{workshop.title}</h3>
                         <div className="flex justify-between items-center mb-4">
-                          <span className="text-gray-600">{workshop.duration}</span>
+                          
                           
                         </div>
-                        <a href="/bookings" className="w-full border border-[#5C162E] text-[#5C162E] hover:bg-[#5C162E] hover:text-white px-4 py-2 rounded-md transition-colors">
-                          {language === "ru" ? "Подробнее" : "Learn More"}
-                        </a>
+                
                       </div>
                     </div>
                   </FadeIn>
