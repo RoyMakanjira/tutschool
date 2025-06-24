@@ -92,7 +92,7 @@ export default function AdultsPage() {
     ru: {
       schoolName: "Tut School",
       schoolSubtitle: "Курсы иностранных языков",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
       rating: "4.8 на Яндексе",
@@ -220,16 +220,12 @@ export default function AdultsPage() {
         title: "СТОИМОСТЬ ОБУЧЕНИЯ",
         items: [
           {
-            type: "Индивидуальные занятия",
-            price: "от 2000₽/час"
-          },
-          {
             type: "Мини-группы",
-            price: "от 4500₽/месяц"
+            price: "от 1400 ₽/занятия"
           },
           {
-            type: "Стандартные группы",
-            price: "от 3500₽/месяц"
+            type: "Индивидуальные занятия",
+            price: "от 3000 ₽/занятия"
           }
         ]
       },
@@ -243,7 +239,7 @@ export default function AdultsPage() {
     en: {
       schoolName: "Tut School",
       schoolSubtitle: "Foreign Language Courses",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
       rating: "4.8 on Yandex",
@@ -374,16 +370,12 @@ export default function AdultsPage() {
         title: "COURSE PRICING",
         items: [
           {
-            type: "Individual lessons",
-            price: "from 2000₽/hour"
-          },
-          {
             type: "Mini-groups",
-            price: "from 4500₽/month"
+            price: "from 1400₽/month"
           },
           {
-            type: "Standard groups",
-            price: "from 3500₽/month"
+            type: "Individual lessons",
+            price: "from 3000₽/hour"
           }
         ]
       },

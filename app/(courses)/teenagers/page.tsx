@@ -48,7 +48,7 @@ export default function TeenagersPage() {
     ru: {
       schoolName: "Tut School",
       schoolSubtitle: "Курсы иностранных языков",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
       rating: "4.8 на Яндексе",
@@ -120,21 +120,16 @@ export default function TeenagersPage() {
         title: "Тарифы",
         plans: [
           {
-            name: "Standard",
-            price: "6,500 ₽/мес",
-            features: ["8 занятий в месяц", "Группа 6-8 человек"],
+            name: "Мини-группы",
+            price: "от 1400 ₽/занятия",
+            features: ["", ""],
           },
           {
-            name: "Intensive",
-            price: "9,800 ₽/мес",
-            features: ["12 занятий в месяц", "Подготовка к экзаменам"],
+            name: "Индивидуальные занятия",
+            price: "от 3000 ₽/занятия",
+            features: ["", ""],
             popular: true,
-          },
-          {
-            name: "Private",
-            price: "1,500 ₽/занятие",
-            features: ["Персональная программа", "1 на 1 с преподавателем"],
-          },
+          }
         ],
       },
       schedule: [
@@ -146,7 +141,7 @@ export default function TeenagersPage() {
     en: {
       schoolName: "Tut School",
       schoolSubtitle: "Foreign Language Courses",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
       rating: "4.8 on Yandex",
@@ -218,21 +213,16 @@ export default function TeenagersPage() {
         title: "Pricing Plans",
         plans: [
           {
-            name: "Standard",
-            price: "6,500 RUB/mo",
-            features: ["8 classes per month", "Group of 6-8 students"],
+            name: "Mini Groups",
+            price: "from 1400₽/month",
+            
           },
           {
-            name: "Intensive",
-            price: "9,800 RUB/mo",
-            features: ["12 classes per month", "Exam preparation"],
+            name: "Individual lessons",
+            price: "from 3000₽/hour",
+            
             popular: true,
-          },
-          {
-            name: "Private",
-            price: "1,500 RUB/class",
-            features: ["Personalized program", "1-on-1 with teacher"],
-          },
+          }
         ],
       },
       schedule: [
@@ -850,14 +840,7 @@ export default function TeenagersPage() {
                   )}
                   <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
                   <p className="text-2xl font-bold mb-6">{plan.price}</p>
-                  <ul className="space-y-3 mb-6">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-gray-600">
-                        <Check className="w-5 h-5 text-[#5C162E] mr-2" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                  
                 </motion.div>
               ))}
             </div>

@@ -1,44 +1,42 @@
 'use client'
 
 import { useState, useRef, useEffect } from "react"
-import { useRouter } from "next/navigation"
 import { Calendar, Clock, Users, MessageSquare, Phone, Mail, User, Check, AlertCircle, Loader2 } from "lucide-react"
 import emailjs from '@emailjs/browser'
 
 interface FormErrors {
-  name?: string;
-  email?: string;
-  phone?: string;
-  serviceType?: string;
-  bookingDate?: string;
-  bookingTime?: string;
-  numberOfPeople?: string;
-  submit?: string;
+  name?: string
+  email?: string
+  phone?: string
+  serviceType?: string
+  bookingDate?: string
+  bookingTime?: string
+  numberOfPeople?: string
+  submit?: string
 }
 
 interface BookingFormData {
-  name: string;
-  email: string;
-  phone: string;
-  serviceType: string;
-  bookingDate: string;
-  bookingTime: string;
-  numberOfPeople: number;
-  specialRequests: string;
+  name: string
+  email: string
+  phone: string
+  serviceType: string
+  bookingDate: string
+  bookingTime: string
+  numberOfPeople: number
+  specialRequests: string
 }
 
 interface ServiceGroup {
-  group: string;
-  services: string[];
+  group: string
+  services: string[]
 }
 
 export default function BookingPage() {
-  const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formErrors, setFormErrors] = useState<FormErrors>({})
   const [formSuccess, setFormSuccess] = useState(false)
-  const [isHydrated, setIsHydrated] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
   const [today, setToday] = useState('')
 
   const [formData, setFormData] = useState<BookingFormData>({
@@ -87,25 +85,25 @@ export default function BookingPage() {
   ]
 
   useEffect(() => {
-    setIsHydrated(true)
-    setToday(new Date().toISOString().split('T')[0])
+    setIsMounted(true)
     
-    try {
-      if (!process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 
-          !process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 
-          !process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID) {
-        throw new Error("EmailJS configuration is missing")
+    const now = new Date()
+    const utcDate = new Date(now.getTime() + now.getTimezoneOffset() * 60000)
+    setToday(utcDate.toISOString().split('T')[0])
+
+    if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
+      try {
+        emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY)
+      } catch (err) {
+        console.error('EmailJS initialization error:', err)
+        setFormErrors({ 
+          submit: "Форма временно недоступна. Пожалуйста, свяжитесь с нами по телефону." 
+        })
       }
-      emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY)
-    } catch (error) {
-      console.error('EmailJS initialization error:', error)
-      setFormErrors({ 
-        submit: "Форма временно недоступна. Пожалуйста, свяжитесь с нами по телефону." 
-      })
     }
   }, [])
 
-  const validateForm = (data: BookingFormData) => {
+  const validateForm = (data: BookingFormData): FormErrors => {
     const errors: FormErrors = {}
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
@@ -139,17 +137,6 @@ export default function BookingPage() {
     }))
   }
 
-  const getErrorMessage = (error: any): string => {
-    if (error?.status === 0) return "Нет соединения с интернетом"
-    if (error?.message?.includes("Invalid public key")) return "Ошибка конфигурации email сервиса"
-    if (error?.message?.includes("Service not found")) return "Ошибка конфигурации шаблона email"
-    if (error?.status === 429) return "Слишком много запросов. Пожалуйста, попробуйте позже"
-    if (error?.status === 400) return "Неверные данные формы"
-    if (error?.message) return error.message
-    
-    return "Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже или свяжитесь с нами по телефону."
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
@@ -164,13 +151,25 @@ export default function BookingPage() {
 
     try {
       if (!formRef.current) {
-        throw new Error("Form reference is missing")
+        throw new Error('Form reference is not available')
       }
-      
-      const result = await emailjs.sendForm(
+
+      // Create a new form data object with EmailJS expected field names
+      const emailJsFormData = {
+        user_name: formData.name,
+        user_email: formData.email,
+        user_phone: formData.phone,
+        service_type: formData.serviceType,
+        booking_date: formData.bookingDate,
+        booking_time: formData.bookingTime,
+        number_of_people: formData.numberOfPeople,
+        special_requests: formData.specialRequests
+      }
+
+      const result = await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        formRef.current,
+        emailJsFormData,
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
 
@@ -178,7 +177,7 @@ export default function BookingPage() {
         throw {
           status: result.status,
           text: result.text,
-          message: `EmailJS returned status ${result.status}`
+          message: 'Email service returned an error'
         }
       }
 
@@ -193,17 +192,26 @@ export default function BookingPage() {
         numberOfPeople: 1,
         specialRequests: ''
       })
-      
+
       setTimeout(() => setFormSuccess(false), 5000)
-    } catch (error) {
+    } catch (error: any) {
       console.error('Booking submission error:', error)
-      setFormErrors({ submit: getErrorMessage(error) })
+      
+      let errorMessage = "Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже или свяжитесь с нами по телефону."
+      
+      if (error?.status === 412) {
+        errorMessage = "Неверные данные формы. Пожалуйста, проверьте все поля."
+      } else if (error?.message) {
+        errorMessage = error.message
+      }
+      
+      setFormErrors({ submit: errorMessage })
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  if (!isHydrated) {
+  if (!isMounted) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="animate-spin h-8 w-8 text-primary" />
@@ -223,12 +231,13 @@ export default function BookingPage() {
             </p>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden" suppressHydrationWarning>
           <svg
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
             className="relative block w-full h-12 text-white"
             aria-hidden="true"
+            suppressHydrationWarning
           >
             <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C0,0,0,0,0,0Z"></path>
           </svg>
@@ -294,38 +303,21 @@ export default function BookingPage() {
                 <h2 className="text-2xl font-bold text-primary mb-6">Забронировать занятие</h2>
 
                 {formSuccess && (
-                  <div className="mb-6 p-4 bg-green-50 text-green-800 rounded-lg border border-green-200">
-                    <div className="flex items-start">
-                      <Check className="w-5 h-5 mt-0.5 mr-2 text-green-600 flex-shrink-0" />
-                      <div>
-                        <h3 className="font-semibold">Запрос успешно отправлен!</h3>
-                        <p>Мы свяжемся с вами в ближайшее время для подтверждения бронирования.</p>
-                        <p className="mt-2 text-sm text-green-700">
-                          Наш администратор может связаться с вами по указанному телефону для уточнения деталей.
-                        </p>
-                      </div>
+                  <div className="mb-6 p-4 bg-green-50 text-green-800 rounded-lg flex items-start">
+                    <Check className="w-5 h-5 mt-0.5 mr-2 text-green-600 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold">Запрос успешно отправлен!</h3>
+                      <p>Мы свяжемся с вами в ближайшее время для подтверждения бронирования.</p>
                     </div>
                   </div>
                 )}
 
                 {formErrors.submit && (
-                  <div className="mb-6 p-4 bg-red-50 text-red-800 rounded-lg border border-red-200">
-                    <div className="flex items-start">
-                      <AlertCircle className="w-5 h-5 mt-0.5 mr-2 text-red-600 flex-shrink-0" />
-                      <div>
-                        <h3 className="font-semibold">Ошибка отправки</h3>
-                        <p>{formErrors.submit}</p>
-                        <div className="mt-3 pt-3 border-t border-red-200">
-                          <p className="text-sm text-red-700">
-                            Вы можете:
-                          </p>
-                          <ul className="list-disc list-inside text-sm text-red-700 mt-1 space-y-1">
-                            <li>Попробовать отправить форму еще раз</li>
-                            <li>Связаться с нами по телефону: +7 (983) 600-00-00</li>
-                            <li>Написать нам на email: info@tutschool.ru</li>
-                          </ul>
-                        </div>
-                      </div>
+                  <div className="mb-6 p-4 bg-red-50 text-red-800 rounded-lg flex items-start">
+                    <AlertCircle className="w-5 h-5 mt-0.5 mr-2 text-red-600 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold">Ошибка отправки</h3>
+                      <p>{formErrors.submit}</p>
                     </div>
                   </div>
                 )}

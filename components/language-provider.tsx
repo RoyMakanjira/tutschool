@@ -13,7 +13,7 @@ type LanguageContextType = {
 
 const LanguageContext = createContext<LanguageContextType>({
   language: "ru",
-  setLanguage: () => {},
+  setLanguage: () => { },
   t: (_, fallback) => fallback,
 })
 
@@ -23,8 +23,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<LanguageType>("ru")
   const [translations, setTranslations] = useState<Record<string, Record<string, string>>>({})
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    setIsMounted(true)
     // Get language preference from localStorage on initial load
     const savedLanguage = localStorage.getItem("language") as LanguageType | null
     if (savedLanguage) {
@@ -67,7 +69,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   // Translation helper function
   const t = (key: string, fallback: string): string => {
-    if (!isLoaded) return fallback
+    if (!isMounted || !isLoaded) return fallback
     return translations[key]?.[language] || fallback
   }
 

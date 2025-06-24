@@ -70,11 +70,11 @@ export default function AdultsPage() {
     ru: {
       schoolName: "Tut School",
       schoolSubtitle: "Курсы иностранных языков",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
       workingHours: "Пн-Пт: 9:00-21:00, Сб: 10:00-18:00",
-      promo: "Запишитесь на пробный урок и получите скидку 20% на первый месяц обучения!",
+      promo: "Запишитесь на пробный урок ",
       nav: {
         about: "О ШКОЛЕ",
         aboutDropdown: [
@@ -232,11 +232,11 @@ export default function AdultsPage() {
     en: {
       schoolName: "Tut School",
       schoolSubtitle: "Foreign Language Courses",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
       workingHours: "Mon-Fri: 9:00-21:00, Sat: 10:00-18:00",
-      promo: "Sign up for a trial lesson and get a 20% discount on your first month of study!",
+      promo: "Sign up for a trial lesson!",
       nav: {
         about: "ABOUT THE SCHOOL",
         aboutDropdown: [

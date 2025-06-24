@@ -45,7 +45,7 @@ export default function ChineseAged79Page() {
       subtitle: "Обучение по современным программам",
       schoolName: "Tut School",
       schoolSubtitle: "Курсы иностранных языков",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
       rating: "4.8 на Яндексе",
@@ -115,14 +115,13 @@ export default function ChineseAged79Page() {
         title: "Стоимость обучения",
         options: [
           {
-            name: "Стандартный курс",
-            price: "8000 ₽/месяц",
-            details: "2 занятия в неделю по 90 минут",
+            name: "Мини-группы",
+            price: "1400 ₽/месяц",
           },
           {
-            name: "Интенсивный курс",
-            price: "12000 ₽/месяц",
-            details: "3 занятия в неделю по 90 минут",
+            name: "Индивидуальные занятия",
+            price: "3000 ₽/месяц",
+            
           },
         ],
       },
@@ -134,7 +133,7 @@ export default function ChineseAged79Page() {
       subtitle: " Learning with modern programs",
       schoolName: "Tut School",
       schoolSubtitle: "Foreign Language Courses",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
       rating: "4.8 on Yandex",
@@ -204,14 +203,13 @@ export default function ChineseAged79Page() {
         title: "Course Pricing",
         options: [
           {
-            name: "Standard Course",
-            price: "8000 ₽/month",
-            details: "2 lessons per week, 90 minutes each",
+            name: "Mini-groups",
+            price: "1400 ₽/month",
+            
           },
           {
-            name: "Intensive Course",
-            price: "12000 ₽/month",
-            details: "3 lessons per week, 90 minutes each",
+            name: "Individual lessons",
+            price: "3000 ₽/month",
           },
         ],
       },
@@ -778,8 +776,7 @@ export default function ChineseAged79Page() {
                   <h3 className="mb-2 text-xl font-semibold">{option.name}</h3>
                   <p className="mb-4 text-2xl font-bold text-[#5C162E]">{option.price}</p>
                   <div className="mb-6 flex items-center text-gray-600">
-                    <Calendar className="mr-2 h-5 w-5" />
-                    <span>{option.details}</span>
+                    
                   </div>
                   <Link
                     href="/bookings"

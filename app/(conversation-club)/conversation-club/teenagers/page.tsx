@@ -73,7 +73,7 @@ export default function TeenagersPage() {
     ru: {
       schoolName: "Tut School",
       schoolSubtitle: "Курсы иностранных языков",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
       workingHours: "Пн-Пт: 9:00-21:00, Сб: 10:00-18:00",
@@ -176,20 +176,13 @@ export default function TeenagersPage() {
         title: "Стоимость занятий",
         plans: [
           {
-            name: "Разовое посещение",
-            price: "1,200 ₽",
-            features: ["1 занятие", "1.5 часа", "Группа до 6 человек"]
+            name: "Мини-группы",
+            price: "1,400 ₽",
           },
           {
-            name: "Абонемент на месяц",
-            price: "4,000 ₽",
-            features: ["4 занятия", "1.5 часа каждое", "Группа до 6 человек"],
+            name: "Индивидуальные занятия",
+            price: "3,000 ₽",
             popular: true
-          },
-          {
-            name: "Индивидуальное занятие",
-            price: "2,000 ₽",
-            features: ["1 занятие", "1 час", "Индивидуальный подход"]
           }
         ]
       },
@@ -198,7 +191,7 @@ export default function TeenagersPage() {
     en: {
       schoolName: "Tut School",
       schoolSubtitle: "Foreign Language Courses",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
       workingHours: "Mon-Fri: 9:00-21:00, Sat: 10:00-18:00",
@@ -301,20 +294,18 @@ export default function TeenagersPage() {
         title: "Pricing Plans",
         plans: [
           {
-            name: "Single Visit",
-            price: "1,200 ₽",
-            features: ["1 lesson", "1.5 hours", "Group up to 6 people"]
+            name: "Mini-Groups",
+            price: "1,400 ₽",
           },
           {
-            name: "Monthly Pass",
-            price: "4,000 ₽",
-            features: ["4 lessons", "1.5 hours each", "Group up to 6 people"],
+            name: "Mini-Groups",
+            price: "1,400 ₽",
             popular: true
           },
           {
-            name: "Individual Lesson",
-            price: "2,000 ₽",
-            features: ["1 lesson", "1 hour", "Individual approach"]
+            name: "Individual Lessons",
+            price: "23,000 ₽",
+           
           }
         ]
       },
@@ -929,14 +920,6 @@ export default function TeenagersPage() {
                     </div>
                   )}
                   <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
-                  <ul className="space-y-3 mb-8">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-gray-600">
-                        <Check className="w-5 h-5 text-[#5C162E] mr-2" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}

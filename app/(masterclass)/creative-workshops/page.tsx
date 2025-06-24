@@ -69,7 +69,7 @@ export default function CreativeWorkshops() {
       subtitle: "Исследуйте свой творческий потенциал через разнообразные мастер-классы под руководством профессионалов",
       schoolName: "Tut School",
       schoolSubtitle: "Курсы иностранных языков",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
       rating: "4.8 на Яндексе",
@@ -139,7 +139,7 @@ export default function CreativeWorkshops() {
         locationValue: "Главный кампус, Здание творческих искусств",
       },
       categories: {
-        title: "Категории мастер-классов",
+        title: "Галерея студенческих работ",
         visualArts: "Изобразительное искусство",
       },
       workshops: {
@@ -183,7 +183,7 @@ export default function CreativeWorkshops() {
       subtitle: "Explore your artistic potential through our diverse range of creative workshops led by industry professionals",
       schoolName: "Tut School",
       schoolSubtitle: "Foreign Language Courses",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
       rating: "4.8 on Yandex",
@@ -253,7 +253,7 @@ export default function CreativeWorkshops() {
         locationValue: "Main Campus, Creative Arts Building",
       },
       categories: {
-        title: "Workshop Categories",
+        title: "Gallery of student works",
         visualArts: "Visual Arts",
         digitalMedia: "Digital Media",
         crafts: "Crafts & Textiles",

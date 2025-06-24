@@ -41,7 +41,7 @@ export default function ChineseAdults() {
           subtitle: "Эффективное обучение китайскому языку для работы, путешествий и саморазвития",
           schoolName: "Tut School",
           schoolSubtitle: "Курсы иностранных языков",
-          phone: "+7 (983) 600-00-00",
+          phone: "+7 (983) 662-97-30",
           email: "info@tutschool.ru",
           address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
           rating: "4.8 на Яндексе",
@@ -159,34 +159,12 @@ export default function ChineseAdults() {
             title: "Стоимость обучения",
             options: [
               {
-                title: "Стандарт",
-                price: "8 000 ₽/месяц",
-                features: [
-                  "2 занятия в неделю",
-                  "Группа до 8 человек",
-                  "Онлайн-материалы",
-                  "Домашние задания"
-                ]
+                title: "Мини-группы",
+                price: "1400 ₽/месяц",
               },
               {
-                title: "Интенсив",
-                price: "12 000 ₽/месяц",
-                features: [
-                  "3 занятия в неделю",
-                  "Группа до 6 человек",
-                  "Разговорный клуб",
-                  "Подготовка к HSK"
-                ]
-              },
-              {
-                title: "Премиум",
-                price: "20 000 ₽/месяц",
-                features: [
-                  "Индивидуальные занятия",
-                  "Гибкий график",
-                  "Бизнес-китайский",
-                  "VIP-поддержка"
-                ]
+                title: "Индивидуальные занятия",
+                price: "3000 ₽/месяц",
               }
             ]
           },
@@ -202,7 +180,7 @@ export default function ChineseAdults() {
           subtitle: "Effective Chinese language learning for work, travel, and personal development",
           schoolName: "Tut School",
           schoolSubtitle: "Foreign Language Courses",
-          phone: "+7 (983) 600-00-00",
+          phone: "+7 (983) 662-97-30",
           email: "info@tutschool.ru",
           address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
           rating: "4.8 on Yandex",
@@ -320,34 +298,13 @@ export default function ChineseAdults() {
             title: "Pricing",
             options: [
               {
-                title: "Standard",
-                price: "8,000 ₽/month",
-                features: [
-                  "2 lessons per week",
-                  "Up to 8 students",
-                  "Online materials",
-                  "Homework assignments"
-                ]
+                title: "Mini-groups",
+                price: "1400 ₽/month",
+              
               },
               {
-                title: "Intensive",
-                price: "12,000 ₽/month",
-                features: [
-                  "3 lessons per week",
-                  "Up to 6 students",
-                  "Conversation club",
-                  "HSK preparation"
-                ]
-              },
-              {
-                title: "Premium",
-                price: "20,000 ₽/month",
-                features: [
-                  "Individual lessons",
-                  "Flexible schedule",
-                  "Business Chinese",
-                  "VIP support"
-                ]
+                title: "Individual lessons",
+                price: "3 000 ₽/month",
               }
             ]
           },
@@ -967,44 +924,23 @@ export default function ChineseAdults() {
 
         {/* Pricing Section with third study image */}
         <section className="py-16">
-          <div className="container mx-auto px-4">
-            <FadeIn>
-              <h2 className="mb-12 text-center text-3xl font-bold text-[#5C162E]">
-                {t.pricing.title}
-              </h2>
-            </FadeIn>
-            <div className="grid gap-8 md:grid-cols-3">
-              {t.pricing.options.map((option, index) => (
-                <FadeIn key={index} delay={index * 0.1}>
-                  <div className="relative overflow-hidden rounded-lg bg-white shadow-lg transition-all hover:shadow-xl">
-                    <div className="relative h-40">
-                      <Image
-                        src={studyImages[2].src}
-                        alt={studyImages[2].alt}
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-2 text-center text-sm text-white">
-                        {studyImages[2].description}
+          <div className="mb-16">
+                      <h2 className="mb-8 text-3xl font-bold text-[#5C162E] text-center">{t.pricing.title}</h2>
+                      <div className="grid gap-6 md:grid-cols-2">
+                        {t.pricing.options.map((option, index) => (
+                          <div
+                            key={index}
+                            className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+                          >
+                            <h3 className="mb-2 text-xl font-semibold ">{option.title}</h3>
+                            <p className="mb-4 text-2xl font-bold text-[#5C162E]">{option.price}</p>
+                            <div className="mb-6 flex items-center text-gray-600">
+                              
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
-                    <div className="p-6">
-                      <h3 className="mb-2 text-xl font-bold text-[#5C162E]">{option.title}</h3>
-                      <p className="mb-4 text-2xl font-bold text-[#5C162E]">{option.price}</p>
-                      <ul className="space-y-3">
-                        {option.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center gap-2">
-                            <Check className="h-4 w-4 text-[#5C162E]" />
-                            <span className="text-gray-600">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
         </section>
 
         {/* CTA Section */}

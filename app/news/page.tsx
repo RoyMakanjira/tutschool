@@ -32,7 +32,7 @@ const translations = {
   schoolName: "Tut School",
   languageToggle: "English",
   schoolSubtitle: "Курсы иностранных языков",
-  phone: "+7 (983) 600-00-00",
+  phone: "+7 (983) 662-97-30",
   email: "info@tutschool.ru",
   address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
   rating: "4.8 на Яндексе",
@@ -607,41 +607,23 @@ export default function NewsPage() {
         <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
       </section>
 
-      {/* News Grid */}
-      <section className="py-16">
+      <section className="relative bg-primary py-20 text-black">
         <div className="container mx-auto px-4">
-          <div className="grid gap-8 md:grid-cols-2">
-            {t.newsItems.map((item, index) => (
-              <div key={index} className="overflow-hidden rounded-lg bg-white shadow-lg transition-transform hover:scale-[1.02]">
-                <div className="relative h-48">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div className="absolute top-4 left-4 rounded-full bg-[#5C162E] px-3 py-1 text-sm text-white">
-                    {item.category}
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="mb-2 text-sm text-gray-500">{item.date}</div>
-                  <h3 className="mb-3 text-xl font-bold text-[#5C162E]">{item.title}</h3>
-                  <p className="mb-4 text-gray-600">{item.description}</p>
-                  <Link
-                    href="#"
-                    className="inline-flex items-center gap-2 text-[#5C162E] hover:text-[#5C162E]/80"
-                  >
-                    Читать далее
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
-            ))}
+          <div className="text-center">
+            <p className="mx-auto max-w-2xl text-lg text-white/80">{t.heroSubtitle}</p>
           </div>
         </div>
+        <div className="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-10"></div>
       </section>
+
+      <section className="py-12 bg-white text-black">
+  <div className="container mx-auto px-4">
+    <p className="text-center text-lg mt-2">
+     Скоро появятся новости о школе
+    </p>
+  </div>
+</section>
+
 
       {/* CTA Section */}
       <section className="bg-[#5C162E] py-16">
