@@ -1070,9 +1070,7 @@ export default function AdultsPage() {
         {/* CTA Section */}
         <section className="py-20 bg-[#5C162E] text-white">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-6">
-              {language === 'ru' ? 'Запишитесь на пробный урок' : 'Book a trial lesson'}
-            </h2>
+            
             <a href="/bookings"
               className="bg-white text-[#5C162E] px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-medium text-lg"
             >

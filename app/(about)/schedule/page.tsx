@@ -296,22 +296,23 @@ export default function SchedulePage() {
           languageToggle: "Русский",
         },
       }
-      const scheduleData = {
-        english: [
-          { time: "14.00", monday: "Preschoolers", tuesday: "", wednesday: "Preschoolers", thursday: "", friday: "" },
-          { time: "15.00", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "" },
-          { time: "16.00", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "" },
-          { time: "17.00", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "" },
-          { time: "18.00", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "" },
-          { time: "19.00", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "" },
-        ],
-        weekend: [
-          { time: "10.00", saturday: "", sunday: "" },
-          { time: "11.00", saturday: "", sunday: "" },
-          { time: "12.00", saturday: "", sunday: "" },
-          { time: "13.00", saturday: "", sunday: "" },
-        ],
-      }
+ const scheduleData = {
+  english: [
+    { time: "14.00", monday: "Preschoolers", tuesday: "", wednesday: "Preschoolers", thursday: "", friday: "" },
+    { time: "15.00", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "" },
+    { time: "16.00", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "" },
+    { time: "17.00", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "" },
+    { time: "18.00", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "" },
+    { time: "19.00", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "" },
+  ],
+  weekend: [
+    { time: "10.00", saturday: "", sunday: "" },
+    { time: "11.00", saturday: "", sunday: "" },
+    { time: "12.00", saturday: "", sunday: "" },
+    { time: "13.00", saturday: "", sunday: "" },
+  ],
+};
+
     
       const fadeIn = {
         hidden: { opacity: 0, y: 20 },

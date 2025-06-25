@@ -834,7 +834,6 @@ export default function ChineseTeenagersPage() {
               </p>
               <ul className="space-y-4">
                 {[
-                  { icon: Clock, text: t.schedule },
                   { icon: Calendar, text: t.duration },
                   { icon: Users, text: t.groupSize },
                   { icon: BookOpen, text: t.hskPrep },
