@@ -65,6 +65,9 @@ const config = {
           800: "#7e2039",
           900: "#5C162E",
         },
+        "primary-burgundy": "#5C162E",
+        "primary-burgundy-dark": "#4A1225",
+        "primary-burgundy-light": "#7A1E3C",
       },
       borderRadius: {
         lg: "var(--radius)",

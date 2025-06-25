@@ -1,7 +1,15 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Initialize Resend - handle missing API key gracefully
+let resend: Resend | null = null
+try {
+  if (process.env.RESEND_API_KEY) {
+    resend = new Resend(process.env.RESEND_API_KEY)
+  }
+} catch (error) {
+  console.error("Failed to initialize Resend:", error)
+}
 
 interface BookingData {
   name: string
@@ -16,6 +24,12 @@ interface BookingData {
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if Resend is properly initialized
+    if (!resend) {
+      console.error("Resend not initialized - missing API key")
+      return NextResponse.json({ error: "Email service not configured. Please contact support." }, { status: 500 })
+    }
+
     const bookingData: BookingData = await request.json()
 
     // Validate required fields
@@ -27,6 +41,12 @@ export async function POST(request: NextRequest) {
       !bookingData.bookingTime
     ) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(bookingData.email)) {
+      return NextResponse.json({ error: "Invalid email format" }, { status: 400 })
     }
 
     // Format date and time for display
@@ -53,7 +73,7 @@ export async function POST(request: NextRequest) {
           <style>
             body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
             .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; padding: 30px 20px; text-align: center; border-radius: 8px 8px 0 0; }
+            .header { background: linear-gradient(135deg, #5C162E, #4A1225); color: white; padding: 30px 20px; text-align: center; border-radius: 8px 8px 0 0; }
             .content { background: white; padding: 30px; border: 1px solid #e5e7eb; }
             .booking-details { background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0; }
             .detail-row { display: flex; justify-content: space-between; margin: 10px 0; padding: 8px 0; border-bottom: 1px solid #e5e7eb; }
@@ -77,7 +97,7 @@ export async function POST(request: NextRequest) {
                 <p style="margin: 5px 0 0 0;">Получен новый запрос на бронирование. Пожалуйста, свяжитесь с клиентом в течение 24 часов.</p>
               </div>
 
-              <h2 style="color: #2563eb; margin-bottom: 20px;">Детали бронирования</h2>
+              <h2 style="color: #5C162E; margin-bottom: 20px;">Детали бронирования</h2>
               
               <div class="booking-details">
                 <div class="detail-row">
@@ -123,7 +143,7 @@ export async function POST(request: NextRequest) {
               </div>
 
               <div style="background: #eff6ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                <h3 style="color: #2563eb; margin-top: 0;">📋 Следующие шаги:</h3>
+                <h3 style="color: #5C162E; margin-top: 0;">📋 Следующие шаги:</h3>
                 <ul style="margin: 10px 0; padding-left: 20px;">
                   <li>Свяжитесь с клиентом для подтверждения бронирования</li>
                   <li>Проверьте доступность выбранного времени</li>
@@ -153,7 +173,7 @@ export async function POST(request: NextRequest) {
           <style>
             body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
             .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; padding: 30px 20px; text-align: center; border-radius: 8px 8px 0 0; }
+            .header { background: linear-gradient(135deg, #5C162E, #4A1225); color: white; padding: 30px 20px; text-align: center; border-radius: 8px 8px 0 0; }
             .content { background: white; padding: 30px; border: 1px solid #e5e7eb; }
             .booking-summary { background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0; }
             .detail-row { display: flex; justify-content: space-between; margin: 10px 0; padding: 8px 0; border-bottom: 1px solid #e5e7eb; }
@@ -179,7 +199,7 @@ export async function POST(request: NextRequest) {
               
               <p>Мы получили ваш запрос на бронирование и обработаем его в ближайшее время. Наш менеджер свяжется с вами в течение 24 часов для подтверждения деталей.</p>
 
-              <h2 style="color: #2563eb; margin-bottom: 20px;">Детали вашего запроса</h2>
+              <h2 style="color: #5C162E; margin-bottom: 20px;">Детали вашего запроса</h2>
               
               <div class="booking-summary">
                 <div class="detail-row">
@@ -213,7 +233,7 @@ export async function POST(request: NextRequest) {
               </div>
 
               <div style="background: #eff6ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                <h3 style="color: #2563eb; margin-top: 0;">📞 Контактная информация</h3>
+                <h3 style="color: #5C162E; margin-top: 0;">📞 Контактная информация</h3>
                 <p style="margin: 10px 0;"><strong>Телефон:</strong> +7 (983) 600-00-00</p>
                 <p style="margin: 10px 0;"><strong>Email:</strong> info@tutschool.ru</p>
                 <p style="margin: 10px 0;"><strong>Рабочие часы:</strong> Понедельник - Суббота, 9:00 - 19:00</p>
@@ -233,21 +253,31 @@ export async function POST(request: NextRequest) {
       </html>
     `
 
-    // Send email to business
-    await resend.emails.send({
-      from: "TutSchool Booking <noreply@tutschool.ru>",
-      to: ["info@tutschool.ru"],
-      subject: `🔔 Новое бронирование: ${bookingData.serviceType} - ${formattedDate}`,
-      html: businessEmailHtml,
-    })
+    try {
+      // Send email to business
+      await resend.emails.send({
+        from: "TutSchool Booking <noreply@tutschool.ru>",
+        to: ["info@tutschool.ru"],
+        subject: `🔔 Новое бронирование: ${bookingData.serviceType} - ${formattedDate}`,
+        html: businessEmailHtml,
+      })
 
-    // Send confirmation email to customer
-    await resend.emails.send({
-      from: "TutSchool <noreply@tutschool.ru>",
-      to: [bookingData.email],
-      subject: `✅ Подтверждение запроса на бронирование - TutSchool`,
-      html: customerEmailHtml,
-    })
+      // Send confirmation email to customer
+      await resend.emails.send({
+        from: "TutSchool <noreply@tutschool.ru>",
+        to: [bookingData.email],
+        subject: `✅ Подтверждение запроса на бронирование - TutSchool`,
+        html: customerEmailHtml,
+      })
+    } catch (emailError) {
+      console.error("Email sending error:", emailError)
+      // Don't fail the entire request if email fails
+      return NextResponse.json({
+        success: true,
+        message: "Booking request received, but email notification failed. We will contact you directly.",
+        warning: "Email service temporarily unavailable",
+      })
+    }
 
     return NextResponse.json({
       success: true,
@@ -255,6 +285,29 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error("Booking API error:", error)
-    return NextResponse.json({ error: "Failed to process booking request" }, { status: 500 })
+
+    if (error instanceof SyntaxError) {
+      return NextResponse.json({ error: "Invalid request format" }, { status: 400 })
+    }
+
+    return NextResponse.json(
+      {
+        error: "Failed to process booking request. Please try again or contact us directly.",
+      },
+      { status: 500 },
+    )
   }
+}
+
+// Handle other HTTP methods
+export async function GET() {
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 })
+}
+
+export async function PUT() {
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 })
+}
+
+export async function DELETE() {
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 })
 }

@@ -142,9 +142,25 @@ export default function BookingPage() {
         body: JSON.stringify(formData),
       })
 
+      const responseData = await response.text()
+
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || "Failed to submit booking")
+        let errorMessage = "Failed to submit booking"
+        try {
+          const errorData = JSON.parse(responseData)
+          errorMessage = errorData.error || errorMessage
+        } catch {
+          errorMessage = responseData || errorMessage
+        }
+        throw new Error(errorMessage)
+      }
+
+      let result
+      try {
+        result = JSON.parse(responseData)
+      } catch {
+        // If response is not JSON, assume success if status is ok
+        result = { success: true }
       }
 
       setFormSuccess(true)
@@ -165,7 +181,7 @@ export default function BookingPage() {
       setFormErrors({
         submit:
           error.message ||
-          "Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже или свяжитесь с нами по телефону.",
+          "Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже или свяжитес�� с нами по телефону.",
       })
     } finally {
       setIsSubmitting(false)
@@ -175,7 +191,7 @@ export default function BookingPage() {
   if (!isMounted) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="animate-spin h-8 w-8 text-blue-600" />
+        <Loader2 className="animate-spin h-8 w-8 text-primary-burgundy" />
       </div>
     )
   }
@@ -183,7 +199,7 @@ export default function BookingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Hero Section */}
-      <section className="relative bg-blue-600 py-20 text-white">
+      <section className="relative bg-primary-burgundy py-20 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Онлайн-бронирование</h1>
@@ -212,11 +228,11 @@ export default function BookingPage() {
             {/* Booking Information */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24">
-                <h2 className="text-2xl font-bold text-blue-600 mb-6">Информация о бронировании</h2>
+                <h2 className="text-2xl font-bold text-primary-burgundy mb-6">Информация о бронировании</h2>
 
                 <div className="space-y-6">
                   <div className="flex items-start">
-                    <Calendar className="w-5 h-5 text-blue-600 mt-1 mr-3" />
+                    <Calendar className="w-5 h-5 text-primary-burgundy mt-1 mr-3" />
                     <div>
                       <h3 className="font-semibold">Доступные дни</h3>
                       <p className="text-gray-600">Понедельник - Суббота</p>
@@ -224,7 +240,7 @@ export default function BookingPage() {
                   </div>
 
                   <div className="flex items-start">
-                    <Clock className="w-5 h-5 text-blue-600 mt-1 mr-3" />
+                    <Clock className="w-5 h-5 text-primary-burgundy mt-1 mr-3" />
                     <div>
                       <h3 className="font-semibold">Рабочие часы</h3>
                       <p className="text-gray-600">9:00 - 19:00</p>
@@ -232,7 +248,7 @@ export default function BookingPage() {
                   </div>
 
                   <div className="flex items-start">
-                    <Phone className="w-5 h-5 text-blue-600 mt-1 mr-3" />
+                    <Phone className="w-5 h-5 text-primary-burgundy mt-1 mr-3" />
                     <div>
                       <h3 className="font-semibold">Телефон</h3>
                       <p className="text-gray-600">+7 (983) 600-00-00</p>
@@ -240,7 +256,7 @@ export default function BookingPage() {
                   </div>
 
                   <div className="flex items-start">
-                    <Mail className="w-5 h-5 text-blue-600 mt-1 mr-3" />
+                    <Mail className="w-5 h-5 text-primary-burgundy mt-1 mr-3" />
                     <div>
                       <h3 className="font-semibold">Электронная почта</h3>
                       <p className="text-gray-600">info@tutschool.ru</p>
@@ -249,7 +265,7 @@ export default function BookingPage() {
                 </div>
 
                 <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-                  <h3 className="font-semibold text-blue-600 mb-2">Примечание:</h3>
+                  <h3 className="font-semibold text-primary-burgundy mb-2">Примечание:</h3>
                   <p className="text-sm text-gray-600">
                     После отправки запроса на бронирование вы получите электронное письмо с подтверждением в течение 24
                     часов. Для срочного бронирования, пожалуйста, свяжитесь с нами напрямую по телефону.
@@ -261,7 +277,7 @@ export default function BookingPage() {
             {/* Booking Form */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
-                <h2 className="text-2xl font-bold text-blue-600 mb-6">Забронировать занятие</h2>
+                <h2 className="text-2xl font-bold text-primary-burgundy mb-6">Забронировать занятие</h2>
 
                 {formSuccess && (
                   <div className="mb-6 p-4 bg-green-50 text-green-800 rounded-lg flex items-start">
@@ -301,7 +317,7 @@ export default function BookingPage() {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className={`pl-10 w-full rounded-md border ${formErrors.name ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                          className={`pl-10 w-full rounded-md border ${formErrors.name ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-burgundy focus:border-transparent`}
                           placeholder="Ваше полное имя"
                         />
                       </div>
@@ -324,7 +340,7 @@ export default function BookingPage() {
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className={`pl-10 w-full rounded-md border ${formErrors.email ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                          className={`pl-10 w-full rounded-md border ${formErrors.email ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-burgundy focus:border-transparent`}
                           placeholder="Ваш адрес электронной почты"
                         />
                       </div>
@@ -346,7 +362,7 @@ export default function BookingPage() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className={`pl-10 w-full rounded-md border ${formErrors.phone ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                          className={`pl-10 w-full rounded-md border ${formErrors.phone ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-burgundy focus:border-transparent`}
                           placeholder="Ваш номер телефона"
                         />
                       </div>
@@ -364,7 +380,7 @@ export default function BookingPage() {
                         value={formData.serviceType}
                         onChange={handleChange}
                         required
-                        className={`w-full rounded-md border ${formErrors.serviceType ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                        className={`w-full rounded-md border ${formErrors.serviceType ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-burgundy focus:border-transparent`}
                       >
                         <option value="">Выберите услугу</option>
                         {serviceGroups.map((group) => (
@@ -397,7 +413,7 @@ export default function BookingPage() {
                           onChange={handleChange}
                           required
                           min={today}
-                          className={`pl-10 w-full rounded-md border ${formErrors.bookingDate ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                          className={`pl-10 w-full rounded-md border ${formErrors.bookingDate ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-burgundy focus:border-transparent`}
                         />
                       </div>
                       {formErrors.bookingDate && <p className="mt-1 text-sm text-red-600">{formErrors.bookingDate}</p>}
@@ -421,7 +437,7 @@ export default function BookingPage() {
                           required
                           min="09:00"
                           max="19:00"
-                          className={`pl-10 w-full rounded-md border ${formErrors.bookingTime ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                          className={`pl-10 w-full rounded-md border ${formErrors.bookingTime ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-burgundy focus:border-transparent`}
                         />
                       </div>
                       {formErrors.bookingTime && <p className="mt-1 text-sm text-red-600">{formErrors.bookingTime}</p>}
@@ -444,7 +460,7 @@ export default function BookingPage() {
                           onChange={handleChange}
                           required
                           min="1"
-                          className={`pl-10 w-full rounded-md border ${formErrors.numberOfPeople ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                          className={`pl-10 w-full rounded-md border ${formErrors.numberOfPeople ? "border-red-500" : "border-gray-300"} py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-burgundy focus:border-transparent`}
                         />
                       </div>
                       {formErrors.numberOfPeople && (
@@ -467,7 +483,7 @@ export default function BookingPage() {
                           value={formData.specialRequests}
                           onChange={handleChange}
                           rows={4}
-                          className="pl-10 w-full rounded-md border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="pl-10 w-full rounded-md border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-burgundy focus:border-transparent"
                           placeholder="Любые особые требования или дополнительная информация"
                         ></textarea>
                       </div>
@@ -478,7 +494,7 @@ export default function BookingPage() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full bg-primary-burgundy hover:bg-primary-burgundy-dark text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? (
                           <>
@@ -502,7 +518,7 @@ export default function BookingPage() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-blue-600 mb-4">Часто задаваемые вопросы</h2>
+            <h2 className="text-3xl font-bold text-primary-burgundy mb-4">Часто задаваемые вопросы</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Найдите ответы на распространенные вопросы о нашем процессе бронирования и услугах
             </p>
@@ -532,7 +548,7 @@ export default function BookingPage() {
               },
             ].map((faq, index) => (
               <div key={index} className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-lg font-semibold text-blue-600 mb-2">{faq.question}</h3>
+                <h3 className="text-lg font-semibold text-primary-burgundy mb-2">{faq.question}</h3>
                 <p className="text-gray-600">{faq.answer}</p>
               </div>
             ))}
