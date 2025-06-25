@@ -422,7 +422,7 @@ export default function SchedulePage() {
             <div className="relative">
               <Link href="/">
                 <Image
-                  src="/placeholder.svg?height=120&width=120"
+                  src="/logo.png"
                   alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
                   width={120}
                   height={120}
