@@ -68,19 +68,6 @@ export default function Footer() {
   return (
     <footer className="bg-gradient-to-b from-gray-900 to-gray-950 py-16 text-white">
       <div className="container mx-auto px-4">
-        {/* Language toggle */}
-        <div className="mb-8 flex justify-end">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="flex items-center gap-2 text-gray-300 hover:text-white"
-            onClick={toggleLanguage}
-          >
-            <Globe className="h-4 w-4" />
-            {t.languageToggle}
-          </Button>
-        </div>
-
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* School info */}
           <div className="space-y-6">

@@ -147,7 +147,7 @@ export default function PreschoolersPage() {
         },
       ],
                   pricing: {
-        title: "СТОИМОСТЬ ОБУЧЕНИЯ",
+        title: "Тарифы",
         items: [
           {
             type: "Мини-группы",
@@ -270,7 +270,7 @@ export default function PreschoolersPage() {
         },
       ],
              pricing: {
-        title: "COURSE PRICING",
+        title: "Pricing Plans",
         items: [
           {
             type: "Mini-groups",
@@ -876,7 +876,7 @@ export default function PreschoolersPage() {
 
         {/* Pricing */}
                 <section className="bg-gray-50 py-16">
-                  <div className="container mx-auto px-4">
+                  <div className="container mx-auto px-">
                     <motion.h2
                       initial="hidden"
                       animate={isLoaded ? "visible" : "hidden"}
@@ -895,7 +895,7 @@ export default function PreschoolersPage() {
                         <motion.div
                           key={index}
                           variants={fadeIn}
-                          className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl"
+                          className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl border-2 border-[#5C162E]"
                         >
                           <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
                           <p className="text-3xl font-bold text-primary">{item.price}</p>

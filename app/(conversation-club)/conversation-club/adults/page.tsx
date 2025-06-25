@@ -164,16 +164,17 @@ export default function AdultsPage() {
           description: "Для свободно владеющих английским"
         }
       ],
-      pricing: {
-        title: "СТОИМОСТЬ ОБУЧЕНИЯ",
-        items: [
+       pricing: {
+        title: "Стоимость занятий",
+        plans: [
           {
-            type: "Мини-группы",
-            price: "от 1400 ₽/занятия"
+            name: "Мини-группы",
+            price: "1,400 ₽",
           },
           {
-            type: "Индивидуальные занятия",
-            price: "от 3000 ₽/занятия"
+            name: "Индивидуальные занятия",
+            price: "3,000 ₽",
+            popular: false
           }
         ]
       },
@@ -277,16 +278,18 @@ export default function AdultsPage() {
         }
       ],
         pricing: {
-        title: "COURSE PRICING",
-        items: [
+        title: "Pricing Plans",
+        plans: [
           {
-            type: "Mini-groups",
-            price: "from 1400₽/lesson"
+            name: "Mini-Groups",
+            price: "1,400 ₽",
           },
           {
-            type: "Individual lessons",
-            price: "from 3000₽/lesson"
-          }
+            name: "Individual Lessons",
+            price: "3,00 ₽",
+            popular: false
+          },
+          
         ]
       },
       
@@ -1037,34 +1040,32 @@ export default function AdultsPage() {
           </div>
         </section>
 
-           {/* Pricing */}
-        <section className="bg-gray-50 py-16">
+                 {/* Pricing Section */}
+        <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
-            <motion.h2
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
-              variants={fadeIn}
-              className="mb-12 text-center text-3xl font-bold"
-            >
+            <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">
               {t.pricing.title}
-            </motion.h2>
-            <motion.div
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
-              variants={staggerContainer}
-              className="grid gap-8 md:grid-cols-3"
-            >
-              {t.pricing.items.map((item, index) => (
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {t.pricing.plans.map((plan, index) => (
                 <motion.div
                   key={index}
-                  variants={fadeIn}
-                  className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={`bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow relative ${plan.popular ? 'border-2 border-[#5C162E]' : ''
+                    }`}
                 >
-                  <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
-                  <p className="text-3xl font-bold text-primary">{item.price}</p>
+                  {plan.popular && (
+                    <div className="absolute top-0 right-0 bg-[#5C162E] text-white px-4 py-1 rounded-bl-xl">
+                      {language === 'ru' ? 'Популярный' : 'Popular'}
+                    </div>
+                  )}
+                  <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
+                  <p className="text-3xl font-bold text-primary">{plan.price}</p>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 

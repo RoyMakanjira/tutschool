@@ -182,7 +182,7 @@ export default function TeenagersPage() {
           {
             name: "Индивидуальные занятия",
             price: "3,000 ₽",
-            popular: true
+            popular: false
           }
         ]
       },
@@ -298,15 +298,11 @@ export default function TeenagersPage() {
             price: "1,400 ₽",
           },
           {
-            name: "Mini-Groups",
-            price: "1,400 ₽",
-            popular: true
-          },
-          {
             name: "Individual Lessons",
-            price: "23,000 ₽",
-           
-          }
+            price: "3,00 ₽",
+            popular: false
+          },
+          
         ]
       },
       languageToggle: "Русский",
@@ -783,20 +779,7 @@ export default function TeenagersPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-[#5C162E] px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-medium text-lg"
-              >
-                {t.hero.cta}
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white/10 transition-colors font-medium text-lg"
-              >
-                {language === 'ru' ? 'Узнать больше' : 'Learn More'}
-              </motion.button>
+              
             </motion.div>
           </div>
         </section>
@@ -920,13 +903,7 @@ export default function TeenagersPage() {
                     </div>
                   )}
                   <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full bg-[#5C162E] text-white py-4 rounded-lg hover:bg-[#7A1F3D] transition-colors font-medium"
-                  >
-                    {language === 'ru' ? 'Выбрать' : 'Select'}
-                  </motion.button>
+                  <p className="text-3xl font-bold text-primary">{plan.price}</p>
                 </motion.div>
               ))}
             </div>

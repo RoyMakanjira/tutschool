@@ -217,7 +217,7 @@ export default function AdultsPage() {
         ]
       },
       pricing: {
-        title: "СТОИМОСТЬ ОБУЧЕНИЯ",
+        title: "Тарифы",
         items: [
           {
             type: "Мини-группы",
@@ -367,7 +367,7 @@ export default function AdultsPage() {
         ]
       },
       pricing: {
-        title: "COURSE PRICING",
+        title: "Pricing Plans",
         items: [
           {
             type: "Mini-groups",
@@ -1070,7 +1070,7 @@ export default function AdultsPage() {
                 <motion.div
                   key={index}
                   variants={fadeIn}
-                  className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl"
+                  className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl border-2 border-[#5C162E]"
                 >
                   <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
                   <p className="text-3xl font-bold text-primary">{item.price}</p>

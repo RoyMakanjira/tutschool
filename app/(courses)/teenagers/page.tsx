@@ -221,7 +221,7 @@ export default function TeenagersPage() {
             name: "Individual lessons",
             price: "from 3000₽/hour",
             
-            popular: true,
+            popular: false,
           }
         ],
       },
@@ -830,7 +830,7 @@ export default function TeenagersPage() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow ${plan.popular ? 'border-2 border-[#5C162E]' : ''
+                  className={`bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow border-2 border-[#5C162E] ${plan.popular ? 'border-2 border-[#5C162E]' : ''
                     }`}
                 >
                   {plan.popular && (

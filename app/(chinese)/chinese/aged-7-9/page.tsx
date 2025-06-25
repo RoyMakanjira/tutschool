@@ -111,19 +111,19 @@ export default function ChineseAged79Page() {
           },
         ],
       },
-      pricing: {
-        title: "Стоимость обучения",
-        options: [
+       pricing: {
+        title: "Тарифы",
+        plans: [
           {
             name: "Мини-группы",
-            price: "1500 ₽/занятия",
+            price: "1,400 ₽",
           },
           {
             name: "Индивидуальные занятия",
-            price: "3000 ₽/занятия",
-            
-          },
-        ],
+            price: "3,000 ₽",
+            popular: false
+          }
+        ]
       },
       cta: "Записаться на пробное занятие",
       languageToggle: "English", // Moved inside the ru object
@@ -200,18 +200,19 @@ export default function ChineseAged79Page() {
         ],
       },
       pricing: {
-        title: "Course Pricing",
-        options: [
+        title: "Pricing Plans",
+        plans: [
           {
-            name: "Mini-groups",
-            price: "1500 ₽/lesson",
-            
+            name: "Mini-Groups",
+            price: "1,400 ₽",
           },
           {
-            name: "Individual lessons",
-            price: "3000 ₽/lesson",
+            name: "Individual Lessons",
+            price: "3,00 ₽",
+            popular: false
           },
-        ],
+          
+        ]
       },
       cta: "Book a Trial Lesson",
       languageToggle: "Русский", // Moved inside the en object
@@ -764,31 +765,34 @@ export default function ChineseAged79Page() {
             </div>
           </div>
 
-          {/* Pricing */}
-          <div className="mb-16">
-            <h2 className="mb-8 text-3xl font-bold text-[#5C162E]">{t.pricing.title}</h2>
-            <div className="grid gap-6 md:grid-cols-2">
-              {t.pricing.options.map((option, index) => (
-                <div
+
+          <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">
+              {t.pricing.title}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {t.pricing.plans.map((plan, index) => (
+                <motion.div
                   key={index}
-                  className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={`bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow relative ${plan.popular ? 'border-2 border-[#5C162E]' : ''
+                    }`}
                 >
-                  <h3 className="mb-2 text-xl font-semibold">{option.name}</h3>
-                  <p className="mb-4 text-2xl font-bold text-[#5C162E]">{option.price}</p>
-                  <div className="mb-6 flex items-center text-gray-600">
-                    
-                  </div>
-                  <Link
-                    href="/bookings"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#5C162E] px-6 py-3 text-white transition-all hover:bg-[#5C162E]/90"
-                  >
-                    {t.cta}
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
+                  {plan.popular && (
+                    <div className="absolute top-0 right-0 bg-[#5C162E] text-white px-4 py-1 rounded-bl-xl">
+                      {language === 'ru' ? 'Популярный' : 'Popular'}
+                    </div>
+                  )}
+                  <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
+                  <p className="text-3xl font-bold text-primary">{plan.price}</p>
+                </motion.div>
               ))}
             </div>
           </div>
+          </section>
 
           
         </div>

@@ -138,25 +138,16 @@ export default function ChineseAdults() {
             ]
           },
           schedule: {
-            title: "Расписание занятий",
-            description: "Выберите удобный формат обучения",
+            title: "",
             formats: [
-              {
-                title: "Утренние группы",
-                time: "Пн, Ср, Пт: 7:30 - 9:00"
-              },
               {
                 title: "Вечерние группы",
                 time: "Вт, Чт: 19:00 - 20:30"
               },
-              {
-                title: "Группы выходного дня",
-                time: "Сб: 10:00 - 13:00"
-              }
             ]
           },
           pricing: {
-            title: "Стоимость обучения",
+            title: "Тарифы",
             options: [
               {
                 title: "Мини-группы",
@@ -278,24 +269,17 @@ export default function ChineseAdults() {
           },
           schedule: {
             title: "Class Schedule",
-            description: "Choose your preferred learning format",
             formats: [
+             
               {
-                title: "Morning Groups",
-                time: "Mon, Wed, Fri: 7:30 - 9:00"
+                title: "",
+                time: "Tue, Thu: 9:00 - 10:00"
               },
-              {
-                title: "Evening Groups",
-                time: "Tue, Thu: 19:00 - 20:30"
-              },
-              {
-                title: "Weekend Groups",
-                time: "Sat: 10:00 - 13:00"
-              }
+              
             ]
           },
           pricing: {
-            title: "Pricing",
+            title: "Pricing Plans",
             options: [
               {
                 title: "Mini-groups",
@@ -907,7 +891,6 @@ export default function ChineseAdults() {
           <div className="container mx-auto px-4">
             <FadeIn>
               <h2 className="mb-8 text-center text-3xl font-bold">{t.schedule.title}</h2>
-              <p className="mb-12 text-center text-lg text-white/90">{t.schedule.description}</p>
             </FadeIn>
             <div className="grid gap-8 md:grid-cols-3">
               {t.schedule.formats.map((format, index) => (

@@ -1020,8 +1020,6 @@ export default function SchedulePage() {
           </div>
         </section>
 
-      // Replace the existing pricing section with this:
-
 {/* Pricing Section */}
 <section className="bg-white py-16">
   <div className="container mx-auto px-4">
@@ -1056,30 +1054,19 @@ export default function SchedulePage() {
                 {t.englishLanguage}
               </h4>
               <div>
-                <span className="text-2xl font-bold text-primary">5,000 ₽</span>
-                <span className="text-gray-600"> / {language === "ru" ? "месяц" : "month"}</span>
+                <span className="text-2xl font-bold text-primary">1,400 ₽</span>
+                <span className="text-gray-600"> / {language === "ru" ? "занятия" : "lesson"}</span>
               </div>
-              <p className="mt-2 text-sm text-gray-600">
-                {language === "ru" ? "8 занятий в месяц" : "8 lessons per month"}
-              </p>
-              <p className="text-sm text-gray-600">
-                {language === "ru" ? "60 минут / занятие" : "60 minutes / lesson"}
-              </p>
+              
             </div>
             <div className="rounded-lg bg-gray-50 p-4">
               <h4 className="mb-2 text-sm font-medium text-gray-600">
                 {t.chineseLanguage}
               </h4>
               <div>
-                <span className="text-2xl font-bold text-primary">6,000 ₽</span>
-                <span className="text-gray-600"> / {language === "ru" ? "месяц" : "month"}</span>
+                <span className="text-2xl font-bold text-primary">1,5000 ₽</span>
+                <span className="text-gray-600"> / {language === "ru" ? "занятия" : "lesson"}</span>
               </div>
-              <p className="mt-2 text-sm text-gray-600">
-                {language === "ru" ? "8 занятий в месяц" : "8 lessons per month"}
-              </p>
-              <p className="text-sm text-gray-600">
-                {language === "ru" ? "60 минут / занятие" : "60 minutes / lesson"}
-              </p>
             </div>
           </div>
           <Link
@@ -1109,30 +1096,18 @@ export default function SchedulePage() {
                 {t.englishLanguage}
               </h4>
               <div>
-                <span className="text-2xl font-bold text-primary">12,000 ₽</span>
-                <span className="text-gray-600"> / {language === "ru" ? "месяц" : "month"}</span>
+                <span className="text-2xl font-bold text-primary">3,000 ₽</span>
+                <span className="text-gray-600"> / {language === "ru" ? "занятия" : "lesson"}</span>
               </div>
-              <p className="mt-2 text-sm text-gray-600">
-                {language === "ru" ? "8 занятий в месяц" : "8 lessons per month"}
-              </p>
-              <p className="text-sm text-gray-600">
-                {language === "ru" ? "60 минут / занятие" : "60 minutes / lesson"}
-              </p>
             </div>
             <div className="rounded-lg bg-white p-4">
               <h4 className="mb-2 text-sm font-medium text-gray-600">
                 {t.chineseLanguage}
               </h4>
               <div>
-                <span className="text-2xl font-bold text-primary">14,000 ₽</span>
-                <span className="text-gray-600"> / {language === "ru" ? "месяц" : "month"}</span>
+                <span className="text-2xl font-bold text-primary">3,000 ₽</span>
+                <span className="text-gray-600"> / {language === "ru" ? "занятия" : "lesson"}</span>
               </div>
-              <p className="mt-2 text-sm text-gray-600">
-                {language === "ru" ? "8 занятий в месяц" : "8 lessons per month"}
-              </p>
-              <p className="text-sm text-gray-600">
-                {language === "ru" ? "60 минут / занятие" : "60 minutes / lesson"}
-              </p>
             </div>
           </div>
           <Link

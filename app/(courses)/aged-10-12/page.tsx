@@ -132,7 +132,7 @@ export default function Aged10to12Page() {
         { title: "Расширение кругозора", description: "Контент, расширяющий как общие знания о мире, так и о культуре англоязычных стран", image: "/assets/children/TutSchool.jpg" },
       ],
       pricing: {
-        title: "СТОИМОСТЬ ОБУЧЕНИЯ",
+        title: "Тарифы",
         items: [
           {
             type: "Мини-группы",
@@ -214,7 +214,7 @@ export default function Aged10to12Page() {
         { title: "Broadening horizons", description: " content expanding general knowledge and culture of English-speaking countries", image: "assets/children/TutSchool.jpg" },
       ],
         pricing: {
-        title: "COURSE PRICING",
+        title: "Pricing Plans",
         items: [
           {
             type: "Mini-groups",
@@ -594,38 +594,27 @@ export default function Aged10to12Page() {
   )
 
   const PricingSection = () => (
-    <div>
-        {/* Pricing */}
-                <section className="bg-gray-50 py-16">
-                  <div className="container mx-auto px-4">
-                    <motion.h2
-                      initial="hidden"
-                      animate={isLoaded ? "visible" : "hidden"}
-                      variants={fadeIn}
-                      className="mb-12 text-center text-3xl font-bold"
-                    >
-                      {t.pricing.title}
-                    </motion.h2>
-                    <motion.div
-                      initial="hidden"
-                      animate={isLoaded ? "visible" : "hidden"}
-                      variants={staggerContainer}
-                      className="grid gap-8 md:grid-cols-3"
-                    >
-                      {t.pricing.items.map((item, index) => (
-                        <motion.div
-                          key={index}
-                          variants={fadeIn}
-                          className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl"
+    <section className="bg-gray-50 py-16">
+                      <div className="container mx-auto px-4">
+                        <h2
+                          className="mb-12 text-center text-3xl font-bold"
                         >
-                          <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
-                          <p className="text-3xl font-bold text-primary">{item.price}</p>
-                        </motion.div>
-                      ))}
-                    </motion.div>
-                  </div>
-                </section>
-    </div>
+                          {t.pricing.title}
+                        </h2>
+                        <div
+                          className="grid gap-8 md:grid-cols-3"
+                        >
+                          {t.pricing.items.map((item, index) => (
+                            <div
+                              className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl border-2 border-[#5C162E]"
+                            >
+                              <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
+                              <p className="text-3xl font-bold text-primary">{item.price}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </section>
   )
 
   const CTASection = () => (

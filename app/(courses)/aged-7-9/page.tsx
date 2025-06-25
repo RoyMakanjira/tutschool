@@ -106,7 +106,7 @@ export default function Aged7to9Page() {
         { title: "Знакомство с традициями и культурой англоязычных стран", description: "Страноведение на уроках и внеклассных мероприятиях", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
       ],
       pricing: {
-        title: "СТОИМОСТЬ ОБУЧЕНИЯ",
+        title: "Тарифы",
         items: [
           {
             type: "Мини-группы",
@@ -188,7 +188,7 @@ export default function Aged7to9Page() {
         { title: "Learning about traditions and culture of English-speaking countries", description: "	Country studies during lessons and extracurricular events", image: "https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
       ],
          pricing: {
-        title: "COURSE PRICING",
+        title: "Pricing Plans",
         items: [
           {
             type: "Mini-groups",
@@ -799,7 +799,7 @@ export default function Aged7to9Page() {
                         <motion.div
                           key={index}
                           variants={fadeIn}
-                          className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl"
+                          className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl border-2 border-[#5C162E]"
                         >
                           <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
                           <p className="text-3xl font-bold text-primary">{item.price}</p>

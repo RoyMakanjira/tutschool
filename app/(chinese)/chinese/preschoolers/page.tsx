@@ -118,24 +118,22 @@ export default function ChinesePreschoolers() {
         title: "Расписание занятий",
         description: "Занятия проводятся 2 раза в неделю по 45 минут",
         times: [
-          "Понедельник и Среда: 10:00 - 10:45",
-          "Вторник и Четверг: 17:00 - 17:45",
-          "Суббота: 11:00 - 12:30 (сдвоенное занятие)"
+          "Вторник и Четверг: 9:00 - 10:00"
         ]
       },
-       pricing: {
-        title: "СТОИМОСТЬ ОБУЧЕНИЯ",
-        items: [
-          {
-            type: "Мини-группы",
-            price: "от 1500 ₽/занятия"
+      pricing: {
+            title: "Тарифы",
+            options: [
+              {
+                title: "Мини-группы",
+                price: "1500 ₽/занятия",
+              },
+              {
+                title: "Индивидуальные занятия",
+                price: "3000 ₽/занятия",
+              }
+            ]
           },
-          {
-            type: "Индивидуальные занятия",
-            price: "от 3000 ₽/занятия"
-          }
-        ]
-      },
       cta: {
         title: "Запишитесь на бесплатный пробный урок",
         description: "Познакомьтесь с нашими преподавателями и методикой обучения",
@@ -226,24 +224,23 @@ export default function ChinesePreschoolers() {
         title: "Class Schedule",
         description: "Classes are held twice a week for 45 minutes",
         times: [
-          "Monday and Wednesday: 10:00 - 10:45",
-          "Tuesday and Thursday: 17:00 - 17:45",
-          "Saturday: 11:00 - 12:30 (double session)"
+          "Tuesday and Thursday: 9:00 - 10:00",
         ]
       },
-      pricing: {
-        title: "COURSE PRICING",
-        items: [
-          {
-            type: "Mini-groups",
-            price: "from 1500₽/lesson"
+                pricing: {
+            title: "Pricing Plans",
+            options: [
+              {
+                title: "Mini-groups",
+                price: "1500 ₽/lesson",
+              
+              },
+              {
+                title: "Individual lessons",
+                price: "3 000 ₽/lesson",
+              }
+            ]
           },
-          {
-            type: "Individual lessons",
-            price: "from 3000₽/lesson"
-          }
-        ]
-      },
       cta: {
         title: "Sign up for a free trial lesson",
         description: "Meet our teachers and experience our teaching methodology",
@@ -789,11 +786,11 @@ export default function ChinesePreschoolers() {
       {/* Schedule Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="rounded-2xl bg-[#5C162E] p-8 text-white md:p-12">
+          <div className="rounded-2xl bg-[#5C162E] p-8 md:p-12">
             <FadeIn>
-              <h2 className="mb-6 text-3xl font-bold">{t.schedule.title}</h2>
+              <h2 className="mb-6 text-3xl font-bold text-white ">{t.schedule.title}</h2>
               <p className="mb-8 text-lg text-white/90">{t.schedule.description}</p>
-              <ul className="space-y-4">
+              <ul className="space-y-4 text-white">
                 {t.schedule.times.map((time, index) => (
                   <li key={index} className="flex items-center gap-3">
                     <ChevronRight className="h-5 w-5" />
@@ -806,35 +803,24 @@ export default function ChinesePreschoolers() {
         </div>
       </section>
 
-                 {/* Pricing */}
-        <section className="bg-gray-50 py-16">
-          <div className="container mx-auto px-4">
-            <motion.h2
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
-              variants={fadeIn}
-              className="mb-12 text-center text-3xl font-bold"
-            >
-              {t.pricing.title}
-            </motion.h2>
-            <motion.div
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
-              variants={staggerContainer}
-              className="grid gap-8 md:grid-cols-3"
-            >
-              {t.pricing.items.map((item, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeIn}
-                  className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl"
-                >
-                  <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
-                  <p className="text-3xl font-bold text-primary">{item.price}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+            <section className="py-16">
+          <div className="mb-16">
+                      <h2 className="mb-8 text-3xl font-bold text-[#5C162E] text-center">{t.pricing.title}</h2>
+                      <div className="grid gap-6 md:grid-cols-2">
+                        {t.pricing.options.map((option, index) => (
+                          <div
+                            key={index}
+                            className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+                          >
+                            <h3 className="mb-2 text-xl font-semibold ">{option.title}</h3>
+                            <p className="mb-4 text-2xl font-bold text-[#5C162E]">{option.price}</p>
+                            <div className="mb-6 flex items-center text-gray-600">
+                              
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
         </section>
 
       {/* CTA Section */}
