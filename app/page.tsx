@@ -1212,7 +1212,7 @@ export default function HomePage() {
     : 'Fun introduction to Chinese through games and songs',
   level: language === 'ru' ? 'Все уровни' : 'All Levels',
   students: language === 'ru' ? '50+ студентов' : '50+ students',
-  image: '/assets/gallery/Calligraphy.jpg',
+  image: '/assets/courses/Painting.jpg',
   href: '/chinese/aged-7-9'
 },
         {
@@ -1398,14 +1398,6 @@ export default function HomePage() {
           <div className="container mx-auto px-4">
             <div className="overflow-hidden rounded-xl bg-primary shadow-xl">
               <div className="relative">
-                <div className="absolute inset-0">
-                  <Image
-                    src="/placeholder.svg?height=400&width=1200"
-                    alt="Background"
-                    fill
-                    className="object-cover opacity-20"
-                  />
-                </div>
                 <div className="relative px-8 py-16 text-center text-white md:px-12 lg:px-16">
                   <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t.trial.title}</h2>
                   <p className="mx-auto mb-8 max-w-2xl text-lg">{t.trial.description}</p>

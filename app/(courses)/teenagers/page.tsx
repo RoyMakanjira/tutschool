@@ -111,8 +111,6 @@ export default function TeenagersPage() {
         title: "Подготовка к экзаменам",
         subtitle: "Интенсивная подготовка с экспертами",
         items: [
-          { name: "IELTS", color: "bg-orange-500" },
-          { name: "TOEFL", color: "bg-blue-500" },
           { name: "ОГЭ/ЕГЭ", color: "bg-green-500" },
         ],
       },
@@ -204,8 +202,6 @@ export default function TeenagersPage() {
         title: "Exam Preparation",
         subtitle: "Intensive preparation with experts",
         items: [
-          { name: "IELTS", color: "bg-orange-500" },
-          { name: "TOEFL", color: "bg-blue-500" },
           { name: "National Exams", color: "bg-green-500" },
         ],
       },

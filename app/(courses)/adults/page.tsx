@@ -199,9 +199,8 @@ export default function AdultsPage() {
           
         ],
         formats: [
-          "Индивидуальные занятия",
           "Мини-группы (4-6 человек)",
-          "Стандартные группы (8-10 человек)",
+          "Индивидуальные занятия",
           "Онлайн обучение"
         ]
       },
@@ -349,9 +348,8 @@ export default function AdultsPage() {
           }
         ],
         formats: [
-          "Individual lessons",
           "Mini-groups (4-6 people)",
-          "Standard groups (8-10 people)",
+          "Individual lessons",
           "Online learning"
         ]
       },

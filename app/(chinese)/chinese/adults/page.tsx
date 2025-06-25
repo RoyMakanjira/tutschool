@@ -309,14 +309,14 @@ export default function ChineseAdults() {
   // Study images data
   const studyImages = [
     {
-      src: "/assets/gallery/Adult.jpg",
+      src: "/Calligraphy-Learning.jpg",
       alt: "Adults learning Chinese in a classroom",
       description: language === "ru" 
         ? "Групповое занятие китайским языком с преподавателем" 
         : "Group Chinese lesson with a teacher"
     },
     {
-      src: "/assets/gallery/Culture.jpg",
+      src: "/C-Adults.jpg",
       alt: "Woman studying Chinese characters",
       description: language === "ru"
         ? "Индивидуальное изучение китайских иероглифов"

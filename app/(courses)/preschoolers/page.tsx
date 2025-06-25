@@ -132,7 +132,7 @@ export default function PreschoolersPage() {
           description: "Специалисты по работе с дошкольниками",
         },
         {
-          title: "Эффективные",
+          title: "Эффективные методы",
           description: "Проверенные подходы к обучению детей",
         },
       ],
@@ -255,7 +255,7 @@ export default function PreschoolersPage() {
           description: "Specialists in preschool education",
         },
         {
-          title: "Proven Methods",
+          title: "Effective Methods",
           description: "Effective approaches to teaching children.",
         },
       ],
@@ -832,9 +832,7 @@ export default function PreschoolersPage() {
           <h3 className="text-xl font-semibold line-clamp-2">{activity.title}</h3>
           <p className="text-gray-600 line-clamp-3 flex-grow">{activity.description}</p>
           {/* Optional button to maintain consistent bottom spacing */}
-          <button className="mt-4 self-start text-primary hover:underline">
-            Learn more →
-          </button>
+        
         </div>
       </div>
     </FadeIn>

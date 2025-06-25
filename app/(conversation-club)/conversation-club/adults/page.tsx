@@ -924,20 +924,22 @@ export default function AdultsPage() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="flex flex-col sm:flex-row gap-4 justify-center"
               >
-                <motion.button
+                <motion.a
+                href="/bookings"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-white text-[#5C162E] px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-medium text-lg"
                 >
                   {t.hero.cta}
-                </motion.button>
-                <motion.button
+                </motion.a>
+                <motion.a
+                href="/contact"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white/10 transition-colors font-medium text-lg"
                 >
                   {language === 'ru' ? 'Узнать больше' : 'Learn More'}
-                </motion.button>
+                </motion.a>
               </motion.div>
             </div>
           </div>
@@ -990,10 +992,6 @@ export default function AdultsPage() {
                   <div className="p-8">
                     <h3 className="text-xl font-semibold mb-3 text-[#5C162E]">{activity.title}</h3>
                     <p className="text-gray-600 mb-4">{activity.description}</p>
-                    <button className="text-[#5C162E] font-medium flex items-center hover:text-[#7A1F3D] transition-colors">
-                      {language === 'ru' ? 'Подробнее' : 'Learn More'}
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </button>
                   </div>
                 </motion.div>
               ))}
@@ -1075,9 +1073,6 @@ export default function AdultsPage() {
             <h2 className="text-3xl font-bold mb-6">
               {language === 'ru' ? 'Запишитесь на пробный урок' : 'Book a trial lesson'}
             </h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              {t.promo}
-            </p>
             <a href="/bookings"
               className="bg-white text-[#5C162E] px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-medium text-lg"
             >
