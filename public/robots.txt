@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-login.php
+Disallow: /search/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /cgi-bin/
+Disallow: /?s=  # Search queries
+
+# Yandex-specific directives
+User-agent: Yandex
+Allow: /images/
+Allow: /assets/
+Disallow: /ajax/
+
+
+# Googlebot specific (optional)
+User-agent: Googlebot
+Allow: /courses/
+Allow: /blog/
+Disallow: /user/account/
+
+Sitemap: https://tutschool.ru/sitemap.xml
+Sitemap: https://tutschool.ru/sitemap-news.xml  # If you have news section

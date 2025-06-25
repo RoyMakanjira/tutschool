@@ -331,37 +331,42 @@ export default function ValuesPage() {
   return (
     <div className="flex min-h-screen flex-col">
 <Head>
-  <title>Tut School - Основные ценности | Курсы английского и китайского языка в Москве</title>
-  <meta 
-    name="description" 
-    content="Ключевые ценности Tut School: качественное обучение, культурное погружение и творческое развитие. Профессиональные курсы английского и китайского языка для всех возрастов в Москве." 
-  />
-  <meta
-    name="keywords"
-    content="курсы английского Москва, школа китайского языка, обучение языкам, ценности образования, Tut School, английский для детей, подготовка к HSK, разговорный клуб"
-  />
-  
-  {/* Open Graph / Social Media Meta Tags */}
-  <meta property="og:title" content="Tut School - Наши ценности в обучении языкам" />
-  <meta 
-    property="og:description" 
-    content="Откройте для себя подход Tut School к преподаванию языков через качество, творчество и культурное погружение." 
-  />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tutschool.ru/our-values" />
-  <meta property="og:image" content="https://tutschool.ru/images/values-og-image.jpg" />
-  <meta property="og:site_name" content="Tut School" />
-  <meta property="og:locale" content="ru_RU" />
-  
+<meta name="description" content="Ценности Tut School - качественное обучение языкам, творческий подход и погружение в культуру. Узнайте, почему наша школа в Москве имеет рейтинг 4.8/5." />
+<meta property="og:description" content="Курсы английского и китайского с упором на сообщество, творчество и измеримые результаты. Присоединяйтесь к нашему языковому сообществу!" />
  
-  {/* Canonical URL */}
-  <link rel="canonical" href="https://tutschool.ru/our-values" />
-  
-  {/* Favicon */}
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="robots" content="index, follow" />
+<meta name="yandex-verification" content="YOUR_YANDEX_WEBMASTER_CODE" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+
+
+<script type="application/ld+json">
+  {JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LanguageSchool",
+    "name": "Tut School",
+    "description": "Professional English and Chinese language courses in Moscow",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Zarechnaya street, 5, building 2",
+      "addressLocality": "Khimki",
+      "addressRegion": "Moscow region",
+      "postalCode": "141400",
+      "addressCountry": "RU"
+    },
+    "telephone": "+79836629730",
+    "openingHours": "Mo-Fr 09:00-21:00, Sa 10:00-18:00",
+    "image": "https://tutschool.ru/logo.png",
+    "priceRange": "$$",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "50"
+    }
+  })}
+</script>
 </Head>
       <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">

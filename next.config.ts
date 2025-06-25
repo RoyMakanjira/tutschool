@@ -17,7 +17,8 @@ const nextConfig: NextConfig = {
         hostname: 'images.pexels.com',
       },
     ],
-  }
+  },
+  
 };
 
 export default nextConfig;
