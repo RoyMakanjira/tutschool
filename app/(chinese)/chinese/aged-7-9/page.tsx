@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion"
+import { FadeIn } from "@/components/animations/scroll-animations";
 import { ArrowRight, Check, Clock, Calendar, Users, Phone, Landmark, Globe, Mail, ChevronDown, X, Menu, Info, BookOpen, Award, MessageCircle, FileText } from "lucide-react";
 
 
@@ -794,7 +795,24 @@ export default function ChineseAged79Page() {
           </div>
           </section>
 
-          
+                {/* CTA Section */}
+                <section className="bg-gray-50 py-16">
+                  <div className="container mx-auto px-4">
+                    <div className="text-center">
+                      <FadeIn>
+                        
+                      
+                        <Link
+                          href="/bookings"
+                          className="inline-flex items-center gap-2 rounded-full bg-[#5C162E] px-8 py-3 font-medium text-white transition-all hover:bg-[#5C162E]/90"
+                        >
+                          {t.cta}
+                          <ArrowRight className="h-4 w-4" />
+                        </Link>
+                      </FadeIn>
+                    </div>
+                  </div>
+                </section>
         </div>
       </main>
     </div>
