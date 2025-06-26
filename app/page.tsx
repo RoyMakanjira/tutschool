@@ -208,7 +208,7 @@ export default function HomePage() {
         contacts: "КОНТАКТЫ",
       },
       hero: {
-        title: "ШКОЛА ИНОСТРАННЫХ ЯЗЫКОВ И ИСКУССТВ",
+        title: "ШКОЛА ИНОСТРАННЫХ ЯЗЫКОВ",
         subtitle: "Мы помогаем детям и взрослым освоить английский и китайский языки в дружеской атмосфере",
         cta: "Записаться на пробный урок",
       },
@@ -366,7 +366,7 @@ export default function HomePage() {
         contacts: "CONTACTS",
       },
       hero: {
-        title: "SCHOOL OF FOREIGN LANGUAGES AND ARTS",
+        title: "SCHOOL OF FOREIGN LANGUAGES",
         subtitle: "We help children and adults learn English and Chinese in a friendly atmosphere",
         cta: "Book a lesson",
       },
@@ -1106,7 +1106,7 @@ export default function HomePage() {
               </div>
               <div className="relative h-[400px] overflow-hidden rounded-lg shadow-lg">
                 <Image
-                  src="/assets/slider/Painting.jpg?height=400&width=600"
+                  src="/C-Club.jpg?height=400&width=600"
                   alt="Tut School classroom"
                   fill
                   className="object-cover"
