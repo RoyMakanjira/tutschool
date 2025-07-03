@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   output: 'export',
+  trailingSlash: true, // Important for static hosting
+  skipTrailingSlashRedirect: true,
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -18,7 +19,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  
+
 };
 
 export default nextConfig;

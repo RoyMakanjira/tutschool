@@ -22,7 +22,6 @@ import {
 } from "lucide-react"
 
 export default function Teachers() {
-  const [language, setLanguage] = useState<"ru" | "en">("ru")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -31,12 +30,10 @@ export default function Teachers() {
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    // Set loaded state after a small delay to trigger initial animations
     const timer = setTimeout(() => {
       setIsLoaded(true)
     }, 100)
 
-    // Handle scroll events for scroll-triggered animations
     const handleScroll = () => {
       setScrollY(window.scrollY)
     }
@@ -72,307 +69,187 @@ export default function Teachers() {
     }
   }, [])
 
-  const translations = {
-    ru: {
-      schoolName: "Tut School",
-      schoolSubtitle: "Курсы иностранных языко",
-      phone: "+7 (983) 662-97-30",
-      email: "info@tutschool.ru",
-      address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
-      rating: "4.8 на Яндексе",
-      search: "Поиск",
-      workingHours: "Пн-Пт: 9:00-21:00, Сб: 10:00-18:00",
-      promo: "Запишитесь на пробный урок до 30 мая и получите скидку 20% на первый месяц обучения!",
-      nav: {
-        about: "О ШКОЛЕ",
-        aboutDropdown: [
-          { title: "НАШИ ЦЕННОСТИ", href: "/our-values" },
-          { title: "РАСПИСАНИЕ И ЦЕНЫ", href: "/schedule" },
-          { title: "ПРЕПОДАВАТЕЛИ", href: "/teachers" },
-        ],
-        courses: "КУРСЫ АНГЛИЙСКОГО",
-        coursesDropdown: [
-          { title: "ДОШКОЛЬНИКИ", href: "/preschoolers" },
-          { title: "ДЕТИ 7-9 ЛЕТ", href: "/aged-7-9" },
-          { title: "ДЕТИ 10-12 ЛЕТ", href: "/aged-10-12" },
-          { title: "ПОДРОСТКИ", href: "/teenagers" },
-          { title: "ВЗРОСЛЫЕ", href: "/adults" },
-        ],
-        chinese: "КУРСЫ КИТАЙСКОГО",
-        chineseDropdown: [
-          { title: "ДОШКОЛЬНИКИ", href: "/chinese/preschoolers" },
-          { title: "ДЕТИ 7-9 ЛЕТ", href: "/chinese/aged-7-9" },
-          { title: "ДЕТИ 10-12 ЛЕТ", href: "/chinese/aged-10-12" },
-          { title: "ПОДРОСТКИ", href: "/chinese/teenagers" },
-          { title: "ВЗРОСЛЫЕ", href: "/chinese/adults" },
-        ],
-        club: "РАЗГОВОРНЫЙ КЛУБ",
-        clubDropdown: [
-          { title: "ПОДРОСТКИ", href: "/conversation-club/teenagers" },
-          { title: "ВЗРОСЛЫЕ", href: "/conversation-club/adults" },
-        ],
-        masterclass: "МАСТЕР-КЛАССЫ",
-        masterclassDropdown: [
-          { title: "КИТАЙСКАЯ КАЛЛИГРАФИЯ ", href: "/chinese-calligraphy" },
-          { title: "ТВОРЧЕСКИЕ МАСТЕР-КЛАССЫ", href: "/creative-workshops" },
-        ],
-        news: "НОВОСТИ",
-        contacts: "КОНТАКТЫ",
+  const t = {
+    schoolName: "Tut School",
+    schoolSubtitle: "Курсы иностранных языков",
+    phone: "+7 (983) 662-97-30",
+    email: "info@tutschool.ru",
+    address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
+    rating: "4.8 на Яндексе",
+    search: "Поиск",
+    workingHours: "Пн-Пт: 9:00-21:00, Сб: 10:00-18:00",
+    promo: "Запишитесь на пробный урок до 30 мая и получите скидку 20% на первый месяц обучения!",
+    nav: {
+      about: "О ШКОЛЕ",
+      aboutDropdown: [
+        { title: "НАШИ ЦЕННОСТИ", href: "/our-values" },
+        { title: "РАСПИСАНИЕ И ЦЕНЫ", href: "/schedule" },
+        { title: "ПРЕПОДАВАТЕЛИ", href: "/teachers" },
+      ],
+      courses: "КУРСЫ АНГЛИЙСКОГО",
+      coursesDropdown: [
+        { title: "ДОШКОЛЬНИКИ", href: "/preschoolers" },
+        { title: "ДЕТИ 7-9 ЛЕТ", href: "/aged-7-9" },
+        { title: "ДЕТИ 10-12 ЛЕТ", href: "/aged-10-12" },
+        { title: "ПОДРОСТКИ", href: "/teenagers" },
+        { title: "ВЗРОСЛЫЕ", href: "/adults" },
+      ],
+      chinese: "КУРСЫ КИТАЙСКОГО",
+      chineseDropdown: [
+        { title: "ДОШКОЛЬНИКИ", href: "/chinese/preschoolers" },
+        { title: "ДЕТИ 7-9 ЛЕТ", href: "/chinese/aged-7-9" },
+        { title: "ДЕТИ 10-12 ЛЕТ", href: "/chinese/aged-10-12" },
+        { title: "ПОДРОСТКИ", href: "/chinese/teenagers" },
+        { title: "ВЗРОСЛЫЕ", href: "/chinese/adults" },
+      ],
+      club: "РАЗГОВОРНЫЙ КЛУБ",
+      clubDropdown: [
+        { title: "ПОДРОСТКИ", href: "/conversation-club/teenagers" },
+        { title: "ВЗРОСЛЫЕ", href: "/conversation-club/adults" },
+      ],
+      masterclass: "МАСТЕР-КЛАССЫ",
+      masterclassDropdown: [
+        { title: "КИТАЙСКАЯ КАЛЛИГРАФИЯ", href: "/chinese-calligraphy" },
+        { title: "ТВОРЧЕСКИЕ МАСТЕР-КЛАССЫ", href: "/creative-workshops" },
+      ],
+      news: "НОВОСТИ",
+      contacts: "КОНТАКТЫ",
+    },
+    teachers: {
+      title: "НАШИ ПРЕПОДАВАТЕЛИ",
+      subtitle: "Познакомьтесь с нашей командой профессиональных педагогов",
+      cta: "Записаться на пробный урок",
+      breadcrumbs: {
+        home: "Главная",
+        teachers: "Преподаватели",
       },
-      teachers: {
-        title: "НАШИ ПРЕПОДАВАТЕЛИ",
-        subtitle: "Познакомьтесь с нашей командой профессиональных педагогов",
-        cta: "Записаться на пробный урок",
-        breadcrumbs: {
-          home: "Главная",
-          teachers: "Преподаватели",
-        },
+    },
+    teachersList: [
+      {
+        name: "Анна Петрова",
+        position: "Преподаватель английского языка",
+        education: "Московский государственный лингвистический университет",
+        experience: "Опыт преподавания: 8 лет",
+        description:
+          "Анна специализируется на обучении детей младшего и среднего школьного возраста. Использует коммуникативную методику и игровые подходы для эффективного усвоения материала.",
+        certifications: ["CELTA", "TKT"],
+        languages: ["Английский (C2)", "Испанский (B1)"],
+        media: [
+          {
+            type: "image",
+            src: "/teachers/anna-petrova.jpg",
+            alt: "Анна Петрова на уроке с детьми",
+          },
+          {
+            type: "certificate",
+            src: "/teachers/anna-petrova-celta.jpg",
+            alt: "Сертификат CELTA Анны Петровой",
+          },
+        ],
       },
-      teachersList: [
+      {
+        name: "Воробьева Анастасия",
+        position: "Преподаватель китайского языка ",
+        education: "Пекинский университет языка и культуры (2024 год)",
+        experience: "МГУ им. Ломоносова, Институт стран Азии и Африки (2021-2025)",
+        description:
+          "Дмитрий работает со взрослыми студентами и подростками, готовит к международным экзаменам IELTS и TOEFL. Имеет опыт работы в языковых школах Великобритании.",
+        certifications: ["HSK5" ],
+        languages: ["Китайский (C2)"],
+        media: [
+          {
+            type: "image",
+            src: "/assets/teachers/Воробьева-Анастасия.jpg",
+            alt: "Воробьева-Анастасия",
+          },
+          {
+            type: "certificate",
+            src: "/teachers/dmitry-ivanov-delta.jpg",
+            alt: "Сертификат DELTA Дмитрия Иванова",
+          },
+        ],
+      },
+      {
+        name: "Елена Смирнова",
+        position: "Преподаватель китайского языка",
+        education: "Пекинский университет, Китай",
+        experience: "Опыт преподавания: 6 лет",
+        description:
+          "Елена преподает китайский язык для всех возрастных групп. Разработала авторскую методику изучения иероглифов для русскоговорящих студентов.",
+        certifications: ["HSK 6", "TCFL"],
+        languages: ["Китайский (C2)", "Английский (C1)"],
+        media: [
+          {
+            type: "image",
+            src: "/teachers/elena-smirnova.jpg",
+            alt: "Елена Смирнова на уроке каллиграфии",
+          },
+          {
+            type: "certificate",
+            src: "/teachers/elena-smirnova-hsk.jpg",
+            alt: "Сертификат HSK 6 Елены Смирновой",
+          },
+        ],
+      },
+    ],
+    qualifications: {
+      title: "КВАЛИФИКАЦИИ И СЕРТИФИКАТЫ",
+      description: "Наши преподаватели имеют международные сертификаты и постоянно повышают свою квалификацию",
+      items: [
+        "Сертификаты CELTA и DELTA от Кембриджского университета",
+        "Сертификаты TKT (Teaching Knowledge Test)",
+        "Сертификаты HSK и HSKK для преподавателей китайского языка",
+        "Сертификаты IELTS Examiner и TOEFL Instructor",
+        "Регулярное участие в методических семинарах и конференциях",
+      ],
+    },
+    methodology: {
+      title: "НАША МЕТОДОЛОГИЯ",
+      description: "Мы используем коммуникативный подход и современные методики преподавания",
+      items: [
         {
-          name: "Анна Петрова",
-          position: "Преподаватель английского языка",
-          education: "Московский государственный лингвистический университет",
-          experience: "Опыт преподавания: 8 лет",
-          description:
-            "Анна специализируется на обучении детей младшего и среднего школьного возраста. Использует коммуникативную методику и игровые подходы для эффективного усвоения материала.",
-          certifications: ["CELTA", "TKT"],
-          languages: ["Английский (C2)", "Испанский (B1)"],
+          title: "Коммуникативный подход",
+          description: "Фокус на развитии разговорных навыков и практическом использовании языка",
         },
         {
-          name: "Дмитрий Иванов",
-          position: "Старший преподаватель английского языка",
-          education: "Кембриджский университет, Великобритания",
-          experience: "Опыт преподавания: 12 лет",
-          description:
-            "Дмитрий работает со взрослыми студентами и подростками, готовит к международным экзаменам IELTS и TOEFL. Имеет опыт работы в языковых школах Великобритании.",
-          certifications: ["DELTA", "IELTS Examiner"],
-          languages: ["Английский (C2)", "Немецкий (B2)"],
+          title: "Индивидуальный подход",
+          description: "Учет особенностей и потребностей каждого студента",
         },
         {
-          name: "Елена Смирнова",
-          position: "Преподаватель китайского языка",
-          education: "Пекинский университет, Китай",
-          experience: "Опыт преподавания: 6 лет",
-          description:
-            "Елена преподает китайский язык для всех возрастных групп. Разработала авторскую методику изучения иероглифов для русскоговорящих студентов.",
-          certifications: ["HSK 6", "TCFL"],
-          languages: ["Китайский (C2)", "Английский (C1)"],
+          title: "Интерактивное обучение",
+          description: "Использование игр, ролевых ситуаций и мультимедийных материалов",
         },
       ],
-      qualifications: {
-        title: "КВАЛИФИКАЦИИ И СЕРТИФИКАТЫ",
-        description: "Наши преподаватели имеют международные сертификаты и постоянно повышают свою квалификацию",
-        items: [
-          "Сертификаты CELTA и DELTA от Кембриджского университета",
-          "Сертификаты TKT (Teaching Knowledge Test)",
-          "Сертификаты HSK и HSKK для преподавателей китайского языка",
-          "Сертификаты IELTS Examiner и TOEFL Instructor",
-          "Регулярное участие в методических семинарах и конференциях",
-        ],
-      },
-      methodology: {
-        title: "НАША МЕТОДОЛОГИЯ",
-        description: "Мы используем коммуникативный подход и современные методики преподавания",
-        items: [
-          {
-            title: "Коммуникативный подход",
-            description: "Фокус на развитии разговорных навыков и практическом использовании языка",
-          },
-          {
-            title: "Индивидуальный подход",
-            description: "Учет особенностей и потребностей каждого студента",
-          },
-          {
-            title: "Интерактивное обучение",
-            description: "Использование игр, ролевых ситуаций и мультимедийных материалов",
-          },
-        ],
-      },
-      joinTeam: {
-        title: "ПРИСОЕДИНЯЙТЕСЬ К НАШЕЙ КОМАНДЕ",
-        description: "Мы всегда рады талантливым и увлеченным преподавателям",
-        requirements: [
-          "Высшее лингвистическое или педагогическое образование",
-          "Опыт преподавания от 2 лет",
-          "Владение современными методиками преподавания",
-          "Любовь к своему делу и желание развиваться",
-        ],
-        cta: "Связаться с нами",
-      },
-      trial: {
-        title: "ЗАПИШИТЕСЬ НА БЕСПЛАТНЫЙ ПРОБНЫЙ УРОК",
-        description: "Оставьте заявку, и мы свяжемся с вами для записи на бесплатное пробное занятие",
-        cta: "Записаться",
-      },
-      footer: {
-        quickLinks: "Быстрые ссылки",
-        links: ["О школе", "Наши курсы", "Расписание", "Преподаватели", "Цены", "Блог", "Контакты"],
-        contacts: "Контакты",
-        workingHours: {
-          title: "Режим работы",
-          weekdays: "Понедельник - Пятница: 9:00 - 21:00",
-          saturday: "Суббота: 10:00 - 18:00",
-          sunday: "Воскресенье, выходной",
-        },
-        socialMedia: "Социальные сети",
-        copyright: "© 2024 Tut School. Все права защищены.",
-      },
-      languageToggle: "English",
     },
-    en: {
-      schoolName: "Tut School",
-      schoolSubtitle: "Foreign Language Courses",
-      phone: "+7 (983) 662-97-30",
-      email: "info@tutschool.ru",
-      address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
-      rating: "4.8 on Yandex",
-      search: "Search",
-      workingHours: "Mon-Fri: 9:00-21:00, Sat: 10:00-18:00",
-      promo: "Sign up for a trial lesson before May 30 and get a 20% discount on your first month of study!",
-      nav: {
-        about: "ABOUT THE SCHOOL",
-        aboutDropdown: [
-          { title: "OUR VALUES", href: "/our-values" },
-          { title: "SCHEDULE AND PRICES", href: "/schedule" },
-          { title: "TEACHERS", href: "/teachers" },
-        ],
-        courses: "COURSES",
-        coursesDropdown: [
-          { title: "PRESCHOOLERS", href: "/preschoolers" },
-          { title: "CHILDREN AGED 7-9", href: "/aged-7-9" },
-          { title: "CHILDREN AGED 10-12", href: "/aged-10-12" },
-          { title: "TEENAGERS", href: "teenagers" },
-          { title: "ADULTS", href: "/adults" },
-        ],
-        chinese: "CHINESE LANGUAGE COURSES",
-        chineseDropdown: [
-          { title: "PRESCHOOLERS", href: "/chinese/preschoolers" },
-          { title: "CHILDREN AGED 7-9", href: "/chinese/aged-7-9" },
-          { title: "CHILDREN AGED 10-12", href: "/chinese/aged-10-12" },
-          { title: "TEENAGERS", href: "/chinese/teenagers" },
-          { title: "ADULTS", href: "/chinese/adults" },
-        ],
-        club: "CONVERSATION CLUB",
-        clubDropdown: [
-          { title: "TEENAGERS", href: "/conversation-club/teenagers" },
-          { title: "ADULTS", href: "/conversation-club/adults" },
-        ],
-        masterclass: "MASTERCLASS",
-        masterclassDropdown: [
-          { title: "CHINESE CALLIGRAPHY", href: "/chinese-calligraphy" },
-          { title: "CREATIVE WORKSHOP", href: "/creative-workshops" },
-        ],
-        news: "NEWS",
-        contacts: "CONTACTS",
-      },
-      teachers: {
-        title: "OUR TEACHERS",
-        subtitle: "Meet our team of professional educators",
-        cta: "Book a trial lesson",
-        breadcrumbs: {
-          home: "Home",
-          teachers: "Teachers",
-        },
-      },
-      teachersList: [
-        {
-          name: "Anna Petrova",
-          position: "English Language Teacher",
-          education: "Moscow State Linguistic University",
-          experience: "Teaching experience: 8 years",
-          description:
-            "Anna specializes in teaching children of primary and middle school age. She uses communicative methodology and game-based approaches for effective learning.",
-          certifications: ["CELTA", "TKT"],
-          languages: ["English (C2)", "Spanish (B1)"],
-        },
-        {
-          name: "Dmitry Ivanov",
-          position: "Senior English Language Teacher",
-          education: "University of Cambridge, UK",
-          experience: "Teaching experience: 12 years",
-          description:
-            "Dmitry works with adult students and teenagers, preparing them for international exams like IELTS and TOEFL. He has experience working in language schools in the UK.",
-          certifications: ["DELTA", "IELTS Examiner"],
-          languages: ["English (C2)", "German (B2)"],
-        },
-        {
-          name: "Elena Smirnova",
-          position: "Chinese Language Teacher",
-          education: "Peking University, China",
-          experience: "Teaching experience: 6 years",
-          description:
-            "Elena teaches Chinese for all age groups. She has developed her own methodology for teaching Chinese characters to Russian-speaking students.",
-          certifications: ["HSK 6", "TCFL"],
-          languages: ["Chinese (C2)", "English (C1)"],
-        },
+    joinTeam: {
+      title: "ПРИСОЕДИНЯЙТЕСЬ К НАШЕЙ КОМАНДЕ",
+      description: "Мы всегда рады талантливым и увлеченным преподавателям",
+      requirements: [
+        "Высшее лингвистическое или педагогическое образование",
+        "Опыт преподавания от 2 лет",
+        "Владение современными методиками преподавания",
+        "Любовь к своему делу и желание развиваться",
       ],
-      qualifications: {
-        title: "QUALIFICATIONS AND CERTIFICATES",
-        description: "Our teachers hold international certificates and continuously improve their qualifications",
-        items: [
-          "CELTA and DELTA certificates from Cambridge University",
-          "TKT (Teaching Knowledge Test) certificates",
-          "HSK and HSKK certificates for Chinese language teachers",
-          "IELTS Examiner and TOEFL Instructor certificates",
-          "Regular participation in methodological seminars and conferences",
-        ],
-      },
-      methodology: {
-        title: "OUR METHODOLOGY",
-        description: "We use a communicative approach and modern teaching methods",
-        items: [
-          {
-            title: "Communicative Approach",
-            description: "Focus on developing speaking skills and practical language use",
-          },
-          {
-            title: "Individual Approach",
-            description: "Taking into account the characteristics and needs of each student",
-          },
-          {
-            title: "Interactive Learning",
-            description: "Using games, role-playing situations, and multimedia materials",
-          },
-        ],
-      },
-      joinTeam: {
-        title: "JOIN OUR TEAM",
-        description: "We are always looking for talented and passionate teachers",
-        requirements: [
-          "Higher linguistic or pedagogical education",
-          "Teaching experience of at least 2 years",
-          "Knowledge of modern teaching methods",
-          "Passion for teaching and desire to develop",
-        ],
-        cta: "Contact Us",
-      },
-      trial: {
-        title: "SIGN UP FOR A FREE TRIAL LESSON",
-        description: "Leave a request and we will contact you to schedule a free trial lesson",
-        cta: "Sign up",
-      },
-      footer: {
-        quickLinks: "Quick Links",
-        links: ["About the school", "Our courses", "Schedule", "Teachers", "Prices", "Blog", "Contacts"],
-        contacts: "Contacts",
-        workingHours: {
-          title: "Working Hours",
-          weekdays: "Monday - Friday: 9:00 AM - 9:00 PM",
-          saturday: "Saturday: 10:00 AM - 6:00 PM",
-          sunday: "Sunday: closed",
-        },
-        socialMedia: "Social Media",
-        copyright: "© 2024 Tut School. All rights reserved.",
-      },
-      languageToggle: "Русский",
+      cta: "Связаться с нами",
     },
-  }
-
-  const t = translations[language]
-
-  const toggleLanguage = () => {
-    setLanguage(language === "ru" ? "en" : "ru")
+    trial: {
+      title: "ЗАПИШИТЕСЬ НА БЕСПЛАТНЫЙ ПРОБНЫЙ УРОК",
+      description: "Оставьте заявку, и мы свяжемся с вами для записи на бесплатное пробное занятие",
+      cta: "Записаться",
+    },
+    footer: {
+      quickLinks: "Быстрые ссылки",
+      links: ["О школе", "Наши курсы", "Расписание", "Преподаватели", "Цены", "Блог", "Контакты"],
+      contacts: "Контакты",
+      workingHours: {
+        title: "Режим работы",
+        weekdays: "Понедельник - Пятница: 9:00 - 21:00",
+        saturday: "Суббота: 10:00 - 18:00",
+        sunday: "Воскресенье, выходной",
+      },
+      socialMedia: "Социальные сети",
+      copyright: "© 2024 Tut School. Все права защищены.",
+    },
   }
 
   const toggleMobileMenu = () => {
@@ -390,7 +267,6 @@ export default function Teachers() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Top Bar */}
-
       <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
           <div className="flex flex-wrap items-center gap-4">
@@ -416,11 +292,6 @@ export default function Teachers() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <a href="#" className="text-red-600 hover:text-burgundy-900">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.052-1.713-1.033-1.033-1.49-1.172-1.744-1.172-.356 0-.458.102-.458.593v1.573c0 .424-.136.593-1.252.593-1.844 0-3.896-1.118-5.336-3.202-2.168-3.4-2.762-5.944-2.762-6.47 0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.864 2.5 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.316c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.407.44-.407h2.744c.373 0 .508.204.508.66v3.54c0 .373.17.508.271.508.22 0 .407-.135.814-.542 1.27-1.422 2.168-3.624 2.168-3.624.118-.254.305-.491.745-.491h1.744c.525 0 .644.27.525.66-.22 1.015-2.32 3.979-2.32 3.979-.186.305-.254.44 0 .78.186.254.796.779 1.2 1.252.745.847 1.32 1.558 1.473 2.052.17.491-.085.745-.576.745z" />
-              </svg>
-            </a>
             <a
               href="https://api.whatsapp.com/send/?phone=%2B79167349246&text&type=phone_number&app_absent=0"
               className="text-green-600 hover:text-burgundy-900"
@@ -434,31 +305,24 @@ export default function Teachers() {
                 <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.193-2.98 5.518-4.99c.22-.196-.048-.307-.338-.11l-6.81 4.29-2.96-.92c-.64-.203-.658-.64.135-.954l11.57-4.46c.538-.196 1.006.128.832.941z" />
               </svg>
             </a>
-            <button
-              onClick={toggleLanguage}
-              className="ml-2 flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 text-xs hover:bg-gray-200"
-            >
-              <Globe className="h-3 w-3" />
-              {t.languageToggle}
-            </button>
           </div>
         </div>
       </div>
 
+      {/* Header */}
       <header
         className={`border-b bg-white shadow-sm transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""}`}
       >
-        {/* Main Header Content */}
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
             <div className="relative">
               <Link href="/">
                 <Image
                   src="/logo.png"
-                  alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
+                  alt="Логотип Tut School"
                   width={120}
                   height={120}
-                  className="object-contain "
+                  className="object-contain"
                 />
               </Link>
             </div>
@@ -468,7 +332,7 @@ export default function Teachers() {
             </div>
           </div>
 
-          {/* Desktop Navigation - keep exactly the same */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:block" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">
@@ -612,6 +476,7 @@ export default function Teachers() {
           </div>
         </div>
 
+        {/* Mobile Menu Content */}
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
             mobileMenuOpen ? "max-h-[calc(100vh-60px)]" : "max-h-0"
@@ -840,63 +705,68 @@ export default function Teachers() {
         </section>
 
         {/* Teachers List Section */}
-        <section id="teachers-list" className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {t.teachersList.map((teacher, index) => (
-                <div
-                  key={index}
-                  className="overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg"
-                >
-                  <div className="relative h-64">
+              <section id="teachers-list" className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {t.teachersList.map((teacher, index) => (
+              <div
+                key={index}
+                className="overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg"
+              >
+                {/* Teacher Image - Updated with larger height */}
+                <div className="relative h-96 w-full"> {/* Increased height from h-64 to h-96 */}
+                  {teacher.media[0].type === "image" && (
                     <Image
-                      src={`/placeholder.svg?height=300&width=400&text=Teacher ${index + 1}`}
-                      alt={teacher.name}
+                      src={teacher.media[0].src}
+                      alt="Teacher"
                       fill
                       className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority={index < 3} // Prioritize loading first 3 images
                     />
+                  )}
+                </div>
+
+                <div className="p-6">
+                  <h3 className="mb-2 text-xl font-bold">{teacher.name}</h3>
+                  <p className="mb-4 text-sm font-medium text-primary">{teacher.position}</p>
+                  <p className="mb-4 text-sm font-medium text-primary">{teacher.experience}</p>
+                  <div className="mb-4 space-y-2 text-sm text-gray-600">
+                    <p>{teacher.education}</p>
                   </div>
-                  <div className="p-6">
-                    <h3 className="mb-2 text-xl font-bold">{teacher.name}</h3>
-                    <p className="mb-4 text-sm font-medium text-primary">{teacher.position}</p>
-                    <div className="mb-4 space-y-2 text-sm text-gray-600">
-                      <p>{teacher.education}</p>
-                      <p>{teacher.experience}</p>
+                  <div className="mb-3">
+                    <p className="mb-1 text-xs font-semibold uppercase text-gray-500">
+                      Сертификаты:
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {teacher.certifications.map((cert, i) => (
+                        <span
+                          key={i}
+                          className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
+                        >
+                          {cert}
+                        </span>
+                      ))}
                     </div>
-                    <p className="mb-4 text-sm text-gray-600">{teacher.description}</p>
-                    <div className="mb-3">
-                      <p className="mb-1 text-xs font-semibold uppercase text-gray-500">
-                        {language === "ru" ? "Сертификаты" : "Certifications"}:
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {teacher.certifications.map((cert, i) => (
-                          <span
-                            key={i}
-                            className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
-                          >
-                            {cert}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="mb-1 text-xs font-semibold uppercase text-gray-500">
-                        {language === "ru" ? "Языки" : "Languages"}:
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {teacher.languages.map((lang, i) => (
-                          <span key={i} className="text-xs text-gray-600">
-                            {lang}
-                          </span>
-                        ))}
-                      </div>
+                  </div>
+                  <div>
+                    <p className="mb-1 text-xs font-semibold uppercase text-gray-500">
+                      Языки:
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {teacher.languages.map((lang, i) => (
+                        <span key={i} className="text-xs text-gray-600">
+                          {lang}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
         {/* Qualifications Section */}
         <section id="qualifications" className="bg-gray-50 py-16">
@@ -942,9 +812,7 @@ export default function Teachers() {
               <h2 className="mb-6 text-center text-3xl font-bold text-primary">{t.joinTeam.title}</h2>
               <p className="mb-8 text-center text-lg text-gray-600">{t.joinTeam.description}</p>
               <div className="mb-8">
-                <h3 className="mb-4 text-xl font-semibold">
-                  {language === "ru" ? "Требования к кандидатам" : "Requirements"}:
-                </h3>
+                <h3 className="mb-4 text-xl font-semibold">Требования к кандидатам:</h3>
                 <ul className="space-y-3">
                   {t.joinTeam.requirements.map((req, index) => (
                     <li key={index} className="flex items-start">
@@ -972,17 +840,8 @@ export default function Teachers() {
           <div className="container mx-auto px-4">
             <div className="overflow-hidden rounded-xl bg-primary shadow-xl">
               <div className="relative">
-                <div className="absolute inset-0">
-                  <Image
-                    src="/placeholder.svg?height=400&width=1200"
-                    alt="Background"
-                    fill
-                    className="object-cover opacity-20"
-                  />
-                </div>
                 <div className="relative px-8 py-16 text-center text-white md:px-12 lg:px-16">
                   <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t.trial.title}</h2>
-                  <p className="mx-auto mb-8 max-w-2xl text-lg">{t.trial.description}</p>
                   <Link
                     href="/bookings"
                     className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary transition-all hover:bg-gray-100 hover:gap-3"

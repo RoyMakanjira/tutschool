@@ -299,7 +299,7 @@ export default function HomePage() {
         whatsapp: "WhatsApp",
       },
       trial: {
-        title: "ЗАПИШИТЕСЬ НА БЕСПЛАТНЫЙ ПРОБНЫЙ УРОК",
+        title: "ЗАПИШИТЕСЬ НА  ПРОБНЫЙ УРОК",
         description: "Оставьте заявку, и мы свяжемся с вами для записи на бесплатное пробное занятие",
         cta: "Записаться",
       },
@@ -457,7 +457,7 @@ export default function HomePage() {
         whatsapp: "WhatsApp",
       },
       trial: {
-        title: "SIGN UP FOR A FREE TRIAL LESSON",
+        title: "SIGN UP FOR A TRIAL LESSON",
         description: "Leave a request and we will contact you to schedule a free trial lesson",
         cta: "Sign up",
       },
@@ -580,7 +580,7 @@ export default function HomePage() {
       <ScrollSpy sectionIds={sectionIds} onChange={(id) => setActiveSection(id)} threshold={0.3} />
 
       {/* Promotional Banner */}
-      <PromotionalBanner />
+      { /* <PromotionalBanner /> */}
 
       <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
@@ -607,11 +607,6 @@ export default function HomePage() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <a href="#" className="text-red-600 hover:text-burgundy-900">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.052-1.713-1.033-1.033-1.49-1.172-1.744-1.172-.356 0-.458.102-.458.593v1.573c0 .424-.136.593-1.252.593-1.844 0-3.896-1.118-5.336-3.202-2.168-3.4-2.762-5.944-2.762-6.47 0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.864 2.5 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.316c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.407.44-.407h2.744c.373 0 .508.204.508.66v3.54c0 .373.17.508.271.508.22 0 .407-.135.814-.542 1.27-1.422 2.168-3.624 2.168-3.624.118-.254.305-.491.745-.491h1.744c.525 0 .644.27.525.66-.22 1.015-2.32 3.979-2.32 3.979-.186.305-.254.44 0 .78.186.254.796.779 1.2 1.252.745.847 1.32 1.558 1.473 2.052.17.491-.085.745-.576.745z" />
-              </svg>
-            </a>
             <a href="https://wa.me/+79167349246" className="text-green-600 hover:text-burgundy-900">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20.472 3.5C18.188 1.24 15.073 0 11.786 0 5.354 0 .13 5.214.13 11.636c0 2.05.546 4.05 1.585 5.812L.13 24l6.726-1.763c1.698.925 3.607 1.41 5.55 1.41h.005c6.43 0 11.65-5.215 11.65-11.637 0-3.109-1.21-6.026-3.413-8.225l-.175-.285zM11.786 21.273h-.004c-1.743 0-3.45-.468-4.942-1.35l-.355-.21-3.676.964.985-3.595-.232-.368c-.975-1.55-1.49-3.335-1.49-5.17 0-5.356 4.364-9.713 9.728-9.713 2.6 0 5.034 1.012 6.868 2.85 1.832 1.837 2.842 4.276 2.84 6.873-.004 5.356-4.367 9.719-9.722 9.719zm5.333-7.278c-.294-.147-1.734-.856-2.002-.951-.268-.097-.463-.146-.658.146-.195.293-.757.951-.928 1.147-.17.195-.342.22-.635.073-.294-.147-1.24-.456-2.363-1.456-.873-.778-1.463-1.738-1.634-2.032-.171-.293-.018-.451.128-.597.132-.132.294-.342.44-.513.148-.17.197-.293.296-.488.098-.195.05-.366-.025-.513-.073-.147-.657-1.583-.9-2.168-.244-.585-.487-.487-.658-.487-.17 0-.367-.025-.562-.025-.195 0-.513.073-.781.366-.269.293-1.025.999-1.025 2.435 0 1.436 1.05 2.824 1.196 3.02.146.195 2.057 3.142 4.988 4.407.697.268 1.24.428 1.664.55.7.222 1.337.19 1.839.115.56-.085 1.734-.71 1.977-1.395.244-.684.244-1.27.17-1.393-.073-.122-.268-.196-.562-.342z" />
@@ -1116,11 +1111,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Values Section */}
-
-        <ValuesSectionCard language={language} />
-
-        <section id="courses" className="py-20 bg-gray-50">
+                <section id="courses" className="py-20 bg-gray-50">
   <div className="container mx-auto px-4 sm:px-6">
     <div className="text-center mb-16">
       <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
@@ -1296,6 +1287,12 @@ export default function HomePage() {
     </div>
   </div>
 </section>
+
+        {/* Values Section */}
+
+        <ValuesSectionCard language={language} />
+
+
         {/* Testimonials Section */}
 <section className="py-16">
   <div className="container mx-auto px-4">
@@ -1400,7 +1397,6 @@ export default function HomePage() {
               <div className="relative">
                 <div className="relative px-8 py-16 text-center text-white md:px-12 lg:px-16">
                   <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t.trial.title}</h2>
-                  <p className="mx-auto mb-8 max-w-2xl text-lg">{t.trial.description}</p>
                   <Link
                     href="/bookings"
                     className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary transition-all hover:bg-gray-100 hover:gap-3"

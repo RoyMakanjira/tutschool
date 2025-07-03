@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { useScroll } from "framer-motion"
+
 import {
   Info, Landmark, Clock, Calendar, Phone, Mail, ChevronDown, X, Menu, Globe, FileText, Award, MessageCircle, BookOpen
 } from "lucide-react"
@@ -62,7 +63,10 @@ export default function Aged10to12Page() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
+
+
+    // Replace with either:
+const { scrollY } = useScroll() // Framer Motion hook
 
   // Refs
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -145,8 +149,8 @@ export default function Aged10to12Page() {
         ]
       },
       schedule: [
-        { day: "Вторник", times: ["9:00 - 10:00"] },
-        { day: "Четверг", times: ["9:00 - 10:00"] },
+        { day: "Пн-Пт:", times: ["9:00 - 21:00"] },
+        { day: "Сб:", times: ["10:00 - 18:00"] },
         
       ],
       languageToggle: "English",
@@ -227,8 +231,8 @@ export default function Aged10to12Page() {
         ]
       },
       schedule: [
-        { day: "Tuesday", times: ["9:00 - 10:00"] },
-        { day: "Thursday", times: ["9:00 - 10:00"] },
+        { day: "Mon-Fri:", times: ["9:00 - 21:00"] },
+        { day: "Sat:", times: ["10:00 - 18:00"] },
       ],
       languageToggle: "Русский",
     },
@@ -237,18 +241,15 @@ export default function Aged10to12Page() {
   const t = translations[language]
 
   // Effects
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 100)
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-      setIsScrolled(window.scrollY > 100)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+ useEffect(() => {
+  const handleScroll = () => {
+    setIsScrolled(window.scrollY > 100)
+  }
+  
+  // Add passive listener
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  return () => window.removeEventListener('scroll', handleScroll)
+}, [])
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

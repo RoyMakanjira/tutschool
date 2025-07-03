@@ -131,8 +131,8 @@ export default function TeenagersPage() {
         ],
       },
       schedule: [
-        { day: "Вторник", times: ["9:00 - 10:00"] },
-        { day: "Четверг", times: ["9:00 - 10:00"] },
+        { day: "Пн-Пт:", times: ["9:00 - 21:00"] },
+        { day: "Сб", times: ["10:00 - 18:00"] },
       ],
       languageToggle: "English",
     },
@@ -211,13 +211,13 @@ export default function TeenagersPage() {
           {
             name: "Mini Groups",
             price: "from 1400₽/month",
-            
+             popular: true,
           },
           {
             name: "Individual lessons",
             price: "from 3000₽/hour",
             
-            popular: false,
+           
           }
         ],
       },
@@ -271,12 +271,6 @@ export default function TeenagersPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    
-                  <a href="#" className="text-red-600 hover:text-burgundy-900">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.052-1.713-1.033-1.033-1.49-1.172-1.744-1.172-.356 0-.458.102-.458.593v1.573c0 .424-.136.593-1.252.593-1.844 0-3.896-1.118-5.336-3.202-2.168-3.4-2.762-5.944-2.762-6.47 0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.864 2.5 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.316c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.407.44-.407h2.744c.373 0 .508.204.508.66v3.54c0 .373.17.508.271.508.22 0 .407-.135.814-.542 1.27-1.422 2.168-3.624 2.168-3.624.118-.254.305-.491.745-.491h1.744c.525 0 .644.27.525.66-.22 1.015-2.32 3.979-2.32 3.979-.186.305-.254.44 0 .78.186.254.796.779 1.2 1.252.745.847 1.32 1.558 1.473 2.052.17.491-.085.745-.576.745z" />
-                      </svg>
-                    </a>
                     <a href="https://api.whatsapp.com/send/?phone=%2B79167349246&text&type=phone_number&app_absent=0" className="text-green-600 hover:text-burgundy-900">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M20.472 3.5C18.188 1.24 15.073 0 11.786 0 5.354 0 .13 5.214.13 11.636c0 2.05.546 4.05 1.585 5.812L.13 24l6.726-1.763c1.698.925 3.607 1.41 5.55 1.41h.005c6.43 0 11.65-5.215 11.65-11.637 0-3.109-1.21-6.026-3.413-8.225l-.175-.285zM11.786 21.273h-.004c-1.743 0-3.45-.468-4.942-1.35l-.355-.21-3.676.964.985-3.595-.232-.368c-.975-1.55-1.49-3.335-1.49-5.17 0-5.356 4.364-9.713 9.728-9.713 2.6 0 5.034 1.012 6.868 2.85 1.832 1.837 2.842 4.276 2.84 6.873-.004 5.356-4.367 9.719-9.722 9.719zm5.333-7.278c-.294-.147-1.734-.856-2.002-.951-.268-.097-.463-.146-.658.146-.195.293-.757.951-.928 1.147-.17.195-.342.22-.635.073-.294-.147-1.24-.456-2.363-1.456-.873-.778-1.463-1.738-1.634-2.032-.171-.293-.018-.451.128-.597.132-.132.294-.342.44-.513.148-.17.197-.293.296-.488.098-.195.05-.366-.025-.513-.073-.147-.657-1.583-.9-2.168-.244-.585-.487-.487-.658-.487-.17 0-.367-.025-.562-.025-.195 0-.513.073-.781.366-.269.293-1.025.999-1.025 2.435 0 1.436 1.05 2.824 1.196 3.02.146.195 2.057 3.142 4.988 4.407.697.268 1.24.428 1.664.55.7.222 1.337.19 1.839.115.56-.085 1.734-.71 1.977-1.395.244-.684.244-1.27.17-1.393-.073-.122-.268-.196-.562-.342z" />
@@ -730,7 +724,7 @@ export default function TeenagersPage() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className="relative h-64">
+                  <div className="relative h-96">
                     <Image
                       src={activity.image}
                       alt={activity.title}
@@ -821,11 +815,7 @@ export default function TeenagersPage() {
             <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">{t.pricing.title}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {t.pricing.plans.map((plan, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                <div
                   className={`bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow border-2 border-[#5C162E] ${plan.popular ? 'border-2 border-[#5C162E]' : ''
                     }`}
                 >
@@ -837,7 +827,7 @@ export default function TeenagersPage() {
                   <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
                   <p className="text-2xl font-bold mb-6">{plan.price}</p>
                   
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
