@@ -423,82 +423,6 @@ const { scrollY } = useScroll() // Framer Motion hook
     )
   }
 
-  const Header = () => (
-  <header className={`sticky top-0 z-50 border-b bg-white transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
-      <TopBar />
-      <div className="container mx-auto flex items-center justify-between px-4 py-4">
-        <div className="flex items-center gap-3">
-          <div className="relative">
-              <Link href="/">
-                <Image
-                  src="/logo.png"
-                  alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
-                  width={120}
-                  height={120}
-                  className="object-contain "
-                />
-              </Link>
-            </div>
-          <div>
-            <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
-            <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
-          </div>
-        </div>
-
-        <nav className="hidden md:block relative z-50" ref={dropdownRef}>
-          <ul className="flex gap-6">
-            <DesktopNavItem label={t.nav.about} dropdownItems={t.nav.aboutDropdown} />
-            <DesktopNavItem label={t.nav.courses} dropdownItems={t.nav.coursesDropdown} />
-            <DesktopNavItem label={t.nav.chinese} dropdownItems={t.nav.chineseDropdown} />
-            <DesktopNavItem label={t.nav.club} dropdownItems={t.nav.clubDropdown} />
-            <DesktopNavItem label={t.nav.masterclass} dropdownItems={t.nav.masterclassDropdown} />
-            <DesktopNavItem label={t.nav.news} />
-            <DesktopNavItem label={t.nav.contacts} />
-          </ul>
-        </nav>
-
-        <div className="flex items-center gap-4 md:hidden">
-          <button
-            className="rounded-md p-1 text-gray-700 hover:bg-gray-100 transition-colors"
-            onClick={toggleMobileMenu}
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-        </div>
-      </div>
-
-      <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
-          mobileMenuOpen ? "max-h-[calc(100vh-60px)]" : "max-h-0"
-        }`}
-      >
-        <div className="container mx-auto space-y-2 px-4 pb-4">
-          <MobileNavItem label={t.nav.about} icon={Info} dropdownItems={t.nav.aboutDropdown} />
-          <MobileNavItem label={t.nav.courses} icon={BookOpen} dropdownItems={t.nav.coursesDropdown} />
-          <MobileNavItem label={t.nav.chinese} icon={Globe} dropdownItems={t.nav.chineseDropdown} />
-          <MobileNavItem label={t.nav.club} icon={MessageCircle} dropdownItems={t.nav.clubDropdown} />
-          <MobileNavItem label={t.nav.masterclass} icon={Award} dropdownItems={t.nav.masterclassDropdown} />
-          <Link
-            href="/news"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2 rounded-lg border border-gray-200 p-4 font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-          >
-            <FileText className="h-5 w-5 text-primary" />
-            {t.nav.news}
-          </Link>
-          <Link
-            href="/contact"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2 rounded-lg border border-gray-200 p-4 font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-          >
-            <Phone className="h-5 w-5 text-primary" />
-            {t.nav.contacts}
-          </Link>
-        </div>
-      </div>
-    </header>
-  )
 
   const HeroSection = () => (
     <section className="relative bg-primary py-20 text-white">
@@ -634,7 +558,383 @@ const { scrollY } = useScroll() // Framer Motion hook
   return (
     <div className="flex min-h-screen flex-col">
   
-        <Header />
+        
+      {/* Combined Header and Mobile Menu */}
+      <header
+        className={`border-b bg-white shadow-sm transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""}`}
+      >
+        {/* Main Header Content */}
+        <div className="container mx-auto flex items-center justify-between px-4 py-4">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <Link href="/">
+                <Image
+                  src="/logo.png"
+                  alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
+                  width={120}
+                  height={120}
+                  className="object-contain "
+                />
+              </Link>
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
+              <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
+            </div>
+          </div>
+
+          {/* Desktop Navigation - keep exactly the same */}
+          <nav className="hidden md:block relative z-50" ref={dropdownRef}>
+            <ul className="flex gap-6">
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("about")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "about" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.about}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "about" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.aboutDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("courses")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "courses" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.courses}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "courses" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "courses" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.coursesDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("chinese")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.chinese}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "chinese" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "chinese" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.chineseDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("club")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "club" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.club}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "club" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "club" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.clubDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => toggleDropdown("masterclass")}
+                  className={`flex items-center text-sm font-medium ${activeDropdown === "masterclass" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                >
+                  {t.nav.masterclass}
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "masterclass" ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {activeDropdown === "masterclass" && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+                    {t.nav.masterclassDropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li>
+                <Link href="/news" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.news}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-primary">
+                  {t.nav.contacts}
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <div className="flex items-center gap-4 md:hidden">
+            <button className="rounded-md p-1 text-gray-700 hover:bg-gray-100" onClick={toggleMobileMenu}>
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+
+        <div
+          className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
+            mobileMenuOpen ? "max-h-[calc(100vh-60px)]" : "max-h-0"
+          }`}
+        >
+          <div className="container mx-auto space-y-2 px-4 pb-4">
+            {/* About Dropdown */}
+            <div className="rounded-lg border border-gray-200">
+              <button
+                onClick={() => toggleDropdown("about-mobile")}
+                className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
+              >
+                <span className="flex items-center gap-2">
+                  <Info className="h-5 w-5 text-primary" />
+                  {t.nav.about}
+                </span>
+                {activeDropdown === "about-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  activeDropdown === "about-mobile" ? "max-h-96" : "max-h-0"
+                }`}
+              >
+                <div className="space-y-2 px-4 pb-4">
+                  {t.nav.aboutDropdown.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block rounded-md p-3 text-gray-600 hover:bg-gray-50"
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Courses Dropdown */}
+            <div className="rounded-lg border border-gray-200">
+              <button
+                onClick={() => toggleDropdown("courses-mobile")}
+                className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
+              >
+                <span className="flex items-center gap-2">
+                  <BookOpen className="h-5 w-5 text-primary" />
+                  {t.nav.courses}
+                </span>
+                {activeDropdown === "courses-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  activeDropdown === "courses-mobile" ? "max-h-96" : "max-h-0"
+                }`}
+              >
+                <div className="space-y-2 px-4 pb-4">
+                  {t.nav.coursesDropdown.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block rounded-md p-3 text-gray-600 hover:bg-gray-50"
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Chinese Dropdown */}
+            <div className="rounded-lg border border-gray-200">
+              <button
+                onClick={() => toggleDropdown("chinese-mobile")}
+                className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
+              >
+                <span className="flex items-center gap-2">
+                  <Globe className="h-5 w-5 text-primary" />
+                  {t.nav.chinese}
+                </span>
+                {activeDropdown === "chinese-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  activeDropdown === "chinese-mobile" ? "max-h-96" : "max-h-0"
+                }`}
+              >
+                <div className="space-y-2 px-4 pb-4">
+                  {t.nav.chineseDropdown.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block rounded-md p-3 text-gray-600 hover:bg-gray-50"
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Club Dropdown */}
+            <div className="rounded-lg border border-gray-200">
+              <button
+                onClick={() => toggleDropdown("club-mobile")}
+                className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
+              >
+                <span className="flex items-center gap-2">
+                  <MessageCircle className="h-5 w-5 text-primary" />
+                  {t.nav.club}
+                </span>
+                {activeDropdown === "club-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  activeDropdown === "club-mobile" ? "max-h-96" : "max-h-0"
+                }`}
+              >
+                <div className="space-y-2 px-4 pb-4">
+                  {t.nav.clubDropdown.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block rounded-md p-3 text-gray-600 hover:bg-gray-50"
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Masterclass Dropdown */}
+            <div className="rounded-lg border border-gray-200">
+              <button
+                onClick={() => toggleDropdown("masterclass-mobile")}
+                className="flex w-full items-center justify-between p-4 text-left font-medium text-gray-700"
+              >
+                <span className="flex items-center gap-2">
+                  <Award className="h-5 w-5 text-primary" />
+                  {t.nav.masterclass}
+                </span>
+                {activeDropdown === "masterclass-mobile" ? (
+                  <X className="h-5 w-5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 transition-transform" />
+                )}
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  activeDropdown === "masterclass-mobile" ? "max-h-96" : "max-h-0"
+                }`}
+              >
+                <div className="space-y-2 px-4 pb-4">
+                  {t.nav.masterclassDropdown.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block rounded-md p-3 text-gray-600 hover:bg-gray-50"
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* News Link */}
+            <Link
+              href="/news"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 rounded-lg border border-gray-200 p-4 font-medium text-gray-700 hover:bg-gray-50"
+            >
+              <FileText className="h-5 w-5 text-primary" />
+              {t.nav.news}
+            </Link>
+
+            {/* Contacts Link */}
+            <Link
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 rounded-lg border border-gray-200 p-4 font-medium text-gray-700 hover:bg-gray-50"
+            >
+              <Phone className="h-5 w-5 text-primary" />
+              {t.nav.contacts}
+            </Link>
+          </div>
+        </div>
+      </header>
         <main className="flex-1">
           <HeroSection />
           <BenefitsSection />
