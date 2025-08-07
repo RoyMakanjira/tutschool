@@ -136,7 +136,7 @@ export default function Aged10to12Page()  {
               cta: {
                 title: "Начните изучение китайского языка сегодня",
                 description: "Запишитесь на бесплатный пробный урок и откройте для своего ребенка мир новых возможностей",
-                button: "Записаться на пробный урок",
+                button: "Записаться на бесплатный урок-диагностику",
               },
               
               languageToggle: "English",
@@ -268,7 +268,7 @@ export default function Aged10to12Page()  {
               cta: {
                 title: "Start Learning Chinese Today",
                 description: "Sign up for a free trial lesson and open a world of new opportunities for your child",
-                button: "Book a Trial Lesson",
+                button: "Sign up for a free diagnostic lesson",
               },
               languageToggle: "Русский",
             },

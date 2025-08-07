@@ -126,7 +126,7 @@ export default function ChineseAged79Page() {
           }
         ]
       },
-      cta: "Записаться на пробное занятие",
+      cta: "Записаться на бесплатный урок-диагностику",
       languageToggle: "English", // Moved inside the ru object
     },
     en: {
@@ -215,7 +215,7 @@ export default function ChineseAged79Page() {
           
         ]
       },
-      cta: "Book a Trial Lesson",
+      cta: "Sign up for a free diagnostic lesson",
       languageToggle: "Русский", // Moved inside the en object
     }
   };
@@ -742,26 +742,29 @@ export default function ChineseAged79Page() {
             <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">
               {t.pricing.title}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {t.pricing.plans.map((plan, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow relative ${plan.popular ? 'border-2 border-[#5C162E]' : ''
-                    }`}
-                >
-                  {plan.popular && (
-                    <div className="absolute top-0 right-0 bg-[#5C162E] text-white px-4 py-1 rounded-bl-xl">
-                      {language === 'ru' ? 'Популярный' : 'Popular'}
-                    </div>
-                  )}
-                  <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
-                  <p className="text-3xl font-bold text-primary">{plan.price}</p>
-                </motion.div>
-              ))}
-            </div>
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 
+  /* ↓↓↓ Modified container classes for right shift ↓↓↓ */
+  max-w-5xl ml-[20%] mr-auto">
+  {t.pricing.plans.map((plan, index) => (
+    <motion.div
+      key={index}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className={`relative bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all ${
+        plan.popular ? 'border-2 border-[#5C162E]' : 'border border-gray-200'
+      }`}
+    >
+      {plan.popular && (
+        <div className="absolute top-0 right-0 bg-[#5C162E] text-white px-4 py-1 rounded-bl-xl">
+          {language === 'ru' ? 'Популярный' : 'Popular'}
+        </div>
+      )}
+      <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
+      <p className="text-3xl font-bold text-primary">{plan.price}</p>
+    </motion.div>
+  ))}
+</div>
           </div>
           </section>
 

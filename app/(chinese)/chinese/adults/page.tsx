@@ -163,7 +163,7 @@ export default function ChineseAdults() {
           cta: {
             title: "Начните изучать китайский язык уже сегодня",
             description: "Запишитесь на бесплатный пробный урок и определите свой уровень",
-            button: "Записаться на пробный урок"
+            button: "Записаться на бесплатный урок-диагностику"
           },
           languageToggle: "English",
         },
@@ -296,7 +296,7 @@ export default function ChineseAdults() {
           cta: {
             title: "Start Learning Chinese Today",
             description: "Book a free trial lesson and determine your level",
-            button: "Book a Trial Lesson"
+            button: "Sign up for a free diagnostic lesson"
           },
           languageToggle: "Русский",
         }

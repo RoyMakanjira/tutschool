@@ -135,9 +135,9 @@ export default function ChinesePreschoolers() {
             ]
           },
       cta: {
-        title: "Запишитесь на  пробный урок",
+        title: "Записаться на бесплатный урок-диагностику",
         description: "Познакомьтесь с нашими преподавателями и методикой обучения",
-        button: "Записаться на пробный урок"
+        button: "Записаться на бесплатный урок-диагностику"
       },
       languageToggle: "English",
     },
@@ -242,9 +242,9 @@ export default function ChinesePreschoolers() {
             ]
           },
       cta: {
-        title: "Sign up for a trial lesson",
+        title: "Sign up for a free diagnostic lesson",
         description: "Meet our teachers and experience our teaching methodology",
-        button: "Book a trial lesson"
+        button: "Sign up for a free diagnostic lesson"
       },
       languageToggle: "Русский",
     },
