@@ -90,8 +90,8 @@ export default function Footer() {
             </div>
             <p className="text-gray-300 leading-relaxed">
               {language === "ru"
-                ? "Школа иностранных языков и искусств для детей и взрослых. Мы помогаем нашим студентам достигать своих целей в изучении языков и творческом развитии."
-                : "School of foreign languages and arts for children and adults. We help our students achieve their goals in language learning and creative development."}
+                ? "Школа иностранных языков для детей и взрослых. Мы помогаем нашим студентам достигать своих целей в изучении языков и творческом развитии."
+                : "School of foreign languages  for children and adults. We help our students achieve their goals in language learning and creative development."}
             </p>
             <div className="flex items-center gap-2 text-sm text-amber-400">
               <a

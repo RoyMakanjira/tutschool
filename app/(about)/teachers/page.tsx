@@ -125,30 +125,31 @@ export default function Teachers() {
       },
     },
     teachersList: [
-      {
-        name: "Анна Петрова",
+        {
+        name: "Юлия",
         position: "Преподаватель английского языка",
-        education: "Московский государственный лингвистический университет",
-        experience: "Опыт преподавания: 8 лет",
+        education: "Trinity College London",
+        alma: "Забайкальский государственный педагогический университет",
+        experience: "Опыт преподавания: 15 лет",
         description:
           "Анна специализируется на обучении детей младшего и среднего школьного возраста. Использует коммуникативную методику и игровые подходы для эффективного усвоения материала.",
-        certifications: ["CELTA", "TKT"],
-        languages: ["Английский (C2)", "Испанский (B1)"],
+        certifications: ["CertTESOL", ],
+        languages: [" Английский (C2)"],
         media: [
           {
             type: "image",
-            src: "/teachers/anna-petrova.jpg",
+            src: "/assets/teachers/Yulia.jpg",
             alt: "Анна Петрова на уроке с детьми",
           },
           {
             type: "certificate",
             src: "/teachers/anna-petrova-celta.jpg",
-            alt: "Сертификат CELTA Анны Петровой",
+            alt: "Language Instructor",
           },
         ],
       },
       {
-        name: "Воробьева Анастасия",
+        name: " Анастасия",
         position: "Преподаватель китайского языка ",
         education: "Пекинский университет языка и культуры (2024 год)",
         experience: "МГУ им. Ломоносова, Институт стран Азии и Африки (2021-2025)",
@@ -165,29 +166,29 @@ export default function Teachers() {
           {
             type: "certificate",
             src: "/teachers/dmitry-ivanov-delta.jpg",
-            alt: "Сертификат DELTA Дмитрия Иванова",
+            alt: "Language Instructor",
           },
         ],
       },
       {
-        name: "Елена Смирнова",
-        position: "Преподаватель китайского языка",
-        education: "Пекинский университет, Китай",
-        experience: "Опыт преподавания: 6 лет",
+        name: "Лаки",
+        position: "Преподаватель английского языка",
+        education: "Московский Авиационный Институт",
+        experience: "Опыт преподавания: 5 лет",
         description:
-          "Елена преподает китайский язык для всех возрастных групп. Разработала авторскую методику изучения иероглифов для русскоговорящих студентов.",
-        certifications: ["HSK 6", "TCFL"],
-        languages: ["Китайский (C2)", "Английский (C1)"],
+          "Анна специализируется на обучении детей младшего и среднего школьного возраста. Использует коммуникативную методику и игровые подходы для эффективного усвоения материала.",
+        certifications: ["TESOL/TEFL", ""],
+        languages: ["Английский (C2)", ],
         media: [
           {
             type: "image",
-            src: "/teachers/elena-smirnova.jpg",
-            alt: "Елена Смирнова на уроке каллиграфии",
+            src: "/assets/teachers/lackson.jpg",
+            alt: "Language Instructor",
           },
           {
             type: "certificate",
-            src: "/teachers/elena-smirnova-hsk.jpg",
-            alt: "Сертификат HSK 6 Елены Смирновой",
+            src: "/teachers/anna-petrova-celta.jpg",
+            alt: "Сертификат CELTA Анны Петровой",
           },
         ],
       },
@@ -714,18 +715,18 @@ export default function Teachers() {
                 className="overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg"
               >
                 {/* Teacher Image - Updated with larger height */}
-                <div className="relative h-96 w-full"> {/* Increased height from h-64 to h-96 */}
-                  {teacher.media[0].type === "image" && (
-                    <Image
-                      src={teacher.media[0].src}
-                      alt="Teacher"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      priority={index < 3} // Prioritize loading first 3 images
-                    />
-                  )}
-                </div>
+                 <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg shadow-lg">
+        {teacher.media[0].type === "image" && (
+          <Image
+            src={teacher.media[0].src}
+            alt={`${teacher.name}, Professional Teacher`}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 30vw"
+            priority={index < 3}
+          />
+        )}
+      </div>
 
                 <div className="p-6">
                   <h3 className="mb-2 text-xl font-bold">{teacher.name}</h3>
@@ -733,6 +734,7 @@ export default function Teachers() {
                   <p className="mb-4 text-sm font-medium text-primary">{teacher.experience}</p>
                   <div className="mb-4 space-y-2 text-sm text-gray-600">
                     <p>{teacher.education}</p>
+                    <p>{teacher.alma}</p>
                   </div>
                   <div className="mb-3">
                     <p className="mb-1 text-xs font-semibold uppercase text-gray-500">

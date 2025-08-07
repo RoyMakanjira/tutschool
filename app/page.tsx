@@ -208,8 +208,10 @@ export default function HomePage() {
         contacts: "КОНТАКТЫ",
       },
       hero: {
-        title: "ШКОЛА ИНОСТРАННЫХ ЯЗЫКОВ",
-        subtitle: "Мы помогаем детям и взрослым освоить английский и китайский языки в дружеской атмосфере",
+        title: "Языковая школа  ",
+        title1: "Английский и Китайский",
+        title2: "Химки Новогорск Куркино",
+        subtitle: "Занятия в мини-группах с квалифицированными преподавателями",
         cta: "Записаться на пробный урок",
       },
       about: {
@@ -221,9 +223,8 @@ export default function HomePage() {
       welcome: {
         title: "ДОБРО ПОЖАЛОВАТЬ В TUT SCHOOL",
         description:
-          "Наша школа предлагает уникальную возможность изучать языки и искусство в одном месте. Мы создаем вдохновляющую среду, где каждый студент может раскрыть свой потенциал.",
+          "Мы создаем вдохновляющую среду, где каждый студент может раскрыть свой потенциал.",
         points: [
-          "Индивидуальный подход к каждому ученику",
           "Современные методики преподавания",
           "Комфортные классы и дружелюбная атмосфера",
           "Регулярные культурные мероприятия",
@@ -320,7 +321,7 @@ export default function HomePage() {
     },
     en: {
       schoolName: "Tut School",
-      schoolSubtitle: "Foreign Language Courses, School of Arts",
+      schoolSubtitle: "Foreign Language School",
       phone: "+7 (983) 600-00-00",
       email: "info@tutschool.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
@@ -366,8 +367,10 @@ export default function HomePage() {
         contacts: "CONTACTS",
       },
       hero: {
-        title: "SCHOOL OF FOREIGN LANGUAGES",
-        subtitle: "We help children and adults learn English and Chinese in a friendly atmosphere",
+        title: "Language school",
+        title1: "English and Chinese",
+        title2: "Khimki Novogorsk Kurkino",
+        subtitle: "Lessons in small groups with qualified teachers",
         cta: "Book a lesson",
       },
       about: {
@@ -379,9 +382,8 @@ export default function HomePage() {
       welcome: {
         title: "WELCOME TO TUT SCHOOL",
         description:
-          "Our school offers a unique opportunity to study languages and art in one place. We create an inspiring environment where every student can reach their potential.",
+          "We create an inspiring environment where every student can reach their potential.",
         points: [
-          "Individual approach to each student",
           "Modern teaching methods",
           "Comfortable classrooms and friendly atmosphere",
           "Regular cultural events",
@@ -528,51 +530,87 @@ export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col">
 
-      <Head>
-  <title>{t.schoolName} | {t.schoolSubtitle} - {language === "ru" ? "Курсы английского и китайского" : "English & Chinese Courses"}</title>
-  <meta name="description" content={language === "ru" 
-    ? "Языковая школа Tut School предлагает курсы английского и китайского для детей и взрослых в Новогорске. Пробные уроки, квалифицированные преподаватели, современные методики."
-    : "Tut School offers English and Chinese language courses for children and adults in Novogorsk. Trial lessons, qualified teachers, modern teaching methods."} />
-  
-  <meta name="keywords" content={language === "ru"
-    ? "курсы английского Химки, китайский язык Новогорск, обучение языкам, английский для детей, репетитор китайского"
-    : "English courses Khimki, Chinese language Novogorsk, language school, English for kids, Chinese tutor"} />
-  
-  <meta property="og:title" content={`${t.schoolName} | ${t.schoolSubtitle}`} />
-  <meta property="og:description" content={t.hero.subtitle} />
-  <meta property="og:image" content="/logo.png" />
-  <meta property="og:url" content="https://tutschool.ru" />
-  <meta property="og:type" content="website" />
-  
-  <link rel="alternate" hrefLang="ru" href="https://tutschool.ru/ru" />
-  <link rel="alternate" hrefLang="en" href="https://tutschool.ru/en" />
-  
-  <script type="application/ld+json">
-    {JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "LanguageSchool",
-      "name": t.schoolName,
-      "description": t.hero.subtitle,
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Заречная улица, 5, корп. 2",
-        "addressLocality": "Химки",
-        "addressRegion": "Московская область",
-        "postalCode": "141435",
-        "addressCountry": "RU"
-      },
-      "telephone": t.phone,
-      "openingHours": t.workingHours,
-      "image": "/logo.png",
-      "priceRange": "₽₽",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "27"
-      }
-    })}
-  </script>
-</Head>
+            <Head>
+        <title>{language === "ru" 
+          ? "Tut School - Language Studio | Курсы английского и китайского в Новогорске" 
+          : "Tut School - Language Studio | English & Chinese Courses in Novogorsk"}</title>
+        
+        <meta name="description" content={
+          language === "ru" 
+            ? "Tut School - Language Studio предлагает курсы английского и китайского для детей и взрослых в Новогорске. Пробный урок с носителями языка." 
+            : "Tut School - Language Studio offers English and Chinese courses for kids and adults in Novogorsk. Book a trial lesson with expert teachers."
+        } />
+        
+        <meta name="keywords" content={
+          language === "ru"
+            ? "курсы английского Новогорск, китайский язык Химки, Language Studio, изучение языков"
+            : "English courses Novogorsk, Chinese language Khimki, Language Studio, language learning"
+        } />
+        
+        {/* Open Graph / Social Media Meta Tags */}
+        <meta property="og:title" content="Tut School - Language Studio" />
+        <meta property="og:description" content={
+          language === "ru"
+            ? "Иммерсивные курсы английского и китайского в Новогорске"
+            : "Immersive English and Chinese courses in Novogorsk"
+        } />
+        <meta property="og:image" content="/logo.png" />
+        <meta property="og:url" content="https://tutschool.ru" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Tut School - Language Studio" />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Tut School - Language Studio" />
+        <meta name="twitter:description" content={
+          language === "ru"
+            ? "Профессиональные курсы английского и китайского языков"
+            : "Professional English and Chinese language courses"
+        } />
+        <meta name="twitter:image" content="/logo.png" />
+        
+        {/* Canonical and Alternate URLs */}
+        <link rel="canonical" href="https://tutschool.ru" />
+        <link rel="alternate" hrefLang="ru" href="https://tutschool.ru" />
+        <link rel="alternate" hrefLang="en" href="https://tutschool.ru/en" />
+        <link rel="alternate" hrefLang="x-default" href="https://tutschool.ru" />
+        
+        {/* Schema.org Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LanguageSchool",
+            "name": "Tut School - Language Studio",
+            "description": language === "ru" 
+              ? "Курсы английского и китайского языков в Новогорске" 
+              : "English and Chinese language courses in Novogorsk",
+            "image": "/logo.png",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Заречная улица, 5, корп. 2",
+              "addressLocality": "Химки",
+              "addressRegion": "Московская область",
+              "postalCode": "141435",
+              "addressCountry": "RU"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "55.894611",
+              "longitude": "37.374147"
+            },
+            "telephone": "+7 (983) 600-00-00",
+            "openingHours": language === "ru" 
+              ? "Пн-Пт 9:00-21:00, Сб 10:00-18:00" 
+              : "Mo-Fr 09:00-21:00, Sa 10:00-18:00",
+            "priceRange": "₽₽",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.8",
+              "reviewCount": "27"
+            }
+          })}
+        </script>
+      </Head>
       {/* Top Bar */}
       <ScrollProgress />
 
@@ -1036,6 +1074,12 @@ export default function HomePage() {
                 <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl animate-fade-in-up">
                   {t.hero.title}
                 </h2>
+                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl animate-fade-in-up">
+                  {t.hero.title1}
+                </h2>
+                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl animate-fade-in-up">
+                  {t.hero.title2}
+                </h2>
                 <p className="mb-8 text-lg md:text-xl animate-fade-in-up animation-delay-300">{t.hero.subtitle}</p>
                 <Link
                   href="/bookings"
@@ -1099,14 +1143,7 @@ export default function HomePage() {
                   <ChevronRight className="ml-1 h-4 w-4" />
                 </Link>
               </div>
-              <div className="relative h-[400px] overflow-hidden rounded-lg shadow-lg">
-                <Image
-                  src="/C-Club.jpg?height=400&width=600"
-                  alt="Tut School classroom"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+           
             </div>
           </div>
         </section>
@@ -1127,14 +1164,14 @@ export default function HomePage() {
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {[
         {
-          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ВЗРОСЛЫХ' : 'ENGLISH FOR ADULTS',
+          title: language === 'ru' ? 'Английский для дошкольников' : 'ENGLISH FOR PRESCHOOLERS',
           description: language === 'ru' 
-            ? 'Развивайте уверенность в общении на английском для работы и повседневной жизни' 
-            : 'Build confidence in English for work and daily communication',
-          level: language === 'ru' ? 'Все уровни' : 'All levels',
-          students: language === 'ru' ? '120+ студентов' : '120+ students',
-          image: '/assets/gallery/adults.jpg',
-          href: '/adults'
+            ? 'Развитие языковых навыков через увлекательные проекты' 
+            : 'Developing language skills through engaging projects',
+          level: language === 'ru' ? 'Все уровни' : 'All Levels',
+          students: language === 'ru' ? '150+ студентов' : '150+ students',
+          image: '/assets/gallery/kids.jpeg',
+          href: '/preschoolers'
         },
         {
           title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ДЕТЕЙ 7-9 ЛЕТ' : 'ENGLISH FOR CHILDREN 7-9',
@@ -1143,7 +1180,7 @@ export default function HomePage() {
             : 'Play-based learning through songs and creative activities',
           level: language === 'ru' ? 'Все уровни' : 'All Levels',
           students: language === 'ru' ? '80+ студентов' : '80+ students',
-          image: '/assets/gallery/kids.jpeg',
+          image: '/assets/preschoolers/basic-vocabulary.jpg',
           href: '/aged-7-9'
         },
         {
@@ -1157,16 +1194,6 @@ export default function HomePage() {
           href: '/aged-10-12'
         },
         {
-          title: language === 'ru' ? 'Английский для дошкольников' : 'ENGLISH FOR PRESCHOOLERS',
-          description: language === 'ru' 
-            ? 'Развитие языковых навыков через увлекательные проекты' 
-            : 'Developing language skills through engaging projects',
-          level: language === 'ru' ? 'Все уровни' : 'All Levels',
-          students: language === 'ru' ? '150+ студентов' : '150+ students',
-          image: '/assets/preschoolers/basic-vocabulary.jpg',
-          href: '/preschoolers'
-        },
-        {
           title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ПОДРОСТКОВ' : 'ENGLISH FOR TEENS',
           description: language === 'ru' 
             ? 'Современные темы и актуальные материалы для подростков' 
@@ -1176,26 +1203,26 @@ export default function HomePage() {
           image: '/assets/teenage/pair-and-groupwork.jpg',
           href: '/teenagers'
         },
-        {
-          title: language === 'ru' ? 'МАСТЕР-КЛАССЫ' : 'MASTERCLASSES',
+             {
+          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ВЗРОСЛЫХ' : 'ENGLISH FOR ADULTS',
           description: language === 'ru' 
-            ? 'Интенсивные занятия с носителями языка' 
-            : 'Intensive workshops with native speakers',
-          level: language === 'ru' ? 'Все уровни' : 'All Levels',
-          students: language === 'ru' ? '60+ студентов' : '60+ students',
-          image: '/MasterClass-Course.jpg',
-          href: '/chinese-calligraphy'
-        },
-        {
-          title: language === 'ru' ? 'РАЗГОВОРНЫЙ КЛУБ' : 'CONVERSATION CLUB',
-          description: language === 'ru' 
-            ? 'Практика разговорного английского в дружеской атмосфере' 
-            : 'Practice English in a friendly atmosphere',
+            ? 'Развивайте уверенность в общении на английском для работы и повседневной жизни' 
+            : 'Build confidence in English for work and daily communication',
           level: language === 'ru' ? 'Все уровни' : 'All levels',
-          students: language === 'ru' ? '200+ студентов' : '200+ students',
-          image: '/C-Club.jpg',
-          href: '/conversation-club/teenagers'
+          students: language === 'ru' ? '120+ студентов' : '120+ students',
+          image: '/assets/gallery/adults.jpg',
+          href: '/adults'
         },
+  {
+  title: language === 'ru' ? 'Китайский язык для дошкольников' : 'CHINESE FOR PRESCHOOLERS',
+  description: language === 'ru' 
+    ? 'Системное изучение китайского с элементами культуры' 
+    : 'Structured learning with cultural elements',
+  level: language === 'ru' ? 'Все уровни' : 'All Levels',
+  students: language === 'ru' ? '60+ студентов' : '60+ students',
+  image: '/assets/gallery/Calligraphy.jpg', 
+  href: '/chinese/preschoolers'
+},
         {
   title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ДЕТЕЙ 7-9 ЛЕТ' : 'CHINESE FOR CHILDREN 7-9',
   description: language === 'ru' 
@@ -1217,6 +1244,16 @@ export default function HomePage() {
   href: '/chinese/aged-10-12'
 },
 {
+  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ПОДРОСТКОВ' : 'CHINESE FOR TEENS',
+  description: language === 'ru' 
+    ? 'Современный китайский язык с актуальной лексикой' 
+    : 'Modern Chinese with relevant vocabulary',
+  level: language === 'ru' ? 'Все уровни' : 'All Levels',
+  students: language === 'ru' ? '40+ студентов' : '40+ students',
+  image: '/assets/gallery/Chinese-Practice.jpg',
+  href: '/chinese/teenagers'
+},
+{
   title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ВЗРОСЛЫХ' : 'CHINESE FOR ADULTS',
   description: language === 'ru' 
     ? 'Практический китайский для работы и путешествий' 
@@ -1226,26 +1263,27 @@ export default function HomePage() {
   image: '/C-Adults.jpg',
   href: '/chinese/adults'
 },
-{
-  title: language === 'ru' ? 'Китайский язык для дошкольников' : 'CHINESE FOR PRESCHOOLERS',
-  description: language === 'ru' 
-    ? 'Системное изучение китайского с элементами культуры' 
-    : 'Structured learning with cultural elements',
-  level: language === 'ru' ? 'Все уровни' : 'All Levels',
-  students: language === 'ru' ? '60+ студентов' : '60+ students',
-  image: '/assets/gallery/Calligraphy.jpg', 
-  href: '/chinese/preschoolers'
-},
-{
-  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ПОДРОСТКОВ' : 'CHINESE FOR TEENS',
-  description: language === 'ru' 
-    ? 'Современный китайский язык с актуальной лексикой' 
-    : 'Modern Chinese with relevant vocabulary',
-  level: language === 'ru' ? 'Все уровни' : 'All Levels',
-  students: language === 'ru' ? '40+ студентов' : '40+ students',
-  image: '/assets/gallery/Chinese-Practice.jpg',
-  href: '/chinese/teenagers'
-}
+       {
+          title: language === 'ru' ? 'МАСТЕР-КЛАССЫ' : 'MASTERCLASSES',
+          description: language === 'ru' 
+            ? 'Интенсивные занятия с носителями языка' 
+            : 'Intensive workshops with native speakers',
+          level: language === 'ru' ? 'Все уровни' : 'All Levels',
+          students: language === 'ru' ? '60+ студентов' : '60+ students',
+          image: '/masterclass.jpg',
+          href: '/chinese-calligraphy'
+        },
+        {
+          title: language === 'ru' ? 'РАЗГОВОРНЫЙ КЛУБ' : 'CONVERSATION CLUB',
+          description: language === 'ru' 
+            ? 'Практика разговорного английского в дружеской атмосфере' 
+            : 'Practice English in a friendly atmosphere',
+          level: language === 'ru' ? 'Все уровни' : 'All levels',
+          students: language === 'ru' ? '200+ студентов' : '200+ students',
+          image: '/C-Club.jpg',
+          href: '/conversation-club/teenagers'
+        },
+
 
       ].map((course) => (
         <div 

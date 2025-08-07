@@ -10,8 +10,8 @@ import { Toaster } from "sonner"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "TUT School - Art & Language Learning",
-  description: "Learn Art, Chinese, and English at TUT School",
+  title: "TUT School -  языковая студия",
+  description: "Learn Chinese, and English at TUT School",
 }
 
 export default function RootLayout({

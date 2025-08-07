@@ -27,18 +27,29 @@ import {
   Check,
   AlertCircle,
   Loader2,
+  Calendar,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
 
-interface ContactFormData {
+interface BookingFormData {
   name: string
-  email: string
   phone: string
-  subject: string
-  message: string
+  serviceType: string
+}
+
+interface FormErrors {
+  name?: string
+  phone?: string
+  serviceType?: string
+  submit?: string
+}
+
+interface ServiceGroup {
+  group: string
+  services: string[]
 }
 
 const YandexMap = dynamic(() => import("@/components/YandexMap"), {
@@ -58,22 +69,51 @@ export default function ContactPage() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formSuccess, setFormSuccess] = useState(false)
-  const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({})
+  const [formErrors, setFormErrors] = useState<FormErrors>({})
+  const [showTermsModal, setShowTermsModal] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
   const [isMounted, setIsMounted] = useState(false)
+  const [pendingFormData, setPendingFormData] = useState<BookingFormData | null>(null)
 
-  const [formData, setFormData] = useState<ContactFormData>({
+  const [formData, setFormData] = useState<BookingFormData>({
     name: "",
-    email: "",
     phone: "",
-    subject: "",
-    message: "",
+    serviceType: "",
   })
 
-  const FORM_SUBMIT_URL = "https://formsubmit.co/ajax/info@tutschool.ru"
+  const serviceGroups: ServiceGroup[] = [
+    {
+      group: "Английский язык",
+      services: [
+        "Английский для дошкольников",
+        "Английский для детей 7-9 лет",
+        "Английский для детей 10-12 лет",
+        "Английский для подростков",
+        "Английский для взрослых",
+        "Мастер-класс по английскому",
+        "Разговорный клуб английского",
+      ],
+    },
+    {
+      group: "Китайский язык",
+      services: [
+        "Китайский для дошкольников",
+        "Китайский для детей 7-9 лет",
+        "Китайский для детей 10-12 лет",
+        "Китайский для подростков",
+        "Китайский для взрослых",
+        "Мастер-класс по китайскому",
+        "Разговорный клуб китайского",
+      ],
+    },
+    {
+      group: "Общие программы",
+      services: ["Мастер-класс", "Разговорный клуб"],
+    },
+  ]
 
-  const translations = {
+    const translations = {
     ru: {
       schoolName: "Tut School",
       schoolSubtitle: "Курсы иностранных языков",
@@ -118,8 +158,8 @@ export default function ContactPage() {
         contacts: "КОНТАКТЫ",
       },
       hero: {
-        title: "СВЯЖИТЕСЬ С НАМИ",
-        subtitle: "Мы всегда рады ответить на ваши вопросы и помочь с выбором подходящей программы",
+        title: "ЗАБРОНИРОВАТЬ ЗАНЯТИЕ",
+        subtitle: "Запишитесь на занятия, консультации или мероприятия с помощью нашей удобной системы онлайн-бронирования",
       },
       contactInfo: {
         title: "НАШИ КОНТАКТЫ",
@@ -133,16 +173,14 @@ export default function ContactPage() {
         socialMedia: "Социальные сети",
       },
       contactForm: {
-        title: "ОТПРАВЬТЕ НАМ СООБЩЕНИЕ",
+        title: "ОТПРАВЬТЕ НАМ ЗАЯВКУ",
         description: "Заполните форму ниже, и мы свяжемся с вами в ближайшее время",
         name: "Ваше имя",
-        email: "Email",
         phone: "Телефон",
-        subject: "Тема",
-        message: "Сообщение",
-        submit: "Отправить сообщение",
-        success: "Ваше сообщение успешно отправлено! Мы свяжемся с вами в ближайшее время.",
-        error: "Произошла ошибка при отправке сообщения. Попробуйте еще раз.",
+        service: "Услуга",
+        submit: "Отправить заявку",
+        success: "Ваша заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.",
+        error: "Произошла ошибка при отправке заявки. Попробуйте еще раз.",
       },
       faq: {
         title: "ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ",
@@ -162,21 +200,6 @@ export default function ContactPage() {
             answer:
               "В наших группах обучается от 6 до 8 человек. Такой размер группы позволяет преподавателю уделить внимание каждому студенту.",
           },
-          {
-            question: "Как определяется уровень знаний?",
-            answer:
-              "Перед зачислением в группу мы проводим небольшое тестирование, которое помогает определить текущий уровень знаний.",
-          },
-          {
-            question: "Можно ли перейти с групповых занятий на индивидуальные?",
-            answer:
-              "Да, вы можете перейти с групповых занятий на индивидуальные в любой момент при наличии свободных мест в расписании преподавателей.",
-          },
-          {
-            question: "Как оплачивать занятия?",
-            answer:
-              "Оплата производится ежемесячно до начала занятий. Вы можете оплатить курс банковской картой в офисе школы или банковским переводом.",
-          },
         ],
       },
       visit: {
@@ -185,6 +208,12 @@ export default function ContactPage() {
         cta: "Записаться на визит",
       },
       languageToggle: "English",
+      terms: {
+        title: "Согласие на обработку данных",
+        content: "Нажимая 'Принимаю', вы соглашаетесь на передачу ваших персональных данных (имя, телефон и выбранная услуга) через WhatsApp для обработки вашего запроса на бронирование.",
+        accept: "Принимаю",
+        decline: "Отклонить"
+      }
     },
     en: {
       schoolName: "Tut School",
@@ -230,8 +259,8 @@ export default function ContactPage() {
         contacts: "CONTACTS",
       },
       hero: {
-        title: "CONTACT US",
-        subtitle: "We are always happy to answer your questions and help you choose the right program",
+        title: "BOOK A LESSON",
+        subtitle: "Book classes, consultations or events using our convenient online booking system",
       },
       contactInfo: {
         title: "OUR CONTACTS",
@@ -245,16 +274,14 @@ export default function ContactPage() {
         socialMedia: "Social Media",
       },
       contactForm: {
-        title: "SEND US A MESSAGE",
+        title: "SEND US A REQUEST",
         description: "Fill out the form below and we will contact you shortly",
         name: "Your Name",
-        email: "Email",
         phone: "Phone",
-        subject: "Subject",
-        message: "Message",
-        submit: "Send Message",
-        success: "Your message has been successfully sent! We will contact you shortly.",
-        error: "An error occurred while sending the message. Please try again.",
+        service: "Service",
+        submit: "Send Request",
+        success: "Your request has been successfully sent! We will contact you shortly.",
+        error: "An error occurred while sending the request. Please try again.",
       },
       faq: {
         title: "FREQUENTLY ASKED QUESTIONS",
@@ -274,21 +301,6 @@ export default function ContactPage() {
             answer:
               "Our groups have 6 to 8 students. This group size allows the teacher to pay attention to each student.",
           },
-          {
-            question: "How is the knowledge level determined?",
-            answer:
-              "Before enrollment in a group, we conduct a small assessment to determine the current level of knowledge.",
-          },
-          {
-            question: "Is it possible to switch from group to individual classes?",
-            answer:
-              "Yes, you can switch from group to individual classes at any time, subject to availability in the teachers' schedules.",
-          },
-          {
-            question: "How do I pay for classes?",
-            answer:
-              "Payment is made monthly before the start of classes. You can pay for the course by bank card at the school office or by bank transfer.",
-          },
         ],
       },
       visit: {
@@ -298,6 +310,12 @@ export default function ContactPage() {
         cta: "Schedule a Visit",
       },
       languageToggle: "Русский",
+      terms: {
+        title: "Data Processing Consent",
+        content: "By clicking 'Accept', you agree to the transfer of your personal data (name, phone and selected service) via WhatsApp to process your booking request.",
+        accept: "Accept",
+        decline: "Decline"
+      }
     },
   }
 
@@ -307,7 +325,7 @@ export default function ContactPage() {
     setIsMounted(true)
   }, [])
 
-  useEffect(() => {
+ useEffect(() => {
     if (typeof window === "undefined") return
 
     const handleScroll = () => {
@@ -329,91 +347,113 @@ export default function ContactPage() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
-  const validateForm = (data: ContactFormData): { [key: string]: string } => {
-    const errors: { [key: string]: string } = {}
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-    if (!data.name.trim()) errors.name = "Пожалуйста, введите ваше имя"
-    if (!data.email.trim()) {
-      errors.email = "Пожалуйста, введите email"
-    } else if (!emailRegex.test(data.email)) {
-      errors.email = "Пожалуйста, введите корректный email"
-    }
-    if (!data.subject.trim()) errors.subject = "Пожалуйста, введите тему сообщения"
-    if (!data.message.trim()) errors.message = "Пожалуйста, введите сообщение"
+  const validateForm = (data: BookingFormData): FormErrors => {
+    const errors: FormErrors = {}
+
+    if (!data.name.trim()) errors.name = language === "ru" ? "Пожалуйста, введите ваше имя" : "Please enter your name"
+    if (!data.phone.trim()) errors.phone = language === "ru" ? "Пожалуйста, введите ваш телефон" : "Please enter your phone number"
+    if (!data.serviceType) errors.serviceType = language === "ru" ? "Пожалуйста, выберите услугу" : "Please select a service"
 
     return errors
   }
 
-  const handleSubmitWithFormSubmit = async (data: ContactFormData) => {
-    try {
-      const response = await fetch(FORM_SUBMIT_URL, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          phone: data.phone || "Не указан",
-          subject: data.subject,
-          message: data.message,
-          _template: "table",
-          _subject: `Новое сообщение от ${data.name}: ${data.subject}`,
-          _autoresponse: `Спасибо за ваше сообщение, ${data.name}! Мы свяжемся с вами в ближайшее время.`,
-          _blacklist: "spammyword, blocker",
-          _honeypot: ""
-        })
-      })
+  const submitToEmail = async (data: BookingFormData) => {
+    const emailData = {
+      name: data.name,
+      phone: data.phone,
+      service: data.serviceType,
+      _subject: language === "ru" 
+        ? `Новая заявка от ${data.name}` 
+        : `New booking request from ${data.name}`,
+      _template: "box",
+      _captcha: "false"
+    };
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok')
-      }
+    const response = await fetch("https://formsubmit.co/ajax/info@tutschool.ru", {
+      method: "POST",
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(emailData)
+    });
 
-      const result = await response.json()
-      if (result.success) {
-        return result
-      } else {
-        throw new Error(result.message || 'Failed to submit form')
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error)
-      throw error
+    if (!response.ok) {
+      throw new Error(language === "ru" 
+        ? "Ошибка при отправке на email" 
+        : "Error sending to email");
     }
+
+    return response.json();
+  };
+
+  const handleSubmitToWhatsApp = async (data: BookingFormData) => {
+    const message = language === "ru" 
+      ? `🎓 *Новая заявка на бронирование*\n\n👤 *Имя:* ${data.name}\n📞 *Телефон:* ${data.phone}\n📚 *Услуга:* ${data.serviceType}\n\nПожалуйста, свяжитесь со мной для подтверждения бронирования.`
+      : `🎓 *New Booking Request*\n\n👤 *Name:* ${data.name}\n📞 *Phone:* ${data.phone}\n📚 *Service:* ${data.serviceType}\n\nPlease contact me to confirm the booking.`;
+
+    const whatsappNumber = "79167349246";
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, "_blank");
+    
+    // Return a resolved promise since we're just opening a new window
+    return Promise.resolve();
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
     const errors = validateForm(formData)
+
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors)
       return
     }
 
     setFormErrors({})
+    // Store the form data temporarily and show terms modal
+    setPendingFormData(formData)
+    setShowTermsModal(true)
+  }
+
+  const handleAcceptTerms = async () => {
+    if (!pendingFormData) return
+    
+    setShowTermsModal(false)
     setIsSubmitting(true)
 
     try {
-      await handleSubmitWithFormSubmit(formData)
-
+      // Submit to both email and WhatsApp simultaneously
+      await Promise.all([
+        submitToEmail(pendingFormData),
+        handleSubmitToWhatsApp(pendingFormData)
+      ])
+      
       setFormSuccess(true)
       toast.success(t.contactForm.success)
 
       // Reset form
       setFormData({
         name: "",
-        email: "",
         phone: "",
-        subject: "",
-        message: "",
+        serviceType: "",
       })
+      setPendingFormData(null)
 
-      // Hide success message after 5 seconds
       setTimeout(() => setFormSuccess(false), 5000)
     } catch (error: any) {
-      console.error("Form submission error:", error)
+      console.error("Submission error:", error)
       const errorMessage = error.message || t.contactForm.error
       setFormErrors({ submit: errorMessage })
       toast.error(errorMessage)
@@ -422,23 +462,27 @@ export default function ContactPage() {
     }
   }
 
+  const handleDeclineTerms = () => {
+    setShowTermsModal(false)
+    setPendingFormData(null)
+    toast.info(language === "ru" ? "Отправка отменена" : "Submission canceled")
+  }
+
   const toggleLanguage = () => setLanguage(language === "ru" ? "en" : "ru")
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen)
   const toggleAccordion = (index: number) => setActiveAccordion(activeAccordion === index ? null : index)
   const toggleDropdown = (dropdown: string) => setActiveDropdown(activeDropdown === dropdown ? null : dropdown)
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
 
   if (!isMounted) {
     return null
   }
 
+  // Rest of your component remains the same until the contact form section...
+
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Top Bar */}
-      <div className="bg-gray-100 py-2 text-sm">
+      {/* Top Bar, Header, Hero sections remain the same... */}
+            <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-2">
@@ -840,222 +884,249 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Contact Content */}
-        <div className="container mx-auto px-4 py-12">
-          <div className="grid gap-12 lg:grid-cols-2">
-            {/* Contact Information */}
-            <div>
-              <h2 className="mb-6 text-2xl font-bold text-burgundy-900">{t.contactInfo.title}</h2>
-              <div className="space-y-6">
-                <div className="rounded-lg bg-white p-6 shadow-md">
-                  <h3 className="mb-4 text-lg font-bold text-burgundy-900">{t.contactInfo.address}</h3>
+
+      {/* Contact Content */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid gap-12 lg:grid-cols-2">
+          {/* Contact Information - Retained with Yandex Map */}
+          <div>
+            <h2 className="mb-6 text-2xl font-bold text-burgundy-900">
+              {language === "ru" ? "Наши контакты" : "Our Contacts"}
+            </h2>
+            <div className="space-y-6">
+              <div className="rounded-lg bg-white p-6 shadow-md">
+                <h3 className="mb-4 text-lg font-bold text-burgundy-900">
+                  {language === "ru" ? "Адрес" : "Address"}
+                </h3>
+                <div className="flex items-start gap-3">
+                  <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-burgundy-900" />
+                  <p>{translations[language].address}</p>
+                </div>
+                {/* Yandex Map retained in original position */}
+                <div className="mt-4 aspect-video w-full overflow-hidden rounded-lg">
+                  <YandexMap />
+                </div>
+              </div>
+
+              <div className="rounded-lg bg-white p-6 shadow-md">
+                <h3 className="mb-4 text-lg font-bold text-burgundy-900">
+                  {language === "ru" ? "Телефон" : "Phone"}
+                </h3>
+                <div className="flex items-center gap-3">
+                  <Phone className="h-5 w-5 text-burgundy-900" />
+                  <a 
+                    href={`tel:${translations[language].phone.replace(/\s+/g, "")}`} 
+                    className="hover:text-burgundy-900 hover:underline"
+                  >
+                    {translations[language].phone}
+                  </a>
+                </div>
+              </div>
+
+              <div className="rounded-lg bg-white p-6 shadow-md">
+                <h3 className="mb-4 text-lg font-bold text-burgundy-900">
+                  {language === "ru" ? "Режим работы" : "Working Hours"}
+                </h3>
+                <div className="space-y-2">
                   <div className="flex items-start gap-3">
-                    <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-burgundy-900" />
-                    <p>{t.address}</p>
-                  </div>
-                  <div className="mt-4 aspect-video w-full overflow-hidden rounded-lg">
-                    <YandexMap />
-                  </div>
-                </div>
-
-                <div className="rounded-lg bg-white p-6 shadow-md">
-                  <h3 className="mb-4 text-lg font-bold text-burgundy-900">{t.contactInfo.phone}</h3>
-                  <div className="flex items-center gap-3">
-                    <Phone className="h-5 w-5 text-burgundy-900" />
-                    <a href={`tel:${t.phone.replace(/\s+/g, "")}`} className="hover:text-burgundy-900 hover:underline">
-                      {t.phone}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="rounded-lg bg-white p-6 shadow-md">
-                  <h3 className="mb-4 text-lg font-bold text-burgundy-900">{t.contactInfo.email}</h3>
-                  <div className="flex items-center gap-3">
-                    <Mail className="h-5 w-5 text-burgundy-900" />
-                    <a href={`mailto:${t.email}`} className="hover:text-burgundy-900 hover:underline">
-                      {t.email}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="rounded-lg bg-white p-6 shadow-md">
-                  <h3 className="mb-4 text-lg font-bold text-burgundy-900">{t.contactInfo.workingHours}</h3>
-                  <div className="space-y-2">
-                    <div className="flex items-start gap-3">
-                      <Clock className="mt-1 h-5 w-5 flex-shrink-0 text-burgundy-900" />
-                      <div>
-                        <p>{t.contactInfo.weekdays}</p>
-                        <p>{t.contactInfo.saturday}</p>
-                        <p>{t.contactInfo.sunday}</p>
-                      </div>
+                    <Clock className="mt-1 h-5 w-5 flex-shrink-0 text-burgundy-900" />
+                    <div>
+                      <p>{translations[language].contactInfo.weekdays}</p>
+                      <p>{translations[language].contactInfo.saturday}</p>
+                      <p>{translations[language].contactInfo.sunday}</p>
                     </div>
-                  </div>
-                </div>
-
-                <div className="rounded-lg bg-white p-6 shadow-md">
-                  <h3 className="mb-4 text-lg font-bold text-burgundy-900">{t.contactInfo.socialMedia}</h3>
-                  <div className="flex gap-3">
-                    <a
-                      href="https://api.whatsapp.com/send/?phone=%2B79167349246&text&type=phone_number&app_absent=0"
-                      className="text-green-600 hover:text-green-800"
-                    >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.472 3.5C18.188 1.24 15.073 0 11.786 0 5.354 0 .13 5.214.13 11.636c0 2.05.546 4.05 1.585 5.812L.13 24l6.726-1.763c1.698.925 3.607 1.41 5.55 1.41h.005c6.43 0 11.65-5.215 11.65-11.637 0-3.109-1.21-6.026-3.413-8.225l-.175-.285zM11.786 21.273h-.004c-1.743 0-3.45-.468-4.942-1.35l-.355-.21-3.676.964.985-3.595-.232-.368c-.975-1.55-1.49-3.335-1.49-5.17 0-5.356 4.364-9.713 9.728-9.713 2.6 0 5.034 1.012 6.868 2.85 1.832 1.837 2.842 4.276 2.84 6.873-.004 5.356-4.367 9.719-9.722 9.719zm5.333-7.278c-.294-.147-1.734-.856-2.002-.951-.268-.097-.463-.146-.658.146-.195.293-.757.951-.928 1.147-.17.195-.342.22-.635.073-.294-.147-1.24-.456-2.363-1.456-.873-.778-1.463-1.738-1.634-2.032-.171-.293-.018-.451.128-.597.132-.132.294-.342.44-.513.148-.17.197-.293.296-.488.098-.195.05-.366-.025-.513-.073-.147-.657-1.583-.9-2.168-.244-.585-.487-.487-.658-.487-.17 0-.367-.025-.562-.025-.195 0-.513.073-.781.366-.269.293-1.025.999-1.025 2.435 0 1.436 1.05 2.824 1.196 3.02.146.195 2.057 3.142 4.988 4.407.697.268 1.24.428 1.664.55.7.222 1.337.19 1.839.115.56-.085 1.734-.71 1.977-1.395.244-.684.244-1.27.17-1.393-.073-.122-.268-.196-.562-.342z" />
-                      </svg>
-                    </a>
-                    <a href="https://t.me/TUTschoolNovogorsk" className="text-blue-500 hover:text-blue-700">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.193-2.98 5.518-4.99c.22-.196-.048-.307-.338-.11l-6.81 4.29-2.96-.92c-.64-.203-.658-.64.135-.954l11.57-4.46c.538-.196 1.006.128.832.941z" />
-                      </svg>
-                    </a>
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Contact Form */}
-            <div>
-              <div className="rounded-lg bg-white p-8 shadow-md">
-                <h2 className="mb-2 text-2xl font-bold text-burgundy-900">{t.contactForm.title}</h2>
-                <p className="mb-6 text-gray-600">{t.contactForm.description}</p>
-
-                {formSuccess && (
-                  <div className="mb-6 p-4 bg-green-50 text-green-800 rounded-lg flex items-start">
-                    <Check className="w-5 h-5 mt-0.5 mr-2 text-green-600 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-semibold">Сообщение успешно отправлено!</h3>
-                      <p>Мы свяжемся с вами в ближайшее время.</p>
-                    </div>
-                  </div>
-                )}
-
-                {formErrors.submit && (
-                  <div className="mb-6 p-4 bg-red-50 text-red-800 rounded-lg flex items-start">
-                    <AlertCircle className="w-5 h-5 mt-0.5 mr-2 text-red-600 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-semibold">Ошибка отправки</h3>
-                      <p>{formErrors.submit}</p>
-                    </div>
-                  </div>
-                )}
-
-                <form 
-                  ref={formRef} 
-                  onSubmit={handleSubmit} 
-                  className="space-y-4"
-                >
-                  <div>
-                    <label htmlFor="name" className="mb-1 block text-sm font-medium text-burgundy-900">
-                      <User className="inline h-4 w-4 mr-1" />
-                      {t.contactForm.name} <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      className={`w-full border-burgundy-300 focus:border-burgundy-900 focus:ring-burgundy-900 ${formErrors.name ? "border-red-500" : ""}`}
-                      placeholder="Введите ваше полное имя"
-                    />
-                    {formErrors.name && <p className="mt-1 text-sm text-red-600">{formErrors.name}</p>}
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="mb-1 block text-sm font-medium text-burgundy-900">
-                      <Mail className="inline h-4 w-4 mr-1" />
-                      {t.contactForm.email} <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className={`w-full border-burgundy-300 focus:border-burgundy-900 focus:ring-burgundy-900 ${formErrors.email ? "border-red-500" : ""}`}
-                      placeholder="Введите ваш email адрес"
-                    />
-                    {formErrors.email && <p className="mt-1 text-sm text-red-600">{formErrors.email}</p>}
-                  </div>
-
-                  <div>
-                    <label htmlFor="phone" className="mb-1 block text-sm font-medium text-burgundy-900">
-                      <Phone className="inline h-4 w-4 mr-1" />
-                      {t.contactForm.phone}
-                    </label>
-                    <Input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="w-full border-burgundy-300 focus:border-burgundy-900 focus:ring-burgundy-900"
-                      placeholder="Введите ваш номер телефона"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="subject" className="mb-1 block text-sm font-medium text-burgundy-900">
-                      <MessageSquare className="inline h-4 w-4 mr-1" />
-                      {t.contactForm.subject} <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      required
-                      className={`w-full border-burgundy-300 focus:border-burgundy-900 focus:ring-burgundy-900 ${formErrors.subject ? "border-red-500" : ""}`}
-                      placeholder="Тема вашего сообщения"
-                    />
-                    {formErrors.subject && <p className="mt-1 text-sm text-red-600">{formErrors.subject}</p>}
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="mb-1 block text-sm font-medium text-burgundy-900">
-                      <Send className="inline h-4 w-4 mr-1" />
-                      {t.contactForm.message} <span className="text-red-500">*</span>
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      rows={5}
-                      className={`w-full border-burgundy-300 focus:border-burgundy-900 focus:ring-burgundy-900 ${formErrors.message ? "border-red-500" : ""}`}
-                      placeholder="Расскажите нам о ваших вопросах или пожеланиях"
-                    />
-                    {formErrors.message && <p className="mt-1 text-sm text-red-600">{formErrors.message}</p>}
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full bg-burgundy-900 text-white hover:bg-burgundy-800 focus:ring-2 focus:ring-burgundy-900 focus:ring-offset-2"
-                    disabled={isSubmitting}
+             {/* Social Media Section - Retained from original */}
+              <div className="rounded-lg bg-white p-6 shadow-md">
+                <h3 className="mb-4 text-lg font-bold text-burgundy-900">
+                  {language === "ru" ? "Социальные сети" : "Social Media"}
+                </h3>
+                <div className="flex gap-4">
+                  <a
+                    href="https://api.whatsapp.com/send/?phone=%2B79167349246&text&type=phone_number&app_absent=0"
+                    className="text-green-600 hover:text-green-800"
+                    aria-label="WhatsApp"
                   >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="animate-spin -ml-1 mr-2 h-5 w-5" />
-                        Отправка...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="mr-2 h-4 w-4" />
-                        {t.contactForm.submit}
-                      </>
-                    )}
-                  </Button>
-                </form>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20.472 3.5C18.188 1.24 15.073 0 11.786 0 5.354 0 .13 5.214.13 11.636c0 2.05.546 4.05 1.585 5.812L.13 24l6.726-1.763c1.698.925 3.607 1.41 5.55 1.41h.005c6.43 0 11.65-5.215 11.65-11.637 0-3.109-1.21-6.026-3.413-8.225l-.175-.285zM11.786 21.273h-.004c-1.743 0-3.45-.468-4.942-1.35l-.355-.21-3.676.964.985-3.595-.232-.368c-.975-1.55-1.49-3.335-1.49-5.17 0-5.356 4.364-9.713 9.728-9.713 2.6 0 5.034 1.012 6.868 2.85 1.832 1.837 2.842 4.276 2.84 6.873-.004 5.356-4.367 9.719-9.722 9.719zm5.333-7.278c-.294-.147-1.734-.856-2.002-.951-.268-.097-.463-.146-.658.146-.195.293-.757.951-.928 1.147-.17.195-.342.22-.635.073-.294-.147-1.24-.456-2.363-1.456-.873-.778-1.463-1.738-1.634-2.032-.171-.293-.018-.451.128-.597.132-.132.294-.342.44-.513.148-.17.197-.293.296-.488.098-.195.05-.366-.025-.513-.073-.147-.657-1.583-.9-2.168-.244-.585-.487-.487-.658-.487-.17 0-.367-.025-.562-.025-.195 0-.513.073-.781.366-.269.293-1.025.999-1.025 2.435 0 1.436 1.05 2.824 1.196 3.02.146.195 2.057 3.142 4.988 4.407.697.268 1.24.428 1.664.55.7.222 1.337.19 1.839.115.56-.085 1.734-.71 1.977-1.395.244-.684.244-1.27.17-1.393-.073-.122-.268-.196-.562-.342z" />
+                    </svg>
+                  </a>
+                  <a 
+                    href="https://t.me/TUTschoolNovogorsk" 
+                    className="text-blue-500 hover:text-blue-700"
+                    aria-label="Telegram"
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.193-2.98 5.518-4.99c.22-.196-.048-.307-.338-.11l-6.81 4.29-2.96-.92c-.64-.203-.658-.64.135-.954l11.57-4.46c.538-.196 1.006.128.832.941z" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          
 
-        {/* FAQ Section */}
+          {/* Updated Booking Form */}
+          <div>
+            <div className="rounded-lg bg-white p-8 shadow-md">
+              <h2 className="mb-2 text-2xl font-bold text-burgundy-900">{t.contactForm.title}</h2>
+              <p className="mb-6 text-gray-600">{t.contactForm.description}</p>
+
+              {formSuccess && (
+                <div className="mb-6 flex items-start rounded-lg bg-green-50 p-4 text-green-800">
+                  <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
+                  <div>
+                    <h3 className="font-semibold">{language === "ru" ? "Перенаправление в WhatsApp!" : "Redirecting to WhatsApp!"}</h3>
+                    <p>{language === "ru" ? "Отправьте сообщение в WhatsApp, и мы свяжемся с вами в ближайшее время." : "Send the message on WhatsApp and we'll contact you shortly."}</p>
+                  </div>
+                </div>
+              )}
+
+              {formErrors.submit && (
+                <div className="mb-6 flex items-start rounded-lg bg-red-50 p-4 text-red-800">
+                  <AlertCircle className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-red-600" />
+                  <div>
+                    <h3 className="font-semibold">{language === "ru" ? "Ошибка" : "Error"}</h3>
+                    <p>{formErrors.submit}</p>
+                  </div>
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="mb-1 block text-sm font-medium text-burgundy-900">
+                    <User className="inline h-4 w-4 mr-1" />
+                    {t.contactForm.name} <span className="text-red-500">*</span>
+                  </label>
+                  <Input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className={`w-full border-burgundy-300 focus:border-burgundy-900 focus:ring-burgundy-900 ${
+                      formErrors.name ? "border-red-500" : ""
+                    }`}
+                    placeholder={language === "ru" ? "Ваше полное имя" : "Your full name"}
+                  />
+                  {formErrors.name && <p className="mt-1 text-sm text-red-600">{formErrors.name}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="mb-1 block text-sm font-medium text-burgundy-900">
+                    <Phone className="inline h-4 w-4 mr-1" />
+                    {t.contactForm.phone} <span className="text-red-500">*</span>
+                  </label>
+                  <Input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    className={`w-full border-burgundy-300 focus:border-burgundy-900 focus:ring-burgundy-900 ${
+                      formErrors.phone ? "border-red-500" : ""
+                    }`}
+                    placeholder={language === "ru" ? "Ваш номер телефона" : "Your phone number"}
+                  />
+                  {formErrors.phone && <p className="mt-1 text-sm text-red-600">{formErrors.phone}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="serviceType" className="mb-1 block text-sm font-medium text-burgundy-900">
+                    <BookOpen className="inline h-4 w-4 mr-1" />
+                    {t.contactForm.service} <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="serviceType"
+                    name="serviceType"
+                    value={formData.serviceType}
+                    onChange={handleChange}
+                    required
+                    className={`w-full rounded-md border bg-gray-50 py-3 px-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-burgundy-900 ${
+                      formErrors.serviceType ? "border-red-500" : "border-gray-300"
+                    }`}
+                  >
+                    <option value="">{language === "ru" ? "Выберите услугу" : "Select a service"}</option>
+                    {serviceGroups.map((group) => (
+                      <optgroup key={group.group} label={group.group}>
+                        {group.services.map((service) => (
+                          <option key={service} value={service}>
+                            {service}
+                          </option>
+                        ))}
+                      </optgroup>
+                    ))}
+                  </select>
+                  {formErrors.serviceType && <p className="mt-1 text-sm text-red-600">{formErrors.serviceType}</p>}
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full bg-burgundy-900 text-white hover:bg-burgundy-800 focus:ring-2 focus:ring-burgundy-900 focus:ring-offset-2"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="animate-spin -ml-1 mr-2 h-5 w-5" />
+                      {language === "ru" ? "Отправка..." : "Sending..."}
+                    </>
+                  ) : (
+                    t.contactForm.submit
+                  )}
+                </Button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Terms and Conditions Modal */}
+      {showTermsModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+          <div className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
+            <div className="mb-4 text-center">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-burgundy-100">
+                <AlertCircle className="h-6 w-6 text-burgundy-900" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900">{t.terms.title}</h3>
+            </div>
+
+            <div className="mb-6 text-sm text-gray-600">
+              <p className="mb-3">{t.terms.content}</p>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={handleDeclineTerms}
+                className="flex-1 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-burgundy-900 focus:ring-offset-2"
+              >
+                {t.terms.decline}
+              </button>
+              <button
+                onClick={handleAcceptTerms}
+                disabled={isSubmitting}
+                className="flex-1 rounded-md bg-burgundy-900 py-2 px-4 text-sm font-medium text-white hover:bg-burgundy-800 focus:outline-none focus:ring-2 focus:ring-burgundy-900 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-1 h-4 w-4 animate-spin inline" />
+                    {language === "ru" ? "Обработка..." : "Processing..."}
+                  </>
+                ) : (
+                  t.terms.accept
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* FAQ and Visit sections remain the same... */}
+         {/* FAQ Section */}
         <section className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
             <h2 className="mb-2 text-center text-3xl font-bold text-burgundy-900">{t.faq.title}</h2>
@@ -1106,7 +1177,7 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
-      </main>
+        </main>
     </div>
   )
 }

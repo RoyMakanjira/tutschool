@@ -1,29 +1,21 @@
 "use client"
 
+import type React from "react"
 import { useState, useEffect } from "react"
-import { Calendar, Clock, Users, MessageSquare, Phone, Mail, User, Check, AlertCircle, Loader2, BookOpen } from "lucide-react"
+import { Calendar, Clock, Phone as PhoneIcon, Mail, User, Check, AlertCircle, Loader2 } from "lucide-react"
 import { toast } from "sonner"
 
 interface FormErrors {
   name?: string
-  email?: string
   phone?: string
   serviceType?: string
-  bookingDate?: string
-  bookingTime?: string
-  numberOfPeople?: string
   submit?: string
 }
 
 interface BookingFormData {
   name: string
-  email: string
   phone: string
   serviceType: string
-  bookingDate: string
-  bookingTime: string
-  numberOfPeople: number
-  specialRequests: string
 }
 
 interface ServiceGroup {
@@ -36,18 +28,13 @@ export default function BookingPage() {
   const [formErrors, setFormErrors] = useState<FormErrors>({})
   const [formSuccess, setFormSuccess] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
-  const [today, setToday] = useState("")
-
   const [formData, setFormData] = useState<BookingFormData>({
     name: "",
-    email: "",
     phone: "",
     serviceType: "",
-    bookingDate: "",
-    bookingTime: "",
-    numberOfPeople: 1,
-    specialRequests: "",
   })
+  const [showTermsModal, setShowTermsModal] = useState(false)
+  const [pendingFormData, setPendingFormData] = useState<BookingFormData | null>(null)
 
   const serviceGroups: ServiceGroup[] = [
     {
@@ -82,297 +69,124 @@ export default function BookingPage() {
 
   useEffect(() => {
     setIsMounted(true)
-    const now = new Date()
-    const utcDate = new Date(now.getTime() + now.getTimezoneOffset() * 60000)
-    setToday(utcDate.toISOString().split("T")[0])
   }, [])
 
   const validateForm = (data: BookingFormData): FormErrors => {
     const errors: FormErrors = {}
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/
 
     if (!data.name.trim()) errors.name = "Пожалуйста, введите ваше имя"
-    if (!data.email.trim()) {
-      errors.email = "Пожалуйста, введите email"
-    } else if (!emailRegex.test(data.email)) {
-      errors.email = "Пожалуйста, введите корректный email"
-    }
-    if (data.phone && !phoneRegex.test(data.phone)) {
-      errors.phone = "Пожалуйста, введите корректный номер телефона"
-    }
+    if (!data.phone.trim()) errors.phone = "Пожалуйста, введите ваш телефон"
     if (!data.serviceType) errors.serviceType = "Пожалуйста, выберите услугу"
-    if (!data.bookingDate) errors.bookingDate = "Пожалуйста, выберите дату"
-    if (!data.bookingTime) errors.bookingTime = "Пожалуйста, выберите время"
-    if (!data.numberOfPeople || data.numberOfPeople < 1) {
-      errors.numberOfPeople = "Пожалуйста, укажите количество человек"
-    }
 
     return errors
   }
 
-  const handleSubmitWithFormSubmit = async (data: BookingFormData) => {
-    const formPayload = {
-      name: data.name,
-      email: data.email,
-      phone: data.phone || "Не указан",
-      serviceType: data.serviceType,
-      bookingDate: data.bookingDate,
-      bookingTime: data.bookingTime,
-      numberOfPeople: data.numberOfPeople.toString(),
-      specialRequests: data.specialRequests || "Нет особых пожеланий",
-      _subject: `Новое бронирование: ${data.serviceType}`,
-      _template: "boxy",
-      _captcha: "false",
-      _replyto: data.email,
-      _html: `
-      <div style="
-        background-color: #4C1D24; 
-        color: #f3f4f6; 
-        font-family: 'Georgia', serif; 
-        padding: 2rem;
-        border-radius: 8px;
-        max-width: 600px;
-        margin: 0 auto;
-      ">
-        <div style="text-align: center; margin-bottom: 1.5rem;">
-          <div style="
-            display: inline-block;
-            background: #f8f8f8;
-            color: #4C1D24;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            line-height: 60px;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 1rem;
-          ">TUT</div>
-          <h1 style="
-            font-size: 1.75rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.5px;
-          ">
-            Новая заявка на бронирование
-          </h1>
-          <div style="
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            margin: 1rem 0;
-          "></div>
-        </div>
+  const handleSubmitToWhatsApp = async (data: BookingFormData) => {
+    const message = `🎓 *Новая заявка на бронирование*
 
-        <div style="
-          background: rgba(255,255,255,0.08);
-          border-left: 4px solid #d4a017;
-          padding: 1.25rem;
-          border-radius: 6px;
-          margin-bottom: 1.5rem;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        ">
-          <h2 style="
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-          ">
-            <span style="
-              background: #d4a017;
-              color: #4C1D24;
-              width: 24px;
-              height: 24px;
-              border-radius: 50%;
-              display: inline-flex;
-              align-items: center;
-              justify-content: center;
-              margin-right: 8px;
-              font-size: 14px;
-            ">1</span>
-            Детали бронирования
-          </h2>
-          
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 6px 0; width: 120px; font-weight: bold;">Услуга:</td>
-              <td style="padding: 6px 0;">${data.serviceType}</td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; font-weight: bold;">Дата:</td>
-              <td style="padding: 6px 0;">${data.bookingDate}</td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; font-weight: bold;">Время:</td>
-              <td style="padding: 6px 0;">${data.bookingTime}</td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; font-weight: bold;">Участники:</td>
-              <td style="padding: 6px 0;">${data.numberOfPeople}</td>
-            </tr>
-          </table>
-        </div>
+👤 *Имя:* ${data.name}
+📞 *Телефон:* ${data.phone}
+📚 *Услуга:* ${data.serviceType}
 
-        <div style="
-          background: rgba(255,255,255,0.08);
-          border-left: 4px solid #8e9aaf;
-          padding: 1.25rem;
-          border-radius: 6px;
-          margin-bottom: 1.5rem;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        ">
-          <h2 style="
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-          ">
-            <span style="
-              background: #8e9aaf;
-              color: #4C1D24;
-              width: 24px;
-              height: 24px;
-              border-radius: 50%;
-              display: inline-flex;
-              align-items: center;
-              justify-content: center;
-              margin-right: 8px;
-              font-size: 14px;
-            ">2</span>
-            Контактная информация
-          </h2>
-          
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 6px 0; width: 120px; font-weight: bold;">Имя:</td>
-              <td style="padding: 6px 0;">${data.name}</td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; font-weight: bold;">Email:</td>
-              <td style="padding: 6px 0;">${data.email}</td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; font-weight: bold;">Телефон:</td>
-              <td style="padding: 6px 0;">${data.phone || "Не указан"}</td>
-            </tr>
-          </table>
-        </div>
+Пожалуйста, свяжитесь со мной для подтверждения бронирования.`
 
-        ${data.specialRequests ? `
-        <div style="
-          background: rgba(255,255,255,0.08);
-          border-left: 4px solid #c77dff;
-          padding: 1.25rem;
-          border-radius: 6px;
-          margin-bottom: 1.5rem;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        ">
-          <h2 style="
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-          ">
-            <span style="
-              background: #c77dff;
-              color: white;
-              width: 24px;
-              height: 24px;
-              border-radius: 50%;
-              display: inline-flex;
-              align-items: center;
-              justify-content: center;
-              margin-right: 8px;
-              font-size: 14px;
-            ">3</span>
-            Особые пожелания
-          </h2>
-          <p style="line-height: 1.5;">${data.specialRequests}</p>
-        </div>
-        ` : ''}
+    const whatsappNumber = "79167349246"
+    const encodedMessage = encodeURIComponent(message)
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
 
-        <div style="
-          text-align: center;
-          margin-top: 2rem;
-          padding-top: 1rem;
-          border-top: 1px dashed rgba(255,255,255,0.2);
-          font-size: 0.8rem;
-          color: rgba(255,255,255,0.7);
-        ">
-          <p>Языковая школа TUT • info@tutschool.ru</p>
-          <p style="margin-top: 0.5rem;">
-            <a href="https://tutschool.ru" style="color: #d4a017; text-decoration: none;">Посетите наш сайт</a>
-          </p>
-        </div>
-      </div>
-      `
-    }
+    window.open(whatsappUrl, "_blank")
+    return Promise.resolve() // Return a resolved promise for Promise.all
+  }
 
+  const submitToEmail = async (data: BookingFormData) => {
     try {
       const response = await fetch("https://formsubmit.co/ajax/info@tutschool.ru", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: JSON.stringify(formPayload),
+        body: JSON.stringify({
+          name: data.name,
+          phone: data.phone,
+          service: data.serviceType,
+          _subject: `Новая заявка на бронирование от ${data.name}`,
+          _template: "table"
+        })
       })
 
-      if (!response.ok) throw new Error("Ошибка отправки формы")
-    } catch (error: any) {
-      throw new Error(error.message || "Не удалось отправить запрос на бронирование")
+      if (!response.ok) {
+        throw new Error('Ошибка при отправке на почту')
+      }
+
+      return await response.json()
+    } catch (error) {
+      console.error('FormSubmit error:', error)
+      throw error
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "numberOfPeople" ? Number.parseInt(value) || 0 : value,
+      [name]: value,
     }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
     const errors = validateForm(formData)
+
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors)
       return
     }
 
     setFormErrors({})
+    setPendingFormData(formData)
+    setShowTermsModal(true)
+  }
+
+  const handleAcceptTerms = async () => {
+    if (!pendingFormData) return
+    
+    setShowTermsModal(false)
     setIsSubmitting(true)
 
     try {
-      await handleSubmitWithFormSubmit(formData)
-
+      // Submit to both email and WhatsApp simultaneously
+      await Promise.all([
+        submitToEmail(pendingFormData),
+        handleSubmitToWhatsApp(pendingFormData)
+      ])
+      
       setFormSuccess(true)
-      toast.success("Запрос на бронирование отправлен успешно! Мы свяжемся с вами в ближайшее время.")
+      toast.success("Заявка успешно отправлена! Перенаправление в WhatsApp...")
 
       // Reset form
       setFormData({
         name: "",
-        email: "",
         phone: "",
         serviceType: "",
-        bookingDate: "",
-        bookingTime: "",
-        numberOfPeople: 1,
-        specialRequests: "",
       })
+      setPendingFormData(null)
 
       setTimeout(() => setFormSuccess(false), 5000)
     } catch (error: any) {
-      console.error("Booking submission error:", error)
-      const errorMessage = error.message || "Произошла ошибка при отправке запроса. Попробуйте еще раз."
+      console.error("Submission error:", error)
+      const errorMessage = error.message || "Произошла ошибка при отправке заявки. Попробуйте еще раз."
       setFormErrors({ submit: errorMessage })
       toast.error(errorMessage)
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const handleDeclineTerms = () => {
+    setShowTermsModal(false)
+    setPendingFormData(null)
+    toast.info("Отправка отменена")
   }
 
   if (!isMounted) {
@@ -432,7 +246,7 @@ export default function BookingPage() {
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <Phone className="mr-3 mt-1 h-5 w-5 text-burgundy-900" />
+                    <PhoneIcon className="mr-3 mt-1 h-5 w-5 text-burgundy-900" />
                     <div>
                       <h3 className="font-semibold">Телефон</h3>
                       <p className="text-gray-600">+7 (983) 662-97-30</p>
@@ -446,12 +260,10 @@ export default function BookingPage() {
                     </div>
                   </div>
                 </div>
-
                 <div className="mt-8 rounded-lg bg-gray-50 p-4">
                   <h3 className="mb-2 font-semibold text-burgundy-900">Примечание:</h3>
                   <p className="text-sm text-gray-600">
-                    Ваш запрос будет отправлен немедленно, и вы получите подтверждение на email мгновенно. Наш менеджер
-                    свяжется с вами в течение 2-4 часов в рабочее время для финального подтверждения.
+                    После принятия условий ваши данные будут отправлены на нашу почту и в WhatsApp одновременно для обработки вашего запроса.
                   </p>
                 </div>
               </div>
@@ -466,8 +278,8 @@ export default function BookingPage() {
                   <div className="mb-6 flex items-start rounded-lg bg-green-50 p-4 text-green-800">
                     <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
                     <div>
-                      <h3 className="font-semibold">Запрос успешно отправлен!</h3>
-                      <p>Мы свяжемся с вами в ближайшее время для подтверждения бронирования.</p>
+                      <h3 className="font-semibold">Заявка отправлена!</h3>
+                      <p>Ваши данные отправлены на почту и в WhatsApp.</p>
                     </div>
                   </div>
                 )}
@@ -476,16 +288,16 @@ export default function BookingPage() {
                   <div className="mb-6 flex items-start rounded-lg bg-red-50 p-4 text-red-800">
                     <AlertCircle className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-red-600" />
                     <div>
-                      <h3 className="font-semibold">Ошибка отправки</h3>
+                      <h3 className="font-semibold">Ошибка</h3>
                       <p>{formErrors.submit}</p>
                     </div>
                   </div>
                 )}
 
                 <form onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-6">
                     {/* Name */}
-                    <div className="md:col-span-1">
+                    <div>
                       <label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-700">
                         ФИО *
                       </label>
@@ -500,44 +312,23 @@ export default function BookingPage() {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className={`w-full rounded-md border bg-gray-50 py-2 px-3 pl-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-burgundy-900 ${formErrors.name ? "border-red-500" : "border-gray-300"}`}
+                          className={`w-full rounded-md border bg-gray-50 py-3 px-3 pl-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-burgundy-900 ${
+                            formErrors.name ? "border-red-500" : "border-gray-300"
+                          }`}
                           placeholder="Ваше полное имя"
                         />
                       </div>
                       {formErrors.name && <p className="mt-1 text-sm text-red-600">{formErrors.name}</p>}
                     </div>
 
-                    {/* Email */}
-                    <div className="md:col-span-1">
-                      <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">
-                        Электронная почта *
-                      </label>
-                      <div className="relative">
-                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                          <Mail className="h-5 w-5 text-gray-400" />
-                        </div>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          required
-                          className={`w-full rounded-md border bg-gray-50 py-2 px-3 pl-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-burgundy-900 ${formErrors.email ? "border-red-500" : "border-gray-300"}`}
-                          placeholder="Ваш адрес электронной почты"
-                        />
-                      </div>
-                      {formErrors.email && <p className="mt-1 text-sm text-red-600">{formErrors.email}</p>}
-                    </div>
-
                     {/* Phone */}
-                    <div className="md:col-span-1">
+                    <div>
                       <label htmlFor="phone" className="mb-1 block text-sm font-medium text-gray-700">
-                        Номер телефона
+                        Телефон *
                       </label>
                       <div className="relative">
                         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                          <Phone className="h-5 w-5 text-gray-400" />
+                          <PhoneIcon className="h-5 w-5 text-gray-400" />
                         </div>
                         <input
                           type="tel"
@@ -545,15 +336,18 @@ export default function BookingPage() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className={`w-full rounded-md border bg-gray-50 py-2 px-3 pl-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-burgundy-900 ${formErrors.phone ? "border-red-500" : "border-gray-300"}`}
-                          placeholder="+7 (XXX) XXX-XXXX"
+                          required
+                          className={`w-full rounded-md border bg-gray-50 py-3 px-3 pl-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-burgundy-900 ${
+                            formErrors.phone ? "border-red-500" : "border-gray-300"
+                          }`}
+                          placeholder="Ваш номер телефона"
                         />
                       </div>
                       {formErrors.phone && <p className="mt-1 text-sm text-red-600">{formErrors.phone}</p>}
                     </div>
 
                     {/* Service Type */}
-                    <div className="md:col-span-1">
+                    <div>
                       <label htmlFor="serviceType" className="mb-1 block text-sm font-medium text-gray-700">
                         Тип услуги *
                       </label>
@@ -563,7 +357,9 @@ export default function BookingPage() {
                         value={formData.serviceType}
                         onChange={handleChange}
                         required
-                        className={`w-full rounded-md border bg-gray-50 py-2 px-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-burgundy-900 ${formErrors.serviceType ? "border-red-500" : "border-gray-300"}`}
+                        className={`w-full rounded-md border bg-gray-50 py-3 px-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-burgundy-900 ${
+                          formErrors.serviceType ? "border-red-500" : "border-gray-300"
+                        }`}
                       >
                         <option value="">Выберите услугу</option>
                         {serviceGroups.map((group) => (
@@ -576,122 +372,23 @@ export default function BookingPage() {
                           </optgroup>
                         ))}
                       </select>
-                      {formErrors.serviceType && (
-                        <p className="mt-1 text-sm text-red-600">{formErrors.serviceType}</p>
-                      )}
-                    </div>
-
-                    {/* Date */}
-                    <div className="md:col-span-1">
-                      <label htmlFor="bookingDate" className="mb-1 block text-sm font-medium text-gray-700">
-                        Дата *
-                      </label>
-                      <div className="relative">
-                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                          <Calendar className="h-5 w-5 text-gray-400" />
-                        </div>
-                        <input
-                          type="date"
-                          id="bookingDate"
-                          name="bookingDate"
-                          value={formData.bookingDate}
-                          onChange={handleChange}
-                          required
-                          min={today}
-                          className={`w-full rounded-md border bg-gray-50 py-2 px-3 pl-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-burgundy-900 ${formErrors.bookingDate ? "border-red-500" : "border-gray-300"}`}
-                        />
-                      </div>
-                      {formErrors.bookingDate && (
-                        <p className="mt-1 text-sm text-red-600">{formErrors.bookingDate}</p>
-                      )}
-                    </div>
-
-                    {/* Time */}
-                    <div className="md:col-span-1">
-                      <label htmlFor="bookingTime" className="mb-1 block text-sm font-medium text-gray-700">
-                        Время *
-                      </label>
-                      <div className="relative">
-                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                          <Clock className="h-5 w-5 text-gray-400" />
-                        </div>
-                        <input
-                          type="time"
-                          id="bookingTime"
-                          name="bookingTime"
-                          value={formData.bookingTime}
-                          onChange={handleChange}
-                          required
-                          min="09:00"
-                          max="19:00"
-                          className={`w-full rounded-md border bg-gray-50 py-2 px-3 pl-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-burgundy-900 ${formErrors.bookingTime ? "border-red-500" : "border-gray-300"}`}
-                        />
-                      </div>
-                      {formErrors.bookingTime && (
-                        <p className="mt-1 text-sm text-red-600">{formErrors.bookingTime}</p>
-                      )}
-                    </div>
-
-                    {/* Number of People */}
-                    <div className="md:col-span-1">
-                      <label htmlFor="numberOfPeople" className="mb-1 block text-sm font-medium text-gray-700">
-                        Количество человек *
-                      </label>
-                      <div className="relative">
-                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                          <Users className="h-5 w-5 text-gray-400" />
-                        </div>
-                        <input
-                          type="number"
-                          id="numberOfPeople"
-                          name="numberOfPeople"
-                          value={formData.numberOfPeople}
-                          onChange={handleChange}
-                          required
-                          min="1"
-                          className={`w-full rounded-md border bg-gray-50 py-2 px-3 pl-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-burgundy-900 ${formErrors.numberOfPeople ? "border-red-500" : "border-gray-300"}`}
-                        />
-                      </div>
-                      {formErrors.numberOfPeople && (
-                        <p className="mt-1 text-sm text-red-600">{formErrors.numberOfPeople}</p>
-                      )}
-                    </div>
-
-                    {/* Special Requests */}
-                    <div className="md:col-span-2">
-                      <label htmlFor="specialRequests" className="mb-1 block text-sm font-medium text-gray-700">
-                        Особые пожелания
-                      </label>
-                      <div className="relative">
-                        <div className="pointer-events-none absolute left-3 top-3 flex items-start">
-                          <MessageSquare className="h-5 w-5 text-gray-400" />
-                        </div>
-                        <textarea
-                          id="specialRequests"
-                          name="specialRequests"
-                          value={formData.specialRequests}
-                          onChange={handleChange}
-                          rows={4}
-                          className="w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 pl-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-burgundy-900"
-                          placeholder="Любые особые требования или дополнительная информация"
-                        ></textarea>
-                      </div>
+                      {formErrors.serviceType && <p className="mt-1 text-sm text-red-600">{formErrors.serviceType}</p>}
                     </div>
 
                     {/* Submit Button */}
-                    <div className="mt-4 md:col-span-2">
+                    <div className="mt-6">
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="flex w-full items-center justify-center rounded-md bg-burgundy-900 py-3 px-4 font-bold text-white transition-colors duration-300 hover:bg-burgundy-800 disabled:cursor-not-allowed disabled:opacity-70"
+                        className="flex w-full items-center justify-center rounded-md bg-burgundy-900 py-4 px-4 text-lg font-bold text-white transition-colors duration-300 hover:bg-burgundy-800 disabled:cursor-not-allowed disabled:opacity-70"
                       >
                         {isSubmitting ? (
                           <>
                             <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                            Обработка...
+                            Отправка...
                           </>
                         ) : (
-                          "Отправить запрос на бронирование"
+                          "Отправить заявку"
                         )}
                       </button>
                     </div>
@@ -702,6 +399,53 @@ export default function BookingPage() {
           </div>
         </div>
       </section>
+
+      {/* Terms and Conditions Modal */}
+      {showTermsModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+          <div className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
+            <div className="mb-4 text-center">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-burgundy-100">
+                <AlertCircle className="h-6 w-6 text-burgundy-900" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900">Согласие на обработку данных</h3>
+            </div>
+
+            <div className="mb-6 text-sm text-gray-600">
+              <p className="mb-3">
+                Нажимая "Принимаю", вы соглашаетесь на обработку ваших персональных данных (имя, телефон и выбранная услуга) для обработки вашего запроса на бронирование.
+              </p>
+              <p className="mb-3">
+                Ваши данные будут отправлены на нашу почту info@tutschool.ru и в WhatsApp одновременно для быстрой обработки вашего запроса.
+              </p>
+              <p className="text-xs text-gray-500">Вы можете отозвать согласие в любое время, связавшись с нами.</p>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={handleDeclineTerms}
+                className="flex-1 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-burgundy-900 focus:ring-offset-2"
+              >
+                Отклонить
+              </button>
+              <button
+                onClick={handleAcceptTerms}
+                disabled={isSubmitting}
+                className="flex-1 rounded-md bg-burgundy-900 py-2 px-4 text-sm font-medium text-white hover:bg-burgundy-800 focus:outline-none focus:ring-2 focus:ring-burgundy-900 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-1 h-4 w-4 animate-spin inline" />
+                    Отправка...
+                  </>
+                ) : (
+                  "Принимаю"
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* FAQ Section */}
       <section className="bg-gray-50 py-16">
@@ -727,7 +471,7 @@ export default function BookingPage() {
               {
                 question: "Могу ли я перенести мое бронирование?",
                 answer:
-                  "Да, вы можете перенести бронирование не позднее, чем за 24 часа до запланированного времени без штрафа. Пожалуйста, свяжитесь с нами по телефону или электронной почте, чтобы назначить новое время.",
+                  "Да, вы можете перенестти бронирование не позднее, чем за 24 часа до запланированного времени без штрафа. Пожалуйста, свяжитесь с нами по телефону или WhatsApp, чтобы назначить новое время.",
               },
               {
                 question: "Предлагаете ли вы групповые скидки?",

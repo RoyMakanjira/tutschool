@@ -777,25 +777,6 @@ export default function ChinesePreschoolers() {
         </div>
       </section>
 
-      {/* Schedule Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="rounded-2xl bg-[#5C162E] p-8 md:p-12">
-            <FadeIn>
-              <h2 className="mb-6 text-3xl font-bold text-white ">{t.schedule.title}</h2>
-              <p className="mb-8 text-lg text-white/90">{t.schedule.description}</p>
-              <ul className="space-y-4 text-white">
-                {t.schedule.times.map((time, index) => (
-                  <li key={index} className="flex items-center gap-3">
-                    <ChevronRight className="h-5 w-5" />
-                    <span>{time}</span>
-                  </li>
-                ))}
-              </ul>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
 
             <section className="py-16">
           <div className="mb-16">
