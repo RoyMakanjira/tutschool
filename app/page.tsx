@@ -300,7 +300,7 @@ export default function HomePage() {
         whatsapp: "WhatsApp",
       },
       trial: {
-        title: "ЗАПИШИТЕСЬ НА  ПРОБНЫЙ УРОК",
+        title: "ЗАПИСАТЬСЯ НА БЕСПЛАТНЫЙ ПРОБНЫЙ УРОК-ДИАГНОСТИКУ",
         description: "Оставьте заявку, и мы свяжемся с вами для записи на бесплатное пробное занятие",
         cta: "Записаться",
       },
@@ -459,7 +459,7 @@ export default function HomePage() {
         whatsapp: "WhatsApp",
       },
       trial: {
-        title: "SIGN UP FOR A TRIAL LESSON",
+        title: "SIGN UP FOR A TRIAL DIAGNOSTIC LESSON",
         description: "Leave a request and we will contact you to schedule a free trial lesson",
         cta: "Sign up",
       },
@@ -1045,7 +1045,7 @@ export default function HomePage() {
       <main>
         {/* Hero Section */}
         <section className="relative">
-          <div className="relative h-[600px] w-full overflow-hidden">
+          <div className="relative h-[600px] sm:h-[600px] w-full overflow-hidden">
             {heroImages.map((src, index) => (
               <div
                 key={index}
@@ -1062,6 +1062,7 @@ export default function HomePage() {
                 <Image
                   src={src || "/assets/happy-student.jpg"}
                   alt={language === "ru" ? `Слайд ${index + 1}` : `Slide ${index + 1}`}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
                   fill
                   className="object-cover transform transition-transform duration-10000 hover:scale-105"
                   priority={index === 0}
@@ -1124,29 +1125,38 @@ export default function HomePage() {
         </section>
 
         {/* Welcome Section */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="grid gap-8 md:grid-cols-2 md:gap-12">
-              <div>
-                <h2 className="mb-6 text-3xl font-bold text-primary">{t.welcome.title}</h2>
-                <p className="mb-6 text-lg text-gray-700">{t.welcome.description}</p>
-                <ul className="mb-8 space-y-3">
-                  {t.welcome.points.map((point, index) => (
-                    <li key={index} className="flex items-start">
-                      <ChevronRight className="mr-2 h-5 w-5 flex-shrink-0 text-primary" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/our-values" className="inline-flex items-center text-primary hover:underline">
-                  {t.welcome.cta}
-                  <ChevronRight className="ml-1 h-4 w-4" />
-                </Link>
-              </div>
-           
-            </div>
-          </div>
-        </section>
+        <section className="py-16 bg-white">
+  <div className="container mx-auto px-4">
+    <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto">
+      
+      <h2 className="mb-6 text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
+        {t.welcome.title}
+      </h2>
+
+      <p className="mb-6 text-lg text-gray-700 leading-relaxed">
+        {t.welcome.description}
+      </p>
+
+      <ul className="mb-8 space-y-4 text-left">
+        {t.welcome.points.map((point, index) => (
+          <li key={index} className="flex items-start">
+            <ChevronRight className="mt-1 mr-2 h-5 w-5 flex-shrink-0 text-primary" />
+            <span className="text-base text-gray-800">{point}</span>
+          </li>
+        ))}
+      </ul>
+
+      <Link
+        href="/our-values"
+        className="inline-flex items-center font-semibold text-primary hover:underline transition duration-150 ease-in-out"
+      >
+        {t.welcome.cta}
+        <ChevronRight className="ml-2 h-4 w-4" />
+      </Link>
+    </div>
+  </div>
+</section>
+
 
                 <section id="courses" className="py-20 bg-gray-50">
   <div className="container mx-auto px-4 sm:px-6">
