@@ -813,23 +813,27 @@ export default function TeenagersPage() {
         <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 text-[#5C162E]">{t.pricing.title}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {t.pricing.plans.map((plan, index) => (
-                <div
-                  className={`bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow border-2 border-[#5C162E] ${plan.popular ? 'border-2 border-[#5C162E]' : ''
-                    }`}
-                >
-                  {plan.popular && (
-                    <div className="absolute top-0 right-0 bg-[#5C162E] text-white px-4 py-1 rounded-bl-lg">
-                      {language === 'ru' ? 'Популярный' : 'Popular'}
-                    </div>
-                  )}
-                  <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
-                  <p className="text-2xl font-bold mb-6">{plan.price}</p>
-                  
-                </div>
-              ))}
-            </div>
+            <div 
+  className="grid grid-cols-1 md:grid-cols-3 gap-8 
+  max-w-5xl ml-[20%] mr-auto"
+>
+  {t.pricing.plans.map((plan, index) => (
+    <div
+      key={index} // Don't forget the key!
+      className={`relative bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow border-2 border-[#5C162E] ${
+        plan.popular ? 'border-2 border-[#5C162E]' : ''
+      }`}
+    >
+      {plan.popular && (
+        <div className="absolute top-0 right-0 bg-[#5C162E] text-white px-4 py-1 rounded-bl-lg">
+          {language === 'ru' ? 'Популярный' : 'Popular'}
+        </div>
+      )}
+      <h3 className="text-xl font-bold mb-4 text-[#5C162E]">{plan.name}</h3>
+      <p className="text-2xl font-bold mb-6">{plan.price}</p>
+    </div>
+  ))}
+</div>
           </div>
         </section>
 
@@ -837,7 +841,7 @@ export default function TeenagersPage() {
         <section className="py-20 bg-[#5C162E] text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6">
-              {language === 'ru' ? 'Запишитесь на пробный урок' : 'Book a trial lesson'}
+              {language === 'ru' ? 'Записаться на бесплатный урок-диагностику' : 'Sign up for a free diagnostic lesson'}
             </h2>
             <a href="/bookings" className="bg-white text-[#5C162E] px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors font-medium">
               {t.hero.cta}

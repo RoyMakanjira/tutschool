@@ -783,23 +783,24 @@ export default function Aged7to9Page() {
                     >
                       {t.pricing.title}
                     </motion.h2>
-                    <motion.div
-                      initial="hidden"
-                      animate={isLoaded ? "visible" : "hidden"}
-                      variants={staggerContainer}
-                      className="grid gap-8 md:grid-cols-3"
-                    >
-                      {t.pricing.items.map((item, index) => (
-                        <motion.div
-                          key={index}
-                          variants={fadeIn}
-                          className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl border-2 border-[#5C162E]"
-                        >
-                          <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
-                          <p className="text-3xl font-bold text-primary">{item.price}</p>
-                        </motion.div>
-                      ))}
-                    </motion.div>
+<motion.div
+  initial="hidden"
+  animate={isLoaded ? "visible" : "hidden"}
+  variants={staggerContainer}
+  // ↓↓↓ Added `ml-[10%]` to shift right + `w-full` to prevent overflow ↓↓↓
+  className="grid gap-8 md:grid-cols-3 ml-[20%] w-full max-w-[90%]"
+>
+  {t.pricing.items.map((item, index) => (
+    <motion.div
+      key={index}
+      variants={fadeIn}
+      className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl border-2 border-[#5C162E]"
+    >
+      <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
+      <p className="text-3xl font-bold text-primary">{item.price}</p>
+    </motion.div>
+  ))}
+</motion.div>
                   </div>
                 </section>
 
@@ -807,7 +808,7 @@ export default function Aged7to9Page() {
         <section className="py-16 bg-[#5C162E] text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6">
-              {language === 'ru' ? 'Запишитесь на пробный урок' : 'Book a trial lesson'}
+              {language === 'ru' ? 'Записаться на бесплатный урок-диагностику' : 'Sign up for a free diagnostic lesson'}
             </h2>
             <a href="/bookings" className="bg-white text-[#5C162E] px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">
               {t.hero.cta}

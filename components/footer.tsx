@@ -234,6 +234,12 @@ export default function Footer() {
         <Separator className="my-10 bg-gray-800" />
 
         <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row">
+          <div className="text-sm text-gray-500 text-center md:text-left">
+  <p>ИП Фёдорова Юлия Викторовна</p>
+  <p>ИНН 253604322701</p>
+  <p>ОГРНИП 314774603400336</p>
+</div>
+
           <p className="text-sm text-gray-400">{t.footer.copyright}</p>
           <p className="text-sm text-gray-500">
             <a 

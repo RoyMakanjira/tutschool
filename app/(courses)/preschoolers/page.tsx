@@ -114,7 +114,7 @@ export default function PreschoolersPage() {
         schedule: "Расписание занятий",
       },
       footnote: {
-        title: "Записаться на урок",
+        title: "Записаться на бесплатный урок-диагностику",
         subtitle: "Познакомьтесь с преподавателем и нашей методикой обучения. Первое занятие бесплатно!",
         cta: "Записаться"
       },
@@ -237,7 +237,7 @@ export default function PreschoolersPage() {
           schedule: "Class Schedule"
         },
         footnote: {
-          title: "Sign up for lesson.",
+          title: "Sign up for a free diagnostic lesson",
           subtitle: "Meet the teacher and learn about our teaching methodology.",
           cta: "Register"
         },
@@ -866,36 +866,40 @@ export default function PreschoolersPage() {
       </div>
     </section>
 
-        {/* Pricing */}
-                <section className="bg-gray-50 py-16">
-                  <div className="container mx-auto px-">
-                    <motion.h2
-                      initial="hidden"
-                      animate={isLoaded ? "visible" : "hidden"}
-                      variants={fadeIn}
-                      className="mb-12 text-center text-3xl font-bold"
-                    >
-                      {t.pricing.title}
-                    </motion.h2>
-                    <motion.div
-                      initial="hidden"
-                      animate={isLoaded ? "visible" : "hidden"}
-                      variants={staggerContainer}
-                      className="grid gap-8 md:grid-cols-3"
-                    >
-                      {t.pricing.items.map((item, index) => (
-                        <motion.div
-                          key={index}
-                          variants={fadeIn}
-                          className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl border-2 border-[#5C162E]"
-                        >
-                          <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
-                          <p className="text-3xl font-bold text-primary">{item.price}</p>
-                        </motion.div>
-                      ))}
-                    </motion.div>
-                  </div>
-                </section>
+{/* Pricing */}
+<section className="bg-gray-50 py-16 flex justify-center items-center">
+  <div className="w-full max-w-7xl px-4">
+    <motion.h2
+      initial="hidden"
+      animate={isLoaded ? "visible" : "hidden"}
+      variants={fadeIn}
+      className="mb-12 text-center text-4xl font-extrabold text-gray-800 justify-center"
+    >
+      {t.pricing.title}
+    </motion.h2>
+
+    <motion.div
+  initial="hidden"
+  animate={isLoaded ? "visible" : "hidden"}
+  variants={staggerContainer}
+  className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 justify-center text-center"
+  // ↓↓↓ Added margin-left (ml-*) to shift right ↓↓↓
+  style={{ marginLeft: '20%' }}
+>
+  {t.pricing.items.map((item, index) => (
+    <motion.div
+      key={index}
+      variants={fadeIn}
+      className="rounded-xl bg-white p-8 text-center shadow-md hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border-2 border-[#5C162E] justify-center"
+    >
+      <h3 className="mb-3 text-2xl font-semibold text-gray-900">{item.type}</h3>
+      <p className="text-4xl font-bold text-primary mb-4">{item.price}</p>
+    </motion.div>
+  ))}
+</motion.div>
+  </div>
+</section>
+
 
     {/* CTA Section */}
     <section className="bg-primary py-16 text-white">

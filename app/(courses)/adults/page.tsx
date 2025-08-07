@@ -228,7 +228,7 @@ export default function AdultsPage() {
           }
         ]
       },
-      cta: "Записаться на пробный урок",
+      cta: "Записаться на бесплатный урок-диагностику",
       trial: {
         title: "НАЧНИТЕ ОБУЧЕНИЕ СЕГОДНЯ",
         description: "Запишитесь на бесплатный пробный урок и определите свой уровень английского"
@@ -373,7 +373,7 @@ export default function AdultsPage() {
           }
         ]
       },
-      cta: "Book a trial lesson",
+      cta: "Sign up for a free diagnostic lesson",
       trial: {
         title: "START LEARNING TODAY",
         description: "Sign up for a free trial lesson and determine your English level"
@@ -1048,23 +1048,24 @@ export default function AdultsPage() {
             >
               {t.pricing.title}
             </motion.h2>
-            <motion.div
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
-              variants={staggerContainer}
-              className="grid gap-8 md:grid-cols-3"
-            >
-              {t.pricing.items.map((item, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeIn}
-                  className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl border-2 border-[#5C162E]"
-                >
-                  <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
-                  <p className="text-3xl font-bold text-primary">{item.price}</p>
-                </motion.div>
-              ))}
-            </motion.div>
+           <motion.div
+  initial="hidden"
+  animate={isLoaded ? "visible" : "hidden"}
+  variants={staggerContainer}
+
+  className="grid gap-8 md:grid-cols-3 ml-[20%] w-[90%]"
+>
+  {t.pricing.items.map((item, index) => (
+    <motion.div
+      key={index}
+      variants={fadeIn}
+      className="rounded-lg bg-white p-6 text-center shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl border-2 border-[#5C162E]"
+    >
+      <h3 className="mb-4 text-xl font-bold">{item.type}</h3>
+      <p className="text-3xl font-bold text-primary">{item.price}</p>
+    </motion.div>
+  ))}
+</motion.div>
           </div>
         </section>
 
