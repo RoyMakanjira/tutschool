@@ -8,6 +8,11 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin", "cyrillic"] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NODE_ENV === "production"
+      ? "https://tutschool.ru"
+      : "http://localhost:3000"
+  ),
   title: {
     default: "Tut School - Языковая студия | Курсы английского и китайского в Новогорске",
     template: "%s | Tut School",
@@ -50,7 +55,7 @@ export const metadata: Metadata = {
       "Профессиональные курсы английского и китайского языков для детей и взрослых в Новогорске. Запишитесь на бесплатный пробный урок!",
     images: [
       {
-        url: "/logo.png",
+        url: "/logo.png", // can be relative; metadataBase will make it absolute
         width: 1200,
         height: 630,
         alt: "Tut School - Языковая студия логотип",
@@ -94,7 +99,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "LanguageSchool",
               name: "Tut School - Языковая студия",
-              description: "Курсы английского и китайского языков для детей и взрослых в Новогорске",
+              description:
+                "Курсы английского и китайского языков для детей и взрослых в Новогорске",
               image: "https://tutschool.ru/logo.png",
               url: "https://tutschool.ru",
               address: {
@@ -121,7 +127,10 @@ export default function RootLayout({
                 bestRating: "5",
                 worstRating: "1",
               },
-              sameAs: ["https://t.me/TUTschoolNovogorsk", "https://wa.me/+79167349246"],
+              sameAs: [
+                "https://t.me/TUTschoolNovogorsk",
+                "https://wa.me/+79167349246",
+              ],
               offers: {
                 "@type": "Offer",
                 name: "Пробный урок",
@@ -137,7 +146,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <Toaster />
-        </body>
+      </body>
     </html>
   )
 }
