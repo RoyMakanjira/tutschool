@@ -62,7 +62,7 @@ export default function HomePage() {
   }, [])
 
   const heroImages = [
-    "/assets/slider/Slider-image-1.jpg",
+    "/assets/slider/Main-BG.jpg",
     "/assets/slider/Slider-Image-2.jpg",
     "/assets/slider/Slider-image-3.jpg",
     "/assets/slider/Slider-image-4.jpg",
