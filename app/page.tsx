@@ -1,7 +1,5 @@
 "use client"
-
 import { useState, useRef, useEffect } from "react"
-import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
 import ValuesSectionCard from "@/components/ValuesSectionCard"
@@ -16,7 +14,6 @@ import {
   Navigation,
   Send,
   ChevronRight,
-  Calendar,
   User,
   ArrowRight,
   Menu,
@@ -31,7 +28,6 @@ import {
   Award,
   FileText,
 } from "lucide-react"
-import PromotionalBanner from "@/components/PromotionalBanner"
 
 export default function HomePage() {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
@@ -44,54 +40,21 @@ export default function HomePage() {
   const [sliderDirection, setSliderDirection] = useState<"next" | "prev" | null>(null)
   const [activeSection, setActiveSection] = useState<string>("hero")
   const [isScrolled, setIsScrolled] = useState(false)
-
   const dropdownRef = useRef<HTMLDivElement>(null)
-
   const [scrollY, setScrollY] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    // Set loaded state after a small delay to trigger initial animations
     const timer = setTimeout(() => {
       setIsLoaded(true)
     }, 100)
 
-    // Handle scroll events for scroll-triggered animations
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
-
-  useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY)
       setIsScrolled(window.scrollY > 100)
     }
 
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  useEffect(() => {
-    // Set loaded state after a small delay to trigger initial animations
-    const timer = setTimeout(() => {
-      setIsLoaded(true)
-    }, 100)
-
-    // Handle scroll events for scroll-triggered animations
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-
     return () => {
       clearTimeout(timer)
       window.removeEventListener("scroll", handleScroll)
@@ -99,10 +62,10 @@ export default function HomePage() {
   }, [])
 
   const heroImages = [
-    "/assets/slider/Slider-image-1.jpg?height=600&width=1600&text=Students in classroom",
-    "/assets/slider/Slider-Image-2.jpg?height=600&width=1600&text=Language Learning",
-    "/assets/slider/Slider-image-3.jpg?height=600&width=1600&text=Arts and Creativity",
-    "/assets/slider/Slider-image-4.jpg?heitht=600&width=1600&text=School Events",
+    "/assets/slider/Slider-image-1.jpg",
+    "/assets/slider/Slider-Image-2.jpg",
+    "/assets/slider/Slider-image-3.jpg",
+    "/assets/slider/Slider-image-4.jpg",
   ]
 
   useEffect(() => {
@@ -112,7 +75,6 @@ export default function HomePage() {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length)
       }, 5000)
     }
-
     return () => {
       if (autoPlayRef.current) {
         clearInterval(autoPlayRef.current)
@@ -153,7 +115,6 @@ export default function HomePage() {
         setActiveDropdown(null)
       }
     }
-
     document.addEventListener("mousedown", handleClickOutside)
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
@@ -164,7 +125,7 @@ export default function HomePage() {
     ru: {
       schoolName: "Tut School",
       schoolSubtitle: "Курсы иностранных языков",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Московская область, Химки, микрорайон Новогорск, Заречная улица, 5, корп. 2",
       rating: "4.8 на Яндексе",
@@ -208,10 +169,8 @@ export default function HomePage() {
         contacts: "КОНТАКТЫ",
       },
       hero: {
-        title: "Языковая школа  ",
-        title1: "Английский и Китайский",
-        title2: "Химки Новогорск Куркино",
-        subtitle: "Занятия в мини-группах с квалифицированными преподавателями",
+        title: "Языковая школа английский и китайский",
+        subtitle: "Занятия в мини-группах с квалифицированными преподавателями в Химки Новогорск Куркино",
         cta: "Записаться на пробный урок",
       },
       about: {
@@ -222,8 +181,7 @@ export default function HomePage() {
       },
       welcome: {
         title: "ДОБРО ПОЖАЛОВАТЬ В TUT SCHOOL",
-        description:
-          "Мы создаем вдохновляющую среду, где каждый студент может раскрыть свой потенциал.",
+        description: "Мы создаем вдохновляющую среду, где каждый студент может раскрыть свой потенциал.",
         points: [
           "Современные методики преподавания",
           "Комфортные классы и дружелюбная атмосфера",
@@ -232,7 +190,7 @@ export default function HomePage() {
         cta: "Узнать больше о нашей школе",
       },
       courses: {
-        title: "НОВОСТИ И СОБЫТИЯ",
+        title: "ПОПУЛЯРНЫЕ КУРСЫ",
         viewAll: "Смотреть все",
         items: [
           {
@@ -287,7 +245,7 @@ export default function HomePage() {
           },
           {
             name: "Manizha F.",
-            text: "Замечательная школа по изучению английского языка! Сын занимается с Юлией с сентября месяца. Начинали с нуля. За это время ребенок уже читает, пишет, постоянно пополняет свой словарныц запас. Может составлять простейшие предложения и вопросы. А главное, на занятия ходит с большим удовольствием. До этого посещали разные курсы в Куркино (только песни пляски под англ детские песни). Никакого результата не было. А с Юлей все четко, структурировано, по делу. Оченб рекомендую данного педагога!",
+            text: "Замечательная школа по изучению английского языка! Сын занимается с Юлией с сентября месяца. Начинали с нуля. За это время ребенок уже читает, пишет, постоянно пополняет свой словарныц запас. Может составлять простейшие предложения и вопросы. А главное, на занятия ходит с большим удовольствием. До этого посещали разные курсы в Куркино (только песни пляски под англ детские песни). Никакого результата не было. А с Юлей все четко, структурировано, по делу. Оченb рекомендую данного педагога!",
           },
         ],
       },
@@ -322,7 +280,7 @@ export default function HomePage() {
     en: {
       schoolName: "Tut School",
       schoolSubtitle: "Foreign Language School",
-      phone: "+7 (983) 600-00-00",
+      phone: "+7 (983) 662-97-30",
       email: "info@tutschool.ru",
       address: "Moscow region, Khimki, Novogorsk district, Zarechnaya street, 5, building 2",
       rating: "4.8 on Yandex",
@@ -336,7 +294,7 @@ export default function HomePage() {
           { title: "SCHEDULE AND PRICES", href: "/schedule" },
           { title: "TEACHERS", href: "/teachers" },
         ],
-        courses: "COURSES",
+        courses: "ENGLISH COURSES",
         coursesDropdown: [
           { title: "PRESCHOOLERS", href: "/preschoolers" },
           { title: "CHILDREN AGED 7-9", href: "/aged-7-9" },
@@ -363,15 +321,12 @@ export default function HomePage() {
           { title: "CREATIVE WORKSHOP", href: "/creative-workshop" },
         ],
         news: "NEWS",
-        masterclasses: "MASTERCLASS",
         contacts: "CONTACTS",
       },
       hero: {
-        title: "Language school",
-        title1: "English and Chinese",
-        title2: "Khimki Novogorsk Kurkino",
-        subtitle: "Lessons in small groups with qualified teachers",
-        cta: "Book a lesson",
+        title: "Language school English and Chinese",
+        subtitle: "Lessons in small groups with qualified teachers in Khimki Novogorsk Kurkino",
+        cta: "Book a trial lesson",
       },
       about: {
         title: "ABOUT US",
@@ -381,8 +336,7 @@ export default function HomePage() {
       },
       welcome: {
         title: "WELCOME TO TUT SCHOOL",
-        description:
-          "We create an inspiring environment where every student can reach their potential.",
+        description: "We create an inspiring environment where every student can reach their potential.",
         points: [
           "Modern teaching methods",
           "Comfortable classrooms and friendly atmosphere",
@@ -391,7 +345,7 @@ export default function HomePage() {
         cta: "Learn more about our school",
       },
       courses: {
-        title: "NEWS AND EVENTS",
+        title: "POPULAR COURSES",
         viewAll: "View all",
         items: [
           {
@@ -498,22 +452,6 @@ export default function HomePage() {
     }
   }
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  }
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  // Section IDs for scroll spy
   const sectionIds = [
     "hero",
     "welcome",
@@ -529,96 +467,9 @@ export default function HomePage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-
-            <Head>
-        <title>{language === "ru" 
-          ? "Tut School - Language Studio | Курсы английского и китайского в Новогорске" 
-          : "Tut School - Language Studio | English & Chinese Courses in Novogorsk"}</title>
-        
-        <meta name="description" content={
-          language === "ru" 
-            ? "Tut School - Language Studio предлагает курсы английского и китайского для детей и взрослых в Новогорске. Пробный урок с носителями языка." 
-            : "Tut School - Language Studio offers English and Chinese courses for kids and adults in Novogorsk. Book a trial lesson with expert teachers."
-        } />
-        
-        <meta name="keywords" content={
-          language === "ru"
-            ? "курсы английского Новогорск, китайский язык Химки, Language Studio, изучение языков"
-            : "English courses Novogorsk, Chinese language Khimki, Language Studio, language learning"
-        } />
-        
-        {/* Open Graph / Social Media Meta Tags */}
-        <meta property="og:title" content="Tut School - Language Studio" />
-        <meta property="og:description" content={
-          language === "ru"
-            ? "Иммерсивные курсы английского и китайского в Новогорске"
-            : "Immersive English and Chinese courses in Novogorsk"
-        } />
-        <meta property="og:image" content="/logo.png" />
-        <meta property="og:url" content="https://tutschool.ru" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Tut School - Language Studio" />
-        
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Tut School - Language Studio" />
-        <meta name="twitter:description" content={
-          language === "ru"
-            ? "Профессиональные курсы английского и китайского языков"
-            : "Professional English and Chinese language courses"
-        } />
-        <meta name="twitter:image" content="/logo.png" />
-        
-        {/* Canonical and Alternate URLs */}
-        <link rel="canonical" href="https://tutschool.ru" />
-        <link rel="alternate" hrefLang="ru" href="https://tutschool.ru" />
-        <link rel="alternate" hrefLang="en" href="https://tutschool.ru/en" />
-        <link rel="alternate" hrefLang="x-default" href="https://tutschool.ru" />
-        
-        {/* Schema.org Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LanguageSchool",
-            "name": "Tut School - Language Studio",
-            "description": language === "ru" 
-              ? "Курсы английского и китайского языков в Новогорске" 
-              : "English and Chinese language courses in Novogorsk",
-            "image": "/logo.png",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Заречная улица, 5, корп. 2",
-              "addressLocality": "Химки",
-              "addressRegion": "Московская область",
-              "postalCode": "141435",
-              "addressCountry": "RU"
-            },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": "55.894611",
-              "longitude": "37.374147"
-            },
-            "telephone": "+7 (983) 600-00-00",
-            "openingHours": language === "ru" 
-              ? "Пн-Пт 9:00-21:00, Сб 10:00-18:00" 
-              : "Mo-Fr 09:00-21:00, Sa 10:00-18:00",
-            "priceRange": "₽₽",
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "4.8",
-              "reviewCount": "27"
-            }
-          })}
-        </script>
-      </Head>
       {/* Top Bar */}
       <ScrollProgress />
-
-      {/* Scroll Spy for section tracking */}
       <ScrollSpy sectionIds={sectionIds} onChange={(id) => setActiveSection(id)} threshold={0.3} />
-
-      {/* Promotional Banner */}
-      { /* <PromotionalBanner /> */}
 
       <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
@@ -651,9 +502,9 @@ export default function HomePage() {
               </svg>
             </a>
             <a href="https://t.me/TUTschoolNovogorsk" className="text-blue-500 hover:text-burgundy-900">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="blue">
-                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.51.26l.213-3.05 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.87 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
-                 </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="blue">
+                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.51.26l.213-3.05 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.87 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z" />
+              </svg>
             </a>
             <button
               onClick={toggleLanguage}
@@ -666,37 +517,41 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Combined Header and Mobile Menu */}
+      {/* Header */}
       <header
-        className={`border-b bg-white shadow-sm transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""}`}
+        className={`border-b bg-white shadow-sm transition-all duration-300 ${
+          isScrolled ? "fixed top-0 left-0 right-0 z-50 shadow-md" : ""
+        }`}
       >
-        {/* Main Header Content */}
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
-            <div className="relative">
+            <div className="relative h-[60px] w-[60px]">
               <Link href="/">
                 <Image
                   src="/logo.png"
                   alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
-                  width={120}
-                  height={120}
-                  className="object-contain "
+                  fill
+                  className="object-contain"
+                  sizes="60px"
+                  priority
                 />
               </Link>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-primary">{t.schoolName}</h1>
+              <h2 className="text-2xl font-bold text-primary">{t.schoolName}</h2>
               <p className="text-sm text-muted-foreground">{t.schoolSubtitle}</p>
             </div>
           </div>
 
-          {/* Desktop Navigation - keep exactly the same */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:block relative z-50" ref={dropdownRef}>
             <ul className="flex gap-6">
               <li className="relative">
                 <button
                   onClick={() => toggleDropdown("about")}
-                  className={`flex items-center text-sm font-medium ${activeDropdown === "about" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                  className={`flex items-center text-sm font-medium ${
+                    activeDropdown === "about" ? "text-primary" : "text-gray-700 hover:text-primary"
+                  }`}
                 >
                   {t.nav.about}
                   <ChevronDown
@@ -720,7 +575,9 @@ export default function HomePage() {
               <li className="relative">
                 <button
                   onClick={() => toggleDropdown("courses")}
-                  className={`flex items-center text-sm font-medium ${activeDropdown === "courses" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                  className={`flex items-center text-sm font-medium ${
+                    activeDropdown === "courses" ? "text-primary" : "text-gray-700 hover:text-primary"
+                  }`}
                 >
                   {t.nav.courses}
                   <ChevronDown
@@ -744,7 +601,9 @@ export default function HomePage() {
               <li className="relative">
                 <button
                   onClick={() => toggleDropdown("chinese")}
-                  className={`flex items-center text-sm font-medium ${activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                  className={`flex items-center text-sm font-medium ${
+                    activeDropdown === "chinese" ? "text-primary" : "text-gray-700 hover:text-primary"
+                  }`}
                 >
                   {t.nav.chinese}
                   <ChevronDown
@@ -768,7 +627,9 @@ export default function HomePage() {
               <li className="relative">
                 <button
                   onClick={() => toggleDropdown("club")}
-                  className={`flex items-center text-sm font-medium ${activeDropdown === "club" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                  className={`flex items-center text-sm font-medium ${
+                    activeDropdown === "club" ? "text-primary" : "text-gray-700 hover:text-primary"
+                  }`}
                 >
                   {t.nav.club}
                   <ChevronDown
@@ -792,11 +653,15 @@ export default function HomePage() {
               <li className="relative">
                 <button
                   onClick={() => toggleDropdown("masterclass")}
-                  className={`flex items-center text-sm font-medium ${activeDropdown === "masterclass" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
+                  className={`flex items-center text-sm font-medium ${
+                    activeDropdown === "masterclass" ? "text-primary" : "text-gray-700 hover:text-primary"
+                  }`}
                 >
                   {t.nav.masterclass}
                   <ChevronDown
-                    className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "masterclass" ? "rotate-180" : ""}`}
+                    className={`ml-1 h-4 w-4 transition-transform ${
+                      activeDropdown === "masterclass" ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
                 {activeDropdown === "masterclass" && (
@@ -834,6 +699,7 @@ export default function HomePage() {
           </div>
         </div>
 
+        {/* Mobile Menu */}
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
             mobileMenuOpen ? "max-h-[calc(100vh-60px)]" : "max-h-0"
@@ -1042,9 +908,10 @@ export default function HomePage() {
           </div>
         </div>
       </header>
+
       <main>
         {/* Hero Section */}
-        <section className="relative">
+        <section id="hero" className="relative">
           <div className="relative h-[600px] sm:h-[600px] w-full overflow-hidden">
             {heroImages.map((src, index) => (
               <div
@@ -1060,9 +927,13 @@ export default function HomePage() {
                 }`}
               >
                 <Image
-                  src={src || "/assets/happy-student.jpg"}
-                  alt={language === "ru" ? `Слайд ${index + 1}` : `Slide ${index + 1}`}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
+                  src={src || "/placeholder.svg"}
+                  alt={
+                    language === "ru"
+                      ? `Слайд ${index + 1} - Tut School языковая студия`
+                      : `Slide ${index + 1} - Tut School language studio`
+                  }
+                  sizes="100vw"
                   fill
                   className="object-cover transform transition-transform duration-10000 hover:scale-105"
                   priority={index === 0}
@@ -1072,18 +943,12 @@ export default function HomePage() {
             <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/70 to-transparent"></div>
             <div className="absolute inset-0 z-30 flex flex-col items-start justify-center px-4 text-white md:px-12 lg:px-20">
               <div className="max-w-2xl">
-                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl animate-fade-in-up">
+                <h1 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl animate-fade-in-up">
                   {t.hero.title}
-                </h2>
-                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl animate-fade-in-up">
-                  {t.hero.title1}
-                </h2>
-                <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl animate-fade-in-up">
-                  {t.hero.title2}
-                </h2>
+                </h1>
                 <p className="mb-8 text-lg md:text-xl animate-fade-in-up animation-delay-300">{t.hero.subtitle}</p>
                 <Link
-                  href="/bookings"
+                  href="/booking"
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white transition-all hover:bg-primary/90 hover:gap-3 animate-fade-in-up animation-delay-600"
                 >
                   {t.hero.cta}
@@ -1125,262 +990,191 @@ export default function HomePage() {
         </section>
 
         {/* Welcome Section */}
-        <section className="py-16 bg-white">
-  <div className="container mx-auto px-4">
-    <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto">
-      
-      <h2 className="mb-6 text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
-        {t.welcome.title}
-      </h2>
-
-      <p className="mb-6 text-lg text-gray-700 leading-relaxed">
-        {t.welcome.description}
-      </p>
-
-      <ul className="mb-8 space-y-4 text-left">
-        {t.welcome.points.map((point, index) => (
-          <li key={index} className="flex items-start">
-            <ChevronRight className="mt-1 mr-2 h-5 w-5 flex-shrink-0 text-primary" />
-            <span className="text-base text-gray-800">{point}</span>
-          </li>
-        ))}
-      </ul>
-
-      <Link
-        href="/our-values"
-        className="inline-flex items-center font-semibold text-primary hover:underline transition duration-150 ease-in-out"
-      >
-        {t.welcome.cta}
-        <ChevronRight className="ml-2 h-4 w-4" />
-      </Link>
-    </div>
-  </div>
-</section>
-
-
-                <section id="courses" className="py-20 bg-gray-50">
-  <div className="container mx-auto px-4 sm:px-6">
-    <div className="text-center mb-16">
-      <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-        {language === 'ru' ? 'Популярные курсы' : 'Popular Courses'}
-      </h2>
-      <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-        {language === 'ru' 
-          ? 'Выбирайте из нашего широкого спектра программ, преподаваемых опытными педагогами' 
-          : 'Choose from our comprehensive programs taught by experienced educators'}
-      </p>
-    </div>
-
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {[
-        {
-          title: language === 'ru' ? 'Английский для дошкольников' : 'ENGLISH FOR PRESCHOOLERS',
-          description: language === 'ru' 
-            ? 'Развитие языковых навыков через увлекательные проекты' 
-            : 'Developing language skills through engaging projects',
-          level: language === 'ru' ? 'Все уровни' : 'All Levels',
-          students: language === 'ru' ? '150+ студентов' : '150+ students',
-          image: '/assets/gallery/kids.jpeg',
-          href: '/preschoolers'
-        },
-        {
-          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ДЕТЕЙ 7-9 ЛЕТ' : 'ENGLISH FOR CHILDREN 7-9',
-          description: language === 'ru' 
-            ? 'Игровое обучение через песни, игры и творческие занятия' 
-            : 'Play-based learning through songs and creative activities',
-          level: language === 'ru' ? 'Все уровни' : 'All Levels',
-          students: language === 'ru' ? '80+ студентов' : '80+ students',
-          image: '/assets/preschoolers/basic-vocabulary.jpg',
-          href: '/aged-7-9'
-        },
-        {
-          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ДЕТЕЙ 10-12 ЛЕТ' : 'ENGLISH FOR CHILDREN 10-12',
-          description: language === 'ru' 
-            ? 'Игровое обучение через песни, игры и творческие занятия' 
-            : 'Play-based learning through songs and creative activities',
-          level: language === 'ru' ? 'Все уровни' : 'All Levels',
-          students: language === 'ru' ? '80+ студентов' : '80+ students',
-          image: '/assets/children/group-work.jpg',
-          href: '/aged-10-12'
-        },
-        {
-          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ПОДРОСТКОВ' : 'ENGLISH FOR TEENS',
-          description: language === 'ru' 
-            ? 'Современные темы и актуальные материалы для подростков' 
-            : 'Modern topics tailored for teenagers',
-          level: language === 'ru' ? 'Все уровни' : 'All Levels',
-          students: language === 'ru' ? '90+ студентов' : '90+ students',
-          image: '/assets/teenage/pair-and-groupwork.jpg',
-          href: '/teenagers'
-        },
-             {
-          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ВЗРОСЛЫХ' : 'ENGLISH FOR ADULTS',
-          description: language === 'ru' 
-            ? 'Развивайте уверенность в общении на английском для работы и повседневной жизни' 
-            : 'Build confidence in English for work and daily communication',
-          level: language === 'ru' ? 'Все уровни' : 'All levels',
-          students: language === 'ru' ? '120+ студентов' : '120+ students',
-          image: '/assets/gallery/adults.jpg',
-          href: '/adults'
-        },
-  {
-  title: language === 'ru' ? 'Китайский язык для дошкольников' : 'CHINESE FOR PRESCHOOLERS',
-  description: language === 'ru' 
-    ? 'Системное изучение китайского с элементами культуры' 
-    : 'Structured learning with cultural elements',
-  level: language === 'ru' ? 'Все уровни' : 'All Levels',
-  students: language === 'ru' ? '60+ студентов' : '60+ students',
-  image: '/assets/gallery/Calligraphy.jpg', 
-  href: '/chinese/preschoolers'
-},
-        {
-  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ДЕТЕЙ 7-9 ЛЕТ' : 'CHINESE FOR CHILDREN 7-9',
-  description: language === 'ru' 
-    ? 'Веселые занятия с основами китайского через игры и песни' 
-    : 'Fun introduction to Chinese through games and songs',
-  level: language === 'ru' ? 'Все уровни' : 'All Levels',
-  students: language === 'ru' ? '50+ студентов' : '50+ students',
-  image: '/assets/courses/Painting.jpg',
-  href: '/chinese/aged-7-9'
-},
-        {
-  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ДЕТЕЙ 10-12 ЛЕТ' : 'CHINESE FOR CHILDREN 10-12',
-  description: language === 'ru' 
-    ? 'Веселые занятия с основами китайского через игры и песни' 
-    : 'Fun introduction to Chinese through games and songs',
-  level: language === 'ru' ? 'Все уровни' : 'All Levels',
-  students: language === 'ru' ? '50+ студентов' : '50+ students',
-  image: '/assets/gallery/Learning-Chinese.jpg',
-  href: '/chinese/aged-10-12'
-},
-{
-  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ПОДРОСТКОВ' : 'CHINESE FOR TEENS',
-  description: language === 'ru' 
-    ? 'Современный китайский язык с актуальной лексикой' 
-    : 'Modern Chinese with relevant vocabulary',
-  level: language === 'ru' ? 'Все уровни' : 'All Levels',
-  students: language === 'ru' ? '40+ студентов' : '40+ students',
-  image: '/assets/gallery/Chinese-Practice.jpg',
-  href: '/chinese/teenagers'
-},
-{
-  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ВЗРОСЛЫХ' : 'CHINESE FOR ADULTS',
-  description: language === 'ru' 
-    ? 'Практический китайский для работы и путешествий' 
-    : 'Practical Chinese for work and travel',
-  level: language === 'ru' ? 'Все уровни' : 'All levels',
-  students: language === 'ru' ? '70+ студентов' : '70+ students',
-  image: '/C-Adults.jpg',
-  href: '/chinese/adults'
-},
-       {
-          title: language === 'ru' ? 'МАСТЕР-КЛАССЫ' : 'MASTERCLASSES',
-          description: language === 'ru' 
-            ? 'Интенсивные занятия с носителями языка' 
-            : 'Intensive workshops with native speakers',
-          level: language === 'ru' ? 'Все уровни' : 'All Levels',
-          students: language === 'ru' ? '60+ студентов' : '60+ students',
-          image: '/masterclass.jpg',
-          href: '/chinese-calligraphy'
-        },
-        {
-          title: language === 'ru' ? 'РАЗГОВОРНЫЙ КЛУБ' : 'CONVERSATION CLUB',
-          description: language === 'ru' 
-            ? 'Практика разговорного английского в дружеской атмосфере' 
-            : 'Practice English in a friendly atmosphere',
-          level: language === 'ru' ? 'Все уровни' : 'All levels',
-          students: language === 'ru' ? '200+ студентов' : '200+ students',
-          image: '/C-Club.jpg',
-          href: '/conversation-club/teenagers'
-        },
-
-
-      ].map((course) => (
-        <div 
-          key={course.title} 
-          className="group relative overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-gray-100"
-        >
-          <div className="relative h-48 overflow-hidden">
-            <Image
-              src={course.image}
-              alt={course.title}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-          </div>
-          
-          <div className="p-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              {course.title}
-            </h3>
-            
-            <div className="flex flex-wrap justify-between items-center mb-4 gap-2">
-              <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">
-                {course.level}
-              </span>
+        <section id="welcome" className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto">
+              <h2 className="mb-6 text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
+                {t.welcome.title}
+              </h2>
+              <p className="mb-6 text-lg text-gray-700 leading-relaxed">{t.welcome.description}</p>
+              <ul className="mb-8 space-y-4 text-left">
+                {t.welcome.points.map((point, index) => (
+                  <li key={index} className="flex items-start">
+                    <ChevronRight className="mt-1 mr-2 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-base text-gray-800">{point}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/our-values"
+                className="inline-flex items-center font-semibold text-primary hover:underline transition duration-150 ease-in-out"
+              >
+                {t.welcome.cta}
+                <ChevronRight className="ml-2 h-4 w-4" />
+              </Link>
             </div>
-            
-            <Link 
-              href={course.href}
-              className="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/90 transition-colors duration-300"
-            >
-              {language === 'ru' ? 'Подробнее' : 'Read More'}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
           </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+        </section>
+
+        {/* Courses Section */}
+        <section id="courses" className="py-20 bg-gray-50">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">{t.courses.title}</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                {language === "ru"
+                  ? "Выбирайте из нашего широкого спектра программ, преподаваемых опытными педагогами"
+                  : "Choose from our comprehensive programs taught by experienced educators"}
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  title: language === "ru" ? "Английский для дошкольников" : "ENGLISH FOR PRESCHOOLERS",
+                  description:
+                    language === "ru"
+                      ? "Развитие языковых навыков через увлекательные проекты"
+                      : "Developing language skills through engaging projects",
+                  level: language === "ru" ? "Все уровни" : "All Levels",
+                  students: language === "ru" ? "150+ студентов" : "150+ students",
+                  image: "/assets/gallery/kids.jpeg",
+                  href: "/preschoolers",
+                },
+                {
+                  title: language === "ru" ? "АНГЛИЙСКИЙ ДЛЯ ДЕТЕЙ 7-9 ЛЕТ" : "ENGLISH FOR CHILDREN 7-9",
+                  description:
+                    language === "ru"
+                      ? "Игровое обучение через песни, игры и творческие занятия"
+                      : "Play-based learning through songs and creative activities",
+                  level: language === "ru" ? "Все уровни" : "All Levels",
+                  students: language === "ru" ? "80+ студентов" : "80+ students",
+                  image: "/assets/preschoolers/basic-vocabulary.jpg",
+                  href: "/aged-7-9",
+                },
+                {
+                  title: language === "ru" ? "АНГЛИЙСКИЙ ДЛЯ ДЕТЕЙ 10-12 ЛЕТ" : "ENGLISH FOR CHILDREN 10-12",
+                  description:
+                    language === "ru"
+                      ? "Игровое обучение через песни, игры и творческие занятия"
+                      : "Play-based learning through songs and creative activities",
+                  level: language === "ru" ? "Все уровни" : "All Levels",
+                  students: language === "ru" ? "80+ студентов" : "80+ students",
+                  image: "/assets/children/group-work.jpg",
+                  href: "/aged-10-12",
+                },
+                {
+                  title: language === "ru" ? "АНГЛИЙСКИЙ ДЛЯ ПОДРОСТКОВ" : "ENGLISH FOR TEENS",
+                  description:
+                    language === "ru"
+                      ? "Современные темы и актуальные материалы для подростков"
+                      : "Modern topics tailored for teenagers",
+                  level: language === "ru" ? "Все уровни" : "All Levels",
+                  students: language === "ru" ? "90+ студентов" : "90+ students",
+                  image: "/assets/teenage/pair-and-groupwork.jpg",
+                  href: "/teenagers",
+                },
+                {
+                  title: language === "ru" ? "АНГЛИЙСКИЙ ДЛЯ ВЗРОСЛЫХ" : "ENGLISH FOR ADULTS",
+                  description:
+                    language === "ru"
+                      ? "Развивайте уверенность в общении на английском для работы и повседневной жизни"
+                      : "Build confidence in English for work and daily communication",
+                  level: language === "ru" ? "Все уровни" : "All levels",
+                  students: language === "ru" ? "120+ студентов" : "120+ students",
+                  image: "/assets/gallery/adults.jpg",
+                  href: "/adults",
+                },
+                {
+                  title: language === "ru" ? "Китайский язык для дошкольников" : "CHINESE FOR PRESCHOOLERS",
+                  description:
+                    language === "ru"
+                      ? "Системное изучение китайского с элементами культуры"
+                      : "Structured learning with cultural elements",
+                  level: language === "ru" ? "Все уровни" : "All Levels",
+                  students: language === "ru" ? "60+ студентов" : "60+ students",
+                  image: "/assets/gallery/Calligraphy.jpg",
+                  href: "/chinese/preschoolers",
+                },
+              ].map((course) => (
+                <div
+                  key={course.title}
+                  className="group relative overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-gray-100"
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={course.image || "/placeholder.svg"}
+                      alt={course.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                  </div>
+
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{course.title}</h3>
+
+                    <div className="flex flex-wrap justify-between items-center mb-4 gap-2">
+                      <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">{course.level}</span>
+                    </div>
+
+                    <Link
+                      href={course.href}
+                      className="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/90 transition-colors duration-300"
+                    >
+                      {language === "ru" ? "Подробнее" : "Read More"}
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Values Section */}
-
         <ValuesSectionCard language={language} />
 
-
         {/* Testimonials Section */}
-<section className="py-16">
-  <div className="container mx-auto px-4">
-    <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.testimonials.title}</h2>
-    <div className="mx-auto mb-12 h-1 w-20 bg-primary"></div>
-    <div className="grid gap-6 md:grid-cols-3">
-      {t.testimonials.items.map((item, index) => (
-        <div key={index} className="rounded-lg bg-white p-6 shadow-md">
-          <div className="mb-4 text-yellow-400">
-            <Star className="inline-block h-5 w-5 fill-current" />
-            <Star className="inline-block h-5 w-5 fill-current" />
-            <Star className="inline-block h-5 w-5 fill-current" />
-            <Star className="inline-block h-5 w-5 fill-current" />
-            <Star className="inline-block h-5 w-5 fill-current" />
-          </div>
-          <p className="mb-4 italic text-gray-600">"{item.text}"</p>
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <User className="h-5 w-5" />
+        <section id="testimonials" className="py-16">
+          <div className="container mx-auto px-4">
+            <h2 className="mb-2 text-center text-3xl font-bold text-primary">{t.testimonials.title}</h2>
+            <div className="mx-auto mb-12 h-1 w-20 bg-primary"></div>
+            <div className="grid gap-6 md:grid-cols-3">
+              {t.testimonials.items.map((item, index) => (
+                <div key={index} className="rounded-lg bg-white p-6 shadow-md">
+                  <div className="mb-4 text-yellow-400">
+                    <Star className="inline-block h-5 w-5 fill-current" />
+                    <Star className="inline-block h-5 w-5 fill-current" />
+                    <Star className="inline-block h-5 w-5 fill-current" />
+                    <Star className="inline-block h-5 w-5 fill-current" />
+                    <Star className="inline-block h-5 w-5 fill-current" />
+                  </div>
+                  <p className="mb-4 italic text-gray-600">"{item.text}"</p>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <User className="h-5 w-5" />
+                    </div>
+                    <span className="font-medium">{item.name}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-            <span className="font-medium">{item.name}</span>
+            <div className="mt-8 text-center">
+              <a
+                href="https://tut-school.clients.site/#rating"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block rounded-md bg-primary px-6 py-2 text-white transition hover:bg-primary-dark"
+              >
+                {t.testimonials.reviews}
+              </a>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
-    <div className="mt-8 text-center">
-      <a 
-        href="https://tut-school.clients.site/#rating" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="inline-block rounded-md bg-primary px-6 py-2 text-white transition hover:bg-primary-dark"
-      >
-        {t.testimonials.reviews}
-      </a>
-    </div>
-  </div>
-</section>
+        </section>
 
         {/* Contact Section */}
-        <section className="bg-gray-50 py-16">
+        <section id="contact" className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
             <h2 className="mb-8 text-center text-3xl font-bold text-primary">{t.contact.title}</h2>
             <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-4">
@@ -1438,15 +1232,16 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
         {/* CTA Section */}
-        <section className="py-16">
+        <section id="cta" className="py-16">
           <div className="container mx-auto px-4">
             <div className="overflow-hidden rounded-xl bg-primary shadow-xl">
               <div className="relative">
                 <div className="relative px-8 py-16 text-center text-white md:px-12 lg:px-16">
                   <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t.trial.title}</h2>
                   <Link
-                    href="/bookings"
+                    href="/booking"
                     className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary transition-all hover:bg-gray-100 hover:gap-3"
                   >
                     {t.trial.cta}
