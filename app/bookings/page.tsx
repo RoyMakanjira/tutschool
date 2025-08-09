@@ -1,9 +1,9 @@
 "use client"
-
 import type React from "react"
 import { useState, useEffect } from "react"
-import { Calendar, Clock, Phone as PhoneIcon, Mail, User, Check, AlertCircle, Loader2 } from "lucide-react"
+import { Calendar, Clock, PhoneIcon, Mail, User, AlertCircle, Loader2 } from "lucide-react"
 import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 interface FormErrors {
   name?: string
@@ -24,9 +24,9 @@ interface ServiceGroup {
 }
 
 export default function BookingPage() {
+  const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formErrors, setFormErrors] = useState<FormErrors>({})
-  const [formSuccess, setFormSuccess] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const [formData, setFormData] = useState<BookingFormData>({
     name: "",
@@ -73,29 +73,10 @@ export default function BookingPage() {
 
   const validateForm = (data: BookingFormData): FormErrors => {
     const errors: FormErrors = {}
-
     if (!data.name.trim()) errors.name = "Пожалуйста, введите ваше имя"
     if (!data.phone.trim()) errors.phone = "Пожалуйста, введите ваш телефон"
     if (!data.serviceType) errors.serviceType = "Пожалуйста, выберите услугу"
-
     return errors
-  }
-
-  const handleSubmitToWhatsApp = async (data: BookingFormData) => {
-    const message = `🎓 *Новая заявка на бронирование*
-
-👤 *Имя:* ${data.name}
-📞 *Телефон:* ${data.phone}
-📚 *Услуга:* ${data.serviceType}
-
-Пожалуйста, свяжитесь со мной для подтверждения бронирования.`
-
-    const whatsappNumber = "79167349246"
-    const encodedMessage = encodeURIComponent(message)
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
-
-    window.open(whatsappUrl, "_blank")
-    return Promise.resolve() // Return a resolved promise for Promise.all
   }
 
   const submitToEmail = async (data: BookingFormData) => {
@@ -103,25 +84,23 @@ export default function BookingPage() {
       const response = await fetch("https://formsubmit.co/ajax/info@tutschool.ru", {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({
           name: data.name,
           phone: data.phone,
           service: data.serviceType,
-          _subject: `Новая заявка на бронирование от ${data.name}`,
-          _template: "table"
-        })
+          _subject: `Новая заявка на пробное занятие от ${data.name}`,
+          _template: "table",
+        }),
       })
-
       if (!response.ok) {
-        throw new Error('Ошибка при отправке на почту')
+        throw new Error("Ошибка при отправке на почту")
       }
-
       return await response.json()
     } catch (error) {
-      console.error('FormSubmit error:', error)
+      console.error("FormSubmit error:", error)
       throw error
     }
   }
@@ -137,7 +116,6 @@ export default function BookingPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const errors = validateForm(formData)
-
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors)
       return
@@ -150,19 +128,14 @@ export default function BookingPage() {
 
   const handleAcceptTerms = async () => {
     if (!pendingFormData) return
-    
+
     setShowTermsModal(false)
     setIsSubmitting(true)
 
     try {
-      // Submit to both email and WhatsApp simultaneously
-      await Promise.all([
-        submitToEmail(pendingFormData),
-        handleSubmitToWhatsApp(pendingFormData)
-      ])
-      
-      setFormSuccess(true)
-      toast.success("Заявка успешно отправлена! Перенаправление в WhatsApp...")
+      await submitToEmail(pendingFormData)
+
+      toast.success("Заявка успешно отправлена!")
 
       // Reset form
       setFormData({
@@ -172,7 +145,8 @@ export default function BookingPage() {
       })
       setPendingFormData(null)
 
-      setTimeout(() => setFormSuccess(false), 5000)
+      // Redirect to thank you page
+      router.push("/thank-you")
     } catch (error: any) {
       console.error("Submission error:", error)
       const errorMessage = error.message || "Произошла ошибка при отправке заявки. Попробуйте еще раз."
@@ -203,9 +177,10 @@ export default function BookingPage() {
       <section className="relative bg-burgundy-900 py-20 text-white">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
-            <h1 className="mb-4 text-4xl font-bold md:text-5xl">Онлайн-бронирование</h1>
+            <h1 className="mb-4 text-4xl font-bold md:text-5xl">Пробное занятие</h1>
             <p className="text-lg opacity-90 md:text-xl">
-              Запишитесь на занятия, консультации или мероприятия с помощью нашей удобной системы онлайн-бронирования
+              Запишитесь на бесплатный урок-диагностику. Познакомьтесь со студией и преподавателем. Пройдите диагностику
+              на определение уровня
             </p>
           </div>
         </div>
@@ -229,7 +204,7 @@ export default function BookingPage() {
             {/* Booking Information */}
             <div className="lg:col-span-1">
               <div className="sticky top-24 rounded-lg bg-white p-6 shadow-lg">
-                <h2 className="mb-6 text-2xl font-bold text-burgundy-900">Информация о бронировании</h2>
+                <h2 className="mb-6 text-2xl font-bold text-burgundy-900">Информация о пробном занятии</h2>
                 <div className="space-y-6">
                   <div className="flex items-start">
                     <Calendar className="mr-3 mt-1 h-5 w-5 text-burgundy-900" />
@@ -263,7 +238,8 @@ export default function BookingPage() {
                 <div className="mt-8 rounded-lg bg-gray-50 p-4">
                   <h3 className="mb-2 font-semibold text-burgundy-900">Примечание:</h3>
                   <p className="text-sm text-gray-600">
-                    После принятия условий ваши данные будут отправлены на нашу почту и в WhatsApp одновременно для обработки вашего запроса.
+                    После отправки заявки наш менеджер свяжется с вами в ближайшее время для уточнения деталей и
+                    назначения времени пробного занятия.
                   </p>
                 </div>
               </div>
@@ -272,17 +248,7 @@ export default function BookingPage() {
             {/* Booking Form */}
             <div className="lg:col-span-2">
               <div className="rounded-lg bg-white p-6 shadow-lg md:p-8">
-                <h2 className="mb-6 text-2xl font-bold text-burgundy-900">Забронировать занятие</h2>
-
-                {formSuccess && (
-                  <div className="mb-6 flex items-start rounded-lg bg-green-50 p-4 text-green-800">
-                    <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
-                    <div>
-                      <h3 className="font-semibold">Заявка отправлена!</h3>
-                      <p>Ваши данные отправлены на почту и в WhatsApp.</p>
-                    </div>
-                  </div>
-                )}
+                <h2 className="mb-6 text-2xl font-bold text-burgundy-900">Записаться на пробное занятие</h2>
 
                 {formErrors.submit && (
                   <div className="mb-6 flex items-start rounded-lg bg-red-50 p-4 text-red-800">
@@ -349,7 +315,7 @@ export default function BookingPage() {
                     {/* Service Type */}
                     <div>
                       <label htmlFor="serviceType" className="mb-1 block text-sm font-medium text-gray-700">
-                        Тип услуги *
+                        Направление обучения *
                       </label>
                       <select
                         id="serviceType"
@@ -361,7 +327,7 @@ export default function BookingPage() {
                           formErrors.serviceType ? "border-red-500" : "border-gray-300"
                         }`}
                       >
-                        <option value="">Выберите услугу</option>
+                        <option value="">Выберите направление</option>
                         {serviceGroups.map((group) => (
                           <optgroup key={group.group} label={group.group}>
                             {group.services.map((service) => (
@@ -388,7 +354,7 @@ export default function BookingPage() {
                             Отправка...
                           </>
                         ) : (
-                          "Отправить заявку"
+                          "Записаться на пробное занятие"
                         )}
                       </button>
                     </div>
@@ -410,17 +376,16 @@ export default function BookingPage() {
               </div>
               <h3 className="text-lg font-semibold text-gray-900">Согласие на обработку данных</h3>
             </div>
-
             <div className="mb-6 text-sm text-gray-600">
               <p className="mb-3">
-                Нажимая "Принимаю", вы соглашаетесь на обработку ваших персональных данных (имя, телефон и выбранная услуга) для обработки вашего запроса на бронирование.
+                Нажимая "Принимаю", вы соглашаетесь на обработку ваших персональных данных (имя, телефон и выбранное
+                направление) для обработки вашего запроса на пробное занятие.
               </p>
               <p className="mb-3">
-                Ваши данные будут отправлены на нашу почту info@tutschool.ru и в WhatsApp одновременно для быстрой обработки вашего запроса.
+                Ваши данные будут отправлены на нашу почту info@tutschool.ru для обработки вашего запроса.
               </p>
               <p className="text-xs text-gray-500">Вы можете отозвать согласие в любое время, связавшись с нами.</p>
             </div>
-
             <div className="flex gap-3">
               <button
                 onClick={handleDeclineTerms}
@@ -453,30 +418,30 @@ export default function BookingPage() {
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold text-burgundy-900">Часто задаваемые вопросы</h2>
             <p className="mx-auto max-w-2xl text-gray-600">
-              Найдите ответы на распространенные вопросы о нашем процессе бронирования и услугах
+              Найдите ответы на распространенные вопросы о пробных занятиях и наших услугах
             </p>
           </div>
           <div className="space-y-6">
             {[
               {
-                question: "За сколько времени следует бронировать?",
+                question: "Что включает в себя пробное занятие?",
                 answer:
-                  "Мы рекомендуем бронировать как минимум за одну неделю, чтобы обеспечить наличие мест, особенно для популярных временных интервалов. Для специальных мероприятий или групповых занятий рекомендуется бронировать за 2-3 недели.",
+                  "Пробное занятие включает знакомство с преподавателем, диагностику вашего текущего уровня знаний, обзор методики обучения и составление индивидуального плана занятий. Продолжительность - 45 минут.",
               },
               {
-                question: "Какова ваша политика отмены?",
+                question: "Действительно ли пробное занятие бесплатное?",
                 answer:
-                  "Отмены, сделанные за 48 часов или более до запланированной встречи, получат полный возврат средств. Отмены, сделанные менее чем за 48 часов до начала, могут облагаться комиссией за отмену в размере 50% от стоимости бронирования.",
+                  "Да, первое пробное занятие полностью бесплатное. Это позволяет вам познакомиться с нашей студией, преподавателем и методикой обучения без каких-либо обязательств.",
               },
               {
-                question: "Могу ли я перенести мое бронирование?",
+                question: "Можно ли перенести пробное занятие?",
                 answer:
-                  "Да, вы можете перенестти бронирование не позднее, чем за 24 часа до запланированного времени без штрафа. Пожалуйста, свяжитесь с нами по телефону или WhatsApp, чтобы назначить новое время.",
+                  "Да, вы можете перенести пробное занятие, уведомив нас не позднее, чем за 24 часа до назначенного времени. Пожалуйста, свяжитесь с нами по телефону для переноса.",
               },
               {
-                question: "Предлагаете ли вы групповые скидки?",
+                question: "Что нужно подготовить к пробному занятию?",
                 answer:
-                  "Да, мы предлагаем скидки для групп от 5 человек. Пожалуйста, свяжитесь с нами напрямую для получения дополнительной информации о наших групповых тарифах и специальных пакетах.",
+                  "Никакой специальной подготовки не требуется. Приходите с хорошим настроением и готовностью к обучению. Все необходимые материалы предоставит преподаватель.",
               },
             ].map((faq, index) => (
               <div key={index} className="rounded-lg bg-white p-6 shadow-md">
