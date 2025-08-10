@@ -101,8 +101,10 @@ export default function ValuesPage() {
     }
   }, [])
 
-  const translations = {
+   const translations = {
     ru: {
+      pageTitle: "Ценности Tut School - Принципы нашей языковой школы",
+      pageDescription: "Курсы английского и китайского с упором на сообщество, творчество и измеримые результаты. Присоединяйтесь к нашему языковому сообществу!",
       schoolName: "Tut School",
       schoolSubtitle: "Курсы иностранных языков",
       phone: "+7 (983) 662-97-30",
@@ -152,32 +154,27 @@ export default function ValuesPage() {
       values: {
         community: {
           title: "Комьюнити",
-          description:
-            "Группы по изучению языков в нашей школе – это сообщество друзей. Основа изучения языков –коммуникация, и мы уделяем особое внимание развитию навыков общения. Мы развиваем не только умение коммуницировать в определенных речевых ситуациях, но и прививаем культурные ценности, умение сопереживать и радоваться за друзей",
+          description: "Группы по изучению языков в нашей школе – это сообщество друзей. Основа изучения языков –коммуникация, и мы уделяем особое внимание развитию навыков общения.",
           points: [],
         },
         quality: {
           title: "Качество",
-          description:
-            "Грамотная методика – это база любого успешного языкового курса. В группах по изучению общего английского мы применяем коммуникативный подход. В группах по подготовке к экзаменам знакомим с форматом экзамена и учим применять экзаменационные стратегии. Наши педагоги – дипломированные специалисты, прошедшие стажировку и обучение в странах преподаваемого языка, а также носители языка..",
+          description: "Грамотная методика – это база любого успешного языкового курса. В группах по изучению общего английского мы применяем коммуникативный подход.",
           points: [],
         },
         geography: {
           title: "Страноведение",
-          description:
-            "Язык – неотъемлемая часть культуры, поэтому мы знакомим наших учеников с культурой страны изучаемых языков. Наши ученики узнают о праздниках, традициях и обычаях других стран на наших занятиях и, конечно же, мероприятиях и мастер-классах.",
+          description: "Язык – неотъемлемая часть культуры, поэтому мы знакомим наших учеников с культурой страны изучаемых языков.",
           points: [],
         },
         result: {
           title: "Измерение результата",
-          description:
-            "Мы помогаем достигать цели и поэтому всегда измеряем прогресс. Мы проводим промежуточное тестирование после каждого пройденного раздела курса и помогаем отслеживать успехи, выявлять и устранять проблемные места",
+          description: "Мы помогаем достигать цели и поэтому всегда измеряем прогресс. Мы проводим промежуточное тестирование после каждого пройденного раздела курса.",
           points: [],
         },
         creative: {
           title: "Творчество",
-          description:
-            "Творчество и языки тесно связаны, потому что и то и другое помогает общаться с миром и выражать свои эмоции. На наших занятиях по творчеству и рисованию учим основам изобразительного искусства и дарим отличное настроение!",
+          description: "Творчество и языки тесно связаны, потому что и то и другое помогает общаться с миром и выражать свои эмоции.",
           points: [],
         },
       },
@@ -189,6 +186,8 @@ export default function ValuesPage() {
       },
     },
     en: {
+      pageTitle: "Tut School Values - Our Language Learning Principles",
+      pageDescription: "Professional English and Chinese language courses in Moscow with focus on community, creativity and measurable results. Join our language community!",
       schoolName: "Tut School",
       schoolSubtitle: "Foreign Language Courses",
       phone: "+7 (983) 662-97-30",
@@ -239,32 +238,27 @@ export default function ValuesPage() {
       values: {
         community: {
           title: "Community",
-          description:
-            "Language study groups in our school are a community of friends. The foundation of language learning is communication, and we pay special attention to developing communication skills. We not only work on the ability to communicate in specific speech situations, but also instill cultural values, empathy, and the ability to rejoice for our friends",
+          description: "Language study groups in our school are a community of friends. The foundation of language learning is communication.",
           points: [],
         },
         quality: {
           title: "Quality",
-          description:
-            "A well-structured methodology is the foundation of any successful language course. In our general English study groups, we use a communicative approach. In our exam preparation groups, we familiarize students with the exam format and teach them how to apply test-taking strategies. Our teachers are qualified professionals who have completed internships and training in the countries of the language they teach, as well as native speakers.",
+          description: "A well-structured methodology is the foundation of any successful language course. In our general English study groups, we use a communicative approach.",
           points: [],
         },
         geography: {
           title: "Regional Geography",
-          description:
-            "Language is an integral part of culture, which is why we introduce our students to the culture of the countries whose languages they are learning. Our students learn about holidays, traditions, and customs of other countries during our lessons and, of course, through events and workshops.",
+          description: "Language is an integral part of culture, which is why we introduce our students to the culture of the countries whose languages they are learning.",
           points: [],
         },
         result: {
           title: "Measuring the result",
-          description:
-            "We help our students achieve their goals, and that's why we always measure progress. We conduct interim assessments after each completed section of the course and help track achievements, identify, and address problem areas",
+          description: "We help our students achieve their goals, and that's why we always measure progress. We conduct interim assessments after each completed section.",
           points: [],
         },
         creative: {
           title: "Creativity",
-          description:
-            "Creativity and languages are closely connected because both help us communicate with the world and express our emotions. In our creativity and art classes, we teach the basics of visual arts and bring lots of joy!",
+          description: "Creativity and languages are closely connected because both help us communicate with the world and express our emotions.",
           points: [],
         },
       },
@@ -276,6 +270,7 @@ export default function ValuesPage() {
       },
     },
   }
+
 
   const t = translations[language]
 
@@ -330,44 +325,61 @@ export default function ValuesPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-<Head>
-<meta name="description" content="Ценности Tut School - качественное обучение языкам, творческий подход и погружение в культуру. Узнайте, почему наша школа в Москве имеет рейтинг 4.8/5." />
-<meta property="og:description" content="Курсы английского и китайского с упором на сообщество, творчество и измеримые результаты. Присоединяйтесь к нашему языковому сообществу!" />
- 
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#ffffff" />
-<meta name="robots" content="index, follow" />
-<meta name="yandex-verification" content="YOUR_YANDEX_WEBMASTER_CODE" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+      <Head>
+        <title>{t.pageTitle}</title>
+        <meta name="description" content={t.pageDescription} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://tutschool.ru/our-values" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://tutschool.ru/our-values" />
+        <meta property="og:title" content={t.pageTitle} />
+        <meta property="og:description" content={t.pageDescription} />
+        <meta property="og:image" content="https://tutschool.ru/assets/images/values-social-preview.jpg" />
 
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://tutschool.ru/our-values" />
+        <meta property="twitter:title" content={t.pageTitle} />
+        <meta property="twitter:description" content={t.pageDescription} />
+        <meta property="twitter:image" content="https://tutschool.ru/assets/images/values-social-preview.jpg" />
 
-
-<script type="application/ld+json">
-  {JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "LanguageSchool",
-    "name": "Tut School",
-    "description": "Professional English and Chinese language courses in Moscow",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Zarechnaya street, 5, building 2",
-      "addressLocality": "Khimki",
-      "addressRegion": "Moscow region",
-      "postalCode": "141400",
-      "addressCountry": "RU"
-    },
-    "telephone": "+79836629730",
-    "openingHours": "Mo-Fr 09:00-21:00, Sa 10:00-18:00",
-    "image": "https://tutschool.ru/logo.png",
-    "priceRange": "$$",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "50"
-    }
-  })}
-</script>
-</Head>
+        {/* Schema.org markup */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": t.pageTitle,
+            "description": t.pageDescription,
+            "url": "https://tutschool.ru/our-values",
+            "publisher": {
+              "@type": "LanguageSchool",
+              "name": "Tut School",
+              "description": t.schoolSubtitle,
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Zarechnaya street, 5, building 2",
+                "addressLocality": "Khimki",
+                "addressRegion": "Moscow region",
+                "postalCode": "141400",
+                "addressCountry": "RU"
+              },
+              "telephone": "+79836629730",
+              "openingHours": "Mo-Fr 09:00-21:00, Sa 10:00-18:00",
+              "image": "https://tutschool.ru/logo.png",
+              "priceRange": "$$",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "50"
+              }
+            }
+          })}
+        </script>
+      </Head>
       <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
           <div className="flex flex-wrap items-center gap-4">

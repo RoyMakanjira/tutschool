@@ -260,126 +260,135 @@ export default function ChineseTeenagersPage() {
   
   return (
     <div className="min-h-screen bg-white">
-<Head>
-  <title>Китайский для подростков | Подготовка к HSK в Tut School, Химки</title>
-  <meta 
-    name="description" 
-    content="Профессиональные курсы китайского языка для подростков в Новогорске. Подготовка к HSK, разговорные клубы с носителями, бизнес-китайский. Запишитесь на пробный урок!" 
-  />
-  <meta
-    name="keywords"
-    content="китайский для подростков, HSK подготовка Химки, курсы китайского Новогорск, китайский язык для школьников, обучение китайскому языку, Tut School китайский, международные экзамены по китайскому, разговорный клуб китайского, бизнес китайский"
-  />
-  
-  {/* Open Graph / Social Media Meta Tags */}
-  <meta property="og:title" content="Курсы китайского для подростков | Подготовка к HSK | Tut School" />
-  <meta 
-    property="og:description" 
-    content="Эффективные курсы китайского языка с подготовкой к международным экзаменам HSK для подростков в Химках. Мини-группы, носители языка, культурные мероприятия." 
-  />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tut-school.ru/chinese/teenagers" />
-  <meta property="og:image" content="https://tut-school.ru/images/chinese-teenagers-og.jpg" />
-  <meta property="og:site_name" content="Tut School" />
-  <meta property="og:locale" content="ru_RU" />
-  
-  {/* Twitter Card */}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Китайский для подростков | Tut School Новогорск" />
-  <meta 
-    name="twitter:description" 
-    content="Профессиональная подготовка к HSK и развитие языковых навыков для подростков. 3-4 занятия в неделю с опытными преподавателями." 
-  />
-  <meta name="twitter:image" content="https://tutschool.ru/images/chinese-teenagers-twitter.jpg" />
-  
-  {/* Canonical URL */}
-  <link rel="canonical" href="https://tutschool.ru/chinese/teenagers" />
-  
-  {/* Alternate Languages */}
-  <link rel="alternate" hrefLang="ru" href="https://tutschool.ru/ru/chinese/teenagers" />
-  <link rel="alternate" hrefLang="en" href="https://tutschool.ru/en/chinese/teenagers" />
-  
-  {/* Course Structured Data */}
-  <script type="application/ld+json">
-    {`
-      {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        "name": "Китайский язык для подростков с подготовкой к HSK",
-        "description": "Интенсивный курс китайского языка для подростков 13-17 лет с подготовкой к международным экзаменам HSK всех уровней",
-        "provider": {
-          "@type": "LanguageSchool",
-          "name": "Tut School",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Заречная улица, 5, корп. 2",
-            "addressLocality": "Химки",
-            "addressRegion": "Московская область",
-            "postalCode": "141400",
-            "addressCountry": "RU"
-          },
-          "telephone": "+79836000000"
-        },
-        "hasCourseInstance": {
-          "@type": "CourseInstance",
-          "courseMode": "in-person",
-          "courseWorkload": "P3H30M",
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "RUB",
-            "availability": "https://schema.org/InStock"
-          }
-        },
-        "educationalLevel": "secondary",
-        "teaches": "Chinese language",
-        "competencyRequired": "Beginner to Advanced",
-        "timeRequired": "P6M"
-      }
-    `}
-  </script>
-  
-  {/* Local Business Structured Data */}
-  <script type="application/ld+json">
-    {`
-      {
-        "@context": "https://schema.org",
-        "@type": "LanguageSchool",
-        "name": "Tut School",
-        "description": "Школа иностранных языков в Новогорске. Курсы китайского и английского для детей и взрослых.",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Заречная улица, 5, корп. 2",
-          "addressLocality": "Химки",
-          "addressRegion": "Московская область",
-          "postalCode": "141400",
-          "addressCountry": "RU"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": "55.894611",
-          "longitude": "37.374147"
-        },
-        "telephone": "+79836000000",
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "09:00",
-          "closes": "21:00"
-        },
-        "sameAs": [
-          "https://t.me/TUTschoolNovogorsk",
-          "https://api.whatsapp.com/send/?phone=%2B79167349246"
-        ]
-      }
-    `}
-  </script>
-</Head>
+            <Head>
+        <title>{t.h1} | {language === "ru" ? "Подготовка к HSK" : "HSK Preparation"} | {t.schoolName}</title>
+        <meta 
+          name="description" 
+          content={`${t.heroSubtitle} ${language === "ru" ? "в языковой школе" : "at"} ${t.schoolName}. ${t.programDescription} ${language === "ru" ? "Запишитесь на бесплатный пробный урок!" : "Sign up for a free trial lesson!"}`} 
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="keywords"
+          content={language === "ru" 
+            ? "китайский для подростков, HSK подготовка Химки, курсы китайского Новогорск, китайский язык для школьников, обучение китайскому языку, Tut School китайский, международные экзамены по китайскому, разговорный клуб китайского, бизнес китайский"
+            : "Chinese for teenagers, HSK preparation Moscow, Chinese courses Novogorsk, Chinese language for students, learn Chinese, Tut School Chinese, Chinese proficiency exams, Chinese conversation club, business Chinese"}
+        />
+        
+        {/* Open Graph / Social Media Meta Tags */}
+        <meta property="og:title" content={`${t.h1} | ${t.schoolName}`} />
+        <meta 
+          property="og:description" 
+          content={t.heroSubtitle} 
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://tut-school.ru/${language}/chinese/teenagers`} />
+        <meta property="og:image" content="https://tut-school.ru/images/chinese-teenagers-og.jpg" />
+        <meta property="og:site_name" content={t.schoolName} />
+        <meta property="og:locale" content={language === "ru" ? "ru_RU" : "en_US"} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${t.h1} | ${t.schoolName}`} />
+        <meta 
+          name="twitter:description" 
+          content={t.heroSubtitle} 
+        />
+        <meta name="twitter:image" content="https://tutschool.ru/images/chinese-teenagers-twitter.jpg" />
+        <meta name="twitter:site" content="@TutSchool" />
+        <meta name="twitter:creator" content="@TutSchool" />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href={`https://tutschool.ru/${language}/chinese/teenagers`} />
+        
+        {/* Alternate Languages */}
+        <link rel="alternate" hrefLang="ru" href="https://tutschool.ru/ru/chinese/teenagers" />
+        <link rel="alternate" hrefLang="en" href="https://tutschool.ru/en/chinese/teenagers" />
+        <link rel="alternate" hrefLang="x-default" href="https://tutschool.ru/chinese/teenagers" />
+        
+        {/* Preload important resources */}
+        <link rel="preload" href="/assets/gallery/Chinese-Practice.jpg" as="image" />
+        
+        {/* Course Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Course",
+            "name": t.h1,
+            "description": t.heroSubtitle,
+            "provider": {
+              "@type": "LanguageSchool",
+              "name": t.schoolName,
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Заречная улица, 5, корп. 2",
+                "addressLocality": "Химки",
+                "addressRegion": "Московская область",
+                "postalCode": "141400",
+                "addressCountry": "RU"
+              },
+              "telephone": t.phone
+            },
+            "hasCourseInstance": {
+              "@type": "CourseInstance",
+              "courseMode": ["in-person", "online"],
+              "courseWorkload": "PT1H",
+              "offers": {
+                "@type": "Offer",
+                "priceCurrency": "RUB",
+                "price": "1500",
+                "availability": "https://schema.org/InStock"
+              }
+            },
+            "educationalLevel": "secondary",
+            "teaches": "Chinese language",
+            "competencyRequired": "Beginner to Advanced",
+            "timeRequired": "P6M"
+          })}
+        </script>
+        
+        {/* Local Business Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LanguageSchool",
+            "name": t.schoolName,
+            "image": "https://tutschool.ru/logo.png",
+            "description": t.schoolSubtitle,
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Заречная улица, 5, корп. 2",
+              "addressLocality": "Химки",
+              "addressRegion": "Московская область",
+              "postalCode": "141400",
+              "addressCountry": "RU"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "55.894611",
+              "longitude": "37.374147"
+            },
+            "telephone": t.phone,
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "21:00"
+            },
+            "sameAs": [
+              "https://t.me/TUTschoolNovogorsk",
+              "https://api.whatsapp.com/send/?phone=%2B79167349246"
+            ]
+          })}
+        </script>
+      </Head>
       <div className="bg-gray-100 py-2 text-sm">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
           <div className="flex flex-wrap items-center gap-4">
