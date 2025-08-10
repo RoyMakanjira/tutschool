@@ -14,7 +14,7 @@ export const metadata: Metadata = {
       : "http://localhost:3000"
   ),
   title: {
-    default: "Tut School - Языковая студия | Курсы английского и китайского в Новогорске",
+    default: "Tut School - Языковая студия ",
     template: "%s | Tut School",
   },
   description:
