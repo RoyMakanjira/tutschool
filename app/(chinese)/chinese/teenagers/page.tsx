@@ -261,17 +261,17 @@ export default function ChineseTeenagersPage() {
   return (
     <div className="min-h-screen bg-white">
             <Head>
-        <title>{t.h1} | {language === "ru" ? "Подготовка к HSK" : "HSK Preparation"} | {t.schoolName}</title>
+        <title>{t.h1} | {language === "ru" ? "Курсы китайского для подростков в Химках, Новогорске" : "Chinese for Teens in Khimki, Novogorsk"} | {t.schoolName}</title>
         <meta 
           name="description" 
-          content={`${t.heroSubtitle} ${language === "ru" ? "в языковой школе" : "at"} ${t.schoolName}. ${t.programDescription} ${language === "ru" ? "Запишитесь на бесплатный пробный урок!" : "Sign up for a free trial lesson!"}`} 
+          content={`${language === "ru" ? "Профессиональные курсы китайского языка для подростков с подготовкой к HSK в языковой школе Tut School. " : "Professional Chinese language courses for teenagers with HSK preparation at Tut School. "}${t.heroSubtitle}`} 
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="keywords"
           content={language === "ru" 
-            ? "китайский для подростков, HSK подготовка Химки, курсы китайского Новогорск, китайский язык для школьников, обучение китайскому языку, Tut School китайский, международные экзамены по китайскому, разговорный клуб китайского, бизнес китайский"
-            : "Chinese for teenagers, HSK preparation Moscow, Chinese courses Novogorsk, Chinese language for students, learn Chinese, Tut School Chinese, Chinese proficiency exams, Chinese conversation club, business Chinese"}
+            ? "китайский для подростков, HSK подготовка Химки, курсы китайского Новогорск, китайский язык для школьников, обучение китайскому языку, Tut School китайский, международные экзамены по китайскому, разговорный клуб китайского, бизнес китайский, китайский Куркино"
+            : "Chinese for teenagers, HSK preparation Khimki, Chinese courses Novogorsk, Chinese language for students, learn Chinese, Tut School Chinese, Chinese proficiency exams, Chinese conversation club, business Chinese, Chinese Kurkino"}
         />
         
         {/* Open Graph / Social Media Meta Tags */}
@@ -281,8 +281,8 @@ export default function ChineseTeenagersPage() {
           content={t.heroSubtitle} 
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://tut-school.ru/${language}/chinese/teenagers`} />
-        <meta property="og:image" content="https://tut-school.ru/images/chinese-teenagers-og.jpg" />
+        <meta property="og:url" content={`https://tutschool.ru/${language}/chinese/teenagers`} />
+        <meta property="og:image" content="https://tutschool.ru/images/chinese-teenagers-og.jpg" />
         <meta property="og:site_name" content={t.schoolName} />
         <meta property="og:locale" content={language === "ru" ? "ru_RU" : "en_US"} />
         <meta property="og:image:width" content="1200" />
@@ -296,8 +296,6 @@ export default function ChineseTeenagersPage() {
           content={t.heroSubtitle} 
         />
         <meta name="twitter:image" content="https://tutschool.ru/images/chinese-teenagers-twitter.jpg" />
-        <meta name="twitter:site" content="@TutSchool" />
-        <meta name="twitter:creator" content="@TutSchool" />
         
         {/* Canonical URL */}
         <link rel="canonical" href={`https://tutschool.ru/${language}/chinese/teenagers`} />
@@ -307,10 +305,7 @@ export default function ChineseTeenagersPage() {
         <link rel="alternate" hrefLang="en" href="https://tutschool.ru/en/chinese/teenagers" />
         <link rel="alternate" hrefLang="x-default" href="https://tutschool.ru/chinese/teenagers" />
         
-        {/* Preload important resources */}
-        <link rel="preload" href="/assets/gallery/Chinese-Practice.jpg" as="image" />
-        
-        {/* Course Structured Data */}
+        {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -325,19 +320,27 @@ export default function ChineseTeenagersPage() {
                 "streetAddress": "Заречная улица, 5, корп. 2",
                 "addressLocality": "Химки",
                 "addressRegion": "Московская область",
-                "postalCode": "141400",
+                "postalCode": "141435",
                 "addressCountry": "RU"
               },
-              "telephone": t.phone
+              "telephone": t.phone,
+              "sameAs": [
+                "https://t.me/TUTschoolNovogorsk",
+                "https://wa.me/+79167349246"
+              ]
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
-              "courseMode": ["in-person", "online"],
-              "courseWorkload": "PT1H",
+              "courseMode": ["in-person"],
+              "courseSchedule": {
+                "@type": "Schedule",
+                "dayOfWeek": ["Monday", "Wednesday", "Friday"],
+                "timeOfDay": ["16:00", "18:00"]
+              },
               "offers": {
                 "@type": "Offer",
-                "priceCurrency": "RUB",
                 "price": "1500",
+                "priceCurrency": "RUB",
                 "availability": "https://schema.org/InStock"
               }
             },
@@ -361,7 +364,7 @@ export default function ChineseTeenagersPage() {
               "streetAddress": "Заречная улица, 5, корп. 2",
               "addressLocality": "Химки",
               "addressRegion": "Московская область",
-              "postalCode": "141400",
+              "postalCode": "141435",
               "addressCountry": "RU"
             },
             "geo": {
@@ -377,7 +380,8 @@ export default function ChineseTeenagersPage() {
                 "Tuesday",
                 "Wednesday",
                 "Thursday",
-                "Friday"
+                "Friday",
+                "Saturday"
               ],
               "opens": "09:00",
               "closes": "21:00"

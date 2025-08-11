@@ -324,132 +324,92 @@ export default function AdultsPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
- 
-<Head>
-  <title>Разговорный клуб английского для взрослых | Tut School Новогорск</title>
-  <meta 
-    name="description" 
-    content="Английский разговорный клуб для взрослых с носителями языка в Химках. Практика общения, бизнес-английский, культурные вечера. Гибкий график занятий." 
-  />
-  <meta
-    name="keywords"
-    content="разговорный клуб английского, английский для взрослых Химки, курсы английского Новогорск, английский с носителями, бизнес английский, разговорная практика, Tut School английский, вечерние занятия английским"
-  />
-  
-  {/* Open Graph / Social Media Meta Tags */}
-  <meta property="og:title" content="Английский разговорный клуб для взрослых | Tut School" />
-  <meta 
-    property="og:description" 
-    content="Практика живого общения на английском с носителями языка в удобное время. Группы до 6 человек, актуальные темы, бизнес-английский." 
-  />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tutschool.ru/conversation-club/adults" />
-  <meta property="og:image" content="https://tutschool.ru/images/adults-club-og.jpg" />
-  <meta property="og:site_name" content="Tut School" />
-  <meta property="og:locale" content="ru_RU" />
-  
-  {/* Twitter Card */}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Английский клуб для взрослых | Tut School" />
-  <meta 
-    name="twitter:description" 
-    content="Улучшите разговорный английский в непринужденной атмосфере с носителями языка. Занятия вечером и в выходные." 
-  />
-  <meta name="twitter:image" content="https://tutschool.ru/images/adults-club-twitter.jpg" />
-  
-  {/* Canonical URL */}
-  <link rel="canonical" href="https://tutschool.ru/conversation-club/adults" />
-  
-  {/* Alternate Languages */}
-  <link rel="alternate" hrefLang="ru" href="https://tutschool.ru/ru/conversation-club/adults" />
-  <link rel="alternate" hrefLang="en" href="https://tutschool.ru/en/conversation-club/adults" />
-  
-  {/* Course Structured Data */}
-  <script type="application/ld+json">
-    {`
-      {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        "name": "Разговорный клуб английского языка для взрослых",
-        "description": "Практика разговорного английского с носителями языка для взрослых. Обсуждение актуальных тем, бизнес-английский, культурные мероприятия.",
-        "provider": {
-          "@type": "LanguageSchool",
-          "name": "Tut School",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Заречная улица, 5, корп. 2",
-            "addressLocality": "Химки",
-            "addressRegion": "Московская область",
-            "postalCode": "141400",
-            "addressCountry": "RU"
-          },
-          "telephone": "+79836000000"
-        },
-        "hasCourseInstance": {
-          "@type": "CourseInstance",
-          "courseMode": ["in-person", "online"],
-          "courseSchedule": {
-            "@type": "Schedule",
-            "dayOfWeek": ["Monday", "Wednesday", "Friday", "Saturday"],
-            "timeOfDay": ["19:00", "20:00"]
-          },
-          "offers": {
-            "@type": "Offer",
-            "price": "1500",
-            "priceCurrency": "RUB",
-            "availability": "https://schema.org/InStock"
-          }
-        },
-        "educationalLevel": "AdultEducation",
-        "teaches": "English conversation",
-        "timeRequired": "P1H30M"
-      }
-    `}
-  </script>
-  
-  {/* Local Business Structured Data */}
-  <script type="application/ld+json">
-    {`
-      {
-        "@context": "https://schema.org",
-        "@type": "LanguageSchool",
-        "name": "Tut School",
-        "description": "Школа иностранных языков в Новогорске. Курсы английского для взрослых с носителями языка.",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Заречная улица, 5, корп. 2",
-          "addressLocality": "Химки",
-          "addressRegion": "Московская область",
-          "postalCode": "141400",
-          "addressCountry": "RU"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": "55.894611",
-          "longitude": "37.374147"
-        },
-        "telephone": "+79836000000",
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"
-          ],
-          "opens": "09:00",
-          "closes": "21:00"
-        },
-        "sameAs": [
-          "https://t.me/TUTschoolNovogorsk",
-          "https://api.whatsapp.com/send/?phone=%2B79167349246"
-        ]
-      }
-    `}
-  </script>
-</Head>
+            <Head>
+        <title>Разговорный клуб английского для взрослых | Tut School Химки, Новогорск, Куркино</title>
+        <meta 
+          name="description" 
+          content="Английский разговорный клуб для взрослых с носителями языка в Химках, Новогорске и Куркино. Практика общения, бизнес-английский, культурные вечера. Гибкий график занятий." 
+        />
+        <meta
+          name="keywords"
+          content="разговорный клуб английского, английский для взрослых Химки, курсы английского Новогорск, английский с носителями, бизнес английский, разговорная практика, Tut School английский, вечерние занятия английским, английский Куркино"
+        />
+        
+        {/* Open Graph / Social Media Meta Tags */}
+        <meta property="og:title" content="Английский разговорный клуб для взрослых | Tut School" />
+        <meta 
+          property="og:description" 
+          content="Практика живого общения на английском с носителями языка в Химках, Новогорске и Куркино. Группы до 6 человек, актуальные темы, бизнес-английский." 
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://tutschool.ru/conversation-club/adults" />
+        <meta property="og:image" content="https://tutschool.ru/images/adults-club-og.jpg" />
+        <meta property="og:site_name" content="Tut School" />
+        <meta property="og:locale" content="ru_RU" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Английский клуб для взрослых | Tut School" />
+        <meta 
+          name="twitter:description" 
+          content="Улучшите разговорный английский в непринужденной атмосфере с носителями языка в Химках и Новогорске. Занятия вечером и в выходные." 
+        />
+        <meta name="twitter:image" content="https://tutschool.ru/images/adults-club-twitter.jpg" />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://tutschool.ru/conversation-club/adults" />
+        
+        {/* Alternate Languages */}
+        <link rel="alternate" hrefLang="ru" href="https://tutschool.ru/ru/conversation-club/adults" />
+        <link rel="alternate" hrefLang="en" href="https://tutschool.ru/en/conversation-club/adults" />
+        
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Course",
+            "name": "Разговорный клуб английского языка для взрослых",
+            "description": "Практика разговорного английского с носителями языка для взрослых в Химках, Новогорске и Куркино. Обсуждение актуальных тем, бизнес-английский, культурные мероприятия.",
+            "provider": {
+              "@type": "LanguageSchool",
+              "name": "Tut School",
+              "address": [
+                {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Заречная улица, 5, корп. 2",
+                  "addressLocality": "Химки, микрорайон Новогорск",
+                  "addressRegion": "Московская область",
+                  "postalCode": "141435",
+                  "addressCountry": "RU"
+                }
+              ],
+              "telephone": "+7 (983) 662-97-30",
+              "sameAs": [
+                "https://t.me/TUTschoolNovogorsk",
+                "https://wa.me/+79167349246"
+              ]
+            },
+            "hasCourseInstance": {
+              "@type": "CourseInstance",
+              "courseMode": ["in-person"],
+              "courseSchedule": {
+                "@type": "Schedule",
+                "dayOfWeek": ["Monday", "Wednesday", "Friday", "Saturday"],
+                "timeOfDay": ["19:00", "20:00"]
+              },
+              "offers": {
+                "@type": "Offer",
+                "price": "1400",
+                "priceCurrency": "RUB",
+                "availability": "https://schema.org/InStock"
+              }
+            },
+            "educationalLevel": "AdultEducation",
+            "teaches": "English conversation",
+            "timeRequired": "P1H30M"
+          })}
+        </script>
+      </Head>
       <FadeIn>
         <div className="bg-gray-100 py-2 text-sm">
           <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
