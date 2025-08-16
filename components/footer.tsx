@@ -202,25 +202,52 @@ export default function Footer() {
               <h3 className="text-lg font-bold tracking-tight">{t.footer.socialMedia}</h3>
               <div className="flex gap-3">
                 <Link
-                  href="https://t.me/TUTschoolNovogorsk"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 transition-transform hover:scale-110 hover:bg-blue-600"
-                  aria-label="Telegram"
-                >
-                  {/* Telegram icon */}
-                  {/* ... */}
-                </Link>
-                <Link
-                  href="https://wa.me/79167349246"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-green-600 transition-transform hover:scale-110 hover:bg-green-700"
-                  aria-label="WhatsApp"
-                >
-                  {/* WhatsApp icon */}
-                  {/* ... */}
-                </Link>
+  href="https://t.me/TUTschoolNovogorsk"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 transition-transform hover:scale-110 hover:bg-blue-600"
+  aria-label="Telegram"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M9.6 15.6L9.9 19.8C10.3 19.8 10.5 19.6 10.7 19.4L12.6 17.7L16.8 20.8C17.6 21.2 18.2 20.9 18.4 20L21.9 4.3C22.2 3.2 21.6 2.7 20.8 3.1L2.7 10.1C1.6 10.5 1.6 11.1 2.5 11.4L7.2 12.8L17.3 6.5C17.8 6.2 18.3 6.4 17.9 6.7L9.6 15.6Z"
+      fill="white"
+    />
+  </svg>
+</Link>
+<Link
+  href="https://wa.me/79167349246"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex h-10 w-10 items-center justify-center rounded-full bg-green-600 transition-transform hover:scale-110 hover:bg-green-700"
+  aria-label="WhatsApp"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M20.5 3.5C18.2 1.2 15.2 0 12 0C5.4 0 0 5.4 0 12C0 13.9 0.5 15.8 1.4 17.5L0 24L6.6 22.6C8.2 23.5 10.1 24 12 24C18.6 24 24 18.6 24 12C24 8.8 22.8 5.8 20.5 3.5ZM12 21.6C10.3 21.6 8.6 21.2 7.2 20.3L6.8 20.1L3.6 20.8L4.4 17.6L4.2 17.2C3.3 15.8 2.8 14 2.8 12C2.8 6.9 6.9 2.8 12 2.8C14.6 2.8 17 3.8 18.8 5.6C20.6 7.4 21.6 9.8 21.6 12.4C21.6 17.5 17.5 21.6 12 21.6Z"
+      fill="white"
+    />
+    <path
+      d="M17 14.4C16.8 14.3 15.7 13.7 15.5 13.6C15.3 13.5 15.1 13.5 15 13.7C14.9 13.9 14.4 14.5 14.3 14.6C14.2 14.7 14 14.8 13.8 14.7C12.8 14.3 11.9 13.7 11.1 12.9C10.3 12.1 9.7 11.2 9.3 10.2C9.2 10 9.3 9.8 9.4 9.7C9.5 9.6 9.6 9.4 9.7 9.3C9.8 9.2 9.8 9.1 9.9 8.9C10 8.7 9.9 8.5 9.8 8.4C9.7 8.3 9.2 7.2 9 6.8C8.8 6.4 8.6 6.5 8.5 6.5C8.4 6.5 8.2 6.5 8.1 6.5C8 6.5 7.8 6.6 7.7 6.7C7.6 6.8 7.2 7.2 7.2 8C7.2 8.8 7.8 9.7 7.9 9.9C8 10.1 9.4 12.4 11.4 14.4C13.6 16.6 15.9 17.8 16.1 17.9C16.3 18 17.2 18.6 18 18.6C18.8 18.6 19.2 18.2 19.3 18.1C19.4 18 19.5 17.8 19.6 17.7C19.7 17.6 19.7 17.5 19.7 17.3C19.7 17.1 19.7 16.9 19.6 16.8C19.5 16.7 17.2 15.3 17 15.2Z"
+      fill="white"
+    />
+  </svg>
+</Link>
+
                 <Button
                   onClick={toggleLanguage}
                   variant="ghost"
