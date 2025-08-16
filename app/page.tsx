@@ -169,7 +169,7 @@ export default function HomePage() {
         contacts: "КОНТАКТЫ",
       },
       hero: {
-        title: "Языковая школа английский и китайский",
+        title: "Языковая школа английского и катайского языка",
         subtitle: "Занятия в мини-группах с квалифицированными преподавателями в Химки Новогорск Куркино",
         cta: "Записаться на пробный урок",
       },
@@ -324,7 +324,7 @@ export default function HomePage() {
         contacts: "CONTACTS",
       },
       hero: {
-        title: "Language school English and Chinese",
+        title: "Language school of English and Chinese",
         subtitle: "Lessons in small groups with qualified teachers in Khimki Novogorsk Kurkino",
         cta: "Book a trial lesson",
       },
@@ -948,7 +948,7 @@ export default function HomePage() {
                 </h1>
                 <p className="mb-8 text-lg md:text-xl animate-fade-in-up animation-delay-300">{t.hero.subtitle}</p>
                 <Link
-                  href="/booking"
+                  href="/bookings"
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white transition-all hover:bg-primary/90 hover:gap-3 animate-fade-in-up animation-delay-600"
                 >
                   {t.hero.cta}
@@ -1241,7 +1241,7 @@ export default function HomePage() {
                 <div className="relative px-8 py-16 text-center text-white md:px-12 lg:px-16">
                   <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t.trial.title}</h2>
                   <Link
-                    href="/booking"
+                    href="/bookings"
                     className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-primary transition-all hover:bg-gray-100 hover:gap-3"
                   >
                     {t.trial.cta}
