@@ -941,21 +941,27 @@ export default function HomePage() {
               </div>
             ))}
             <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/70 to-transparent"></div>
-            <div className="absolute inset-0 z-30 flex flex-col items-start justify-center px-4 text-white md:px-12 lg:px-20">
-              <div className="max-w-2xl">
-                <h1 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl animate-fade-in-up">
-                  {t.hero.title}
-                </h1>
-                <p className="mb-8 text-lg md:text-xl animate-fade-in-up animation-delay-300">{t.hero.subtitle}</p>
-                <Link
-                  href="/bookings"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white transition-all hover:bg-primary/90 hover:gap-3 animate-fade-in-up animation-delay-600"
-                >
-                  {t.hero.cta}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
+           <div className="absolute inset-0 z-30 flex flex-col items-start justify-center px-4 text-white md:px-12 lg:px-20">
+  <div className="max-w-2xl">
+    <h1 className="mb-2 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl animate-fade-in-up">
+      Языковая школа
+    </h1>
+    <p className="mb-2 text-xl md:text-2xl animate-fade-in-up animation-delay-150">
+      Английский и китайский
+    </p>
+    <p className="mb-6 text-sm md:text-base text-white/80 animate-fade-in-up animation-delay-300">
+      Химки • Новогорск • Куркино
+    </p>
+    <p className="mb-8 text-lg md:text-xl animate-fade-in-up animation-delay-300">{t.hero.subtitle}</p>
+    <Link
+      href="/bookings"
+      className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white transition-all hover:bg-primary/90 hover:gap-3 animate-fade-in-up animation-delay-600"
+    >
+      {t.hero.cta}
+      <ArrowRight className="h-4 w-4" />
+    </Link>
+  </div>
+</div>
 
             {/* Carousel Navigation Arrows */}
             <button
