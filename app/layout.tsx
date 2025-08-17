@@ -140,11 +140,6 @@ export default function RootLayout({
               telephone: "+7 (983) 662-97-30",
               email: "info@tutschool.ru",
               openingHours: ["Mo-Fr 09:00-21:00", "Sa 10:00-18:00"],
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "4.8",
-                reviewCount: "27",
-              },
               sameAs: [
                 "https://t.me/TUTschoolNovogorsk",
                 "https://wa.me/+79167349246",

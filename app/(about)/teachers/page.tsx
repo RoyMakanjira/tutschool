@@ -857,6 +857,51 @@ export default function Teachers() {
           </div>
         </section>
       </main>
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Наши преподаватели - Tut School",
+      "description": "Познакомьтесь с нашей командой профессиональных педагогов",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Главная",
+            "item": "https://tutschool.ru/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Преподаватели",
+            "item": "https://tutschool.ru/teachers"
+          }
+        ]
+      },
+      "mainEntity": t.teachersList.map(teacher => ({
+        "@type": "Person",
+        "name": teacher.name,
+        "jobTitle": teacher.position,
+        "alumniOf": teacher.alma,
+        "hasOccupation": {
+          "@type": "Occupation",
+          "name": teacher.position,
+          "experienceRequirements": teacher.experience
+        },
+        "description": teacher.description,
+        "knowsLanguage": teacher.languages,
+        "hasCredential": teacher.certifications.map(cert => ({
+          "@type": "EducationalOccupationalCredential",
+          "name": cert
+        }))
+      }))
+    })
+  }}
+/>
     </div>
   )
 }

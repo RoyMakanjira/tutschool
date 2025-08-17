@@ -949,8 +949,8 @@ export default function HomePage() {
     <p className="mb-2 text-xl md:text-2xl animate-fade-in-up animation-delay-150">
       Английский и китайский
     </p>
-    <p className="mb-6 text-sm md:text-base text-white/80 animate-fade-in-up animation-delay-300">
-      Химки • Новогорск • Куркино
+    <p className="mb-2 text-xl md:text-2xl animate-fade-in-up animation-delay-150">
+      Химки Новогорск Куркино
     </p>
     <p className="mb-8 text-lg md:text-xl animate-fade-in-up animation-delay-300">{t.hero.subtitle}</p>
     <Link
