@@ -946,9 +946,9 @@ export default function HomePage() {
     <h1 className="mb-2 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl animate-fade-in-up">
       Языковая школа
     </h1>
-    <p className="mb-2 text-xl md:text-2xl animate-fade-in-up animation-delay-150">
+    <h2 className="mb-2 text-2xl md:text-2xl animate-fade-in-up animation-delay-150 ont-bold">
       Английский и китайский
-    </p>
+    </h2>
     <p className="mb-2 text-xl md:text-2xl animate-fade-in-up animation-delay-150">
       Химки Новогорск Куркино
     </p>
