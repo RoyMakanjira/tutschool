@@ -1084,16 +1084,6 @@ export default function HomePage() {
           image: '/assets/gallery/kids.jpeg',
           href: '/preschoolers'
         },
-  {
-  title: language === 'ru' ? 'Китайский язык для дошкольников' : 'CHINESE FOR PRESCHOOLERS',
-  description: language === 'ru' 
-    ? 'Системное изучение китайского с элементами культуры' 
-    : 'Structured learning with cultural elements',
-  level: language === 'ru' ? 'Все уровни' : 'All Levels',
-  students: language === 'ru' ? '60+ студентов' : '60+ students',
-  image: '/assets/gallery/Calligraphy.jpg', 
-  href: '/chinese/preschoolers'
-},
         {
   title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ДЕТЕЙ 7-9 ЛЕТ' : 'CHINESE FOR CHILDREN 7-9',
   description: language === 'ru' 
@@ -1134,6 +1124,16 @@ export default function HomePage() {
   students: language === 'ru' ? '70+ студентов' : '70+ students',
   image: '/C-Adults.jpg',
   href: '/chinese/adults'
+},
+{
+  title: language === 'ru' ? 'Китайский язык для дошкольников' : 'CHINESE FOR PRESCHOOLERS',
+  description: language === 'ru' 
+    ? 'Системное изучение китайского с элементами культуры' 
+    : 'Structured learning with cultural elements',
+  level: language === 'ru' ? 'Все уровни' : 'All Levels',
+  students: language === 'ru' ? '60+ студентов' : '60+ students',
+  image: '/assets/gallery/Calligraphy.jpg', 
+  href: '/chinese/preschoolers'
 },
        {
           title: language === 'ru' ? 'МАСТЕР-КЛАССЫ' : 'MASTERCLASSES',
