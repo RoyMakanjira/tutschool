@@ -1074,6 +1074,16 @@ export default function HomePage() {
           image: '/assets/gallery/adults.jpg',
           href: '/adults'
         },
+         {
+          title: language === 'ru' ? 'Английский для дошкольников' : 'ENGLISH FOR PRESCHOOLERS',
+          description: language === 'ru' 
+            ? 'Развитие языковых навыков через увлекательные проекты' 
+            : 'Developing language skills through engaging projects',
+          level: language === 'ru' ? 'Все уровни' : 'All Levels',
+          students: language === 'ru' ? '150+ студентов' : '150+ students',
+          image: '/assets/gallery/kids.jpeg',
+          href: '/preschoolers'
+        },
   {
   title: language === 'ru' ? 'Китайский язык для дошкольников' : 'CHINESE FOR PRESCHOOLERS',
   description: language === 'ru' 
@@ -1114,16 +1124,7 @@ export default function HomePage() {
   image: '/assets/gallery/Chinese-Practice.jpg',
   href: '/chinese/teenagers'
 },
- {
-          title: language === 'ru' ? 'Английский для дошкольников' : 'ENGLISH FOR PRESCHOOLERS',
-          description: language === 'ru' 
-            ? 'Развитие языковых навыков через увлекательные проекты' 
-            : 'Developing language skills through engaging projects',
-          level: language === 'ru' ? 'Все уровни' : 'All Levels',
-          students: language === 'ru' ? '150+ студентов' : '150+ students',
-          image: '/assets/gallery/kids.jpeg',
-          href: '/preschoolers'
-        },
+
 {
   title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ВЗРОСЛЫХ' : 'CHINESE FOR ADULTS',
   description: language === 'ru' 
