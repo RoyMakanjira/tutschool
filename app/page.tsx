@@ -525,15 +525,14 @@ export default function HomePage() {
       >
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-[60px] w-[60px]">
+            <div className="relative">
               <Link href="/">
                 <Image
                   src="/logo.png"
                   alt={language === "ru" ? "Логотип Tut School" : "Tut School logo"}
-                  fill
-                  className="object-contain"
-                  sizes="60px"
-                  priority
+                  width={120}
+                  height={120}
+                  className="object-contain "
                 />
               </Link>
             </div>
@@ -946,12 +945,12 @@ export default function HomePage() {
     <h1 className="mb-2 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl animate-fade-in-up">
       Языковая школа
     </h1>
-    <h2 className="mb-2 text-3xl md:text-3xl animate-fade-in-up animation-delay-150 font-bold">
+    <h2 className="mb-2 text-3xl md:text-3xl animate-fade-in-up animation-delay-150 ">
       Английский и китайский
     </h2>
-    <p className="mb-2 text-xl md:text-2xl animate-fade-in-up animation-delay-150">
+    <h5 className="mb-2 text-lg md:text-lg animate-fade-in-up animation-delay-150">
       Химки Новогорск Куркино
-    </p>
+    </h5>
     <p className="mb-8 text-lg md:text-xl animate-fade-in-up animation-delay-300">{t.hero.subtitle}</p>
     <Link
       href="/bookings"
@@ -1034,73 +1033,127 @@ export default function HomePage() {
               </p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                {
-                  title: language === "ru" ? "Английский для дошкольников" : "ENGLISH FOR PRESCHOOLERS",
-                  description:
-                    language === "ru"
-                      ? "Развитие языковых навыков через увлекательные проекты"
-                      : "Developing language skills through engaging projects",
-                  level: language === "ru" ? "Все уровни" : "All Levels",
-                  students: language === "ru" ? "150+ студентов" : "150+ students",
-                  image: "/assets/gallery/kids.jpeg",
-                  href: "/preschoolers",
-                },
-                {
-                  title: language === "ru" ? "АНГЛИЙСКИЙ ДЛЯ ДЕТЕЙ 7-9 ЛЕТ" : "ENGLISH FOR CHILDREN 7-9",
-                  description:
-                    language === "ru"
-                      ? "Игровое обучение через песни, игры и творческие занятия"
-                      : "Play-based learning through songs and creative activities",
-                  level: language === "ru" ? "Все уровни" : "All Levels",
-                  students: language === "ru" ? "80+ студентов" : "80+ students",
-                  image: "/assets/preschoolers/basic-vocabulary.jpg",
-                  href: "/aged-7-9",
-                },
-                {
-                  title: language === "ru" ? "АНГЛИЙСКИЙ ДЛЯ ДЕТЕЙ 10-12 ЛЕТ" : "ENGLISH FOR CHILDREN 10-12",
-                  description:
-                    language === "ru"
-                      ? "Игровое обучение через песни, игры и творческие занятия"
-                      : "Play-based learning through songs and creative activities",
-                  level: language === "ru" ? "Все уровни" : "All Levels",
-                  students: language === "ru" ? "80+ студентов" : "80+ students",
-                  image: "/assets/children/group-work.jpg",
-                  href: "/aged-10-12",
-                },
-                {
-                  title: language === "ru" ? "АНГЛИЙСКИЙ ДЛЯ ПОДРОСТКОВ" : "ENGLISH FOR TEENS",
-                  description:
-                    language === "ru"
-                      ? "Современные темы и актуальные материалы для подростков"
-                      : "Modern topics tailored for teenagers",
-                  level: language === "ru" ? "Все уровни" : "All Levels",
-                  students: language === "ru" ? "90+ студентов" : "90+ students",
-                  image: "/assets/teenage/pair-and-groupwork.jpg",
-                  href: "/teenagers",
-                },
-                {
-                  title: language === "ru" ? "АНГЛИЙСКИЙ ДЛЯ ВЗРОСЛЫХ" : "ENGLISH FOR ADULTS",
-                  description:
-                    language === "ru"
-                      ? "Развивайте уверенность в общении на английском для работы и повседневной жизни"
-                      : "Build confidence in English for work and daily communication",
-                  level: language === "ru" ? "Все уровни" : "All levels",
-                  students: language === "ru" ? "120+ студентов" : "120+ students",
-                  image: "/assets/gallery/adults.jpg",
-                  href: "/adults",
-                },
-                {
-                  title: language === "ru" ? "Китайский язык для дошкольников" : "CHINESE FOR PRESCHOOLERS",
-                  description:
-                    language === "ru"
-                      ? "Системное изучение китайского с элементами культуры"
-                      : "Structured learning with cultural elements",
-                  level: language === "ru" ? "Все уровни" : "All Levels",
-                  students: language === "ru" ? "60+ студентов" : "60+ students",
-                  image: "/assets/gallery/Calligraphy.jpg",
-                  href: "/chinese/preschoolers",
-                },
+                    {[
+        {
+          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ДЕТЕЙ 7-9 ЛЕТ' : 'ENGLISH FOR CHILDREN 7-9',
+          description: language === 'ru' 
+            ? 'Игровое обучение через песни, игры и творческие занятия' 
+            : 'Play-based learning through songs and creative activities',
+          level: language === 'ru' ? 'Все уровни' : 'All Levels',
+          students: language === 'ru' ? '80+ студентов' : '80+ students',
+          image: '/assets/preschoolers/basic-vocabulary.jpg',
+          href: '/aged-7-9'
+        },
+        {
+          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ДЕТЕЙ 10-12 ЛЕТ' : 'ENGLISH FOR CHILDREN 10-12',
+          description: language === 'ru' 
+            ? 'Игровое обучение через песни, игры и творческие занятия' 
+            : 'Play-based learning through songs and creative activities',
+          level: language === 'ru' ? 'Все уровни' : 'All Levels',
+          students: language === 'ru' ? '80+ студентов' : '80+ students',
+          image: '/assets/children/group-work.jpg',
+          href: '/aged-10-12'
+        },
+        {
+          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ПОДРОСТКОВ' : 'ENGLISH FOR TEENS',
+          description: language === 'ru' 
+            ? 'Современные темы и актуальные материалы для подростков' 
+            : 'Modern topics tailored for teenagers',
+          level: language === 'ru' ? 'Все уровни' : 'All Levels',
+          students: language === 'ru' ? '90+ студентов' : '90+ students',
+          image: '/assets/teenage/pair-and-groupwork.jpg',
+          href: '/teenagers'
+        },
+             {
+          title: language === 'ru' ? 'АНГЛИЙСКИЙ ДЛЯ ВЗРОСЛЫХ' : 'ENGLISH FOR ADULTS',
+          description: language === 'ru' 
+            ? 'Развивайте уверенность в общении на английском для работы и повседневной жизни' 
+            : 'Build confidence in English for work and daily communication',
+          level: language === 'ru' ? 'Все уровни' : 'All levels',
+          students: language === 'ru' ? '120+ студентов' : '120+ students',
+          image: '/assets/gallery/adults.jpg',
+          href: '/adults'
+        },
+  {
+  title: language === 'ru' ? 'Китайский язык для дошкольников' : 'CHINESE FOR PRESCHOOLERS',
+  description: language === 'ru' 
+    ? 'Системное изучение китайского с элементами культуры' 
+    : 'Structured learning with cultural elements',
+  level: language === 'ru' ? 'Все уровни' : 'All Levels',
+  students: language === 'ru' ? '60+ студентов' : '60+ students',
+  image: '/assets/gallery/Calligraphy.jpg', 
+  href: '/chinese/preschoolers'
+},
+        {
+  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ДЕТЕЙ 7-9 ЛЕТ' : 'CHINESE FOR CHILDREN 7-9',
+  description: language === 'ru' 
+    ? 'Веселые занятия с основами китайского через игры и песни' 
+    : 'Fun introduction to Chinese through games and songs',
+  level: language === 'ru' ? 'Все уровни' : 'All Levels',
+  students: language === 'ru' ? '50+ студентов' : '50+ students',
+  image: '/assets/courses/Painting.jpg',
+  href: '/chinese/aged-7-9'
+},
+        {
+  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ДЕТЕЙ 10-12 ЛЕТ' : 'CHINESE FOR CHILDREN 10-12',
+  description: language === 'ru' 
+    ? 'Веселые занятия с основами китайского через игры и песни' 
+    : 'Fun introduction to Chinese through games and songs',
+  level: language === 'ru' ? 'Все уровни' : 'All Levels',
+  students: language === 'ru' ? '50+ студентов' : '50+ students',
+  image: '/assets/gallery/Learning-Chinese.jpg',
+  href: '/chinese/aged-10-12'
+},
+{
+  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ПОДРОСТКОВ' : 'CHINESE FOR TEENS',
+  description: language === 'ru' 
+    ? 'Современный китайский язык с актуальной лексикой' 
+    : 'Modern Chinese with relevant vocabulary',
+  level: language === 'ru' ? 'Все уровни' : 'All Levels',
+  students: language === 'ru' ? '40+ студентов' : '40+ students',
+  image: '/assets/gallery/Chinese-Practice.jpg',
+  href: '/chinese/teenagers'
+},
+ {
+          title: language === 'ru' ? 'Английский для дошкольников' : 'ENGLISH FOR PRESCHOOLERS',
+          description: language === 'ru' 
+            ? 'Развитие языковых навыков через увлекательные проекты' 
+            : 'Developing language skills through engaging projects',
+          level: language === 'ru' ? 'Все уровни' : 'All Levels',
+          students: language === 'ru' ? '150+ студентов' : '150+ students',
+          image: '/assets/gallery/kids.jpeg',
+          href: '/preschoolers'
+        },
+{
+  title: language === 'ru' ? 'КИТАЙСКИЙ ДЛЯ ВЗРОСЛЫХ' : 'CHINESE FOR ADULTS',
+  description: language === 'ru' 
+    ? 'Практический китайский для работы и путешествий' 
+    : 'Practical Chinese for work and travel',
+  level: language === 'ru' ? 'Все уровни' : 'All levels',
+  students: language === 'ru' ? '70+ студентов' : '70+ students',
+  image: '/C-Adults.jpg',
+  href: '/chinese/adults'
+},
+       {
+          title: language === 'ru' ? 'МАСТЕР-КЛАССЫ' : 'MASTERCLASSES',
+          description: language === 'ru' 
+            ? 'Интенсивные занятия с носителями языка' 
+            : 'Intensive workshops with native speakers',
+          level: language === 'ru' ? 'Все уровни' : 'All Levels',
+          students: language === 'ru' ? '60+ студентов' : '60+ students',
+          image: '/masterclass.jpg',
+          href: '/chinese-calligraphy'
+        },
+        {
+          title: language === 'ru' ? 'РАЗГОВОРНЫЙ КЛУБ' : 'CONVERSATION CLUB',
+          description: language === 'ru' 
+            ? 'Практика разговорного английского в дружеской атмосфере' 
+            : 'Practice English in a friendly atmosphere',
+          level: language === 'ru' ? 'Все уровни' : 'All levels',
+          students: language === 'ru' ? '200+ студентов' : '200+ students',
+          image: '/C-Club.jpg',
+          href: '/conversation-club/teenagers'
+        },
               ].map((course) => (
                 <div
                   key={course.title}
